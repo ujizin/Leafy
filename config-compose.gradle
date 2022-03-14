@@ -1,0 +1,19 @@
+android {
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.get()
+    }
+}
+
+dependencies {
+    implementation libs.bundles.compose
+    debugImplementation libs.bundles.compose.debug
+
+    implementation libs.compose.activity
+    implementation libs.compose.material3
+
+    androidTestImplementation libs.compose.android.test
+}

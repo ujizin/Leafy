@@ -1,0 +1,20 @@
+android {
+    namespace 'br.com.devlucasyuji.camerasavier'
+    compileSdk 32
+    defaultConfig {
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+}
+
+dependencies {
+    implementation libs.bundles.androidx
+    testImplementation libs.junit
+    androidTestImplementation libs.bundles.androidx.test
+}

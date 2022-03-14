@@ -1,0 +1,14 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+apply from: '../config-android.gradle'
+apply from: '../config-compose.gradle'
+
+android {
+    namespace 'br.com.devlucasyuji.camerasavier'
+    defaultConfig {
+        applicationId "br.com.devlucasyuji.camerasavier"
+    }
+}
