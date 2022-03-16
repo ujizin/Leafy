@@ -18,3 +18,7 @@ rootProject.name = "camera-savier"
 include ':app'
 
 enableFeaturePreview("VERSION_CATALOGS")
+include ':domain'
+include ':data:local'
+include ':data:repository'
+include ':data:datastore'
