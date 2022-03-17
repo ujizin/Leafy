@@ -14,6 +14,10 @@ dependencies {
 
     implementation libs.compose.activity
     implementation libs.compose.material3
+    implementation libs.bundles.androidx
 
+    testImplementation libs.junit
+
+    androidTestImplementation libs.bundles.androidx.test
     androidTestImplementation libs.compose.android.test
 }
