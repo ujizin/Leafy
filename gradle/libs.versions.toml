@@ -60,3 +60,7 @@ compose-debug = [
 ]
 
 [plugins]
+
+android-application = { id = "com.android.application", version = "7.3.0-alpha06" }
+android-library = { id = "com.android.library", version = "7.3.0-alpha06" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version = "1.6.10" }

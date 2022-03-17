@@ -4,7 +4,7 @@ plugins {
 }
 
 apply from: '../config-android.gradle'
-apply from: '../config-ui.gradle'
+apply from: '../config-compose.gradle'
 
 android {
     namespace 'br.com.devlucasyuji.camerasavier'
