@@ -1,8 +1,7 @@
 
 <p align="center"> 
-  
   <img src="assets/icon.png" />
-</div>
+</p>
 
 # CameraSavier
 
@@ -18,9 +17,11 @@ CameraSavier is an open-source project that save photos and keep reminding you w
 
 ## 🗃 Architecture 
 
-The architecture is based on the Hexagonal Architecture using modularization for better separation of concerns:
+The architecture is based on the Hexagonal Architecture using modularization for better separation of concerns.
 
-<Preview 🚧>
+Here is an example preview of the dependency flow:
+
+<img src="assets/example-architecture.jpg" width="850px"/>
 
 ## 📋 License
 
