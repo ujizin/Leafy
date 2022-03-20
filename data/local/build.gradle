@@ -1,6 +1,13 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 apply from: '../../config-android.gradle'
+
+dependencies {
+    implementation libs.room
+    ksp libs.room.compiler
+    testImplementation libs.junit
+}

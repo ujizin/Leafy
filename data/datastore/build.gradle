@@ -4,3 +4,8 @@ plugins {
 }
 
 apply from: '../../config-android.gradle'
+
+dependencies {
+    implementation libs.datastore
+    testImplementation libs.junit
+}
