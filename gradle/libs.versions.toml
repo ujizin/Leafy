@@ -68,6 +68,12 @@ androidx-test = [
     "android-junit",
 ]
 
+coroutines = [
+    "coroutines",
+    "coroutines-viewmodel",
+    "coroutines-lifecycle"
+]
+
 compose = [
     "compose-ui",
     "compose-tooling-preview",
