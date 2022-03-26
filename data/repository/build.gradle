@@ -4,3 +4,7 @@ plugins {
 }
 
 apply from: '../../config-android.gradle'
+
+dependencies {
+    implementation libs.coroutines
+}
