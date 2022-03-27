@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.camerasavier.ui.theme
+package br.com.devlucasyuji.camerareminder.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.camerasavier
+package br.com.devlucasyuji.camerareminder
 
 import org.junit.Test
 

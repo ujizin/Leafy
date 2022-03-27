@@ -7,8 +7,8 @@ apply from: '../config-android.gradle'
 apply from: '../config-compose.gradle'
 
 android {
-    namespace 'br.com.devlucasyuji.camerasavier'
+    namespace 'br.com.devlucasyuji.camerareminder'
     defaultConfig {
-        applicationId "br.com.devlucasyuji.camerasavier"
+        applicationId "br.com.devlucasyuji.camerareminder"
     }
 }

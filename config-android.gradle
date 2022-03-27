@@ -1,5 +1,5 @@
 android {
-    namespace 'br.com.devlucasyuji.camerasavier'
+    namespace 'br.com.devlucasyuji.camerareminder'
     compileSdk 32
     defaultConfig {
         minSdk 21
