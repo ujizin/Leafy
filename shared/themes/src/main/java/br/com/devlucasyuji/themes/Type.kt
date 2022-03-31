@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.camerareminder.ui.theme
+package br.com.devlucasyuji.themes
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

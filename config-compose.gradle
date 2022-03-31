@@ -13,7 +13,6 @@ dependencies {
     debugImplementation libs.bundles.compose.debug
 
     implementation libs.compose.activity
-    implementation libs.compose.material3
     implementation libs.bundles.androidx
 
     testImplementation libs.junit
