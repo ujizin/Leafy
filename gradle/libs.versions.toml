@@ -25,6 +25,7 @@ androidx-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-ktx", vers
 androidx-core = { module = "androidx.core:core", version.ref = "androidx-core" }
 
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "appcompat" }
+compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "compose" }
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
@@ -77,6 +78,8 @@ coroutines = [
 compose = [
     "compose-ui",
     "compose-tooling-preview",
+    "compose-material3",
+    "compose-runtime"
 ]
 
 compose-debug = [

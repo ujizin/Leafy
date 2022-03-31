@@ -5,7 +5,3 @@ plugins {
 
 apply from: '../../config-android.gradle'
 apply from: '../../config-compose.gradle'
-
-dependencies {
-    implementation libs.compose.material3
-}
