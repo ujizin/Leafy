@@ -16,8 +16,10 @@ dependencyResolutionManagement {
 rootProject.name = "camera-savier"
 
 enableFeaturePreview("VERSION_CATALOGS")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include ':app'
 include ':domain'
 include ':data:local'
 include ':data:repository'
+include ':shared:themes'
