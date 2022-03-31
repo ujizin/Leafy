@@ -12,3 +12,7 @@ android {
         applicationId "br.com.devlucasyuji.camerareminder"
     }
 }
+
+dependencies {
+    implementation projects.shared.themes
+}
