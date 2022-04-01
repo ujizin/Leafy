@@ -14,5 +14,6 @@ android {
 }
 
 dependencies {
+    implementation libs.androidx.core.splashscreen
     implementation projects.shared.themes
 }
