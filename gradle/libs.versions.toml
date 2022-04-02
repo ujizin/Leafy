@@ -80,7 +80,8 @@ compose = [
     "compose-ui",
     "compose-tooling-preview",
     "compose-material3",
-    "compose-runtime"
+    "compose-runtime",
+    "compose-navigation"
 ]
 
 compose-debug = [
