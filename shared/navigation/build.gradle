@@ -1,0 +1,10 @@
+plugins {
+    alias(libs.plugins.android.library)
+}
+
+apply from: '../../config-android.gradle'
+apply from: '../../config-compose.gradle'
+
+android {
+    namespace 'br.com.devlucasyuji.navigation'
+}
