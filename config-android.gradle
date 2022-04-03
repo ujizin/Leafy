@@ -1,5 +1,12 @@
+/***
+ * Hilt does not have support to KSP yet
+ * https://issuetracker.google.com/179057202
+ * */
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
 android {
-    namespace 'br.com.devlucasyuji.camerareminder'
     compileSdk 32
     defaultConfig {
         minSdk 21
@@ -11,4 +18,9 @@ android {
             useSupportLibrary true
         }
     }
+}
+
+dependencies {
+    implementation libs.hilt
+    kapt libs.hilt.compiler
 }

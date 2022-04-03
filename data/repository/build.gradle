@@ -5,6 +5,10 @@ plugins {
 
 apply from: '../../config-android.gradle'
 
+android {
+    namespace 'br.com.devlucasyuji.camerareminder.data.repository'
+}
+
 dependencies {
     implementation libs.coroutines
 }
