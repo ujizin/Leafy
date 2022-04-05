@@ -15,8 +15,5 @@ dependencies {
     implementation libs.compose.activity
     implementation libs.bundles.androidx
 
-    testImplementation libs.junit
-
-    androidTestImplementation libs.bundles.androidx.test
     androidTestImplementation libs.compose.android.test
 }
