@@ -4,10 +4,10 @@ import androidx.navigation.NavGraphBuilder
 
 typealias NavGraph = NavGraphBuilder.() -> Unit
 
-internal val Navigators: MutableList<NavGraph> = mutableListOf()
+internal val ModulesNavGraph: MutableList<NavGraph> = mutableListOf()
 
 fun addNavigators(vararg navigation: Navigation) {
-    Navigators.addAll(navigation.toList().map { it.navGraph() })
+    ModulesNavGraph.addAll(navigation.toList().map { it.navGraph() })
 }
 
 interface Navigation {
