@@ -20,6 +20,7 @@ private val DarkColorScheme = darkColorScheme(
     secondary = Color.Cyan,
     tertiary = Color.Cloud,
     background = Color.Cloud,
+    onPrimary = Color.Gray,
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -27,6 +28,7 @@ private val LightColorScheme = lightColorScheme(
     secondary = Color.Cyan,
     tertiary = Color.Cloud,
     background = Color.Cloud,
+    onPrimary = Color.Gray,
 )
 
 @Composable
