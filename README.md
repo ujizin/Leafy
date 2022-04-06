@@ -14,6 +14,7 @@ CameraReminder is an open-source project that save photos and keep reminding you
 - Jetpack Compose to UI
 - DI with Hilt
 - Database with Room
+- Ktlint
 
 ## 🗃 Architecture 
 
