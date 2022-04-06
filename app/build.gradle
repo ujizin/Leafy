@@ -21,5 +21,4 @@ dependencies {
 
     implementation projects.data.local
     implementation projects.shared.navigation
-
 }

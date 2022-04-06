@@ -18,6 +18,7 @@ room = "2.4.2"
 ksp = "1.6.10-1.0.2"
 navigation = "2.4.1"
 ktlint = "0.43.1"
+detekt = "1.20.0-RC2"
 
 [libraries]
 
@@ -99,3 +100,4 @@ android-library = { id = "com.android.library", version.ref = "gradle" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "dagger.hilt.android.plugin" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

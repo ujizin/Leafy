@@ -1,6 +1,9 @@
+import io.gitlab.arturbosch.detekt.Detekt
+
 buildscript {
     dependencies {
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.39.1'
+        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${libs.versions.detekt}"
     }
 }
 
@@ -8,4 +11,20 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.detekt)
+}
+
+detekt {
+    toolVersion = libs.versions.detekt
+    config = files("config/detekt.yml")
+    buildUponDefaultConfig = true
+}
+
+tasks.withType(Detekt).configureEach {
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+        txt.required.set(true)
+        sarif.required.set(true)
+    }
 }
