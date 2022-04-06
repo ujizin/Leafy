@@ -1,3 +1,4 @@
+![Build Unit Tests](https://github.com/devlucasyuji/camerareminder/actions/workflows/workflow.yml/badge.svg)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 <img src="assets/icon.png" />
