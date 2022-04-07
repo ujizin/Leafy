@@ -16,11 +16,11 @@ private val PoppinsFamily = FontFamily(
 internal val Typography = Typography(
     titleLarge = TextStyle(
         fontFamily = PoppinsFamily,
-        fontSize = 24.sp,
+        fontSize = 32.sp,
         fontWeight = FontWeight.Bold,
     ),
     bodyMedium = TextStyle(
         fontFamily = PoppinsFamily,
-        fontSize = 12.sp,
+        fontSize = 16.sp,
     ),
 )
