@@ -20,5 +20,6 @@ dependencies {
     implementation projects.features.home
 
     implementation projects.data.local
+
     implementation projects.shared.navigation
 }

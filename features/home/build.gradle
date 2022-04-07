@@ -12,4 +12,5 @@ android {
 
 dependencies {
     implementation projects.shared.navigation
+    implementation projects.shared.components
 }
