@@ -9,19 +9,24 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import br.com.devlucasyuji.components.Icons
+import br.com.devlucasyuji.components.animation.Animate.Animated
+import br.com.devlucasyuji.components.animation.Animation
 import br.com.devlucasyuji.components.extensions.OnClick
 
 @Composable
 internal fun Icon(
     icon: Icons,
     modifier: Modifier = Modifier,
+    animation: Animation = Animation.None,
     onClick: OnClick
 ) {
-    Image(
-        modifier = modifier
-            .size(32.dp)
-            .clickable(onClick = onClick),
-        painter = painterResource(icon.resId),
-        contentDescription = stringResource(icon.descriptionRes),
-    )
+    animation.Animated {
+        Image(
+            modifier = modifier
+                .size(32.dp)
+                .clickable(onClick = onClick),
+            painter = painterResource(icon.resId),
+            contentDescription = stringResource(icon.descriptionRes),
+        )
+    }
 }
