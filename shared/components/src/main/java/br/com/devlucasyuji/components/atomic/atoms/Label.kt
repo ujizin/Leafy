@@ -17,6 +17,7 @@ fun Label(
         Text(
             text = text,
             modifier = modifier,
+            color = MaterialTheme.colorScheme.onPrimary,
             style = MaterialTheme.typography.bodyMedium
         )
     }
