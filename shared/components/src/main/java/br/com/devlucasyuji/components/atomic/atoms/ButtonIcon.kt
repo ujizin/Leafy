@@ -15,12 +15,15 @@ import br.com.devlucasyuji.components.animation.Animate.Animated
 import br.com.devlucasyuji.components.animation.Animation
 import br.com.devlucasyuji.components.extensions.OnClick
 
+data class ButtonIcon(
+    val icon: Icons,
+    val animation: Animation = Animation.None,
+    val onClick: OnClick = {}
+)
+
 @Composable
-internal fun Icon(
-    icon: Icons,
+internal fun ButtonIcon.ButtonIcon(
     modifier: Modifier = Modifier,
-    animation: Animation = Animation.None,
-    onClick: OnClick
 ) {
     animation.Animated {
         IconButton(
@@ -41,11 +44,11 @@ internal fun Icon(
 @Preview("Hamburger")
 @Composable
 private fun PreviewHamburgerIcon() {
-    Icon(Icons.Hamburger) {}
+    ButtonIcon(Icons.Hamburger) {}
 }
 
 @Preview("Magnifier")
 @Composable
 private fun PreviewMagnifierIcon() {
-    Icon(Icons.Magnifier) {}
+    ButtonIcon(Icons.Magnifier) {}
 }
