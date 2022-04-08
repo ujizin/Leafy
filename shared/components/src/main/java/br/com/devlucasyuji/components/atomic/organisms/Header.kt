@@ -21,7 +21,7 @@ fun LazyListScope.header(
     subTitle: String = String.Empty,
     trailingIcon: ButtonIcon?,
     leadingIcon: ButtonIcon?,
-    headerAnimation: Animation = Animation.Top,
+    headerAnimation: Animation = Animation.SlideToTop,
     toolbarPadding: PaddingValues = PaddingValues(horizontal = 20.dp),
     headerTitlePadding: PaddingValues = PaddingValues(top = 24.dp, start = 20.dp, end = 20.dp)
 ) {

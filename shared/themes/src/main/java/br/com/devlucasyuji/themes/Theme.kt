@@ -20,16 +20,28 @@ private val DarkColorScheme = darkColorScheme(
     primary = Color.DarkCyan,
     secondary = Color.Cyan,
     tertiary = Color.Cloud,
+    surface = Color.DarkCyan,
     background = Color.Cloud,
     onPrimary = Color.Gray,
+    secondaryContainer = Color.Cloud,
+    onSecondaryContainer = Color.DarkCyan,
+    surfaceVariant = Color.DarkCyan,
+    onSurfaceVariant = Color.Cloud,
+    onSurface = Color.Cyan
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = Color.DarkCyan,
     secondary = Color.Cyan,
     tertiary = Color.Cloud,
+    surface = Color.DarkCyan,
     background = Color.Cloud,
     onPrimary = Color.Gray,
+    secondaryContainer = Color.Cloud,
+    onSecondaryContainer = Color.DarkCyan,
+    surfaceVariant = Color.DarkCyan,
+    onSurfaceVariant = Color.Cloud,
+    onSurface = Color.Cyan
 )
 
 @Composable

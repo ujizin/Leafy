@@ -9,9 +9,9 @@ data class Animation(
 ) {
     companion object {
         val None = Animation(Animate.Direction.None)
-        val Start = Animation(Animate.Direction.Start)
-        val Top = Animation(Animate.Direction.Top)
-        val End = Animation(Animate.Direction.End)
-        val Bottom = Animation(Animate.Direction.Bottom)
+        val SlideToStart = Animation(Animate.Direction.Start)
+        val SlideToTop = Animation(Animate.Direction.Top)
+        val SlideToEnd = Animation(Animate.Direction.End)
+        val SlideToBottom = Animation(Animate.Direction.Bottom)
     }
 }

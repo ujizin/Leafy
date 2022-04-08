@@ -18,7 +18,7 @@ import br.com.devlucasyuji.themes.CameraReminderTheme
 fun HeaderTitle(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues(horizontal = 20.dp),
-    animation: Animation = Animation.Top,
+    animation: Animation = Animation.SlideToTop,
     title: String,
     subTitle: String = String.Empty
 ) {
@@ -31,7 +31,7 @@ fun HeaderTitle(
         if (subTitle != String.Empty) {
             Label(
                 text = subTitle,
-                animation = animation.copy(delayMillis = 500),
+                animation = animation.copy(delayMillis = 750),
             )
         }
     }
