@@ -9,3 +9,7 @@ apply from: '../../config-compose.gradle'
 android {
     namespace 'br.com.devlucasyuji.components'
 }
+
+dependencies {
+    implementation projects.shared.themes
+}
