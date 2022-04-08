@@ -27,6 +27,7 @@ import br.com.devlucasyuji.components.R
 import br.com.devlucasyuji.components.animation.Animate.Animated
 import br.com.devlucasyuji.components.animation.Animation
 import br.com.devlucasyuji.components.atomic.molecules.CameraButton
+import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.components.extensions.capitalize
 
 
@@ -41,10 +42,16 @@ enum class NavItem(@DrawableRes val iconRes: Int? = null, @StringRes val labelRe
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Scaffold(modifier: Modifier = Modifier, content: LazyListScope.() -> Unit) {
+    var selectedItem by remember { mutableStateOf(NavItem.Home) }
+
     androidx.compose.material3.Scaffold(modifier = modifier, bottomBar = {
         Animation.SlideToTop.copy(delayMillis = Animation.SmallDelay).Animated {
             NavigationBar {
-                NavItem.values().forEach { item -> NavBarItem(item) }
+                NavItem.values().forEach { item ->
+                    NavBarItem(selectedItem, item) {
+                        selectedItem = item
+                    }
+                }
             }
             CameraButton {}
         }
@@ -59,12 +66,11 @@ fun Scaffold(modifier: Modifier = Modifier, content: LazyListScope.() -> Unit) {
 }
 
 @Composable
-internal fun RowScope.NavBarItem(item: NavItem) {
+internal fun RowScope.NavBarItem(selectedItem: NavItem, item: NavItem, onClick: OnClick) {
     // TODO add navigation with destinations
-    var selectedItem by remember { mutableStateOf(NavItem.Home) }
-
     val labelRes = item.labelRes ?: return Box(Modifier.size(64.dp))
     val iconRes = item.iconRes ?: return
+
     NavigationBarItem(
         icon = {
             Icon(
@@ -81,6 +87,6 @@ internal fun RowScope.NavBarItem(item: NavItem) {
         },
         alwaysShowLabel = item == selectedItem,
         selected = selectedItem == item,
-        onClick = { selectedItem = item },
+        onClick = onClick,
     )
 }
