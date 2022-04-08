@@ -13,5 +13,9 @@ data class Animation(
         val SlideToTop = Animation(Animate.Direction.Top)
         val SlideToEnd = Animation(Animate.Direction.End)
         val SlideToBottom = Animation(Animate.Direction.Bottom)
+
+        const val SmallDelay = 250
+        const val MediumDelay = 750
+        const val LargeDelay = 1000
     }
 }

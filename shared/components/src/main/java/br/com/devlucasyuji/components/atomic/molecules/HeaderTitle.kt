@@ -31,7 +31,7 @@ fun HeaderTitle(
         if (subTitle != String.Empty) {
             Label(
                 text = subTitle,
-                animation = animation.copy(delayMillis = 750),
+                animation = animation.copy(delayMillis = Animation.MediumDelay),
             )
         }
     }

@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -40,36 +41,46 @@ enum class NavItem(@DrawableRes val iconRes: Int? = null, @StringRes val labelRe
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Scaffold(modifier: Modifier = Modifier, content: LazyListScope.() -> Unit) {
-    var selectedItem by remember { mutableStateOf(NavItem.Home) }
     androidx.compose.material3.Scaffold(modifier = modifier, bottomBar = {
-        Animation.SlideToTop.copy(delayMillis = 250).Animated {
+        Animation.SlideToTop.copy(delayMillis = Animation.SmallDelay).Animated {
             NavigationBar {
-                NavItem.values().forEach { item ->
-                    val labelRes = item.labelRes ?: return@forEach Box(Modifier.size(64.dp))
-                    val iconRes = item.iconRes ?: return@forEach
-                    NavigationBarItem(
-                        icon = {
-                            Icon(
-                                modifier = Modifier.size(24.dp),
-                                painter = painterResource(iconRes),
-                                contentDescription = null
-                            )
-                        },
-                        label = {
-                            Text(
-                                text = stringResource(labelRes).capitalize(),
-                                Modifier.animateContentSize()
-                            )
-                        },
-                        alwaysShowLabel = item == selectedItem,
-                        selected = selectedItem == item,
-                        onClick = { selectedItem = item },
-                    )
-                }
+                NavItem.values().forEach { item -> NavBarItem(item) }
             }
             CameraButton {}
         }
-    }) {
-        LazyColumn(Modifier.padding(vertical = 32.dp), content = content)
+    }) { innerPadding ->
+        LazyColumn(
+            Modifier
+                .padding(vertical = 32.dp)
+                .padding(innerPadding),
+            content = content
+        )
     }
+}
+
+@Composable
+internal fun RowScope.NavBarItem(item: NavItem) {
+    // TODO add navigation with destinations
+    var selectedItem by remember { mutableStateOf(NavItem.Home) }
+
+    val labelRes = item.labelRes ?: return Box(Modifier.size(64.dp))
+    val iconRes = item.iconRes ?: return
+    NavigationBarItem(
+        icon = {
+            Icon(
+                modifier = Modifier.size(24.dp),
+                painter = painterResource(iconRes),
+                contentDescription = null
+            )
+        },
+        label = {
+            Text(
+                text = stringResource(labelRes).capitalize(),
+                Modifier.animateContentSize()
+            )
+        },
+        alwaysShowLabel = item == selectedItem,
+        selected = selectedItem == item,
+        onClick = { selectedItem = item },
+    )
 }

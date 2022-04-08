@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContent {
-            CameraReminderTheme {
+            CameraReminderTheme(dynamicColor = true) {
                 NavigationGraph()
             }
         }

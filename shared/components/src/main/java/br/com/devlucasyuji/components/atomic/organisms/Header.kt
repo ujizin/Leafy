@@ -2,6 +2,7 @@ package br.com.devlucasyuji.components.atomic.organisms
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.runtime.Composable
@@ -14,6 +15,7 @@ import br.com.devlucasyuji.components.atomic.atoms.ButtonIcon
 import br.com.devlucasyuji.components.atomic.molecules.HeaderTitle
 import br.com.devlucasyuji.components.atomic.molecules.Toolbar
 import br.com.devlucasyuji.components.extensions.Empty
+import br.com.devlucasyuji.themes.CameraReminderTheme
 
 fun LazyListScope.header(
     modifier: Modifier = Modifier,
@@ -43,16 +45,19 @@ fun LazyListScope.header(
     }
 }
 
-@Preview
+@Preview(showSystemUi = true)
 @Composable
 private fun PreviewHeader() {
-    LazyColumn {
-        header(
-            title = "Hello Lucas",
-            subTitle = "Welcome back!",
-            leadingIcon = ButtonIcon(Icons.Hamburger),
-            trailingIcon = ButtonIcon(Icons.Magnifier),
-            headerAnimation = Animation.None
-        )
+    CameraReminderTheme {
+        LazyColumn {
+            header(
+                modifier = Modifier.padding(top = 32.dp),
+                title = "Hello Lucas",
+                subTitle = "Welcome back!",
+                leadingIcon = ButtonIcon(Icons.Hamburger),
+                trailingIcon = ButtonIcon(Icons.Magnifier),
+                headerAnimation = Animation.None
+            )
+        }
     }
 }

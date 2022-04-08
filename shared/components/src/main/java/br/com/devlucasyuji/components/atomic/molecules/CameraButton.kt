@@ -14,28 +14,36 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.devlucasyuji.components.R
 import br.com.devlucasyuji.components.animation.Animate.Animated
 import br.com.devlucasyuji.components.animation.Animation
 import br.com.devlucasyuji.components.extensions.OnClick
+import br.com.devlucasyuji.themes.CameraReminderTheme
 
 @Composable
-internal fun CameraButton(onClick: OnClick) {
+internal fun CameraButton(
+    modifier: Modifier = Modifier,
+    animation: Animation = Animation.SlideToBottom.copy(delayMillis = Animation.MediumDelay),
+    iconAnimation: Animation = Animation.SlideToTop.copy(delayMillis = Animation.LargeDelay),
+    onClick: OnClick,
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .offset(y = (-32).dp),
+            .offset(y = (-32).dp)
+            .then(modifier),
         contentAlignment = Alignment.Center
     ) {
-        Animation.SlideToBottom.copy(delayMillis = 750).Animated {
+        animation.Animated {
             IconButton(
                 modifier = Modifier
                     .size(72.dp)
                     .background(Color.White, CircleShape),
                 onClick = onClick
             ) {
-                Animation.SlideToTop.copy(delayMillis = 1000).Animated {
+                iconAnimation.Animated {
                     Icon(
                         modifier = Modifier.size(32.dp),
                         painter = painterResource(id = R.drawable.camera),
@@ -45,5 +53,17 @@ internal fun CameraButton(onClick: OnClick) {
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+private fun PreviewCameraButton() {
+    CameraReminderTheme(dynamicColor = false) {
+        CameraButton(
+            modifier = Modifier.offset(y = 32.dp),
+            animation = Animation.None,
+            iconAnimation = Animation.None
+        ) {}
     }
 }
