@@ -10,6 +10,6 @@ fun NavigationGraph(startDestination: Destination = Destination.Home) {
     val navController = rememberNavController()
 
     NavHost(navController, startDestination.route) {
-        ModulesNavGraph.forEach { ModuleNavGraph -> ModuleNavGraph() }
+        ModulesNavGraph.forEach { ModuleNavGraph -> ModuleNavGraph(navController) }
     }
 }
