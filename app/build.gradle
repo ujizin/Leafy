@@ -15,11 +15,12 @@ android {
 
 dependencies {
     implementation libs.androidx.core.splashscreen
-    implementation projects.shared.themes
 
     implementation projects.features.home
 
     implementation projects.data.local
 
+    implementation projects.shared.components
+    implementation projects.shared.themes
     implementation projects.shared.navigation
 }
