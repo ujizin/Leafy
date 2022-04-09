@@ -9,7 +9,9 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.unit.IntOffset
 
 object Animate {
@@ -47,7 +49,13 @@ object Animate {
             content()
             return
         }
-        val visibleState = remember { MutableTransitionState(false).apply { targetState = true } }
+        val visible = rememberSaveable { mutableStateOf(false) }
+        val visibleState = remember {
+            MutableTransitionState(visible.value).apply {
+                targetState = true
+                visible.value = true
+            }
+        }
         AnimatedVisibility(
             visibleState = visibleState,
             enter = enterTransition() + fadeInEaseInOut(durationMillis, delayMillis),
