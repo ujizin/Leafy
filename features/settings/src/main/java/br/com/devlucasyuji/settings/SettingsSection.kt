@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.alarm
+package br.com.devlucasyuji.settings
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable

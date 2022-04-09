@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.search
+package br.com.devlucasyuji.alarm
 
 import org.junit.Test
 

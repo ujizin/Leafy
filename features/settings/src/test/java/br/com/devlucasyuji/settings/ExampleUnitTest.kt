@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.search
+package br.com.devlucasyuji.settings
 
 import org.junit.Test
 
