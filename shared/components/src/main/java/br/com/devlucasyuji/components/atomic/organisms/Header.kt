@@ -25,7 +25,7 @@ fun LazyListScope.header(
     leadingIcon: ButtonIcon? = null,
     headerAnimation: Animation = Animation.SlideToTop,
     toolbarPadding: PaddingValues = PaddingValues(horizontal = 20.dp),
-    headerTitlePadding: PaddingValues = PaddingValues(top = 24.dp, start = 20.dp, end = 20.dp)
+    headerTitlePadding: PaddingValues? = null,
 ) {
     item {
         Column(modifier) {
@@ -40,7 +40,15 @@ fun LazyListScope.header(
                 subTitle = subTitle,
                 modifier = Modifier,
                 animation = headerAnimation,
-                paddingValues = headerTitlePadding
+                paddingValues = when {
+                    headerTitlePadding != null -> headerTitlePadding
+                    trailingIcon != null && leadingIcon != null -> PaddingValues(
+                        top = 24.dp,
+                        start = 20.dp,
+                        end = 20.dp
+                    )
+                    else -> PaddingValues(horizontal = 20.dp)
+                }
             )
         }
     }
