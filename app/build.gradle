@@ -17,6 +17,9 @@ dependencies {
     implementation libs.androidx.core.splashscreen
 
     implementation projects.features.home
+    implementation projects.features.search
+    implementation projects.features.alarm
+    implementation projects.features.settings
 
     implementation projects.data.local
 

@@ -21,8 +21,8 @@ fun LazyListScope.header(
     modifier: Modifier = Modifier,
     title: String,
     subTitle: String = String.Empty,
-    trailingIcon: ButtonIcon?,
-    leadingIcon: ButtonIcon?,
+    trailingIcon: ButtonIcon? = null,
+    leadingIcon: ButtonIcon? = null,
     headerAnimation: Animation = Animation.SlideToTop,
     toolbarPadding: PaddingValues = PaddingValues(horizontal = 20.dp),
     headerTitlePadding: PaddingValues = PaddingValues(top = 24.dp, start = 20.dp, end = 20.dp)
@@ -30,6 +30,7 @@ fun LazyListScope.header(
     item {
         Column(modifier) {
             Toolbar(
+                modifier = Modifier.padding(top = 32.dp),
                 paddingValues = toolbarPadding,
                 trailingIcon = trailingIcon,
                 leadingIcon = leadingIcon

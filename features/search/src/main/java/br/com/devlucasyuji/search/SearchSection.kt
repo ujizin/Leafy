@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.home
+package br.com.devlucasyuji.search
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -9,13 +9,18 @@ import br.com.devlucasyuji.components.atomic.atoms.ButtonIcon
 import br.com.devlucasyuji.components.atomic.organisms.header
 
 @Composable
-fun NavController.HomeSection() {
+fun NavController.SearchSection() {
     LazyColumn {
         header(
-            title = "Hi Lucas!",
-            subTitle = "Welcome back",
-            leadingIcon = ButtonIcon(Icons.Hamburger, Animation.SlideToEnd),
-            trailingIcon = ButtonIcon(Icons.Magnifier, Animation.SlideToStart)
+            leadingIcon = ButtonIcon(
+                icon = Icons.Hamburger,
+                animation = Animation.SlideToTop,
+            ),
+            trailingIcon = ButtonIcon(
+                icon = Icons.Settings,
+                animation = Animation.SlideToTop
+            ),
+            title = "Search"
         )
     }
 }

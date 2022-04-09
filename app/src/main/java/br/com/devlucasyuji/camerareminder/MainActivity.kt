@@ -11,6 +11,9 @@ import androidx.navigation.compose.rememberNavController
 import br.com.devlucasyuji.components.atomic.organisms.Scaffold
 import br.com.devlucasyuji.home.homeGraph
 import br.com.devlucasyuji.navigation.Destination
+import br.com.devlucasyuji.alarm.alarmGraph
+import br.com.devlucasyuji.alarm.settingsGraph
+import br.com.devlucasyuji.search.searchGraph
 import br.com.devlucasyuji.themes.CameraReminderTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,6 +37,9 @@ class MainActivity : ComponentActivity() {
         NavHost(navController, Destination.Home.route) {
             with(navController) {
                 homeGraph(this)
+                searchGraph(this)
+                alarmGraph(this)
+                settingsGraph(this)
             }
         }
     }

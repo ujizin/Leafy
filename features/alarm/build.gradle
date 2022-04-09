@@ -1,0 +1,16 @@
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+}
+
+apply from: "$rootDir/config-compose.gradle"
+apply from: "$rootDir/config-android.gradle"
+
+android {
+    namespace 'br.com.devlucasyuji.alarm'
+}
+
+dependencies {
+    implementation projects.shared.navigation
+    implementation projects.shared.components
+}

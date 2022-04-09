@@ -19,10 +19,17 @@ enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include ':app'
+
 include ':domain'
 include ':data:local'
 include ':data:repository'
+
+include ':features:home'
+include ':features:search'
+include ':features:alarm'
+include ':features:settings'
+
+include ':shared:components'
 include ':shared:themes'
 include ':shared:navigation'
-include ':features:home'
-include ':shared:components'
+
