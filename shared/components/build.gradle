@@ -13,4 +13,6 @@ android {
 dependencies {
     implementation projects.shared.themes
     implementation projects.shared.navigation
+
+    implementation libs.landcapist.coil
 }
