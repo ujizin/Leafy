@@ -1,11 +1,14 @@
 package br.com.devlucasyuji.components.atomic.organisms.navigation
 
+import androidx.compose.foundation.layout.offset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import br.com.devlucasyuji.components.animation.Animate.Animated
@@ -33,7 +36,7 @@ internal fun NavController.NavigationBar() {
                 }
             }
         }
-        CameraButton {}
+        CameraButton(Modifier.offset(y = (-32).dp)) {}
     }
 }
 

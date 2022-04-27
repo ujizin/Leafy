@@ -3,7 +3,6 @@ package br.com.devlucasyuji.components.atomic.molecules
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
@@ -32,7 +31,6 @@ internal fun CameraButton(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .offset(y = (-32).dp)
             .then(modifier),
         contentAlignment = Alignment.Center
     ) {
@@ -61,7 +59,6 @@ internal fun CameraButton(
 private fun PreviewCameraButton() {
     CameraReminderTheme(dynamicColor = false) {
         CameraButton(
-            modifier = Modifier.offset(y = 32.dp),
             animation = Animation.None,
             iconAnimation = Animation.None
         ) {}
