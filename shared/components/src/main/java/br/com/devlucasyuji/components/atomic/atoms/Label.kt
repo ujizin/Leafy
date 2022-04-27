@@ -6,19 +6,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import br.com.devlucasyuji.components.animation.Animate.Animated
 import br.com.devlucasyuji.components.animation.Animation
+import br.com.devlucasyuji.components.props.Text
 
 @Composable
 fun Label(
-    text: String,
+    text: Text,
     modifier: Modifier = Modifier,
     animation: Animation = Animation.None,
 ) {
     animation.Animated {
         Text(
-            text = text,
+            text = text.text,
             modifier = modifier,
-            color = MaterialTheme.colorScheme.onPrimary,
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium.copy(
+                MaterialTheme.colorScheme.onPrimary
+            ).merge(text.style)
         )
     }
 }

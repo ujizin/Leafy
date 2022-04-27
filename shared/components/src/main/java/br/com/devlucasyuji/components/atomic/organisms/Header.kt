@@ -9,18 +9,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import br.com.devlucasyuji.components.Icons
 import br.com.devlucasyuji.components.animation.Animation
 import br.com.devlucasyuji.components.atomic.atoms.ButtonIcon
 import br.com.devlucasyuji.components.atomic.molecules.HeaderTitle
 import br.com.devlucasyuji.components.atomic.molecules.Toolbar
-import br.com.devlucasyuji.components.extensions.Empty
+import br.com.devlucasyuji.components.props.Icons
+import br.com.devlucasyuji.components.props.Text
 import br.com.devlucasyuji.themes.CameraReminderTheme
 
 fun LazyListScope.header(
     modifier: Modifier = Modifier,
-    title: String,
-    subTitle: String = String.Empty,
+    title: Text,
+    subTitle: Text = Text(),
     trailingIcon: ButtonIcon? = null,
     leadingIcon: ButtonIcon? = null,
     headerAnimation: Animation = Animation.SlideToTop,
@@ -61,8 +61,8 @@ private fun PreviewHeader() {
         LazyColumn {
             header(
                 modifier = Modifier.padding(top = 32.dp),
-                title = "Hello Lucas",
-                subTitle = "Welcome back!",
+                title = Text("Hello Lucas"),
+                subTitle = Text("Welcome back!"),
                 leadingIcon = ButtonIcon(Icons.Hamburger),
                 trailingIcon = ButtonIcon(Icons.Magnifier),
                 headerAnimation = Animation.None

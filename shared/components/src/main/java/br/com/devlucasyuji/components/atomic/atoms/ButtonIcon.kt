@@ -10,7 +10,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import br.com.devlucasyuji.components.Icons
+import br.com.devlucasyuji.components.props.Icons
 import br.com.devlucasyuji.components.animation.Animate.Animated
 import br.com.devlucasyuji.components.animation.Animation
 import br.com.devlucasyuji.components.extensions.OnClick

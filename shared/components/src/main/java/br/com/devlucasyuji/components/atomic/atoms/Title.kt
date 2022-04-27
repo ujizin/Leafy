@@ -7,20 +7,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.devlucasyuji.components.animation.Animate.Animated
 import br.com.devlucasyuji.components.animation.Animation
+import br.com.devlucasyuji.components.props.Text
 import br.com.devlucasyuji.themes.CameraReminderTheme
 
 @Composable
 internal fun Title(
-    text: String,
+    text: Text,
     modifier: Modifier = Modifier,
-    animation: Animation = Animation.None
+    animation: Animation = Animation.None,
 ) {
     animation.Animated {
         Text(
-            text = text,
+            text = text.text,
             modifier = modifier,
-            color = MaterialTheme.colorScheme.onPrimary,
-            style = MaterialTheme.typography.titleLarge,
+            style = MaterialTheme.typography.titleLarge
+                .copy(MaterialTheme.colorScheme.onPrimary)
+                .merge(text.style),
         )
     }
 }
@@ -29,6 +31,6 @@ internal fun Title(
 @Composable
 private fun PreviewTitle() {
     CameraReminderTheme {
-        Title("Hello Lucas")
+        Title(Text("Hello Lucas"))
     }
 }
