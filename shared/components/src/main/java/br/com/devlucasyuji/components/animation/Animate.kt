@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 
 object Animate {
@@ -42,7 +43,8 @@ object Animate {
     )
 
     @Composable
-    internal fun Animation.Animated(
+    fun Animation.Animated(
+        modifier: Modifier = Modifier,
         content: @Composable () -> Unit,
     ) {
         if (direction == Direction.None) {
@@ -57,6 +59,7 @@ object Animate {
             }
         }
         AnimatedVisibility(
+            modifier = modifier,
             visibleState = visibleState,
             enter = enterTransition() + fadeInEaseInOut(durationMillis, delayMillis),
         ) { content() }
