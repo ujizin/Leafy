@@ -1,7 +1,8 @@
-package br.com.devlucasyuji.components
+package br.com.devlucasyuji.components.props
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import br.com.devlucasyuji.components.R
 
 enum class Icons(
     @DrawableRes internal val resId: Int,
