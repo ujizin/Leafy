@@ -19,7 +19,7 @@ ksp = "1.6.10-1.0.2"
 navigation = "2.4.1"
 ktlint = "0.43.1"
 detekt = "1.20.0-RC2"
-landcapist-coil = "1.5.1"
+coil = "2.0.0-rc03"
 
 [libraries]
 
@@ -46,7 +46,7 @@ hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.re
 room = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
-landcapist-coil = { module = "com.github.skydoves:landscapist-coil", version.ref = "landcapist-coil" }
+coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 # Debug Implementations
 
