@@ -1,7 +1,6 @@
 package br.com.devlucasyuji.components.atomic.molecules
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
@@ -23,7 +22,6 @@ fun TitleRow(
     subTitle: Text = Text(),
     animation: Animation = Animation.SlideToTop,
     iconSpacedBy: Dp = 8.dp,
-    iconsAlignment: Alignment = Alignment.BottomStart,
     icons: @Composable Content
 ) {
     animation.Animated {
@@ -33,17 +31,14 @@ fun TitleRow(
             verticalAlignment = verticalAlignment,
         ) {
             HeaderTitle(
+                modifier = Modifier.weight(1F),
                 title = title,
                 subTitle = subTitle,
                 paddingValues = PaddingValues(0.dp),
                 animation = Animation.None
             )
-            Box(
-                contentAlignment = iconsAlignment
-            ) {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(iconSpacedBy)
-                ) { icons() }
+            Row(horizontalArrangement = Arrangement.spacedBy(iconSpacedBy)) {
+                icons()
             }
         }
     }
