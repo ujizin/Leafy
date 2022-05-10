@@ -5,22 +5,33 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import br.com.devlucasyuji.components.atomic.atoms.Image
 import br.com.devlucasyuji.components.extensions.Content
+import coil.compose.AsyncImagePainter
+import coil.compose.rememberAsyncImagePainter
+import coil.decode.DataSource
 
 @Composable
 fun BoxImage(
     modifier: Modifier = Modifier,
-    data: Any?,
+    painter: Painter,
     contentDescription: String?,
     contentAlignment: Alignment = Alignment.TopStart,
     boxModifier: Modifier = Modifier,
     content: @Composable Content
 ) {
     Box(modifier = modifier) {
-        Image(Modifier.fillMaxSize(), data, contentDescription)
-        Box(Modifier.fillMaxSize().then(boxModifier), contentAlignment = contentAlignment) {
-            content()
-        }
+        Image(
+            modifier = Modifier.fillMaxSize(),
+            painter = painter,
+            contentDescription = contentDescription,
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .then(boxModifier),
+            contentAlignment = contentAlignment,
+        ) { content() }
     }
 }
