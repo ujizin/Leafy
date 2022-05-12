@@ -6,9 +6,11 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import br.com.devlucasyuji.components.props.Icons
 import br.com.devlucasyuji.components.animation.Animate.Animated
@@ -18,6 +20,8 @@ import br.com.devlucasyuji.components.extensions.OnClick
 data class ButtonIcon(
     val icon: Icons,
     val animation: Animation = Animation.None,
+    val size: Dp = Dp.Unspecified,
+    val tint: Color? = null,
     val onClick: OnClick = {}
 )
 
@@ -33,8 +37,9 @@ internal fun ButtonIcon.ButtonIcon(
                 .clickable(onClick = onClick),
         ) {
             androidx.compose.material3.Icon(
+                modifier = Modifier.size(size),
                 painter = painterResource(icon.resId),
-                tint = MaterialTheme.colorScheme.onPrimary,
+                tint = tint ?: MaterialTheme.colorScheme.onPrimary,
                 contentDescription = stringResource(icon.descriptionRes),
             )
         }
