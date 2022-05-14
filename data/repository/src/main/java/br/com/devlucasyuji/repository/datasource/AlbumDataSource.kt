@@ -5,45 +5,45 @@ import br.com.devlucasyuji.repository.model.Album
 interface AlbumDataSource {
 
     /**
-     * Insert a new album.
+     * Insert a new [Album].
      *
-     * @param album album to be added
+     * @param album [Album] to be added
      * */
     suspend fun insertAlbum(album: Album)
 
     /**
-     * Insert a new album list.
+     * Insert a new list of [Album].
      *
-     * @param albums albums' list to be added
+     * @param albums list of [Album] to be added
      * */
     suspend fun insertAlbums(albums: List<Album>)
 
     /**
-     * Get all albums.
+     * Get all [Album] from data source.
      *
-     * @return all albums added
+     * @return all [Album] added
      * */
     suspend fun getAlbums(): List<Album>
 
     /**
-     * Find album by id.
+     * Find [Album] by id.
      *
      * @param albumId id's album
-     * @return album found or null
+     * @return [Album] found or null
      * */
     suspend fun findAlbum(albumId: String): Album?
 
     /**
-     * Update album passed on parameter
+     * Update [Album] passed on parameter
      *
-     * @param album album to be updated
+     * @param album [Album] to be updated
      * */
     suspend fun updateAlbum(album: Album)
 
     /**
-     * Delete album passed on parameter
+     * Delete [Album] passed on parameter
      *
-     * @param album album to be deleted
+     * @param album [Album] to be deleted
      * */
     suspend fun deleteAlbum(album: Album)
 }

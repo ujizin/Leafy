@@ -4,45 +4,45 @@ import br.com.devlucasyuji.repository.model.Alarm
 
 interface AlarmDataSource {
     /**
-     * Insert a new album.
+     * Insert a new [Alarm].
      *
-     * @param alarm alarm to be added
+     * @param alarm [Alarm] to be added
      * */
     suspend fun insertAlarm(alarm: Alarm)
 
     /**
-     * Insert a new alarm list.
+     * Insert a new list of [Alarm].
      *
-     * @param alarms alarms' list to be added
+     * @param alarms list of [Alarm] to be added
      * */
     suspend fun insertAlarms(alarms: List<Alarm>)
 
     /**
-     * Get all alarms.
+     * Get all [Alarm] from data source.
      *
-     * @return all alarms added
+     * @return all [Alarm] added
      * */
     suspend fun getAlarms(): List<Alarm>
 
     /**
-     * Find alarm by id.
+     * Find [Alarm] by id.
      *
      * @param alarmId id's alarm
-     * @return alarm found or null
+     * @return [Alarm] found or null
      * */
     suspend fun findAlarm(alarmId: String): Alarm?
 
     /**
-     * Update alarm passed on parameter
+     * Update [Alarm] passed on parameter
      *
-     * @param alarm alarm to be updated
+     * @param alarm [Alarm] to be updated
      * */
     suspend fun updateAlarm(alarm: Alarm)
 
     /**
-     * Delete alarm passed on parameter
+     * Delete [Alarm] passed on parameter
      *
-     * @param alarm alarm to be deleted
+     * @param alarm [Alarm] to be deleted
      * */
     suspend fun deleteAlarm(alarm: Alarm)
 }

@@ -5,30 +5,30 @@ import br.com.devlucasyuji.repository.model.Photo
 interface PhotoDataSource {
 
     /**
-     * Inserts a new photo.
+     * Inserts a new [Photo].
      *
-     * @param photo photo to be added
+     * @param photo [Photo] to be added
      * */
     suspend fun insertPhoto(photo: Photo)
 
     /**
-     * Inserts a new photo list.
+     * Inserts a new list of [Photo].
      *
-     * @param photos photos' list to be added
+     * @param photos list of [Photo] to be added
      * */
     suspend fun insertPhotos(photos: List<Photo>)
 
     /**
-     * Get all photos.
+     * Get all [Photo] from data source.
      *
-     * @return all photos added.
+     * @return all [Photo] added.
      * */
     suspend fun getPhotos(): List<Photo>
 
     /**
-     * Update the photo passed on parameter.
+     * Update the [Photo] passed on parameter.
      *
-     * @param photo photo to be updated
+     * @param photo [Photo] to be updated
      * */
     suspend fun updatePhoto(photo: Photo)
 
