@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey
  * @param title the album title
  */
 @Entity
-data class AlbumEntity(
+internal data class AlbumEntity(
     @ColumnInfo(name = "album_id")
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,

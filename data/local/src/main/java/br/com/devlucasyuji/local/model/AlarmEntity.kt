@@ -22,7 +22,7 @@ import androidx.room.PrimaryKey
         )
     ]
 )
-data class AlarmEntity(
+internal data class AlarmEntity(
     @ColumnInfo(name = "alarm_id")
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
