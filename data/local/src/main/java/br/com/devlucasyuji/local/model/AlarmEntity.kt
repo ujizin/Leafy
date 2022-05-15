@@ -4,17 +4,18 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import br.com.devlucasyuji.repository.model.Photo
 
 /**
  * Alarm [Entity]
  *
- * @param
+ * @param id the alarm id
+ * @param ring the ring's alarm
+ * @param photoId the photo id linked to the alarm
  * */
 @Entity(
     foreignKeys = [
         ForeignKey(
-            entity = Photo::class,
+            entity = PhotoEntity::class,
             parentColumns = ["photo_id"],
             childColumns = ["photo_id"],
             onDelete = ForeignKey.SET_DEFAULT

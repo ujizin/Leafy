@@ -2,6 +2,7 @@ package br.com.devlucasyuji.local.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 /**
@@ -12,8 +13,18 @@ import androidx.room.PrimaryKey
  * @param date the photo date
  * @param filePath file path of the photo
  * @param description the photo description
+ * @param albumId the album id linked to the photo
  * */
-@Entity
+@Entity(
+    foreignKeys = [
+        ForeignKey(
+            entity = AlbumEntity::class,
+            parentColumns = ["album_id"],
+            childColumns = ["album_id"],
+            onDelete = ForeignKey.SET_DEFAULT
+        )
+    ]
+)
 internal data class PhotoEntity(
     @ColumnInfo(name = "photo_id")
     @PrimaryKey(autoGenerate = true)
@@ -28,4 +39,6 @@ internal data class PhotoEntity(
     val description: String,
     @ColumnInfo(name = "photo_favorite")
     val favorite: Boolean,
+    @ColumnInfo(name = "album_id")
+    val albumId: Long? = null,
 )
