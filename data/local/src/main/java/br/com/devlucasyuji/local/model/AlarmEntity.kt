@@ -13,6 +13,7 @@ import androidx.room.PrimaryKey
  * @param photoId the photo id linked to the alarm
  * */
 @Entity(
+    tableName = "alarm",
     foreignKeys = [
         ForeignKey(
             entity = PhotoEntity::class,
@@ -22,7 +23,7 @@ import androidx.room.PrimaryKey
         )
     ]
 )
-internal data class AlarmEntity(
+data class AlarmEntity(
     @ColumnInfo(name = "alarm_id")
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,

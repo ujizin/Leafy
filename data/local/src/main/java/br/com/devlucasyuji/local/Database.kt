@@ -28,4 +28,7 @@ abstract class Database : RoomDatabase() {
 
     abstract fun photoDao(): PhotoDao
 
+    companion object {
+        internal const val NAME = "camera_reminder_db"
+    }
 }

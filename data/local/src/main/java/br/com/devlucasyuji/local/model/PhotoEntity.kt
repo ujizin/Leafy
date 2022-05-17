@@ -16,6 +16,7 @@ import androidx.room.PrimaryKey
  * @param albumId the album id linked to the photo
  * */
 @Entity(
+    tableName = "photo",
     foreignKeys = [
         ForeignKey(
             entity = AlbumEntity::class,
@@ -25,7 +26,7 @@ import androidx.room.PrimaryKey
         )
     ]
 )
-internal data class PhotoEntity(
+data class PhotoEntity(
     @ColumnInfo(name = "photo_id")
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
