@@ -3,6 +3,7 @@ package br.com.devlucasyuji.local.dao
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import br.com.devlucasyuji.local.model.PhotoEntity
@@ -33,7 +34,7 @@ interface PhotoDao {
      * Insert a new [PhotoEntity].
      *
      * */
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(vararg photo: PhotoEntity)
 
     /**
