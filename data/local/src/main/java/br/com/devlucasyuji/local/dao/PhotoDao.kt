@@ -26,6 +26,7 @@ interface PhotoDao {
      * Find all photo entity by album id
      *
      * @param albumId the album id linked to [PhotoEntity]
+     * @return list of [PhotoEntity]
      * */
     @Query("SELECT * FROM photo WHERE album_id = :albumId")
     suspend fun findByAlbumId(albumId: Long): List<PhotoEntity>

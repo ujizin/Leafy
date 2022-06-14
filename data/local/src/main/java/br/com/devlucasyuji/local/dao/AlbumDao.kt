@@ -23,6 +23,15 @@ interface AlbumDao {
     suspend fun getAll(): List<AlbumEntity>
 
     /**
+     * Find a list of [AlbumEntity] by album id
+     *
+     * @param albumId the album's id
+     * @return list of [AlbumEntity]
+     * */
+    @Query("SELECT * FROM album where album_id = :albumId")
+    suspend fun findAlbumById(albumId: Long): AlbumEntity?
+
+    /**
      * Insert a new [AlbumEntity].
      *
      * @param album [AlbumEntity] to be added
