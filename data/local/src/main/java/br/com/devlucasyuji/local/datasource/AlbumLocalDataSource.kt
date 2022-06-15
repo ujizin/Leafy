@@ -1,31 +1,38 @@
 package br.com.devlucasyuji.local.datasource
 
+import br.com.devlucasyuji.local.dao.AlbumDao
+import br.com.devlucasyuji.local.mapper.AlbumMapper
 import br.com.devlucasyuji.repository.datasource.AlbumDataSource
 import br.com.devlucasyuji.repository.model.Album
 
-internal class AlbumLocalDataSource : AlbumDataSource {
+internal class AlbumLocalDataSource(
+    private val albumDao: AlbumDao,
+    private val mapper: AlbumMapper,
+) : AlbumDataSource {
 
     override suspend fun insertAlbum(album: Album) {
-        TODO("Not yet implemented")
+        albumDao.insert(mapper.toAlbumEntity(album))
     }
 
     override suspend fun insertAlbums(albums: List<Album>) {
-        TODO("Not yet implemented")
+        val albumEntities = albums.map { mapper.toAlbumEntity(it) }
+        albumDao.insert(*albumEntities.toTypedArray())
     }
 
     override suspend fun getAlbums(): List<Album> {
-        TODO("Not yet implemented")
+        return albumDao.getAll().map { mapper.toAlbum(it) }
     }
 
-    override suspend fun findAlbum(albumId: String): Album? {
-        TODO("Not yet implemented")
+    override suspend fun findAlbumById(albumId: Long): Album? {
+        val albumEntity = albumDao.findAlbumById(albumId) ?: return null
+        return mapper.toAlbum(albumEntity)
     }
 
     override suspend fun updateAlbum(album: Album) {
-        TODO("Not yet implemented")
+        albumDao.update(mapper.toAlbumEntity(album))
     }
 
     override suspend fun deleteAlbum(album: Album) {
-        TODO("Not yet implemented")
+        albumDao.delete(mapper.toAlbumEntity(album))
     }
 }
