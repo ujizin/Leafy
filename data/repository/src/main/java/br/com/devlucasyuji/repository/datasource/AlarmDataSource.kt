@@ -25,14 +25,6 @@ interface AlarmDataSource {
     suspend fun getAlarms(): List<Alarm>
 
     /**
-     * Find [Alarm] by id.
-     *
-     * @param alarmId id's alarm
-     * @return [Alarm] found or null
-     * */
-    suspend fun findAlarm(alarmId: String): Alarm?
-
-    /**
      * Update [Alarm] passed on parameter
      *
      * @param alarm [Alarm] to be updated
