@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import br.com.devlucasyuji.components.props.Icons
 import br.com.devlucasyuji.components.atomic.atoms.ButtonIcon
+import br.com.devlucasyuji.components.props.Icons
 
 @Composable
 internal fun Toolbar(

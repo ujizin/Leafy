@@ -50,5 +50,4 @@ fun NavController.HomeSection() {
             )
         }
     }
-
 }

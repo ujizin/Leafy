@@ -28,10 +28,12 @@ object Animate {
         return when (direction) {
             Direction.Start -> slideInHorizontally(
                 animationSpec = animationSpec,
-                initialOffsetX = { it / 2 })
+                initialOffsetX = { it / 2 }
+            )
             Direction.Top -> slideInVertically(
                 animationSpec = animationSpec,
-                initialOffsetY = { it / 2 })
+                initialOffsetY = { it / 2 }
+            )
             Direction.End -> slideInHorizontally(animationSpec = animationSpec)
             Direction.Bottom -> slideInVertically(animationSpec = animationSpec)
             Direction.None -> EnterTransition.None

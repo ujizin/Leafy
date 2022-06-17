@@ -8,9 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import br.com.devlucasyuji.components.atomic.atoms.Image
 import br.com.devlucasyuji.components.extensions.Content
-import coil.compose.AsyncImagePainter
-import coil.compose.rememberAsyncImagePainter
-import coil.decode.DataSource
 
 @Composable
 fun BoxImage(
