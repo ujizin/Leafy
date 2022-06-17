@@ -31,7 +31,7 @@ interface AlbumDataSource {
      * @param albumId id's album
      * @return [Album] found or null
      * */
-    suspend fun findAlbum(albumId: String): Album?
+    suspend fun findAlbumById(albumId: Long): Album?
 
     /**
      * Update [Album] passed on parameter
