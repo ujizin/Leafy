@@ -19,9 +19,7 @@ internal class AlbumLocalDataSource(
         albumDao.insert(*albumEntities.toTypedArray())
     }
 
-    override suspend fun getAlbums(): List<Album> {
-        return albumDao.getAll().map { mapper.toAlbum(it) }
-    }
+    override suspend fun getAlbums(): List<Album> = albumDao.getAll().map(mapper::toAlbum)
 
     override suspend fun findAlbumById(albumId: Long): Album? {
         val albumEntity = albumDao.findAlbumById(albumId) ?: return null

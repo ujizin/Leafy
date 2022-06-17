@@ -18,9 +18,7 @@ internal class AlarmLocalDataSource(
         alarmDao.insert(*alarmEntities.toTypedArray())
     }
 
-    override suspend fun getAlarms(): List<Alarm> {
-        return alarmDao.getAll().map { mapper.toAlarm(it) }
-    }
+    override suspend fun getAlarms(): List<Alarm> = alarmDao.getAll().map(mapper::toAlarm)
 
     override suspend fun updateAlarm(alarm: Alarm) {
         alarmDao.update(mapper.toAlarmEntity(alarm))
