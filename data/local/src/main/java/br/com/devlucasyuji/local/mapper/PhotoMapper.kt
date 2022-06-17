@@ -3,6 +3,9 @@ package br.com.devlucasyuji.local.mapper
 import br.com.devlucasyuji.local.model.PhotoEntity
 import br.com.devlucasyuji.repository.model.Photo
 
+/**
+ * Mapper between [Photo] and [PhotoEntity]
+ * */
 class PhotoMapper {
 
     fun toPhoto(photoEntity: PhotoEntity) = with(photoEntity) {

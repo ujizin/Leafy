@@ -3,6 +3,9 @@ package br.com.devlucasyuji.local.mapper
 import br.com.devlucasyuji.local.model.AlbumEntity
 import br.com.devlucasyuji.repository.model.Album
 
+/**
+ * Mapper between [Album] and [AlbumEntity]
+ * */
 internal class AlbumMapper {
 
     fun toAlbumEntity(album: Album) = with(album) {

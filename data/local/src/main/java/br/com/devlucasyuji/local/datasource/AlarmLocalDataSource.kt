@@ -9,6 +9,7 @@ internal class AlarmLocalDataSource(
     private val alarmDao: AlarmDao,
     private val mapper: AlarmMapper,
 ) : AlarmDataSource {
+
     override suspend fun insertAlarm(alarm: Alarm) {
         alarmDao.insert(mapper.toAlarmEntity(alarm))
     }
