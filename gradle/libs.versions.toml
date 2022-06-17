@@ -20,6 +20,8 @@ navigation = "2.4.1"
 ktlint = "0.43.1"
 detekt = "1.20.0-RC2"
 coil = "2.0.0-rc03"
+test-runner = "1.4.0"
+test-core-ktx = "1.4.0"
 
 [libraries]
 
@@ -57,6 +59,8 @@ compose-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", versi
 # Test Implementations
 
 junit = { module = "junit:junit", version.ref = "junit" }
+test-core = { module = "androidx.test:core-ktx", version.ref = "test-core-ktx" }
+test-runner = { module = "androidx.test:runner", version.ref = "test-runner" }
 
 # Android Test Implementations
 
@@ -71,6 +75,12 @@ ktlint = { module = "com.pinterest:ktlint", version.ref = "ktlint" }
 androidx = [
     "androidx-core",
     "androidx-lifecycle"
+]
+
+test = [
+    "junit",
+    "test-runner",
+    "test-core"
 ]
 
 androidx-test = [
