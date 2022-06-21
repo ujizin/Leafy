@@ -9,6 +9,10 @@ apply from: '../../config-android.gradle'
 
 android {
     namespace 'br.com.devlucasyuji.camerareminder.local'
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -16,7 +20,8 @@ dependencies {
     implementation libs.room.ktx
     ksp libs.room.compiler
 
-    testImplementation libs.bundles.test
+    androidTestImplementation libs.bundles.test
+    androidTestImplementation libs.coroutines.test
 
     implementation projects.data.repository
 }
