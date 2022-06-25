@@ -10,6 +10,8 @@ android {
 
 dependencies {
     implementation libs.bundles.compose
+    implementation libs.hilt.compose
+
     debugImplementation libs.bundles.compose.debug
 
     implementation libs.compose.activity

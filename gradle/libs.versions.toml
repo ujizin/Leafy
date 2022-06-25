@@ -14,6 +14,7 @@ espresso = "3.4.0"
 junit = "4.13.2"
 android-junit = "1.1.3"
 hilt = "2.41"
+hilt-compose = "1.0.0"
 room = "2.4.2"
 ksp = "1.6.10-1.0.2"
 navigation = "2.4.1"
@@ -46,6 +47,7 @@ coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", ve
 
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+hilt-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-compose"}
 
 room = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
