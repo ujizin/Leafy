@@ -9,7 +9,7 @@ import androidx.room.Update
 import br.com.devlucasyuji.local.model.AlarmEntity
 
 /**
- * [Dao] class to handle with [AlarmEntity]
+ * [Dao] class to handle with [AlarmEntity].
  * */
 @Dao
 interface AlarmDao {
