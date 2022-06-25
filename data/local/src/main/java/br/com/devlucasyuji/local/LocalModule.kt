@@ -2,6 +2,9 @@ package br.com.devlucasyuji.local
 
 import android.content.Context
 import androidx.room.Room
+import br.com.devlucasyuji.local.datasource.PhotoLocalDataSource
+import br.com.devlucasyuji.local.mapper.PhotoMapper
+import br.com.devlucasyuji.repository.datasource.PhotoDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,4 +27,11 @@ object LocalModule {
             Database::class.java,
             Database.NAME
         ).build()
+
+    @Singleton
+    @Provides
+    fun provideLocalPhotoDataSource(database: Database): PhotoDataSource = PhotoLocalDataSource(
+        photoDao = database.photoDao(),
+        mapper = PhotoMapper()
+    )
 }

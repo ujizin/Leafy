@@ -6,7 +6,7 @@ import br.com.devlucasyuji.repository.model.Photo
 /**
  * Mapper between [Photo] and [PhotoEntity]
  * */
-class PhotoMapper {
+internal class PhotoMapper {
 
     fun toPhoto(photoEntity: PhotoEntity) = with(photoEntity) {
         Photo(id, title, date, filePath, description, favorite, albumId)
