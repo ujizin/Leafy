@@ -2,6 +2,9 @@ package br.com.devlucasyuji.repository.datasource
 
 import br.com.devlucasyuji.repository.model.Alarm
 
+/**
+ * Interface Alarm to data source implementation.
+ * */
 interface AlarmDataSource {
     /**
      * Insert a new [Alarm].

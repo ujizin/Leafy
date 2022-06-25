@@ -2,6 +2,9 @@ package br.com.devlucasyuji.repository.datasource
 
 import br.com.devlucasyuji.repository.model.Album
 
+/**
+ * Interface Album to data source implementation.
+ * */
 interface AlbumDataSource {
 
     /**

@@ -2,6 +2,9 @@ package br.com.devlucasyuji.repository.datasource
 
 import br.com.devlucasyuji.repository.model.Photo
 
+/**
+ * Interface Photo to data source implementation.
+ * */
 interface PhotoDataSource {
 
     /**
