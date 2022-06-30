@@ -4,7 +4,7 @@ import br.com.devlucasyuji.domain.model.Photo
 import br.com.devlucasyuji.domain.repository.PhotoRepository
 import br.com.devlucasyuji.domain.usecase.photo.DeletePhoto
 
-class DeletePhotoImpl(
+internal class DeletePhotoImpl(
     private val photoRepository: PhotoRepository
 ): DeletePhoto {
 

@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import br.com.devlucasyuji.components.animation.Animation
 import br.com.devlucasyuji.components.atomic.atoms.ButtonIcon
@@ -22,7 +23,7 @@ import br.com.devlucasyuji.components.props.Text
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun NavController.HomeSection() {
+fun NavController.HomeSection(viewModel: HomeViewModel = hiltViewModel()) {
     Section(
         header = Header(
             title = Text("Hi Lucas!"),

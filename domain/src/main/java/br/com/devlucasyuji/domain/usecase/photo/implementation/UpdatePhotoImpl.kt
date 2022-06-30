@@ -5,7 +5,7 @@ import br.com.devlucasyuji.domain.repository.PhotoRepository
 import br.com.devlucasyuji.domain.usecase.photo.UpdatePhoto
 import kotlinx.coroutines.flow.Flow
 
-class UpdatePhotoImpl(
+internal class UpdatePhotoImpl(
     private val photoRepository: PhotoRepository,
 ) : UpdatePhoto {
 
