@@ -23,6 +23,13 @@ interface PhotoRepository {
     fun insertPhoto(photo: Photo): Flow<Unit>
 
     /**
+     * Insert a list of Photo.
+     *
+     * @param photos list of photo to be added
+     * */
+    fun insertPhotos(photos: List<Photo>): Flow<Unit>
+
+    /**
      * Update Photo.
      *
      * @param photo photo to be updated

@@ -11,6 +11,8 @@ internal class PhotoMapper {
         Photo(id, title, date, filePath, description, favorite, albumId)
     }
 
+    fun toRepo(photos: List<Photo>) = photos.map { toRepo(it) }
+
     fun toRepo(photo: Photo) = with(photo) {
         DataPhoto(id, title, date, filePath, description, favorite, albumId)
     }

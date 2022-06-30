@@ -24,6 +24,10 @@ internal class PhotoRepositoryImpl(
         emit(dataSource.insertPhoto(mapper.toRepo(photo)))
     }.flowOn(dispatcher)
 
+    override fun insertPhotos(photos: List<Photo>) = flow {
+        emit(dataSource.insertPhotos(mapper.toRepo(photos)))
+    }.flowOn(dispatcher)
+
     override fun updatePhoto(photo: Photo) = flow {
         emit(dataSource.updatePhoto(mapper.toRepo(photo)))
     }.flowOn(dispatcher)
