@@ -1,9 +1,9 @@
-package br.com.devlucasyuji.local.common
+package br.com.devlucasyuji.local
 
 import androidx.room.Room
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.platform.app.InstrumentationRegistry
-import br.com.devlucasyuji.local.Database
+import br.com.devlucasyuji.test.TestDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.After
 import org.junit.Before
