@@ -1,6 +1,6 @@
 package br.com.devlucasyuji.local.datasource
 
-import br.com.devlucasyuji.local.common.BaseDatabaseTest
+import br.com.devlucasyuji.local.BaseDatabaseTest
 import br.com.devlucasyuji.local.dao.AlarmDao
 import br.com.devlucasyuji.local.model.AlarmEntity
 import br.com.devlucasyuji.local.model.PhotoEntity

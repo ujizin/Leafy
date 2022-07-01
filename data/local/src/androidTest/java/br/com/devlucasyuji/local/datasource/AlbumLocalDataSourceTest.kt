@@ -1,6 +1,6 @@
 package br.com.devlucasyuji.local.datasource
 
-import br.com.devlucasyuji.local.common.BaseDatabaseTest
+import br.com.devlucasyuji.local.BaseDatabaseTest
 import br.com.devlucasyuji.local.dao.AlbumDao
 import br.com.devlucasyuji.local.model.AlbumEntity
 import kotlinx.coroutines.ExperimentalCoroutinesApi

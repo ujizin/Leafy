@@ -1,6 +1,6 @@
 package br.com.devlucasyuji.local.datasource
 
-import br.com.devlucasyuji.local.common.BaseDatabaseTest
+import br.com.devlucasyuji.local.BaseDatabaseTest
 import br.com.devlucasyuji.local.dao.PhotoDao
 import br.com.devlucasyuji.local.model.AlbumEntity
 import br.com.devlucasyuji.local.model.PhotoEntity
