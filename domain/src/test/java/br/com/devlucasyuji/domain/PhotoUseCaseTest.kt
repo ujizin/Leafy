@@ -54,7 +54,7 @@ class PhotoUseCaseTest {
     }
 
     @Test
-    fun `when add photo should call insert photos in repository`() = runTest {
+    fun `when add photo then expect call insert photos on repository`() = runTest {
         every { photoRepository.insertPhotos(any()) } returns flowOf(Unit)
 
         addPhotoUseCase(fakePhoto).collect {
@@ -64,7 +64,7 @@ class PhotoUseCaseTest {
     }
 
     @Test
-    fun `when load photo should return photos from repository`() = runTest {
+    fun `when load photo then expect return photos on repository`() = runTest {
         val expectedPhotos = listOf(
             Photo(id = 1, "", "", "", "", false),
             Photo(id = 2, "", "", "", "", false),
@@ -79,7 +79,7 @@ class PhotoUseCaseTest {
     }
 
     @Test
-    fun `when update photo should call update photos in repository`() = runTest {
+    fun `when update photo then expect call update photos on repository`() = runTest {
         every { photoRepository.updatePhoto(fakePhoto) } returns flowOf(Unit)
 
         updatePhotoUseCase(fakePhoto).collect {
@@ -88,7 +88,7 @@ class PhotoUseCaseTest {
     }
 
     @Test
-    fun `when delete photo should call delete photos in repository`() = runTest {
+    fun `when delete photo then expect call delete photos on repository`() = runTest {
         every { photoRepository.deletePhoto(fakePhoto) } returns flowOf(Unit)
 
         deletePhotoUseCase(fakePhoto).collect {
