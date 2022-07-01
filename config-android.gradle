@@ -37,4 +37,8 @@ dependencies {
     androidTestImplementation libs.bundles.androidx.test
 }
 
+kapt {
+    correctErrorTypes true
+}
+
 apply from: "$rootDir/ktlint.gradle"
