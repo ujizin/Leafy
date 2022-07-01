@@ -23,6 +23,7 @@ detekt = "1.20.0-RC2"
 coil = "2.0.0-rc03"
 test-runner = "1.4.0"
 test-core-ktx = "1.4.0"
+mockk = "1.10.0"
 
 [libraries]
 
@@ -47,13 +48,15 @@ coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", ve
 
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
-hilt-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-compose"}
+hilt-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-compose" }
 
 room = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 # Debug Implementations
 
