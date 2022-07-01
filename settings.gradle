@@ -32,4 +32,5 @@ include ':features:settings'
 include ':shared:components'
 include ':shared:themes'
 include ':shared:navigation'
+include ':shared:test'
 

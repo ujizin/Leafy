@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.local.common
+package br.com.devlucasyuji.test
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -9,7 +9,6 @@ import kotlinx.coroutines.test.setMain
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
-// FIXME: add on test module later
 /**
  * Watcher dispatcher rule to use on tests
  * */
