@@ -16,5 +16,6 @@ enum class Icons(
     Star(R.drawable.star, R.string.star),
     Settings(R.drawable.settings, R.string.settings),
     Add(R.drawable.add, R.string.add),
+    Shared(R.drawable.shared, R.string.shared),
     Others(R.drawable.others, R.string.others);
 }

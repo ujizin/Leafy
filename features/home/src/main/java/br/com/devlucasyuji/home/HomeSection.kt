@@ -46,7 +46,7 @@ fun NavController.HomeSection(viewModel: HomeViewModel = hiltViewModel()) {
                 subTitle = Text("Torre Eiffel", TextStyle(color = Color.White)),
                 size = CardSize.Large,
                 buttonIcons = arrayOf(
-                    ButtonIcon(Icons.Settings, tint = Color.White)
+                    ButtonIcon(Icons.Shared, tint = Color.White, size = 24.dp),
                 )
             )
         }
