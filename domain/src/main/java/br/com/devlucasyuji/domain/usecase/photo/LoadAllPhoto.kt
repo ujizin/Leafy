@@ -13,5 +13,5 @@ interface LoadAllPhoto {
      *
      * @return list of all photos
      * */
-    operator fun invoke(): Flow<List<Photo>>
+    operator fun invoke(): Flow<Result<List<Photo>>>
 }
