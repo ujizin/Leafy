@@ -16,10 +16,11 @@ class HomeViewModel @Inject constructor(
     loadAllPhoto: LoadAllPhoto,
 ) : ViewModel() {
 
-    private val photoState: StateFlow<UIState> = combine(loadAllPhoto()) { (photoResult) ->
+    val photoState: StateFlow<UIState> = combine(loadAllPhoto()) { (photoResult) ->
         if (photoResult.isSuccess) {
             val photos = photoResult.getOrDefault(emptyList())
-            UIState.Success(photos)
+            // TODO get name from user data store
+            UIState.Success("user", photos)
         } else {
             UIState.Error(photoResult.exceptionOrNull())
         }
@@ -31,7 +32,10 @@ class HomeViewModel @Inject constructor(
 }
 
 sealed interface UIState {
-    data class Success(val photos: List<Photo>) : UIState
+    data class Success(
+        val nickname: String,
+        val photos: List<Photo>
+    ) : UIState
     data class Error(val throwable: Throwable?) : UIState
     object Loading : UIState
 }
