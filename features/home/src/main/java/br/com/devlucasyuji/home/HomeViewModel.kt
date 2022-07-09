@@ -16,7 +16,7 @@ class HomeViewModel @Inject constructor(
     loadAllPhoto: LoadAllPhoto,
 ) : ViewModel() {
 
-    val photoState: StateFlow<UIState> = combine(loadAllPhoto()) { (photoResult) ->
+    val homeState: StateFlow<UIState> = combine(loadAllPhoto()) { (photoResult) ->
         if (photoResult.isSuccess) {
             val photos = photoResult.getOrDefault(emptyList())
             // TODO get name from user data store
