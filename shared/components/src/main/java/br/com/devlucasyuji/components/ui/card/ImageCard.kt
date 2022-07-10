@@ -13,10 +13,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import br.com.devlucasyuji.components.animation.Animate.Animated
 import br.com.devlucasyuji.components.animation.Animation
-import br.com.devlucasyuji.components.atomic.atoms.ButtonIcon
 import br.com.devlucasyuji.components.atomic.molecules.BoxImage
-import br.com.devlucasyuji.components.atomic.molecules.TitleRow
-import br.com.devlucasyuji.components.props.Text
+import br.com.devlucasyuji.components.ui.label.TitleRow
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 

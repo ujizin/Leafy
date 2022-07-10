@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.components.atomic.organisms.navigation
+package br.com.devlucasyuji.components.navigation
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Box

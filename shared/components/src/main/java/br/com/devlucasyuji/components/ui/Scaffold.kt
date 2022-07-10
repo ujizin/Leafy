@@ -7,7 +7,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import br.com.devlucasyuji.components.atomic.organisms.navigation.NavigationBar
+import br.com.devlucasyuji.components.navigation.NavigationBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
