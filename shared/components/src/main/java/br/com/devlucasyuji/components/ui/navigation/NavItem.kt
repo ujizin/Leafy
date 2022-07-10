@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.components.atomic.organisms.navigation
+package br.com.devlucasyuji.components.navigation
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

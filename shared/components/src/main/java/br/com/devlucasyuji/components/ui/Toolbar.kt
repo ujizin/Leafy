@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import br.com.devlucasyuji.components.atomic.atoms.ButtonIcon
+import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
 import br.com.devlucasyuji.components.props.Icons
 
 @Composable
@@ -35,8 +35,8 @@ internal fun Toolbar(
 private fun PreviewToolbar() {
     Toolbar(
         modifier = Modifier.fillMaxWidth(),
-        leadingIcon = ButtonIcon(Icons.Hamburger),
-        trailingIcon = ButtonIcon(Icons.Magnifier),
+        leadingIcon = AnimatedIcon(Icons.Hamburger),
+        trailingIcon = AnimatedIcon(Icons.Magnifier),
         paddingValues = PaddingValues(horizontal = 20.dp)
     )
 }

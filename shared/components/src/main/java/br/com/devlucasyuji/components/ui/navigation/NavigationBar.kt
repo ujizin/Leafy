@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.components.atomic.organisms.navigation
+package br.com.devlucasyuji.components.navigation
 
 import androidx.compose.foundation.layout.offset
 import androidx.compose.runtime.Composable

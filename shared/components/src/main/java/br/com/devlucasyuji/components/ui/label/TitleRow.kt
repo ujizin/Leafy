@@ -11,7 +11,6 @@ import androidx.compose.ui.unit.dp
 import br.com.devlucasyuji.components.animation.Animate.Animated
 import br.com.devlucasyuji.components.animation.Animation
 import br.com.devlucasyuji.components.extensions.Content
-import br.com.devlucasyuji.components.props.Text
 
 @Composable
 fun TitleRow(

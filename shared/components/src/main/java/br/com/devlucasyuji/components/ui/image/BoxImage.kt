@@ -1,12 +1,12 @@
 package br.com.devlucasyuji.components.atomic.molecules
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
-import br.com.devlucasyuji.components.atomic.atoms.Image
 import br.com.devlucasyuji.components.extensions.Content
 
 @Composable
