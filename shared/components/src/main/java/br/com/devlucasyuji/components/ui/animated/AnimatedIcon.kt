@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.components.atomic.atoms
+package br.com.devlucasyuji.components.ui.animated
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.size
@@ -12,13 +12,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import br.com.devlucasyuji.components.animation.Animate.Animated
-import br.com.devlucasyuji.components.animation.Animation
+import br.com.devlucasyuji.components.ui.animated.animation.Animate.Animated
+import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.components.extensions.OnClick
-import br.com.devlucasyuji.components.props.Icons
+import br.com.devlucasyuji.components.ui.image.Icons
 
 @Composable
-internal fun AnimatedIcon(
+fun AnimatedIcon(
     modifier: Modifier = Modifier,
     icon: Icons,
     animation: Animation = Animation.None,
