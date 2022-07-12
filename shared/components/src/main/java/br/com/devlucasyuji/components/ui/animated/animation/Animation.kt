@@ -1,6 +1,6 @@
-package br.com.devlucasyuji.components.animation
+package br.com.devlucasyuji.components.ui.animated.animation
 
-import br.com.devlucasyuji.components.animation.Animate.DEFAULT_DURATION_MILLIS
+import br.com.devlucasyuji.components.ui.animated.animation.Animate.DEFAULT_DURATION_MILLIS
 
 data class Animation(
     val direction: Animate.Direction,
