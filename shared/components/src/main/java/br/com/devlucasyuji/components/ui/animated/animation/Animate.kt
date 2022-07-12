@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.components.animation
+package br.com.devlucasyuji.components.ui.animated.animation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
