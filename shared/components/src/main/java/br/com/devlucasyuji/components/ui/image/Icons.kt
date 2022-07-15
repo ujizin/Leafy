@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.components.props
+package br.com.devlucasyuji.components.ui.image
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
