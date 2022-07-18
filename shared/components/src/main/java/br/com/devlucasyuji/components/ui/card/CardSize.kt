@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.components.atomic.organisms.card
+package br.com.devlucasyuji.components.ui.card
 
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
