@@ -1,15 +1,19 @@
-package br.com.devlucasyuji.components.atomic.molecules
+package br.com.devlucasyuji.components.ui.label
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import br.com.devlucasyuji.components.animation.Animate.Animated
-import br.com.devlucasyuji.components.animation.Animation
+import br.com.devlucasyuji.components.ui.animated.animation.Animate.Animated
+import br.com.devlucasyuji.components.ui.animated.animation.Animation
+import br.com.devlucasyuji.components.ui.header.HeaderTitle
 import br.com.devlucasyuji.components.extensions.Content
 
 @Composable
@@ -17,8 +21,10 @@ fun TitleRow(
     modifier: Modifier = Modifier,
     horizontalArrangement: Arrangement.HorizontalOrVertical = Arrangement.SpaceBetween,
     verticalAlignment: Alignment.Vertical = Alignment.Top,
-    title: Text,
-    subTitle: Text = Text(),
+    title: String,
+    titleStyle: TextStyle = MaterialTheme.typography.titleLarge,
+    subTitle: String,
+    subTitleStyle: TextStyle = MaterialTheme.typography.bodyMedium,
     animation: Animation = Animation.SlideToTop,
     iconSpacedBy: Dp = 8.dp,
     icons: @Composable Content
@@ -33,12 +39,11 @@ fun TitleRow(
                 modifier = Modifier.weight(1F),
                 title = title,
                 subTitle = subTitle,
-                paddingValues = PaddingValues(0.dp),
-                animation = Animation.None
+                animation = Animation.None,
+                titleStyle = titleStyle,
+                subTitleStyle = subTitleStyle
             )
-            Row(horizontalArrangement = Arrangement.spacedBy(iconSpacedBy)) {
-                icons()
-            }
+            Row(horizontalArrangement = Arrangement.spacedBy(iconSpacedBy)) { icons() }
         }
     }
 }
