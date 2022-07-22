@@ -1,39 +1,32 @@
-package br.com.devlucasyuji.components.ui
+package br.com.devlucasyuji.components.ui.header
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.ExperimentalTextApi
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import br.com.devlucasyuji.components.animation.Animate.Animated
-import br.com.devlucasyuji.components.animation.Animation
 import br.com.devlucasyuji.components.extensions.Empty
+import br.com.devlucasyuji.components.ui.animated.animation.Animate.Animated
+import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.themes.CameraReminderTheme
 
 @Composable
 fun HeaderTitle(
     modifier: Modifier = Modifier,
-    paddingValues: PaddingValues = PaddingValues(horizontal = 20.dp),
     animation: Animation = Animation.SlideToTop,
     title: String,
-    subTitle: String = ""
+    titleStyle: TextStyle = MaterialTheme.typography.titleLarge,
+    subTitle: String = String.Empty,
+    subTitleStyle: TextStyle = MaterialTheme.typography.bodyMedium,
 ) {
-    Column(modifier.padding(paddingValues)) {
-        animation.Animated {
-            Text(
-                text = title,
-                modifier = modifier,
-                style = MaterialTheme.typography.titleLarge
-                    .copy(MaterialTheme.colorScheme.onPrimary),
-            )
-        }
+    Column(modifier) {
+        animation.Animated { Text(text = title, style = titleStyle) }
         if (subTitle != String.Empty) {
-            animation.copy(delayMillis = Animation.MediumDelay).Animated {
-                Text(text = subTitle)
+            animation.copy(delayMillis = animation.durationMillis).Animated {
+                Text(text = subTitle, style = subTitleStyle)
             }
         }
     }
@@ -44,8 +37,8 @@ fun HeaderTitle(
 private fun PreviewHeaderTitleWithSubtitle() {
     CameraReminderTheme {
         HeaderTitle(
-            title = Text("Hi Lucas"),
-            subTitle = Text("Welcome back!"),
+            title = "Hi Lucas",
+            subTitle = "Welcome back!",
             animation = Animation.None
         )
     }
@@ -56,7 +49,7 @@ private fun PreviewHeaderTitleWithSubtitle() {
 private fun PreviewHeaderTitle() {
     CameraReminderTheme {
         HeaderTitle(
-            title = Text("Hi Lucas"),
+            title = "Hi Lucas",
             animation = Animation.None
         )
     }
