@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.components.atomic.organisms
+package br.com.devlucasyuji.components.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -7,7 +7,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import br.com.devlucasyuji.components.navigation.NavigationBar
+import br.com.devlucasyuji.components.ui.navigation.NavigationBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
