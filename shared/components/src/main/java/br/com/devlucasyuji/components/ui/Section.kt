@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.components.ui.header
+package br.com.devlucasyuji.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,6 +12,7 @@ import br.com.devlucasyuji.components.extensions.Content
 import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
 import br.com.devlucasyuji.components.ui.image.Icons
 import br.com.devlucasyuji.components.ui.Toolbar
+import br.com.devlucasyuji.components.ui.header.HeaderTitle
 import br.com.devlucasyuji.themes.CameraReminderTheme
 
 @Composable
@@ -22,29 +23,28 @@ fun Section(
     trailingIcon: @Composable Content? = null,
     leadingIcon: @Composable Content? = null,
     headerAnimation: Animation = Animation.SlideToTop,
-    toolbarPadding: PaddingValues = PaddingValues(start = 20.dp, end = 20.dp, top = 32.dp),
-    headerTitlePadding: PaddingValues = PaddingValues(),
-    sectionContent: @Composable Content = {}
 ) {
+    val titlePadding = PaddingValues(
+        top = when {
+            trailingIcon != null || leadingIcon != null -> 24.dp
+            else -> 0.dp
+        }
+    )
     Column(modifier) {
-        Toolbar(
-            paddingValues = toolbarPadding,
-            trailingIcon = trailingIcon,
-            leadingIcon = leadingIcon
-        )
+        Toolbar(trailingIcon = trailingIcon, leadingIcon = leadingIcon)
+
         HeaderTitle(
             title = title,
             subTitle = subTitle,
             animation = headerAnimation,
-            modifier = Modifier.padding(headerTitlePadding)
+            modifier = Modifier.padding(titlePadding)
         )
-        sectionContent()
     }
 }
 
 @Preview(showSystemUi = true)
 @Composable
-private fun PreviewHeader() {
+private fun PreviewSection() {
     CameraReminderTheme {
         Section(
             modifier = Modifier.padding(top = 32.dp),
