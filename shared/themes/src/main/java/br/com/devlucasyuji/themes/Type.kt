@@ -1,6 +1,9 @@
 package br.com.devlucasyuji.themes
 
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.Typography
+import androidx.compose.ui.text.ExperimentalTextApi
+import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -13,14 +16,19 @@ private val PoppinsFamily = FontFamily(
     Font(R.font.poppins_regular, FontWeight.Normal)
 )
 
-internal val Typography = Typography(
+@OptIn(ExperimentalTextApi::class)
+internal fun getTypography(color: ColorScheme) = Typography(
     titleLarge = TextStyle(
         fontFamily = PoppinsFamily,
         fontSize = 32.sp,
         fontWeight = FontWeight.Bold,
+        color = color.onPrimary,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     ),
     bodyMedium = TextStyle(
         fontFamily = PoppinsFamily,
         fontSize = 16.sp,
+        color = color.onPrimary,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     ),
 )
