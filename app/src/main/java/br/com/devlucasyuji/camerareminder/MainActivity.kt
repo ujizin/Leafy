@@ -8,7 +8,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import br.com.devlucasyuji.components.atomic.organisms.Scaffold
+import br.com.devlucasyuji.components.ui.Scaffold
 import br.com.devlucasyuji.home.homeGraph
 import br.com.devlucasyuji.navigation.Destination
 import br.com.devlucasyuji.alarm.alarmGraph
