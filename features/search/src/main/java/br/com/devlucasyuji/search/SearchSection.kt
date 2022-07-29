@@ -1,27 +1,32 @@
 package br.com.devlucasyuji.search
 
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import br.com.devlucasyuji.components.animation.Animation
-import br.com.devlucasyuji.components.atomic.atoms.ButtonIcon
-import br.com.devlucasyuji.components.atomic.organisms.header
-import br.com.devlucasyuji.components.props.Icons
-import br.com.devlucasyuji.components.props.Text
+import br.com.devlucasyuji.components.Section
+import br.com.devlucasyuji.components.extensions.section
+import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
+import br.com.devlucasyuji.components.ui.animated.animation.Animation
+import br.com.devlucasyuji.components.ui.image.Icons
 
 @Composable
 fun NavController.SearchSection() {
-    LazyColumn {
-        header(
-            leadingIcon = ButtonIcon(
+    Section(
+        modifier = Modifier.section(),
+        leadingIcon = {
+            AnimatedIcon(
                 icon = Icons.Hamburger,
                 animation = Animation.SlideToTop,
-            ),
-            trailingIcon = ButtonIcon(
+            )
+        },
+        trailingIcon = {
+            AnimatedIcon(
                 icon = Icons.Settings,
                 animation = Animation.SlideToTop
-            ),
-            title = Text("Search")
-        )
-    }
+            )
+        },
+        title = "Search"
+    )
 }
