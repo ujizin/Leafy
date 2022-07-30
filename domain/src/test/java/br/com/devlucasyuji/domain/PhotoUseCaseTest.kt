@@ -15,6 +15,7 @@ import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.verify
+import java.io.File
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
@@ -66,15 +67,15 @@ class PhotoUseCaseTest {
     @Test
     fun `when load photo then expect return photos on repository`() = runTest {
         val expectedPhotos = listOf(
-            Photo(id = 1, "", "", "", "", false),
-            Photo(id = 2, "", "", "", "", false),
-            Photo(id = 3, "", "", "", "", false)
+            Photo(id = 1, "", "", File(""), "", false),
+            Photo(id = 2, "", "", File(""), "", false),
+            Photo(id = 3, "", "", File(""), "", false)
         )
 
         every { photoRepository.getPhotos() } returns flowOf(expectedPhotos)
 
         loadPhotoUseCase().collect { actualPhotos ->
-            Assert.assertEquals(expectedPhotos, actualPhotos)
+            Assert.assertEquals(expectedPhotos, actualPhotos.getOrThrow())
         }
     }
 
