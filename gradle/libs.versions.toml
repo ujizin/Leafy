@@ -1,7 +1,7 @@
 [versions]
 
 kotlin = "1.6.21"
-gradle = "7.3.0-alpha06"
+gradle = "7.4.0-alpha08"
 compose = "1.2.0-rc02"
 androidx-lifecyle = "2.4.1"
 material3 = "1.0.0-alpha14"
