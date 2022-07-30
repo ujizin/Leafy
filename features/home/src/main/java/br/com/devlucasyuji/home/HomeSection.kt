@@ -1,7 +1,6 @@
 package br.com.devlucasyuji.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -31,7 +30,6 @@ import br.com.devlucasyuji.components.Section
 import br.com.devlucasyuji.components.extensions.section
 import br.com.devlucasyuji.components.ui.label.TitleRow
 import br.com.devlucasyuji.domain.model.Photo
-import java.io.File
 
 @Composable
 fun NavController.HomeRoute(viewModel: HomeViewModel = hiltViewModel()) {
@@ -63,20 +61,8 @@ private fun HomeScreen(result: UIState.Success) {
             )
         }
         when {
-//                result.photos.isEmpty() -> item { EmptyPhotoCard() }
-            else -> items(20) {
-                HomePhotoCard(
-                    Photo(
-                        0,
-                        "yuji apenas",
-                        "",
-                        "",
-                        "eu apenas",
-                        false,
-                        1
-                    )
-                )
-            }
+            result.photos.isEmpty() -> item { EmptyPhotoCard() }
+            else -> items(result.photos) { HomePhotoCard(it) }
         }
     }
 }
@@ -103,7 +89,7 @@ private fun LazyItemScope.HomePhotoCard(photo: Photo) {
             .animateItemPlacement()
             .height(CardSize.Large.height)
             .padding(horizontal = 20.dp, vertical = 8.dp),
-        data = "https://pps.whatsapp.net/v/t61.24694-24/179134053_520513506372508_3465206539243170804_n.jpg?ccb=11-4&oh=01_AVxbQe01QoC8ku5i0d0k1Kd76j0_dhk89ISzNOIoEL7bSw&oe=62F2ADD0",
+        data = photo.file,
         contentDescription = photo.description,
     ) {
         TitleRow(
