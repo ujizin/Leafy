@@ -17,5 +17,6 @@ enum class Icons(
     Settings(R.drawable.settings, R.string.settings),
     Add(R.drawable.add, R.string.add),
     Shared(R.drawable.shared, R.string.shared),
+    Folder(R.drawable.folder, R.string.folder),
     Others(R.drawable.others, R.string.others);
 }
