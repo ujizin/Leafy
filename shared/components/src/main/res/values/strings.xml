@@ -12,4 +12,6 @@
     <string name="search">search</string>
     <string name="shared">shared</string>
     <string name="folder">folder</string>
+    <string name="take_a_picture">take a picture</string>
+    <string name="empty_photo">oh no, it looks like that you don\'t have any photo</string>
 </resources>
