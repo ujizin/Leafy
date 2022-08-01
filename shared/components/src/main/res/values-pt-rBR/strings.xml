@@ -12,4 +12,6 @@
     <string name="search">busca</string>
     <string name="shared">compartilhar</string>
     <string name="folder">past</string>
+    <string name="take_a_picture">tirar uma foto</string>
+    <string name="empty_photo">oh no! parece que você não tem nenhuma foto</string>
 </resources>

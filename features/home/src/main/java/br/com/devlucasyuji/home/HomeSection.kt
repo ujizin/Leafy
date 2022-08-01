@@ -27,7 +27,9 @@ import br.com.devlucasyuji.components.ui.card.BoxImage
 import br.com.devlucasyuji.components.extensions.capitalize
 import br.com.devlucasyuji.components.ui.image.Icons
 import br.com.devlucasyuji.components.Section
+import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.components.extensions.section
+import br.com.devlucasyuji.components.ui.EmptySection
 import br.com.devlucasyuji.components.ui.label.TitleRow
 import br.com.devlucasyuji.domain.model.Photo
 
@@ -36,13 +38,13 @@ fun NavController.HomeRoute(viewModel: HomeViewModel = hiltViewModel()) {
     val state by viewModel.homeState.collectAsState()
     when (val result: UIState = state) {
         UIState.Loading -> {}
-        is UIState.Success -> HomeScreen(result)
+        is UIState.Success -> HomeScreen(result, viewModel::takePicture)
         is UIState.Error -> {}
     }
 }
 
 @Composable
-private fun HomeScreen(result: UIState.Success) {
+private fun HomeScreen(result: UIState.Success, OnEmptyPhotoClick: OnClick) {
     NavLazyColumn {
         item {
             Section(
@@ -61,7 +63,12 @@ private fun HomeScreen(result: UIState.Success) {
             )
         }
         when {
-            result.photos.isEmpty() -> item { EmptyPhotoCard() }
+            result.photos.isEmpty() -> item {
+                EmptySection(
+                    modifier = Modifier.padding(vertical = 32.dp, horizontal = 20.dp),
+                    onClick = OnEmptyPhotoClick
+                )
+            }
             else -> items(result.photos) { HomePhotoCard(it) }
         }
     }
@@ -74,11 +81,6 @@ fun NavLazyColumn(modifier: Modifier = Modifier, content: LazyListScope.() -> Un
         content()
         item { Spacer(Modifier.size(32.dp)) }
     }
-}
-
-@Composable
-private fun EmptyPhotoCard() {
-
 }
 
 @Composable

@@ -29,6 +29,10 @@ class HomeViewModel @Inject constructor(
         SharingStarted.WhileSubscribed(5_000),
         initialValue = UIState.Loading,
     )
+
+    fun takePicture() {
+        // TODO navigate to picture section
+    }
 }
 
 sealed interface UIState {
