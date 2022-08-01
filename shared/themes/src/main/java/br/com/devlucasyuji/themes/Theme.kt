@@ -22,7 +22,9 @@ private val DarkColorScheme = darkColorScheme(
     tertiary = Color.Cloud,
     surface = Color.DarkCyan,
     background = Color.Cloud,
-    onPrimary = Color.Gray,
+    onPrimary = Color.Cloud,
+    onSecondary = Color.Gray,
+    onBackground = Color.Gray,
     secondaryContainer = Color.Cloud,
     onSecondaryContainer = Color.DarkCyan,
     surfaceVariant = Color.DarkCyan,
@@ -36,7 +38,9 @@ private val LightColorScheme = lightColorScheme(
     tertiary = Color.Cloud,
     surface = Color.DarkCyan,
     background = Color.Cloud,
-    onPrimary = Color.Gray,
+    onPrimary = Color.Cloud,
+    onSecondary = Color.Gray,
+    onBackground = Color.Gray,
     secondaryContainer = Color.Cloud,
     onSecondaryContainer = Color.DarkCyan,
     surfaceVariant = Color.DarkCyan,
@@ -66,11 +70,11 @@ fun CameraReminderTheme(
         }
     }
 
-    ProvideTextStyle(value = MaterialTheme.typography.bodyMedium) {
-        MaterialTheme(
-            colorScheme = colorScheme,
-            typography = getTypography(colorScheme),
-            content = content
-        )
-    }
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = getTypography(colorScheme),
+        content = {
+            ProvideTextStyle(value = MaterialTheme.typography.bodyMedium, content = content)
+        }
+    )
 }

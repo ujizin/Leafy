@@ -45,7 +45,7 @@ internal fun CameraButton(
                     Icon(
                         modifier = Modifier.size(32.dp),
                         painter = painterResource(id = R.drawable.camera),
-                        tint = MaterialTheme.colorScheme.onPrimary,
+                        tint = MaterialTheme.colorScheme.onSecondary,
                         contentDescription = null
                     )
                 }

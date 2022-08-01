@@ -36,7 +36,7 @@ fun AnimatedIcon(
             androidx.compose.material3.Icon(
                 modifier = Modifier.size(size),
                 painter = painterResource(icon.resId),
-                tint = tint ?: MaterialTheme.colorScheme.onPrimary,
+                tint = tint ?: MaterialTheme.colorScheme.onBackground,
                 contentDescription = stringResource(icon.descriptionRes),
             )
         }
