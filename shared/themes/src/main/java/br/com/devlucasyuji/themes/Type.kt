@@ -22,13 +22,13 @@ internal fun getTypography(color: ColorScheme) = Typography(
         fontFamily = PoppinsFamily,
         fontSize = 32.sp,
         fontWeight = FontWeight.Bold,
-        color = color.onPrimary,
+        color = color.onBackground,
         platformStyle = PlatformTextStyle(includeFontPadding = false)
     ),
     bodyMedium = TextStyle(
         fontFamily = PoppinsFamily,
         fontSize = 16.sp,
-        color = color.onPrimary,
+        color = color.onBackground,
         platformStyle = PlatformTextStyle(includeFontPadding = false)
     ),
 )

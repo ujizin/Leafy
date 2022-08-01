@@ -24,7 +24,7 @@ internal fun NavController.NavigationBar() {
     Animation.SlideToTop.copy(delayMillis = Animation.SmallDelay).Animated {
         androidx.compose.material3.NavigationBar {
             NavItem.values().forEach { item ->
-                NavBarItem(navItem, item) {
+                NavBarItem(selectedItem = navItem, item = item) {
                     navigate(item.destination) {
                         launchSingleTop = false
                         restoreState = true
