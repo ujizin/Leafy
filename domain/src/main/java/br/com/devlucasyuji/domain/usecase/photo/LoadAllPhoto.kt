@@ -1,6 +1,7 @@
 package br.com.devlucasyuji.domain.usecase.photo
 
 import br.com.devlucasyuji.domain.model.Photo
+import br.com.devlucasyuji.domain.result.Result
 import kotlinx.coroutines.flow.Flow
 
 /**
