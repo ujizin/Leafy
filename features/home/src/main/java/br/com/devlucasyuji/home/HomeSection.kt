@@ -36,15 +36,15 @@ import br.com.devlucasyuji.domain.model.Photo
 @Composable
 fun NavController.HomeRoute(viewModel: HomeViewModel = hiltViewModel()) {
     val state by viewModel.homeState.collectAsState()
-    when (val result: UIState = state) {
-        UIState.Loading -> {}
-        is UIState.Success -> HomeScreen(result, viewModel::takePicture)
-        is UIState.Error -> {}
+    when (val result: HomeUIState = state) {
+        HomeUIState.Loading -> {}
+        is HomeUIState.Success -> HomeScreen(result, viewModel::takePicture)
+        is HomeUIState.Error -> {}
     }
 }
 
 @Composable
-private fun HomeScreen(result: UIState.Success, OnEmptyPhotoClick: OnClick) {
+private fun HomeScreen(result: HomeUIState.Success, OnEmptyPhotoClick: OnClick) {
     NavLazyColumn {
         item {
             Section(
