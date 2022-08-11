@@ -10,9 +10,9 @@ import kotlinx.coroutines.flow.Flow
 interface LoadUser {
 
     /**
-    *  Load an user.
-    *
-    *  @return an user
-    * */
+     *  Load an user.
+     *
+     *  @return an user
+     * */
     operator fun invoke(): Flow<Result<User>>
 }
