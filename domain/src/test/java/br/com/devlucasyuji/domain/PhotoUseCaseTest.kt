@@ -75,7 +75,9 @@ class PhotoUseCaseTest {
         every { photoRepository.getPhotos() } returns flowOf(expectedPhotos)
 
         loadPhotoUseCase().collect { actualPhotos ->
-            Assert.assertEquals(expectedPhotos, actualPhotos.getOrThrow())
+            if (actualPhotos is br.com.devlucasyuji.domain.result.Result.Success) {
+                Assert.assertEquals(expectedPhotos, actualPhotos.data)
+            }
         }
     }
 
