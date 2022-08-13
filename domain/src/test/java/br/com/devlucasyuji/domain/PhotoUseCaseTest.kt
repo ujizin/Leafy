@@ -2,6 +2,7 @@ package br.com.devlucasyuji.domain
 
 import br.com.devlucasyuji.domain.model.Photo
 import br.com.devlucasyuji.domain.repository.PhotoRepository
+import br.com.devlucasyuji.domain.result.Result
 import br.com.devlucasyuji.domain.usecase.photo.AddPhoto
 import br.com.devlucasyuji.domain.usecase.photo.DeletePhoto
 import br.com.devlucasyuji.domain.usecase.photo.LoadAllPhoto
@@ -75,7 +76,7 @@ class PhotoUseCaseTest {
         every { photoRepository.getPhotos() } returns flowOf(expectedPhotos)
 
         loadPhotoUseCase().collect { actualPhotos ->
-            if (actualPhotos is br.com.devlucasyuji.domain.result.Result.Success) {
+            if (actualPhotos is Result.Success) {
                 Assert.assertEquals(expectedPhotos, actualPhotos.data)
             }
         }
