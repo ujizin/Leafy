@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.repository
+package br.com.devlucasyuji.repository.implementation
 
 import br.com.devlucasyuji.domain.model.Photo
 import br.com.devlucasyuji.domain.repository.PhotoRepository
