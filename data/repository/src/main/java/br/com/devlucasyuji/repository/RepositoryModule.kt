@@ -2,6 +2,7 @@ package br.com.devlucasyuji.repository
 
 import br.com.devlucasyuji.domain.repository.PhotoRepository
 import br.com.devlucasyuji.repository.datasource.PhotoDataSource
+import br.com.devlucasyuji.repository.implementation.PhotoRepositoryImpl
 import br.com.devlucasyuji.repository.mapper.PhotoMapper
 import dagger.Module
 import dagger.Provides
