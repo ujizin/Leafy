@@ -4,6 +4,9 @@ import br.com.devlucasyuji.domain.model.Photo
 import java.io.File
 import br.com.devlucasyuji.repository.model.Photo as DataPhoto
 
+/**
+ * Photo mapper between domain and data modules.
+ * */
 internal class PhotoMapper {
 
     fun toDomain(photos: List<DataPhoto>) = photos.map { toDomain(it) }
