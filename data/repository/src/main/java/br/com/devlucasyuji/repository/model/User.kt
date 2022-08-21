@@ -8,5 +8,5 @@ package br.com.devlucasyuji.repository.model
  * */
 data class User(
     val nickname: String,
-    val createdAt: String
+    val createdAt: String? = null
 )
