@@ -14,4 +14,11 @@ interface UserRepository {
      *  @return return an user
      * */
     fun getUser(): Flow<User>
+
+    /**
+     * Update user
+     *
+     * @param user user to be updated
+     * */
+    fun updateUser(user: User): Flow<Unit>
 }
