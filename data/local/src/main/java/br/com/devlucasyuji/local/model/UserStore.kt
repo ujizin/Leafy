@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class UserStore(
     val nickname: String,
-    val createdAt: String
+    val createdAt: String? = null
 ) {
 
     companion object {

@@ -11,10 +11,10 @@ class UserLocalDataSource(
 ) : UserDataSource {
 
     override suspend fun getUser(): User {
-        TODO("Not yet implemented")
+        return UserMapper.toData(userDataStore.getUser())
     }
 
     override suspend fun updateUser(user: User) {
-        TODO("Not yet implemented")
+        userDataStore.updateUser(UserMapper.toLocal(user))
     }
 }

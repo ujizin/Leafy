@@ -25,9 +25,9 @@ internal class UserDataStoreImpl(
 
     private val userKey = stringPreferencesKey("user_stringify")
 
-    private suspend fun createUser(userStore: UserStore) {
-        this.userStore.edit { preferences ->
-            preferences[userKey] = userStore.toString()
+    private suspend fun createUser(user: UserStore) {
+        userStore.edit { preferences ->
+            preferences[userKey] = Json.encodeToString(user)
         }
     }
 
@@ -41,9 +41,11 @@ internal class UserDataStoreImpl(
         return serializer.decodeFromString(userStore)
     }
 
-    override suspend fun updateUser(userStore: UserStore) {
-        this.userStore.edit { preferences ->
-            preferences[userKey] = serializer.encodeToString(userStore)
+    override suspend fun updateUser(user: UserStore) {
+        userStore.edit { preferences ->
+            preferences[userKey] = serializer.encodeToString(
+                value = getUser().copy(nickname = user.nickname)
+            )
         }
     }
 
