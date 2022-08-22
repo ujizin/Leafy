@@ -7,7 +7,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import br.com.devlucasyuji.local.datastore.UserDataStore
-import br.com.devlucasyuji.local.model.User
+import br.com.devlucasyuji.local.model.UserStore
 import kotlinx.coroutines.flow.first
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -25,25 +25,25 @@ internal class UserDataStoreImpl(
 
     private val userKey = stringPreferencesKey("user_stringify")
 
-    private suspend fun createUser(user: User) {
-        userStore.edit { preferences ->
-            preferences[userKey] = user.toString()
+    private suspend fun createUser(userStore: UserStore) {
+        this.userStore.edit { preferences ->
+            preferences[userKey] = userStore.toString()
         }
     }
 
-    override suspend fun getUser(): User {
+    override suspend fun getUser(): UserStore {
         val preferences = userStore.data.first()
-        val user = preferences[userKey] ?: run {
-            createUser(User.default())
+        val userStore = preferences[userKey] ?: run {
+            createUser(UserStore.default())
             return getUser()
         }
 
-        return serializer.decodeFromString(user)
+        return serializer.decodeFromString(userStore)
     }
 
-    override suspend fun updateUser(user: User) {
-        userStore.edit { preferences ->
-            preferences[userKey] = serializer.encodeToString(user)
+    override suspend fun updateUser(userStore: UserStore) {
+        this.userStore.edit { preferences ->
+            preferences[userKey] = serializer.encodeToString(userStore)
         }
     }
 
