@@ -1,6 +1,6 @@
 package br.com.devlucasyuji.local.datastore
 
-import br.com.devlucasyuji.local.model.User
+import br.com.devlucasyuji.local.model.UserStore
 
 /**
  * Data store to User.
@@ -12,12 +12,12 @@ interface UserDataStore {
      *
      * @return an user
      * */
-    suspend fun getUser(): User
+    suspend fun getUser(): UserStore
 
     /**
      * Update an user.
      *
      * @param user to be updated
      * */
-    suspend fun updateUser(user: User)
+    suspend fun updateUser(user: UserStore)
 }
