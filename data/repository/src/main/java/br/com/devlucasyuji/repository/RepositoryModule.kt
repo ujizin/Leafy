@@ -1,9 +1,13 @@
 package br.com.devlucasyuji.repository
 
 import br.com.devlucasyuji.domain.repository.PhotoRepository
+import br.com.devlucasyuji.domain.repository.UserRepository
 import br.com.devlucasyuji.repository.datasource.PhotoDataSource
+import br.com.devlucasyuji.repository.datasource.UserDataSource
 import br.com.devlucasyuji.repository.implementation.PhotoRepositoryImpl
+import br.com.devlucasyuji.repository.implementation.UserRepositoryImpl
 import br.com.devlucasyuji.repository.mapper.PhotoMapper
+import br.com.devlucasyuji.repository.mapper.UserMapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,5 +26,12 @@ object RepositoryModule {
     fun providePhotoRepository(dataSource: PhotoDataSource): PhotoRepository = PhotoRepositoryImpl(
         dataSource = dataSource,
         mapper = PhotoMapper(),
+    )
+
+    @Provides
+    @Singleton
+    fun provideUserRepository(dataSource: UserDataSource): UserRepository = UserRepositoryImpl(
+        dataSource = dataSource,
+        userMapper = UserMapper()
     )
 }

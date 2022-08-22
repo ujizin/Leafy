@@ -18,6 +18,8 @@ hilt-compose = "1.0.0"
 room = "2.4.2"
 ksp = "1.6.21-1.0.6"
 navigation = "2.4.1"
+datastore = "1.0.0"
+kotlinx-serialization = "1.4.0"
 ktlint = "0.43.1"
 detekt = "1.20.0-RC2"
 coil = "2.0.0-rc03"
@@ -55,6 +57,11 @@ room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+
+datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
+
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
@@ -112,6 +119,11 @@ compose = [
 compose-debug = [
     "compose-debug-tooling",
     "compose-test-manifest"
+]
+
+datastore = [
+    "datastore",
+    "datastore-preferences"
 ]
 
 [plugins]

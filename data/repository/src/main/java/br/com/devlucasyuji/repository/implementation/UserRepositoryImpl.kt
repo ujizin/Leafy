@@ -11,16 +11,16 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 internal class UserRepositoryImpl(
-    private val datasource: UserDataSource,
+    private val dataSource: UserDataSource,
     private val userMapper: UserMapper,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : UserRepository {
 
     override fun getUser(): Flow<User> = flow {
-        emit(userMapper.toDomain(datasource.getUser()))
+        emit(userMapper.toDomain(dataSource.getUser()))
     }.flowOn(dispatcher)
 
     override fun updateUser(user: User): Flow<Unit> = flow {
-        emit(datasource.updateUser(userMapper.toData(user)))
+        emit(dataSource.updateUser(userMapper.toData(user)))
     }.flowOn(dispatcher)
 }
