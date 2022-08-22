@@ -6,7 +6,7 @@ import br.com.devlucasyuji.domain.model.User
 /**
  * User mapper between domain and data modules.
  * */
-class UserMapper {
+internal class UserMapper {
 
     fun toDomain(user: DataUser): User = with(user) {
         User(nickname = nickname)

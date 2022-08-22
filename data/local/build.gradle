@@ -16,9 +16,13 @@ android {
 }
 
 dependencies {
+    implementation libs.bundles.datastore
+
     implementation libs.room
     implementation libs.room.ktx
     ksp libs.room.compiler
+
+    implementation libs.kotlinx.serialization.json
 
     androidTestImplementation projects.shared.test
     androidTestImplementation libs.bundles.test
