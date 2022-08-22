@@ -7,6 +7,8 @@ import br.com.devlucasyuji.repository.mapper.UserMapper
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 internal class UserRepositoryImpl(
     private val datasource: UserDataSource,
@@ -14,7 +16,11 @@ internal class UserRepositoryImpl(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : UserRepository {
 
-    override fun getUser(): Flow<User> {
-        TODO("Not yet implemented")
-    }
+    override fun getUser(): Flow<User> = flow {
+        emit(userMapper.toDomain(datasource.getUser()))
+    }.flowOn(dispatcher)
+
+    override fun updateUser(user: User): Flow<Unit> = flow {
+        emit(datasource.updateUser(userMapper.toData(user)))
+    }.flowOn(dispatcher)
 }
