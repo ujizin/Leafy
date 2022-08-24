@@ -20,26 +20,25 @@ class HomeViewModel @Inject constructor(
     loadUser: LoadUser,
 ) : ViewModel() {
 
-    val homeState: StateFlow<HomeUIState> =
-        combine(
-            loadAllPhoto(),
-            loadUser(),
-        ) { photoResult, userResult ->
+    val homeState: StateFlow<HomeUIState> = combine(
+        loadAllPhoto(),
+        loadUser(),
+    ) { photoResult, userResult ->
 
-            ifAnyError(userResult, photoResult) {
-                return@combine HomeUIState.Error(it.first())
-            }
+        ifAnyError(userResult, photoResult) {
+            return@combine HomeUIState.Error(it.first())
+        }
 
-            ifSuccess(userResult, photoResult) { user, photos ->
-                return@combine HomeUIState.Success(user.nickname, photos)
-            }
+        ifSuccess(userResult, photoResult) { user, photos ->
+            return@combine HomeUIState.Success(user.nickname, photos)
+        }
 
-            return@combine HomeUIState.Loading
-        }.stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5_000),
-            initialValue = HomeUIState.Loading,
-        )
+        return@combine HomeUIState.Loading
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5_000),
+        initialValue = HomeUIState.Loading,
+    )
 
     fun takePicture() {
         // TODO navigate to picture section
@@ -54,4 +53,5 @@ sealed interface HomeUIState {
 
     data class Error(val throwable: Throwable?) : HomeUIState
     object Loading : HomeUIState
+
 }
