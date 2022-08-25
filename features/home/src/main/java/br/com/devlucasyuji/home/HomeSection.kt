@@ -20,16 +20,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import br.com.devlucasyuji.components.ui.animated.animation.Animation
-import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
-import br.com.devlucasyuji.components.ui.card.CardSize
-import br.com.devlucasyuji.components.ui.card.BoxImage
-import br.com.devlucasyuji.components.extensions.capitalize
-import br.com.devlucasyuji.components.ui.image.Icons
 import br.com.devlucasyuji.components.Section
 import br.com.devlucasyuji.components.extensions.OnClick
+import br.com.devlucasyuji.components.extensions.capitalize
 import br.com.devlucasyuji.components.extensions.section
 import br.com.devlucasyuji.components.ui.EmptySection
+import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
+import br.com.devlucasyuji.components.ui.animated.animation.Animation
+import br.com.devlucasyuji.components.ui.card.BoxImage
+import br.com.devlucasyuji.components.ui.card.CardSize
+import br.com.devlucasyuji.components.ui.image.Icons
 import br.com.devlucasyuji.components.ui.label.TitleRow
 import br.com.devlucasyuji.domain.model.Photo
 
