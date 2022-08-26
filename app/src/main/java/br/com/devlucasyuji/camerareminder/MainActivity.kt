@@ -8,12 +8,13 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import br.com.devlucasyuji.alarm.alarmGraph
+import br.com.devlucasyuji.camera.cameraGraph
 import br.com.devlucasyuji.components.ui.Scaffold
 import br.com.devlucasyuji.home.homeGraph
 import br.com.devlucasyuji.navigation.Destination
-import br.com.devlucasyuji.alarm.alarmGraph
-import br.com.devlucasyuji.settings.settingsGraph
 import br.com.devlucasyuji.search.searchGraph
+import br.com.devlucasyuji.settings.settingsGraph
 import br.com.devlucasyuji.themes.CameraReminderTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,20 +27,21 @@ class MainActivity : ComponentActivity() {
         setContent {
             CameraReminderTheme(dynamicColor = true) {
                 with(rememberNavController()) {
-                    Scaffold { NavigationGraph(this@with) }
+                    Scaffold { CameraNavigation(this@with) }
                 }
             }
         }
     }
 
     @Composable
-    fun NavigationGraph(navController: NavHostController) {
+    fun CameraNavigation(navController: NavHostController) {
         NavHost(navController, Destination.Home.route) {
             with(navController) {
-                homeGraph(this)
-                searchGraph(this)
-                alarmGraph(this)
-                settingsGraph(this)
+                homeGraph()
+                searchGraph()
+                alarmGraph()
+                cameraGraph()
+                settingsGraph()
             }
         }
     }

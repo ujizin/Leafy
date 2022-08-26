@@ -20,6 +20,7 @@ dependencies {
     implementation projects.features.search
     implementation projects.features.alarm
     implementation projects.features.settings
+    implementation projects.features.camera
 
     implementation projects.data.local
 

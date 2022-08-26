@@ -1,0 +1,18 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+apply from: '../../config-android.gradle'
+apply from: '../../config-compose.gradle'
+
+android {
+    namespace 'br.com.devlucasyuji.camera'
+}
+
+dependencies {
+    implementation projects.shared.navigation
+    implementation projects.shared.components
+
+    implementation projects.domain
+}
