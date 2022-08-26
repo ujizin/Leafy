@@ -19,7 +19,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import br.com.devlucasyuji.components.Section
 import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.components.extensions.capitalize
@@ -34,7 +33,7 @@ import br.com.devlucasyuji.components.ui.label.TitleRow
 import br.com.devlucasyuji.domain.model.Photo
 
 @Composable
-fun NavController.HomeRoute(viewModel: HomeViewModel = hiltViewModel()) {
+fun HomeRoute(viewModel: HomeViewModel = hiltViewModel()) {
     val state by viewModel.homeState.collectAsState()
     when (val result: HomeUIState = state) {
         HomeUIState.Loading -> {}
