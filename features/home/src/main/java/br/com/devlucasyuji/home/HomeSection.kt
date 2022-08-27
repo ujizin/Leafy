@@ -33,11 +33,14 @@ import br.com.devlucasyuji.components.ui.label.TitleRow
 import br.com.devlucasyuji.domain.model.Photo
 
 @Composable
-fun HomeRoute(viewModel: HomeViewModel = hiltViewModel()) {
+fun HomeRoute(
+    viewModel: HomeViewModel = hiltViewModel(),
+    onTakePictureClick: OnClick
+) {
     val state by viewModel.homeState.collectAsState()
     when (val result: HomeUIState = state) {
         HomeUIState.Loading -> {}
-        is HomeUIState.Success -> HomeScreen(result, viewModel::takePicture)
+        is HomeUIState.Success -> HomeScreen(result, onTakePictureClick)
         is HomeUIState.Error -> {}
     }
 }
