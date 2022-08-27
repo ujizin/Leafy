@@ -35,7 +35,9 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun CameraNavigation(navController: NavHostController) {
         NavHost(navController, Destination.Home.route) {
-            homeGraph()
+            homeGraph(onTakePictureClick = {
+                // TODO add navigation to camera
+            })
             searchGraph()
             alarmGraph()
             cameraGraph()
