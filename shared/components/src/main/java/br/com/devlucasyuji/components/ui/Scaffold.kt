@@ -11,13 +11,14 @@ import br.com.devlucasyuji.components.ui.navigation.NavigationBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavController.Scaffold(
+fun Scaffold(
     modifier: Modifier = Modifier,
+    navController: NavController,
     content: @Composable BoxScope.() -> Unit
 ) {
     androidx.compose.material3.Scaffold(
         modifier = modifier,
-        bottomBar = { NavigationBar() }
+        bottomBar = { NavigationBar(navController) }
     ) { innerPadding ->
         Box(
             Modifier.padding(innerPadding),

@@ -18,25 +18,20 @@ import br.com.devlucasyuji.navigation.Destination
 import br.com.devlucasyuji.navigation.navigate
 
 @Composable
-internal fun NavController.NavigationBar() {
-    val navItemState by currentNavItemAsState()
+internal fun NavigationBar(navController: NavController) {
+    val navItemState by navController.currentNavItemAsState()
     val navItem = navItemState ?: return
     Animation.SlideToTop.copy(delayMillis = Animation.SmallDelay).Animated {
         androidx.compose.material3.NavigationBar {
             NavItem.values().forEach { item ->
                 NavBarItem(selectedItem = navItem, item = item) {
-                    navigate(item.destination) {
-                        launchSingleTop = false
-                        restoreState = true
-
-                        popUpTo(graph.findStartDestination().id) {
-                            saveState = true
-                        }
-                    }
+                    navController.navigateToItem(item)
                 }
             }
         }
-        CameraButton(Modifier.offset(y = (-32).dp)) {}
+        CameraButton(Modifier.offset(y = (-32).dp)) {
+            navController.navigateToItem(navItem)
+        }
     }
 }
 
@@ -57,4 +52,15 @@ private fun NavController.currentNavItemAsState(): State<NavItem?> {
     }
 
     return selectedItem
+}
+
+private fun NavController.navigateToItem(item: NavItem) {
+    navigate(item.destination) {
+        launchSingleTop = false
+        restoreState = true
+
+        popUpTo(graph.findStartDestination().id) {
+            saveState = true
+        }
+    }
 }
