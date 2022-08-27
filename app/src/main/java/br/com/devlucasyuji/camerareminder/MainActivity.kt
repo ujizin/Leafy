@@ -26,9 +26,8 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
         setContent {
             CameraReminderTheme(dynamicColor = true) {
-                with(rememberNavController()) {
-                    Scaffold { CameraNavigation(this@with) }
-                }
+                val navController = rememberNavController()
+                Scaffold(navController = navController) { CameraNavigation(navController) }
             }
         }
     }
@@ -36,13 +35,11 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun CameraNavigation(navController: NavHostController) {
         NavHost(navController, Destination.Home.route) {
-            with(navController) {
-                homeGraph()
-                searchGraph()
-                alarmGraph()
-                cameraGraph()
-                settingsGraph()
-            }
+            homeGraph()
+            searchGraph()
+            alarmGraph()
+            cameraGraph()
+            settingsGraph()
         }
     }
 }

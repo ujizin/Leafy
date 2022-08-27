@@ -5,5 +5,5 @@ import br.com.devlucasyuji.navigation.Destination
 import br.com.devlucasyuji.navigation.composable
 
 fun NavGraphBuilder.cameraGraph() {
-    composable(Destination.Camera) { cameraRoute() }
+    composable(Destination.Camera) { CameraRoute() }
 }
