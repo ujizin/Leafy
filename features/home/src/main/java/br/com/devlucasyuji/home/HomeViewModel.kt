@@ -40,9 +40,6 @@ class HomeViewModel @Inject constructor(
         initialValue = HomeUIState.Loading,
     )
 
-    fun takePicture() {
-        // TODO navigate to picture section
-    }
 }
 
 sealed interface HomeUIState {
