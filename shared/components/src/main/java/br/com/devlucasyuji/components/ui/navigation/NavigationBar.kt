@@ -30,7 +30,7 @@ internal fun NavigationBar(navController: NavController) {
             }
         }
         CameraButton(Modifier.offset(y = (-32).dp)) {
-            navController.navigateToItem(navItem)
+            navController.navigateToItem(NavItem.Camera)
         }
     }
 }

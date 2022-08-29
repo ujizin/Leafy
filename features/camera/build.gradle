@@ -15,4 +15,6 @@ dependencies {
     implementation projects.shared.components
 
     implementation projects.domain
+
+    implementation libs.bundles.camerax
 }

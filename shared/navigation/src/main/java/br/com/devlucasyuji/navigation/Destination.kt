@@ -6,7 +6,7 @@ enum class Destination(
 ) {
     Home("home", NavigationItem.Home),
     Search("search", NavigationItem.Search),
-    Camera("camera", NavigationItem.Camera),
+    Camera("camera", NavigationItem.None),
     Alarm("alarm", NavigationItem.Alarm),
     Others("others", NavigationItem.Others);
 
