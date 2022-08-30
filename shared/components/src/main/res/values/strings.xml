@@ -14,4 +14,7 @@
     <string name="folder">folder</string>
     <string name="take_a_picture">take a picture</string>
     <string name="empty_photo">oh no, it looks like that you don\'t have any photo</string>
+    <string name="camera_permission_description">oh no, we need to use the camera! could you allow me to use please?</string>
+    <string name="camera_permission_denied_description">oh no, you denied to use the camera! Please, allow camera on settings app to use this feature</string>
+    <string name="camera_permission_allow">allow camera</string>
 </resources>
