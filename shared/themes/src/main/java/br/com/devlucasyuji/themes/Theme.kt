@@ -29,7 +29,7 @@ private val DarkColorScheme = darkColorScheme(
     onSecondaryContainer = Color.DarkCyan,
     surfaceVariant = Color.DarkCyan,
     onSurfaceVariant = Color.Cloud,
-    onSurface = Color.Cyan
+    onSurface = Color.DarkGray
 )
 
 private val LightColorScheme = lightColorScheme(

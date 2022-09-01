@@ -2,6 +2,7 @@ package br.com.devlucasyuji.components.ui
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
@@ -28,12 +29,14 @@ fun EmptySection(
     modifier: Modifier = Modifier,
     @StringRes descriptionRes: Int = R.string.empty_photo,
     @StringRes buttonRes: Int = R.string.take_a_picture,
+    enabled: Boolean = true,
     icons: Icons = Icons.Folder,
     onClick: OnClick,
 ) {
     Column(
         modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         Image(
             modifier = Modifier.defaultMinSize(minWidth = 128.dp, minHeight = 96.dp),
@@ -46,7 +49,11 @@ fun EmptySection(
             text = stringResource(id = descriptionRes).capitalize(),
             textAlign = TextAlign.Center,
         )
-        Button(text = stringResource(id = buttonRes).capitalize(), onClick = onClick)
+        Button(
+            text = stringResource(id = buttonRes).capitalize(),
+            enabled = enabled,
+            onClick = onClick
+        )
     }
 }
 
