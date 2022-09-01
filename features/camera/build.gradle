@@ -17,4 +17,5 @@ dependencies {
     implementation projects.domain
 
     implementation libs.bundles.camerax
+    implementation libs.accompanist.permissions
 }

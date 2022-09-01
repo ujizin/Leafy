@@ -2,7 +2,8 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlinx.serialization)
-    alias(libs.plugins.ksp)
+    // FIXME ksp is crashing app
+    id 'kotlin-kapt'
 }
 
 apply from: '../../config-android.gradle'
@@ -20,7 +21,7 @@ dependencies {
 
     implementation libs.room
     implementation libs.room.ktx
-    ksp libs.room.compiler
+    kapt libs.room.compiler
 
     implementation libs.kotlinx.serialization.json
 

@@ -2,7 +2,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 
 buildscript {
     dependencies {
-        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.41'
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.43.2'
         classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${libs.versions.detekt}"
         classpath "org.jetbrains.kotlin:kotlin-serialization:${libs.versions.kotlin}"
     }
