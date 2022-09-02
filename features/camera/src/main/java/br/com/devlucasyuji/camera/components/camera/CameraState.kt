@@ -1,121 +1,59 @@
 package br.com.devlucasyuji.camera.components.camera
 
+import android.content.ContentValues
 import android.content.Context
+import android.provider.MediaStore
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
-import androidx.camera.view.CameraController
 import androidx.camera.view.PreviewView
-import androidx.camera.view.PreviewView.ScaleType
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
-import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 /**
  * CameraState to [CameraPreview] composable
  * */
-interface CameraState {
-
-    /***
-     * Selector from the camera.
-     * */
-    val cameraSelector: CameraSelector
+class CameraState(private val context: Context) {
 
     /**
-     * Set if camera is full screen or not.
+     * Selector from the camera.
      * */
-    val isFullScreen: Boolean
+    internal var cameraSelector: CameraSelector by mutableStateOf(CameraSelector.DEFAULT_BACK_CAMERA)
 
     /**
      * Set scale type from the camera.
      * */
-    val scaleType: PreviewView.ScaleType
+    var scaleType: PreviewView.ScaleType by mutableStateOf(PreviewView.ScaleType.FIT_CENTER)
 
     /**
-     *  Set Camera controller from CameraX to state.
-     *
-     *  @param cameraController Camera Controller from camera view
+     * Set if camera is full screen or not.
      * */
-    fun setCameraController(cameraController: CameraController?)
+    var isFullScreen: Boolean by mutableStateOf(true)
+
+    /**
+     * Get ImageCapture from the camera.
+     * */
+    internal val imageCapture: ImageCapture = ImageCapture.Builder()
+        .build()
 
     /**
      *  Take a picture on the camera.
-     *  @param outputDir The directory which the photo will be saved
+     *
      *  @param onResult Callback called when [PhotoResult] is ready
      * */
-    fun takePicture(outputDir: File, onResult: (PhotoResult) -> Unit)
-
-    /**
-     * Pause the camera.
-     *
-     * @return if it's been paused or not
-     * */
-    fun pause(): Boolean
-
-    /**
-     * Resume the camera.
-     *
-     * @return if it's been resumed or not
-     * */
-    fun resume(): Boolean
-
-    /**
-     * Turn to the back camera.
-     * */
-    fun turnBackCamera()
-
-    /**
-     * Turn to the front camera.
-     * */
-    fun turnToFrontCamera()
-
-    /**
-     * Set fullscreen mode to the camera.
-     *
-     * @param fullscreen if it's true then set full screen.
-     * */
-    fun setFullScreen(fullscreen: Boolean)
-
-    /**
-     * Set scale type to the camera.
-     *
-     * @param scaleType scale type that will be applied
-     * */
-    fun setScaleType(scaleType: ScaleType)
-}
-
-private class CameraStateImpl(
-    private val context: Context,
-    private var cameraController: CameraController?
-) : CameraState {
-
-    private var _cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-    override val cameraSelector: CameraSelector
-        get() = _cameraSelector
-
-    private var _scaleType: PreviewView.ScaleType = PreviewView.ScaleType.FILL_CENTER
-    override val scaleType: PreviewView.ScaleType
-        get() = _scaleType
-
-    private var _isFullScreen: Boolean = true
-    override val isFullScreen: Boolean
-        get() = _isFullScreen
-
-    override fun setCameraController(cameraController: CameraController?) {
-        this.cameraController = cameraController
-    }
-
-    override fun takePicture(outputDir: File, onResult: (PhotoResult) -> Unit) {
-        val output = ImageCapture.OutputFileOptions.Builder(outputDir).build()
-        cameraController?.takePicture(
-            output,
+    fun takePicture(onResult: (PhotoResult) -> Unit) {
+        imageCapture.takePicture(
+            createOutputFile(),
             context.mainExecutor,
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    onResult(PhotoResult.Success(outputDir))
+                    onResult(PhotoResult.Success)
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -124,33 +62,63 @@ private class CameraStateImpl(
             })
     }
 
-    override fun pause(): Boolean {
-        TODO("Not yet implemented")
+    /**
+     * Create output file directory to camera.
+     * */
+    private fun createOutputFile(): ImageCapture.OutputFileOptions {
+        val name = SimpleDateFormat(DATE_FORMAT, Locale.US)
+            .format(System.currentTimeMillis())
+
+        val contentValues = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, name)
+            put(MediaStore.MediaColumns.MIME_TYPE, MIME_TYPE)
+            put(MediaStore.Images.Media.RELATIVE_PATH, RELATIVE_PATH)
+        }
+
+        return ImageCapture.OutputFileOptions
+            .Builder(
+                context.contentResolver,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                contentValues
+            )
+            .build()
     }
 
-    override fun resume(): Boolean {
-        TODO("Not yet implemented")
+    /**
+     * Turn to back camera.
+     * */
+    fun turnBackCamera() {
+        cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     }
 
-    override fun turnBackCamera() {
-        _cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+    /**
+     * Turn to front camera.
+     * */
+    fun turnFrontCamera() {
+        cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
     }
 
-    override fun turnToFrontCamera() {
-        _cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
+    /**
+     * Toggle camera, can be front or back camera
+     * */
+    fun toggleCamera() {
+        when (cameraSelector) {
+            CameraSelector.DEFAULT_FRONT_CAMERA -> turnBackCamera()
+            else -> turnFrontCamera()
+        }
     }
 
-    override fun setFullScreen(fullscreen: Boolean) {
-        _isFullScreen = fullscreen
-    }
+    companion object {
+        private const val DATE_FORMAT = "YYYY-HH:MM:SS"
+        private const val MIME_TYPE = "image/jpeg"
 
-    override fun setScaleType(scaleType: ScaleType) {
-        _scaleType = scaleType
+        // FIXME set app name from the app or searching another way to set name
+        private const val RELATIVE_PATH = "Pictures/Camera reminder"
     }
 }
 
 @Composable
-fun rememberCameraState(): State<CameraState> {
+internal fun rememberCameraState(): CameraState {
     val context = LocalContext.current
-    return remember { mutableStateOf(CameraStateImpl(context, null)) }
+    return remember { CameraState(context) }
 }
