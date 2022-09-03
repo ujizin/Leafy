@@ -4,19 +4,20 @@ import android.content.Context
 import android.util.Log
 import android.view.ViewGroup
 import androidx.camera.core.Preview
+import androidx.camera.core.UseCase
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.lifecycle.LifecycleOwner
 import br.com.devlucasyuji.components.extensions.Content
 import executor
 import hideSystemUi
@@ -33,11 +34,14 @@ import showSystemUi
 @Composable
 fun CameraPreview(
     modifier: Modifier = Modifier,
-    cameraState: CameraState = rememberCameraState().value,
+    cameraState: CameraState = rememberCameraState(),
     content: @Composable Content = {},
 ) {
     val coroutineScope = rememberCoroutineScope()
     val lifecycleOwner = LocalLifecycleOwner.current
+    val cameraSelector by rememberUpdatedState(cameraState.cameraSelector)
+    val isFullScreen by rememberUpdatedState(cameraState.isFullScreen)
+
     AndroidView(
         modifier = modifier,
         factory = { context ->
@@ -49,33 +53,16 @@ fun CameraPreview(
                 )
             }
 
-            // CameraX Preview UseCase
-            val previewUseCase = Preview.Builder()
-                .build()
-                .also {
-                    it.setSurfaceProvider(previewView.surfaceProvider)
-                }
-
-            coroutineScope.launch {
-                val cameraProvider = context.getCameraProvider()
-                try {
-                    // Must unbind the use-cases before rebinding them.
-                    cameraProvider.unbindAll()
-                    cameraProvider.bindToLifecycle(
-                        lifecycleOwner, cameraState.cameraSelector, previewUseCase
-                    )
-                } catch (ex: Exception) {
-                    Log.e("CameraPreview", "Use case binding failed", ex)
-                }
-            }
-
-            cameraState.setCameraController(previewView.controller)
+            coroutineScope.launch { lifecycleOwner.bindCamera(previewView, cameraState) }
 
             previewView
         },
+        update = { previewView ->
+            coroutineScope.launch { lifecycleOwner.bindCamera(previewView, cameraState) }
+        }
     )
 
-    if (cameraState.isFullScreen) {
+    if (isFullScreen) {
         val context = LocalContext.current
         DisposableEffect(context) {
             context.hideSystemUi()
@@ -90,5 +77,30 @@ suspend fun Context.getCameraProvider(): ProcessCameraProvider = suspendCoroutin
         future.addListener({
             continuation.resume(future.get())
         }, executor)
+    }
+}
+
+private val PreviewView.previewUseCase: UseCase
+    get() = Preview.Builder()
+        .build()
+        .also {
+            it.setSurfaceProvider(surfaceProvider)
+        }
+
+private suspend fun LifecycleOwner.bindCamera(
+    previewView: PreviewView,
+    cameraState: CameraState,
+) {
+    val cameraProvider = previewView.context.getCameraProvider()
+    try {
+        cameraProvider.unbindAll()
+        cameraProvider.bindToLifecycle(
+            this,
+            cameraState.cameraSelector,
+            previewView.previewUseCase,
+            cameraState.imageCapture
+        )
+    } catch (ex: Exception) {
+        Log.e("CameraPreview", "Use case binding failed", ex)
     }
 }
