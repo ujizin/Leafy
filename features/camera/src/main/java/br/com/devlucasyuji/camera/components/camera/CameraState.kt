@@ -6,6 +6,7 @@ import android.provider.MediaStore
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
+import androidx.camera.view.LifecycleCameraController
 import androidx.camera.view.PreviewView
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,14 +23,19 @@ import java.util.Locale
 class CameraState(private val context: Context) {
 
     /**
-     * Selector from the camera.
+     * Camera mode, it can be front or back.
+     * @see CameraMode
      * */
-    internal var cameraSelector: CameraSelector by mutableStateOf(CameraSelector.DEFAULT_BACK_CAMERA)
+    var cameraMode: CameraMode = CameraMode.Back
+        set(value) {
+            controller.cameraSelector = cameraMode.selector
+            field = value
+        }
 
     /**
      * Set scale type from the camera.
      * */
-    var scaleType: PreviewView.ScaleType by mutableStateOf(PreviewView.ScaleType.FIT_CENTER)
+    var scaleType: PreviewView.ScaleType = PreviewView.ScaleType.FIT_CENTER
 
     /**
      * Set if camera is full screen or not.
@@ -37,10 +43,21 @@ class CameraState(private val context: Context) {
     var isFullScreen: Boolean by mutableStateOf(true)
 
     /**
+     * Flash Mode from the camera.
+     * @see FlashMode
+     * */
+    var flashMode: FlashMode = FlashMode.Off
+        set(value) {
+            controller.imageCaptureFlashMode = value.mode
+            field = value
+        }
+
+    /**
      * Get ImageCapture from the camera.
      * */
-    internal val imageCapture: ImageCapture = ImageCapture.Builder()
-        .build()
+    internal val imageCapture: ImageCapture = ImageCapture.Builder().build()
+
+    internal val controller by lazy { LifecycleCameraController(context) }
 
     /**
      *  Take a picture on the camera.
@@ -48,7 +65,7 @@ class CameraState(private val context: Context) {
      *  @param onResult Callback called when [PhotoResult] is ready
      * */
     fun takePicture(onResult: (PhotoResult) -> Unit) {
-        imageCapture.takePicture(
+        controller.takePicture(
             createOutputFile(),
             context.mainExecutor,
             object : ImageCapture.OnImageSavedCallback {
@@ -85,26 +102,22 @@ class CameraState(private val context: Context) {
     }
 
     /**
-     * Turn to back camera.
-     * */
-    fun turnBackCamera() {
-        cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-    }
-
-    /**
-     * Turn to front camera.
-     * */
-    fun turnFrontCamera() {
-        cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
-    }
-
-    /**
-     * Toggle camera, can be front or back camera
+     * Toggle camera, it can be front or back camera
      * */
     fun toggleCamera() {
-        when (cameraSelector) {
-            CameraSelector.DEFAULT_FRONT_CAMERA -> turnBackCamera()
-            else -> turnFrontCamera()
+        cameraMode = when (cameraMode) {
+            CameraMode.Front -> CameraMode.Back
+            else -> CameraMode.Front
+        }
+    }
+
+    /**
+     * Toggle Flash, it can be on or off, this case auto is ignored.
+     * */
+    fun toggleFlash() {
+        flashMode = when (flashMode) {
+            FlashMode.On -> FlashMode.Off
+            else -> FlashMode.On
         }
     }
 
