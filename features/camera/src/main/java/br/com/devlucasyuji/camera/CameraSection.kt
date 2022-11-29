@@ -9,7 +9,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import br.com.devlucasyuji.camera.components.camera.CameraPreview
 import br.com.devlucasyuji.components.R
 import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.components.ui.EmptySection
@@ -24,8 +23,7 @@ fun CameraRoute() {
     val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
     when (val status = cameraPermissionState.status) {
         PermissionStatus.Granted -> {
-            CameraPreview(Modifier.fillMaxSize()) {
-            }
+
         }
         is PermissionStatus.Denied -> CameraDenied(status) {
             cameraPermissionState.launchPermissionRequest()
