@@ -18,4 +18,6 @@ dependencies {
 
     implementation libs.bundles.camerax
     implementation libs.accompanist.permissions
+
+    implementation libs.camposer
 }

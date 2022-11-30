@@ -1,7 +1,7 @@
 [versions]
 
 kotlin = "1.7.0"
-gradle = "7.4.0-alpha08"
+gradle = "7.3.1"
 compose = "1.2.0"
 androidx-lifecyle = "2.4.1"
 material3 = "1.0.0-alpha14"
@@ -28,6 +28,7 @@ accompanist = "0.25.1"
 test-runner = "1.4.0"
 test-core-ktx = "1.4.0"
 mockk = "1.10.0"
+camposer = "0.1.0"
 
 [libraries]
 
@@ -73,6 +74,8 @@ camerax-view = { module = "androidx.camera:camera-view", version.ref = "camerax"
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
 
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+
+camposer = { module = "io.github.ujizin:camposer", version.ref="camposer" }
 
 # Debug Implementations
 
