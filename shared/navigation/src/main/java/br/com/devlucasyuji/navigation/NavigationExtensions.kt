@@ -1,5 +1,12 @@
 package br.com.devlucasyuji.navigation
 
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
@@ -7,15 +14,33 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDeepLink
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptionsBuilder
-import androidx.navigation.compose.composable
+import com.google.accompanist.navigation.animation.composable
 
+@OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.composable(
     destination: Destination,
+    enterTransition: (AnimatedContentScope<NavBackStackEntry>.() -> EnterTransition?)? = { fadeIn() },
+    exitTransition: (AnimatedContentScope<NavBackStackEntry>.() -> ExitTransition?)? = { fadeOut() },
+    popEnterTransition: (
+    AnimatedContentScope<NavBackStackEntry>.() -> EnterTransition?
+    )? = enterTransition,
+    popExitTransition: (
+    AnimatedContentScope<NavBackStackEntry>.() -> ExitTransition?
+    )? = exitTransition,
     arguments: List<NamedNavArgument> = emptyList(),
     deepLinks: List<NavDeepLink> = emptyList(),
-    content: @Composable (NavBackStackEntry) -> Unit
+    content: @Composable AnimatedVisibilityScope.(NavBackStackEntry) -> Unit
 ) {
-    composable(destination.route, arguments, deepLinks, content)
+    composable(
+        route = destination.route,
+        arguments = arguments,
+        deepLinks = deepLinks,
+        enterTransition = enterTransition,
+        exitTransition = exitTransition,
+        popEnterTransition = popEnterTransition,
+        popExitTransition = popExitTransition,
+        content = content
+    )
 }
 
 fun NavController.navigate(destination: Destination, builder: NavOptionsBuilder.() -> Unit) {

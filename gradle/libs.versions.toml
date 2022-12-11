@@ -44,6 +44,7 @@ compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
+compose-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist"}
 
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 coroutines-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "coroutines-android" }
@@ -125,7 +126,8 @@ compose = [
     "compose-tooling-preview",
     "compose-material3",
     "compose-runtime",
-    "compose-navigation"
+    "compose-navigation",
+    "compose-navigation-animation"
 ]
 
 compose-debug = [
