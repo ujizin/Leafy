@@ -5,7 +5,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.devlucasyuji.components.extensions.Empty
@@ -23,9 +22,9 @@ fun HeaderTitle(
     subTitleStyle: TextStyle = MaterialTheme.typography.bodyMedium,
 ) {
     Column(modifier) {
-        animation.Animated { Text(text = title, style = titleStyle) }
+        Animated(animation = animation) { Text(text = title, style = titleStyle) }
         if (subTitle != String.Empty) {
-            animation.copy(delayMillis = animation.durationMillis).Animated {
+            Animated(animation = animation.copy(delayMillis = animation.durationMillis)) {
                 Text(text = subTitle, style = subTitleStyle)
             }
         }

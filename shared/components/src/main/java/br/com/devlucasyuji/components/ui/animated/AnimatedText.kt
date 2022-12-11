@@ -16,7 +16,7 @@ internal fun AnimatedText(
     style: TextStyle = TextStyle(),
     animation: Animation = Animation.None,
 ) {
-    animation.Animated {
+    Animated(animation = animation) {
         Text(
             text = text,
             modifier = modifier,

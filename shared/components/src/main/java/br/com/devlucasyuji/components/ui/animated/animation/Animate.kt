@@ -30,10 +30,12 @@ object Animate {
                 animationSpec = animationSpec,
                 initialOffsetX = { it / 2 }
             )
+
             Direction.Top -> slideInVertically(
                 animationSpec = animationSpec,
                 initialOffsetY = { it / 2 }
             )
+
             Direction.End -> slideInHorizontally(animationSpec = animationSpec)
             Direction.Bottom -> slideInVertically(animationSpec = animationSpec)
             Direction.None -> EnterTransition.None
@@ -45,11 +47,12 @@ object Animate {
     )
 
     @Composable
-    fun Animation.Animated(
+    fun Animated(
         modifier: Modifier = Modifier,
+        animation: Animation,
         content: @Composable () -> Unit,
     ) {
-        if (direction == Direction.None) {
+        if (animation.direction == Direction.None) {
             content()
             return
         }
@@ -60,10 +63,14 @@ object Animate {
                 visible.value = true
             }
         }
+
         AnimatedVisibility(
             modifier = modifier,
             visibleState = visibleState,
-            enter = enterTransition() + fadeInEaseInOut(durationMillis, delayMillis),
+            enter = animation.enterTransition() + fadeInEaseInOut(
+                animation.durationMillis,
+                animation.delayMillis
+            ),
         ) { content() }
     }
 }

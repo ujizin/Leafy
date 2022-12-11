@@ -3,7 +3,6 @@ package br.com.devlucasyuji.components.ui.button
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
@@ -17,9 +16,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.devlucasyuji.components.R
+import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.components.ui.animated.animation.Animate.Animated
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
-import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.themes.CameraReminderTheme
 
 @Composable
@@ -35,14 +34,14 @@ internal fun CameraButton(
             .then(modifier),
         contentAlignment = Alignment.Center
     ) {
-        animation.Animated {
+        Animated(animation = animation) {
             IconButton(
                 modifier = Modifier
                     .size(72.dp)
                     .background(Color.White, CircleShape),
                 onClick = onClick
             ) {
-                iconAnimation.Animated {
+                Animated(animation = iconAnimation) {
                     Icon(
                         modifier = Modifier.size(32.dp),
                         painter = painterResource(id = R.drawable.camera),

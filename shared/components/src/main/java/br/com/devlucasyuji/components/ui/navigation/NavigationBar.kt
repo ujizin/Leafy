@@ -21,7 +21,7 @@ import br.com.devlucasyuji.navigation.navigate
 internal fun NavigationBar(navController: NavController) {
     val navItemState by navController.currentNavItemAsState()
     val navItem = navItemState ?: return
-    Animation.SlideToTop.copy(delayMillis = Animation.SmallDelay).Animated {
+    Animated(animation = Animation.SlideToTop.copy(delayMillis = Animation.SmallDelay)) {
         androidx.compose.material3.NavigationBar {
             NavItem.values().forEach { item ->
                 NavBarItem(selectedItem = navItem, item = item) {

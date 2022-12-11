@@ -1,20 +1,18 @@
 package br.com.devlucasyuji.components.ui.label
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import br.com.devlucasyuji.components.extensions.Content
 import br.com.devlucasyuji.components.ui.animated.animation.Animate.Animated
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.components.ui.header.HeaderTitle
-import br.com.devlucasyuji.components.extensions.Content
 
 @Composable
 fun TitleRow(
@@ -29,7 +27,7 @@ fun TitleRow(
     iconSpacedBy: Dp = 8.dp,
     icons: @Composable Content
 ) {
-    animation.Animated {
+    Animated(animation = animation) {
         Row(
             modifier = modifier,
             horizontalArrangement = horizontalArrangement,

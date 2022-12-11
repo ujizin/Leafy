@@ -32,7 +32,7 @@ fun BoxImage(
     }
 
     when (painter.state) {
-        is AsyncImagePainter.State.Success -> animation.Animated { content() }
+        is AsyncImagePainter.State.Success -> Animated(animation = animation) { content() }
         else -> Box(Modifier.alpha(0F)) { content() }
     }
 }

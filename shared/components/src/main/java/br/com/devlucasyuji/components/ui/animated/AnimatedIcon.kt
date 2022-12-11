@@ -26,7 +26,7 @@ fun AnimatedIcon(
     tint: Color? = null,
     onClick: OnClick = {}
 ) {
-    animation.Animated {
+    Animated(animation = animation) {
         IconButton(
             onClick = onClick,
             modifier = modifier
