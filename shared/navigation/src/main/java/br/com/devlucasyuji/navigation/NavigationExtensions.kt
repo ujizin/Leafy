@@ -17,10 +17,16 @@ import androidx.navigation.NavOptionsBuilder
 import com.google.accompanist.navigation.animation.composable
 
 @OptIn(ExperimentalAnimationApi::class)
+typealias AnimatedEnterTransition = (AnimatedContentScope<NavBackStackEntry>.() -> EnterTransition?)
+
+@OptIn(ExperimentalAnimationApi::class)
+typealias AnimatedExitTransition = (AnimatedContentScope<NavBackStackEntry>.() -> ExitTransition?)?
+
+@OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.composable(
     destination: Destination,
-    enterTransition: (AnimatedContentScope<NavBackStackEntry>.() -> EnterTransition?)? = { fadeIn() },
-    exitTransition: (AnimatedContentScope<NavBackStackEntry>.() -> ExitTransition?)? = { fadeOut() },
+    enterTransition: AnimatedEnterTransition = { fadeIn() },
+    exitTransition: AnimatedExitTransition = { fadeOut() },
     popEnterTransition: (
     AnimatedContentScope<NavBackStackEntry>.() -> EnterTransition?
     )? = enterTransition,
@@ -43,6 +49,6 @@ fun NavGraphBuilder.composable(
     )
 }
 
-fun NavController.navigate(destination: Destination, builder: NavOptionsBuilder.() -> Unit) {
+fun NavController.navigate(destination: Destination, builder: NavOptionsBuilder.() -> Unit = {}) {
     navigate(destination.route, builder)
 }

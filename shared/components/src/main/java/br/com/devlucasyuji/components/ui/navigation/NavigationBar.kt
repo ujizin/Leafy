@@ -10,7 +10,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import br.com.devlucasyuji.components.ui.animated.animation.Animate.Animated
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.components.ui.button.CameraButton
@@ -55,12 +54,10 @@ private fun NavController.currentNavItemAsState(): State<NavItem?> {
 }
 
 private fun NavController.navigateToItem(item: NavItem) {
+    if (currentBackStackEntry?.destination?.route == item.destination.route) return
+
     navigate(item.destination) {
         launchSingleTop = false
         restoreState = true
-
-        popUpTo(graph.findStartDestination().id) {
-            saveState = true
-        }
     }
 }

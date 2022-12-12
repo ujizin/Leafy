@@ -1,7 +1,9 @@
 package br.com.devlucasyuji.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -19,7 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import br.com.devlucasyuji.components.Section
+import br.com.devlucasyuji.components.ui.Section
 import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.components.extensions.capitalize
 import br.com.devlucasyuji.components.extensions.section
@@ -37,11 +39,13 @@ fun HomeRoute(
     viewModel: HomeViewModel = hiltViewModel(),
     onTakePictureClick: OnClick
 ) {
-    val state by viewModel.homeState.collectAsState()
-    when (val result: HomeUIState = state) {
-        HomeUIState.Loading -> {}
-        is HomeUIState.Success -> HomeScreen(result, onTakePictureClick)
-        is HomeUIState.Error -> {}
+    Box(modifier = Modifier.fillMaxSize()) {
+        val state by viewModel.homeState.collectAsState()
+        when (val result: HomeUIState = state) {
+            HomeUIState.Loading -> {}
+            is HomeUIState.Success -> HomeScreen(result, onTakePictureClick)
+            is HomeUIState.Error -> {}
+        }
     }
 }
 

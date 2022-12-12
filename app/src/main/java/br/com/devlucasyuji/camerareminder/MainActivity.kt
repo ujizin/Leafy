@@ -10,8 +10,11 @@ import androidx.navigation.NavHostController
 import br.com.devlucasyuji.alarm.alarmGraph
 import br.com.devlucasyuji.camera.cameraGraph
 import br.com.devlucasyuji.components.ui.Scaffold
+import br.com.devlucasyuji.components.ui.navigation.navigationEnterTransition
+import br.com.devlucasyuji.components.ui.navigation.navigationExitTransition
 import br.com.devlucasyuji.home.homeGraph
 import br.com.devlucasyuji.navigation.Destination
+import br.com.devlucasyuji.navigation.navigate
 import br.com.devlucasyuji.search.searchGraph
 import br.com.devlucasyuji.settings.settingsGraph
 import br.com.devlucasyuji.themes.CameraReminderTheme
@@ -41,13 +44,24 @@ class MainActivity : ComponentActivity() {
             navController = navController,
             startDestination = Destination.Home.route,
         ) {
-            homeGraph(onTakePictureClick = {
-                // TODO add navigation to camera
-            })
-            searchGraph()
-            alarmGraph()
+            homeGraph(
+                enterTransition = { navigationEnterTransition(navController) },
+                exitTransition = { navigationExitTransition(navController) },
+                onTakePictureClick = { navController.navigate(Destination.Camera) }
+            )
+            searchGraph(
+                enterTransition = { navigationEnterTransition(navController) },
+                exitTransition = { navigationExitTransition(navController) }
+            )
+            alarmGraph(
+                enterTransition = { navigationEnterTransition(navController) },
+                exitTransition = { navigationExitTransition(navController) }
+            )
             cameraGraph()
-            settingsGraph()
+            settingsGraph(
+                enterTransition = { navigationEnterTransition(navController) },
+                exitTransition = { navigationExitTransition(navController) }
+            )
         }
     }
 }

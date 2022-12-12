@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.components
+package br.com.devlucasyuji.components.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,7 +11,6 @@ import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.components.extensions.Content
 import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
 import br.com.devlucasyuji.components.ui.image.Icons
-import br.com.devlucasyuji.components.ui.Toolbar
 import br.com.devlucasyuji.components.ui.header.HeaderTitle
 import br.com.devlucasyuji.themes.CameraReminderTheme
 
