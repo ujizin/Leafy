@@ -57,7 +57,9 @@ class MainActivity : ComponentActivity() {
                 enterTransition = { navigationEnterTransition(navController) },
                 exitTransition = { navigationExitTransition(navController) }
             )
-            cameraGraph()
+            cameraGraph(
+                onCloseClicked = { navController.navigateUp() }
+            )
             settingsGraph(
                 enterTransition = { navigationEnterTransition(navController) },
                 exitTransition = { navigationExitTransition(navController) }

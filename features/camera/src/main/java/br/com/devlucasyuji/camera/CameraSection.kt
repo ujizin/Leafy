@@ -30,6 +30,8 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import br.com.devlucasyuji.components.extensions.OnClick
+import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
+import br.com.devlucasyuji.components.ui.image.Icons
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberPermissionState
@@ -38,10 +40,10 @@ import com.ujizin.camposer.state.rememberCameraState
 
 @Composable
 @OptIn(ExperimentalPermissionsApi::class)
-fun CameraRoute() {
+fun CameraRoute(onCloseClicked: OnClick) {
     val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
     when (val status = cameraPermissionState.status) {
-        PermissionStatus.Granted -> CameraSection()
+        PermissionStatus.Granted -> CameraSection(onCloseClicked)
         is PermissionStatus.Denied -> CameraDenied(status) {
             cameraPermissionState.launchPermissionRequest()
         }
@@ -53,7 +55,9 @@ fun CameraRoute() {
 }
 
 @Composable
-fun CameraSection() {
+fun CameraSection(
+    onCloseClicked: OnClick,
+) {
     val cameraState = rememberCameraState()
     CameraPreview(
         modifier = Modifier.fillMaxSize(),
@@ -67,7 +71,7 @@ fun CameraSection() {
             ActionRow(
                 onSettingsClicked = {},
                 onFlashModeClicked = {},
-                onCloseClicked = {},
+                onCloseClicked = onCloseClicked,
             )
             PictureButton(modifier = Modifier.padding(24.dp)) {}
         }
@@ -81,9 +85,14 @@ private fun ActionRow(
     onCloseClicked: OnClick
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 20.dp, vertical = 16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-
+        Box() {}
+        Box() {}
+        AnimatedIcon(icon = Icons.Close, onClick = onCloseClicked)
     }
 }
 

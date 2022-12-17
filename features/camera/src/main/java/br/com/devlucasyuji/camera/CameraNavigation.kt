@@ -7,11 +7,12 @@ import androidx.compose.animation.core.Spring.StiffnessLow
 import androidx.compose.animation.core.Spring.StiffnessMediumLow
 import androidx.compose.animation.core.spring
 import androidx.navigation.NavGraphBuilder
+import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.navigation.Destination
 import br.com.devlucasyuji.navigation.composable
 
 @OptIn(ExperimentalAnimationApi::class)
-fun NavGraphBuilder.cameraGraph() {
+fun NavGraphBuilder.cameraGraph(onCloseClicked: OnClick) {
     composable(
         Destination.Camera,
         enterTransition = {
@@ -28,5 +29,5 @@ fun NavGraphBuilder.cameraGraph() {
                 targetOffset = { -it }
             )
         }
-    ) { CameraRoute() }
+    ) { CameraRoute(onCloseClicked) }
 }
