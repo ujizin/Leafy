@@ -58,7 +58,7 @@ class MainActivity : ComponentActivity() {
                 exitTransition = { navigationExitTransition(navController) }
             )
             cameraGraph(
-                onCloseClicked = { navController.navigateUp() }
+                onBackPressed = { navController.navigateUp() }
             )
             settingsGraph(
                 enterTransition = { navigationEnterTransition(navController) },
