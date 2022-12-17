@@ -5,7 +5,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.devlucasyuji.camera.ui.CameraDenied
 import br.com.devlucasyuji.camera.ui.CameraPreviewSection
@@ -25,20 +27,27 @@ internal fun CameraRoute(viewModel: CameraViewModel = hiltViewModel(), onCloseCl
     when (val status = cameraPermissionState.status) {
         PermissionStatus.Granted -> {
             val uiState by viewModel.uiState.collectAsState()
-            when (val state: CameraUiState = uiState) {
-                CameraUiState.Initial, is CameraUiState.Error -> {
-                    val cameraState = rememberCameraState()
-                    CameraSection(
-                        uiState = state,
-                        cameraState = cameraState,
-                        onCloseClicked = onCloseClicked,
-                        onTakePicture = remember { { viewModel.takePicture(cameraState) } }
-                    )
-                }
+            val state: CameraUiState = uiState
+            var previewLoaded by remember { mutableStateOf(false) }
+            val cameraState = rememberCameraState()
 
-                is CameraUiState.Preview -> CameraPreviewSection(
+            if (!previewLoaded) {
+                CameraSection(
+                    uiState = state,
+                    cameraState = cameraState,
+                    onCloseClicked = onCloseClicked,
+                    onTakePicture = remember { { viewModel.takePicture(cameraState) } }
+                )
+            }
+
+            if (state is CameraUiState.Preview) {
+                CameraPreviewSection(
                     previewImage = state.imageByteArray,
-                    viewModel::onBackCamera
+                    onSuccess = { previewLoaded = true },
+                    onBackPressed = {
+                        previewLoaded = false
+                        viewModel.onBackCamera()
+                    }
                 )
             }
         }
