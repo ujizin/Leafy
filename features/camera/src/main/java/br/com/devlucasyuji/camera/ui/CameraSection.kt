@@ -1,8 +1,6 @@
-package br.com.devlucasyuji.camera
+package br.com.devlucasyuji.camera.ui
 
-import android.Manifest
 import android.widget.Toast
-import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -23,7 +21,6 @@ import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,71 +30,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.devlucasyuji.camera.viewmodel.CameraUiState
-import br.com.devlucasyuji.camera.viewmodel.CameraViewModel
 import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
 import br.com.devlucasyuji.components.ui.image.Icons
-import coil.compose.AsyncImage
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.PermissionStatus
-import com.google.accompanist.permissions.rememberPermissionState
 import com.ujizin.camposer.CameraPreview
 import com.ujizin.camposer.state.CameraState
-import com.ujizin.camposer.state.rememberCameraState
 
 @Composable
-@OptIn(ExperimentalPermissionsApi::class)
-fun CameraRoute(viewModel: CameraViewModel = hiltViewModel(), onCloseClicked: OnClick) {
-    val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
-    when (val status = cameraPermissionState.status) {
-        PermissionStatus.Granted -> {
-            val uiState by viewModel.uiState.collectAsState()
-            when (val state: CameraUiState = uiState) {
-                CameraUiState.Initial, is CameraUiState.Error -> {
-                    val cameraState = rememberCameraState()
-                    CameraSection(
-                        uiState = state,
-                        cameraState = cameraState,
-                        onCloseClicked = onCloseClicked,
-                        onTakePicture = remember { { viewModel.takePicture(cameraState) } }
-                    )
-                }
-
-                is CameraUiState.Preview -> CameraPreviewSection(
-                    previewImage = state.imageByteArray,
-                    viewModel::onBackCamera
-                )
-            }
-        }
-
-        is PermissionStatus.Denied -> CameraDenied(status) {
-            cameraPermissionState.launchPermissionRequest()
-        }
-    }
-
-    LaunchedEffect(Unit) {
-        cameraPermissionState.launchPermissionRequest()
-    }
-}
-
-@Composable
-fun CameraPreviewSection(previewImage: ByteArray, onBackPressed: OnClick) {
-    BackHandler(onBack = onBackPressed)
-    AsyncImage(
-        modifier = Modifier.fillMaxSize(),
-        model = previewImage,
-        contentScale = ContentScale.Crop,
-        contentDescription = null
-    )
-}
-
-@Composable
-private fun CameraSection(
+internal fun CameraSection(
     uiState: CameraUiState,
     cameraState: CameraState,
     onCloseClicked: OnClick,
