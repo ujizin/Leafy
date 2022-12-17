@@ -29,5 +29,5 @@ fun NavGraphBuilder.cameraGraph(onBackPressed: OnClick) {
                 targetOffset = { -it }
             )
         }
-    ) { CameraRoute(onBackPressed) }
+    ) { CameraRoute(onCloseClicked = onBackPressed) }
 }
