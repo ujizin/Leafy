@@ -12,7 +12,10 @@ import br.com.devlucasyuji.navigation.Destination
 import br.com.devlucasyuji.navigation.composable
 
 @OptIn(ExperimentalAnimationApi::class)
-fun NavGraphBuilder.cameraGraph(onBackPressed: OnClick) {
+fun NavGraphBuilder.cameraGraph(
+    onBackPressed: OnClick,
+    onSaveClicked: (ByteArray) -> Unit
+) {
     composable(
         Destination.Camera,
         enterTransition = {
@@ -29,5 +32,8 @@ fun NavGraphBuilder.cameraGraph(onBackPressed: OnClick) {
                 targetOffset = { -it }
             )
         }
-    ) { CameraRoute(onCloseClicked = onBackPressed) }
+    ) { CameraRoute(
+        onCloseClicked = onBackPressed,
+        onSaveClicked = onSaveClicked
+    ) }
 }

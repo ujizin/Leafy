@@ -22,7 +22,11 @@ import com.ujizin.camposer.state.rememberCameraState
 
 @Composable
 @OptIn(ExperimentalPermissionsApi::class)
-internal fun CameraRoute(viewModel: CameraViewModel = hiltViewModel(), onCloseClicked: OnClick) {
+internal fun CameraRoute(
+    viewModel: CameraViewModel = hiltViewModel(),
+    onSaveClicked: (ByteArray) -> Unit,
+    onCloseClicked: OnClick
+) {
     val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
     when (val status = cameraPermissionState.status) {
         PermissionStatus.Granted -> {
@@ -47,7 +51,8 @@ internal fun CameraRoute(viewModel: CameraViewModel = hiltViewModel(), onCloseCl
                     onBackPressed = {
                         previewLoaded = false
                         viewModel.onBackCamera()
-                    }
+                    },
+                    onSaveClicked = onSaveClicked
                 )
             }
         }

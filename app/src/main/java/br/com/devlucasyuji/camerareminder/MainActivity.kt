@@ -58,7 +58,14 @@ class MainActivity : ComponentActivity() {
                 exitTransition = { navigationExitTransition(navController) }
             )
             cameraGraph(
-                onBackPressed = { navController.navigateUp() }
+                onBackPressed = { navController.navigateUp() },
+                onSaveClicked = {
+//                    navController.navigate(
+//                        Destination.Preview.withArguments(
+//                            "image" to Uri.encode("$it")
+//                        )
+//                    )
+                }
             )
             settingsGraph(
                 enterTransition = { navigationEnterTransition(navController) },
