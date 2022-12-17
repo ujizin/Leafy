@@ -1,21 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hamburger">hamburguer</string>
-    <string name="magnifier">lupa</string>
-    <string name="home">início</string>
-    <string name="info">informação</string>
-    <string name="alarm">alarme</string>
-    <string name="star">feedback</string>
-    <string name="settings">configuração</string>
-    <string name="add">adicionar</string>
-    <string name="others">outros</string>
-    <string name="search">busca</string>
-    <string name="shared">compartilhar</string>
-    <string name="folder">past</string>
     <string name="take_a_picture">tirar uma foto</string>
     <string name="empty_photo">oh no! parece que você não tem nenhuma foto</string>
     <string name="camera_permission_allow">permitir câmera</string>
     <string name="camera_permission_description">"oh no! nós precisamos usar a câmera! você poderia me permitir a usar? "</string>
     <string name="camera_permission_denied_description">oh no, você negou o uso da câmera! Por favor, permita a câmera no aplicativo de configuração para usar essa ferramenta</string>
-
 </resources>

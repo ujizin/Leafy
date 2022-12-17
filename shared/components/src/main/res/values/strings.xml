@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hamburger">hamburger</string>
-    <string name="magnifier">magnifying glass</string>
-    <string name="home">home</string>
-    <string name="info">info</string>
-    <string name="alarm">alarm</string>
-    <string name="star">review</string>
-    <string name="settings">settings</string>
-    <string name="add">add</string>
-    <string name="others">others</string>
-    <string name="search">search</string>
-    <string name="shared">shared</string>
-    <string name="folder">folder</string>
     <string name="take_a_picture">take a picture</string>
     <string name="empty_photo">oh no, it looks like that you don\'t have any photo</string>
     <string name="camera_permission_description">oh no, we need to use the camera! could you allow me to use please?</string>
