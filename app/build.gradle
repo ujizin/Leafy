@@ -21,6 +21,7 @@ dependencies {
     implementation projects.features.alarm
     implementation projects.features.settings
     implementation projects.features.camera
+    implementation projects.features.publish
 
     implementation projects.data.local
 

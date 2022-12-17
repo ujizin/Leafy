@@ -1,5 +1,6 @@
 package br.com.devlucasyuji.camerareminder
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,8 +14,10 @@ import br.com.devlucasyuji.components.ui.Scaffold
 import br.com.devlucasyuji.components.ui.navigation.navigationEnterTransition
 import br.com.devlucasyuji.components.ui.navigation.navigationExitTransition
 import br.com.devlucasyuji.home.homeGraph
+import br.com.devlucasyuji.navigation.Args
 import br.com.devlucasyuji.navigation.Destination
 import br.com.devlucasyuji.navigation.navigate
+import br.com.devlucasyuji.publish.publishGraph
 import br.com.devlucasyuji.search.searchGraph
 import br.com.devlucasyuji.settings.settingsGraph
 import br.com.devlucasyuji.themes.CameraReminderTheme
@@ -59,18 +62,19 @@ class MainActivity : ComponentActivity() {
             )
             cameraGraph(
                 onBackPressed = { navController.navigateUp() },
-                onSaveClicked = {
-//                    navController.navigate(
-//                        Destination.Preview.withArguments(
-//                            "image" to Uri.encode("$it")
-//                        )
-//                    )
+                onSaveClicked = { imagePath ->
+                    navController.navigate(
+                        Destination.Publish.withArguments(
+                            Args.ImageFilePath to Uri.encode(imagePath)
+                        )
+                    )
                 }
             )
             settingsGraph(
                 enterTransition = { navigationEnterTransition(navController) },
                 exitTransition = { navigationExitTransition(navController) }
             )
+            publishGraph()
         }
     }
 }

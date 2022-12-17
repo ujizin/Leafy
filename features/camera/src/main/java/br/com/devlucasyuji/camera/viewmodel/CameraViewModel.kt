@@ -1,8 +1,10 @@
 package br.com.devlucasyuji.camera.viewmodel
 
+import android.content.Context
 import androidx.camera.core.ImageCapture
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.devlucasyuji.domain.usecase.file.SaveFile
 import com.ujizin.camposer.extensions.takePicture
 import com.ujizin.camposer.state.CameraState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,11 +15,14 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 @HiltViewModel
-class CameraViewModel @Inject constructor() : ViewModel() {
+class CameraViewModel @Inject constructor(
+    private val saveFile: SaveFile,
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow<CameraUiState>(CameraUiState.Initial)
     val uiState: StateFlow<CameraUiState> get() = _uiState
@@ -37,6 +42,17 @@ class CameraViewModel @Inject constructor() : ViewModel() {
 
     fun onBackCamera() {
         _uiState.update { CameraUiState.Initial }
+    }
+
+    fun saveImage(
+        context: Context,
+        imageByteArray: ByteArray,
+        onImageSaved: (filepath: String) -> Unit
+    ) {
+        viewModelScope.launch {
+            val file = saveFile(context.filesDir, imageByteArray, "jpg")
+            onImageSaved(file.absolutePath)
+        }
     }
 }
 

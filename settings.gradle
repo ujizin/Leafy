@@ -28,10 +28,11 @@ include ':features:home'
 include ':features:search'
 include ':features:alarm'
 include ':features:settings'
+include ':features:camera'
+include ':features:publish'
 
 include ':shared:components'
 include ':shared:themes'
 include ':shared:navigation'
 include ':shared:test'
 
-include ':features:camera'

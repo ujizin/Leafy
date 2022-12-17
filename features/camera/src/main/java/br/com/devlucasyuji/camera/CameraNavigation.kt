@@ -14,7 +14,7 @@ import br.com.devlucasyuji.navigation.composable
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.cameraGraph(
     onBackPressed: OnClick,
-    onSaveClicked: (ByteArray) -> Unit
+    onSaveClicked: (filepath: String) -> Unit
 ) {
     composable(
         Destination.Camera,
@@ -34,6 +34,6 @@ fun NavGraphBuilder.cameraGraph(
         }
     ) { CameraRoute(
         onCloseClicked = onBackPressed,
-        onSaveClicked = onSaveClicked
+        onImageSaved = onSaveClicked
     ) }
 }

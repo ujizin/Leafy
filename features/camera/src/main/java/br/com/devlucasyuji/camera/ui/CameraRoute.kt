@@ -8,6 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.devlucasyuji.camera.ui.CameraDenied
 import br.com.devlucasyuji.camera.ui.CameraPreviewSection
@@ -24,7 +25,7 @@ import com.ujizin.camposer.state.rememberCameraState
 @OptIn(ExperimentalPermissionsApi::class)
 internal fun CameraRoute(
     viewModel: CameraViewModel = hiltViewModel(),
-    onSaveClicked: (ByteArray) -> Unit,
+    onImageSaved: (filepath: String) -> Unit,
     onCloseClicked: OnClick
 ) {
     val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
@@ -44,16 +45,22 @@ internal fun CameraRoute(
                 )
             }
 
-            if (state is CameraUiState.Preview) {
-                CameraPreviewSection(
-                    previewImage = state.imageByteArray,
-                    onSuccess = { previewLoaded = true },
-                    onBackPressed = {
-                        previewLoaded = false
-                        viewModel.onBackCamera()
-                    },
-                    onSaveClicked = onSaveClicked
-                )
+            when (state) {
+                is CameraUiState.Preview -> {
+                    val context = LocalContext.current
+                    CameraPreviewSection(
+                        previewImage = state.imageByteArray,
+                        onSuccess = { previewLoaded = true },
+                        onBackPressed = {
+                            previewLoaded = false
+                            viewModel.onBackCamera()
+                        },
+                        onSaveClicked = {
+                            viewModel.saveImage(context, state.imageByteArray, onImageSaved)
+                        }
+                    )
+                }
+                else -> Unit
             }
         }
 
