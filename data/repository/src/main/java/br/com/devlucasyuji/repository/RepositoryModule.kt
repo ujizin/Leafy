@@ -1,9 +1,11 @@
 package br.com.devlucasyuji.repository
 
+import br.com.devlucasyuji.domain.repository.FileRepository
 import br.com.devlucasyuji.domain.repository.PhotoRepository
 import br.com.devlucasyuji.domain.repository.UserRepository
 import br.com.devlucasyuji.repository.datasource.PhotoDataSource
 import br.com.devlucasyuji.repository.datasource.UserDataSource
+import br.com.devlucasyuji.repository.implementation.FileRepositoryImpl
 import br.com.devlucasyuji.repository.implementation.PhotoRepositoryImpl
 import br.com.devlucasyuji.repository.implementation.UserRepositoryImpl
 import br.com.devlucasyuji.repository.mapper.PhotoMapper
@@ -34,4 +36,8 @@ object RepositoryModule {
         dataSource = dataSource,
         userMapper = UserMapper()
     )
+
+    @Provides
+    @Singleton
+    fun provideFileRepository(): FileRepository = FileRepositoryImpl()
 }

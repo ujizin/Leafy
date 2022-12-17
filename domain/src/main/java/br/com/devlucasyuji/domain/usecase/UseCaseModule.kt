@@ -1,7 +1,10 @@
 package br.com.devlucasyuji.domain.usecase
 
+import br.com.devlucasyuji.domain.repository.FileRepository
 import br.com.devlucasyuji.domain.repository.PhotoRepository
 import br.com.devlucasyuji.domain.repository.UserRepository
+import br.com.devlucasyuji.domain.usecase.file.SaveFile
+import br.com.devlucasyuji.domain.usecase.file.implementation.SaveFileImpl
 import br.com.devlucasyuji.domain.usecase.photo.AddPhoto
 import br.com.devlucasyuji.domain.usecase.photo.DeletePhoto
 import br.com.devlucasyuji.domain.usecase.photo.implementation.AddPhotoImpl
@@ -51,4 +54,10 @@ object UseCaseModule {
     fun provideLoadUser(
         repository: UserRepository
     ): LoadUser = LoadUserImpl(repository)
+
+    @Provides
+    @Singleton
+    fun provideSaveFile(
+        repository: FileRepository,
+    ): SaveFile = SaveFileImpl(repository)
 }
