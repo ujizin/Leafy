@@ -20,6 +20,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -27,7 +28,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import br.com.devlucasyuji.components.extensions.OnClick
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -45,6 +45,10 @@ fun CameraRoute() {
         is PermissionStatus.Denied -> CameraDenied(status) {
             cameraPermissionState.launchPermissionRequest()
         }
+    }
+
+    LaunchedEffect(Unit) {
+        cameraPermissionState.launchPermissionRequest()
     }
 }
 
@@ -95,13 +99,10 @@ private fun PictureButton(
         Modifier
             .then(modifier)
             .scale(scaleAnimated)
-            .size(64.dp)
+            .size(72.dp)
             .clip(CircleShape)
             .background(MaterialTheme.colorScheme.primary, CircleShape)
             .border(BorderStroke(8.dp, Color.White), CircleShape)
-            .graphicsLayer {
-                scaleX = 10F
-            }
             .clickable(
                 interactionSource = interactionSource,
                 indication = rememberRipple(bounded = true),
