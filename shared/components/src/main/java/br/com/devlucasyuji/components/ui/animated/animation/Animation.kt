@@ -2,7 +2,7 @@ package br.com.devlucasyuji.components.ui.animated.animation
 
 import br.com.devlucasyuji.components.ui.animated.animation.Animate.DEFAULT_DURATION_MILLIS
 
-data class Animation(
+data class Animation internal constructor(
     val direction: Animate.Direction,
     val delayMillis: Int = 0,
     val durationMillis: Int = DEFAULT_DURATION_MILLIS,
@@ -15,7 +15,7 @@ data class Animation(
         val SlideToBottom = Animation(Animate.Direction.Bottom)
 
         const val SmallDelay = 250
-        const val MediumDelay = 750
+        const val MediumDelay = 500
         const val LargeDelay = 1000
     }
 }

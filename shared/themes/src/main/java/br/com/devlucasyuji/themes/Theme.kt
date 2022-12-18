@@ -27,7 +27,7 @@ private val DarkColorScheme = darkColorScheme(
     onBackground = Color.Gray,
     secondaryContainer = Color.Cloud,
     onSecondaryContainer = Color.DarkCyan,
-    surfaceVariant = Color.DarkCyan,
+    surfaceVariant = Color.Cyan,
     onSurfaceVariant = Color.Cloud,
     onSurface = Color.DarkGray
 )
@@ -43,7 +43,7 @@ private val LightColorScheme = lightColorScheme(
     onBackground = Color.Gray,
     secondaryContainer = Color.Cloud,
     onSecondaryContainer = Color.DarkCyan,
-    surfaceVariant = Color.DarkCyan,
+    surfaceVariant = Color.Cyan,
     onSurfaceVariant = Color.Cloud,
     onSurface = Color.Cyan
 )

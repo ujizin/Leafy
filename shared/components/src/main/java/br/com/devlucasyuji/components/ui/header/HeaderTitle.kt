@@ -2,13 +2,12 @@ package br.com.devlucasyuji.components.ui.header
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.devlucasyuji.components.extensions.Empty
-import br.com.devlucasyuji.components.ui.animated.animation.Animate.Animated
+import br.com.devlucasyuji.components.ui.animated.AnimatedText
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.themes.CameraReminderTheme
 
@@ -22,11 +21,13 @@ fun HeaderTitle(
     subTitleStyle: TextStyle = MaterialTheme.typography.bodyMedium,
 ) {
     Column(modifier) {
-        Animated(animation = animation) { Text(text = title, style = titleStyle) }
+        AnimatedText(animation = animation, text = title, style = titleStyle)
         if (subTitle != String.Empty) {
-            Animated(animation = animation.copy(delayMillis = animation.durationMillis)) {
-                Text(text = subTitle, style = subTitleStyle)
-            }
+            AnimatedText(
+                animation = animation.copy(delayMillis = animation.durationMillis),
+                text = subTitle,
+                style = subTitleStyle
+            )
         }
     }
 }
