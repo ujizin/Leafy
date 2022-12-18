@@ -74,7 +74,9 @@ class MainActivity : ComponentActivity() {
                 enterTransition = { navigationEnterTransition(navController) },
                 exitTransition = { navigationExitTransition(navController) }
             )
-            publishGraph()
+            publishGraph(
+                onBackPressed = { navController.navigateUp() }
+            )
         }
     }
 }

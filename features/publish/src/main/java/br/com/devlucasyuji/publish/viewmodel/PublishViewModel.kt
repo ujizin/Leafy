@@ -12,6 +12,6 @@ class PublishViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
-    val image = Uri.decode(savedStateHandle.get<String>(Args.ImageFilePath).orEmpty())
+    private val imageFilepath = Uri.decode(savedStateHandle.get<String>(Args.ImageFilePath).orEmpty())
 
 }
