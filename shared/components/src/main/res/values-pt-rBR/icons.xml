@@ -12,6 +12,7 @@
     <string name="search">busca</string>
     <string name="shared">compartilhar</string>
     <string name="folder">pasta</string>
+    <string name="leaf">folha</string>
     <string name="close">fechar</string>
     <string name="back">voltar</string>
 </resources>
