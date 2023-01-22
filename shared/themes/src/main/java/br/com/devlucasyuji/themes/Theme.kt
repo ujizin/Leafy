@@ -17,32 +17,32 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.ViewCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Color.DarkCyan,
+    primary = Color.Green,
     secondary = Color.Cyan,
     tertiary = Color.Cloud,
-    surface = Color.DarkCyan,
+    surface = Color.Green,
     background = Color.Cloud,
     onPrimary = Color.Cloud,
     onSecondary = Color.Gray,
     onBackground = Color.Gray,
     secondaryContainer = Color.Cloud,
-    onSecondaryContainer = Color.DarkCyan,
+    onSecondaryContainer = Color.DarkGreen,
     surfaceVariant = Color.Cyan,
     onSurfaceVariant = Color.Cloud,
     onSurface = Color.DarkGray
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Color.DarkCyan,
+    primary = Color.Green,
     secondary = Color.Cyan,
     tertiary = Color.Cloud,
-    surface = Color.DarkCyan,
+    surface = Color.Green,
     background = Color.Cloud,
     onPrimary = Color.Cloud,
     onSecondary = Color.Gray,
     onBackground = Color.Gray,
     secondaryContainer = Color.Cloud,
-    onSecondaryContainer = Color.DarkCyan,
+    onSecondaryContainer = Color.DarkGreen,
     surfaceVariant = Color.Cyan,
     onSurfaceVariant = Color.Cloud,
     onSurface = Color.Cyan
