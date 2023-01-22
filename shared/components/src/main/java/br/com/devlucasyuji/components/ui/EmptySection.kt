@@ -27,10 +27,10 @@ import br.com.devlucasyuji.themes.CameraReminderTheme
 @Composable
 fun EmptySection(
     modifier: Modifier = Modifier,
-    @StringRes descriptionRes: Int = R.string.empty_photo,
+    @StringRes descriptionRes: Int = R.string.empty_plant,
     @StringRes buttonRes: Int = R.string.take_a_picture,
     enabled: Boolean = true,
-    icons: Icons = Icons.Folder,
+    icons: Icons = Icons.Leaf,
     onClick: OnClick,
 ) {
     Column(
