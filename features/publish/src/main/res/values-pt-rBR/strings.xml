@@ -2,5 +2,8 @@
 <resources>
     <string name="publish_title">Descreva sua\nfoto</string>
     <string name="publish_description">para sua adoravel foto, uma descricao maravilhosa.</string>
+    <string name="title">título</string>
+    <string name="description">descrição</string>
+    <string name="next">próximo</string>
     <string name="publish">publicar</string>
 </resources>

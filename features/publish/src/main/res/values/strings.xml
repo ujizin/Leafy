@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="publish_title">Describe your\npicture</string>
-    <string name="publish_description">to your lovely picture, a wonderful describe.</string>
+    <string name="publish_title">Describe your\nplant</string>
+    <string name="publish_description">to your lovely plant, a wonderful describe.</string>
+    <string name="title">title</string>
+    <string name="description">description</string>
+    <string name="next">next</string>
     <string name="publish">publish</string>
 </resources>

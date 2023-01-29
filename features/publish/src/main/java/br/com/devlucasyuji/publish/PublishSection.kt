@@ -1,8 +1,12 @@
 package br.com.devlucasyuji.publish
 
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,6 +29,7 @@ fun PublishSection(onBackPressed: OnClick, viewModel: PublishViewModel = hiltVie
     Section(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(20.dp),
         title = stringResource(R.string.publish_title),
         subTitle = stringResource(R.string.publish_description),
@@ -33,13 +38,30 @@ fun PublishSection(onBackPressed: OnClick, viewModel: PublishViewModel = hiltVie
         },
     ) {
         var title by remember { mutableStateOf("") }
+        var description by remember { mutableStateOf("") }
         TextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = title, onValueChange = { title = it }
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 32.dp),
+            placeholder = stringResource(R.string.title),
+            value = title,
+            onValueChange = { title = it }
         )
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(1.25F)
+                .padding(top = 16.dp),
+            placeholder = stringResource(R.string.description),
+            value = description,
+            onValueChange = { description = it },
+        )
+        Spacer(modifier = Modifier.weight(1F))
         Button(
-            modifier = Modifier.fillMaxWidth(),
-            text = stringResource(R.string.publish),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp),
+            text = stringResource(R.string.next),
             onClick = { }
         )
     }
