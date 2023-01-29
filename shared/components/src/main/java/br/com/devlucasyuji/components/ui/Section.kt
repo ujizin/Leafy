@@ -1,19 +1,18 @@
 package br.com.devlucasyuji.components.ui
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.components.extensions.Content
 import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
-import br.com.devlucasyuji.components.ui.animated.animation.Animate.Animated
-import br.com.devlucasyuji.components.ui.animated.animation.Animation.Companion.LargeDelay
-import br.com.devlucasyuji.components.ui.image.Icons
+import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.components.ui.header.HeaderTitle
+import br.com.devlucasyuji.components.ui.image.Icons
 import br.com.devlucasyuji.themes.CameraReminderTheme
 
 @Composable
@@ -24,8 +23,7 @@ fun Section(
     trailingIcon: @Composable Content? = null,
     leadingIcon: @Composable Content? = null,
     headerAnimation: Animation = Animation.SlideToTop,
-    bodyAnimation: Animation = Animation.SlideToTop.copy(delayMillis = LargeDelay),
-    content: @Composable Content = {}
+    content: @Composable ColumnScope.() -> Unit = {}
 ) {
     val titlePadding = PaddingValues(
         top = when {
@@ -43,9 +41,7 @@ fun Section(
             modifier = Modifier.padding(titlePadding)
         )
 
-        Animated(animation = bodyAnimation) {
-            Column { content() }
-        }
+        content()
     }
 }
 
