@@ -21,11 +21,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import br.com.devlucasyuji.components.ui.Section
 import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.components.extensions.capitalize
 import br.com.devlucasyuji.components.extensions.section
 import br.com.devlucasyuji.components.ui.EmptySection
+import br.com.devlucasyuji.components.ui.Section
 import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.components.ui.card.BoxImage
@@ -50,7 +50,7 @@ fun HomeRoute(
 }
 
 @Composable
-private fun HomeScreen(result: HomeUIState.Success, OnEmptyPhotoClick: OnClick) {
+private fun HomeScreen(result: HomeUIState.Success, onEmptyPhotoClick: OnClick) {
     NavLazyColumn {
         item {
             Section(
@@ -72,7 +72,7 @@ private fun HomeScreen(result: HomeUIState.Success, OnEmptyPhotoClick: OnClick) 
             result.photos.isEmpty() -> item {
                 EmptySection(
                     modifier = Modifier.padding(vertical = 32.dp, horizontal = 20.dp),
-                    onClick = OnEmptyPhotoClick
+                    onClick = onEmptyPhotoClick
                 )
             }
             else -> items(result.photos) { HomePhotoCard(it) }
