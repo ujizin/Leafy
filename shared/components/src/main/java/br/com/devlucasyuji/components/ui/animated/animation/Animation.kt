@@ -1,21 +1,26 @@
 package br.com.devlucasyuji.components.ui.animated.animation
 
-import br.com.devlucasyuji.components.ui.animated.animation.Animate.DEFAULT_DURATION_MILLIS
 
 data class Animation internal constructor(
     val direction: Animate.Direction,
     val delayMillis: Int = 0,
-    val durationMillis: Int = DEFAULT_DURATION_MILLIS,
+    val durationMillis: Int = MediumDuration,
 ) {
     companion object {
+        const val SmallDelay = 250
+        const val MediumDelay = 500
+        const val LargeDelay = 1000
+
+        private const val MediumDuration = 750
+        private const val LargeDuration = 1_000
+
+        // Default animations
         val None = Animation(Animate.Direction.None)
         val SlideToStart = Animation(Animate.Direction.Start)
         val SlideToTop = Animation(Animate.Direction.Top)
         val SlideToEnd = Animation(Animate.Direction.End)
         val SlideToBottom = Animation(Animate.Direction.Bottom)
 
-        const val SmallDelay = 250
-        const val MediumDelay = 500
-        const val LargeDelay = 1000
+        val SlideToTopLargeDuration = SlideToTop.copy(durationMillis = LargeDuration)
     }
 }

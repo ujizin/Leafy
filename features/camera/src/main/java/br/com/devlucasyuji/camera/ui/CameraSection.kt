@@ -94,7 +94,7 @@ private fun ActionRow(
     ) {
         Box() {}
         Box() {}
-        AnimatedIcon(icon = Icons.Close, onClick = onCloseClicked)
+        AnimatedIcon(icon = Icons.Close, tint = Color.White, onClick = onCloseClicked)
     }
 }
 

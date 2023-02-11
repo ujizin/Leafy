@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.devlucasyuji.components.extensions.Content
 import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
+import br.com.devlucasyuji.components.ui.animated.animation.Animate.Animated
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.components.ui.header.HeaderTitle
 import br.com.devlucasyuji.components.ui.image.Icons
@@ -23,6 +24,7 @@ fun Section(
     trailingIcon: @Composable Content? = null,
     leadingIcon: @Composable Content? = null,
     headerAnimation: Animation = Animation.SlideToTop,
+    animation: Animation = Animation.None,
     content: @Composable ColumnScope.() -> Unit = {}
 ) {
     val titlePadding = PaddingValues(
@@ -31,17 +33,20 @@ fun Section(
             else -> 0.dp
         }
     )
-    Column(modifier) {
-        Toolbar(trailingIcon = trailingIcon, leadingIcon = leadingIcon)
 
-        HeaderTitle(
-            title = title,
-            subTitle = subTitle,
-            animation = headerAnimation,
-            modifier = Modifier.padding(titlePadding)
-        )
+    Animated(animation = animation) {
+        Column(modifier) {
+            Toolbar(trailingIcon = trailingIcon, leadingIcon = leadingIcon)
 
-        content()
+            HeaderTitle(
+                title = title,
+                subTitle = subTitle,
+                animation = headerAnimation,
+                modifier = Modifier.padding(titlePadding)
+            )
+
+            content()
+        }
     }
 }
 

@@ -7,6 +7,7 @@ import androidx.compose.animation.core.Spring.StiffnessLow
 import androidx.compose.animation.core.Spring.StiffnessMediumLow
 import androidx.compose.animation.core.spring
 import androidx.navigation.NavGraphBuilder
+import br.com.devlucasyuji.camera.ui.CameraRoute
 import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.navigation.Destination
 import br.com.devlucasyuji.navigation.composable

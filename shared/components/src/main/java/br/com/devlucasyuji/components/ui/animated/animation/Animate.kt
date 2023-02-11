@@ -17,8 +17,6 @@ import androidx.compose.ui.unit.IntOffset
 
 object Animate {
 
-    internal const val DEFAULT_DURATION_MILLIS = 750
-
     enum class Direction {
         None, Start, Top, End, Bottom;
     }

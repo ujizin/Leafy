@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.camera
+package br.com.devlucasyuji.camera.ui
 
 import android.Manifest
 import androidx.compose.runtime.Composable
@@ -10,9 +10,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
-import br.com.devlucasyuji.camera.ui.CameraDenied
-import br.com.devlucasyuji.camera.ui.CameraPreviewSection
-import br.com.devlucasyuji.camera.ui.CameraSection
 import br.com.devlucasyuji.camera.viewmodel.CameraUiState
 import br.com.devlucasyuji.camera.viewmodel.CameraViewModel
 import br.com.devlucasyuji.components.extensions.OnClick
@@ -41,7 +38,7 @@ internal fun CameraRoute(
                     uiState = state,
                     cameraState = cameraState,
                     onCloseClicked = onCloseClicked,
-                    onTakePicture = remember { { viewModel.takePicture(cameraState) } }
+                    onTakePicture = { viewModel.takePicture(cameraState) }
                 )
             }
 
@@ -60,6 +57,7 @@ internal fun CameraRoute(
                         }
                     )
                 }
+
                 else -> Unit
             }
         }
