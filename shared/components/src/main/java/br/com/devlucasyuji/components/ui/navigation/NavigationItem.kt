@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,6 +39,7 @@ internal fun RowScope.NavBarItem(
             Text(
                 modifier = Modifier.animateContentSize(),
                 text = stringResource(labelRes).capitalize(),
+                color = MaterialTheme.colorScheme.onSurface,
             )
         },
         alwaysShowLabel = item == selectedItem,
