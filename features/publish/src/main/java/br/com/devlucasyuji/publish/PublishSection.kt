@@ -26,7 +26,11 @@ import br.com.devlucasyuji.components.ui.textfield.TextField
 import br.com.devlucasyuji.publish.viewmodel.PublishViewModel
 
 @Composable
-fun PublishSection(onBackPressed: OnClick, viewModel: PublishViewModel = hiltViewModel()) {
+fun PublishSection(
+    onBackPressed: OnClick,
+    onNextClick: OnClick,
+    viewModel: PublishViewModel = hiltViewModel()
+) {
     Section(
         modifier = Modifier
             .fillMaxSize()
@@ -64,7 +68,7 @@ fun PublishSection(onBackPressed: OnClick, viewModel: PublishViewModel = hiltVie
                 .fillMaxWidth()
                 .padding(top = 16.dp),
             text = stringResource(R.string.next),
-            onClick = { }
+            onClick = onNextClick // TODO validate text fields first
         )
     }
 }

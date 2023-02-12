@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.alarm
+package br.com.devlucasyuji.alarms
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

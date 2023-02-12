@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.alarm
+package br.com.devlucasyuji.alarms
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry

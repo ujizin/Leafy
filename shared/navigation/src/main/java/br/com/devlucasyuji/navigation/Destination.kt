@@ -9,9 +9,10 @@ enum class Destination(
     Home("home", NavigationItem.Home),
     Search("search", NavigationItem.Search),
     Camera("camera", NavigationItem.None),
-    Alarm("alarm", NavigationItem.Alarm),
+    Alarms("alarms", NavigationItem.Alarm),
     Others("others", NavigationItem.Others),
-    Publish("publish/{$ImageFilePath}", NavigationItem.None);
+    Publish("publish/{$ImageFilePath}", NavigationItem.None),
+    Alarm("alarm", NavigationItem.None);
 
     val route: String get() = "$HOST/$destinationName"
 

@@ -4,11 +4,13 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
 import br.com.devlucasyuji.alarm.alarmGraph
+import br.com.devlucasyuji.alarms.alarmsGraph
 import br.com.devlucasyuji.camera.cameraGraph
 import br.com.devlucasyuji.components.ui.Scaffold
 import br.com.devlucasyuji.components.ui.navigation.navigationEnterTransition
@@ -56,9 +58,14 @@ class MainActivity : ComponentActivity() {
                 enterTransition = { navigationEnterTransition(navController) },
                 exitTransition = { navigationExitTransition(navController) }
             )
-            alarmGraph(
+            alarmsGraph(
                 enterTransition = { navigationEnterTransition(navController) },
                 exitTransition = { navigationExitTransition(navController) }
+            )
+            alarmGraph(
+                onBackPressed = { navController.navigateUp() },
+                enterTransition = { slideIntoContainer(AnimatedContentScope.SlideDirection.Start) },
+                exitTransition = { slideOutOfContainer(AnimatedContentScope.SlideDirection.End) }
             )
             cameraGraph(
                 onBackPressed = { navController.navigateUp() },
@@ -75,7 +82,8 @@ class MainActivity : ComponentActivity() {
                 exitTransition = { navigationExitTransition(navController) }
             )
             publishGraph(
-                onBackPressed = { navController.navigateUp() }
+                onBackPressed = { navController.navigateUp() },
+                onNextClick = { navController.navigate(Destination.Alarm) }
             )
         }
     }

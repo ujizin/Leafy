@@ -10,11 +10,17 @@ import br.com.devlucasyuji.navigation.Destination
 import br.com.devlucasyuji.navigation.composable
 
 @OptIn(ExperimentalAnimationApi::class)
-fun NavGraphBuilder.publishGraph(onBackPressed: OnClick) {
+fun NavGraphBuilder.publishGraph(
+    onBackPressed: OnClick,
+    onNextClick: OnClick
+) {
     composable(
         destination = Destination.Publish,
         arguments = listOf(navArgument(Args.ImageFilePath) { type = NavType.StringType })
     ) {
-        PublishSection(onBackPressed = onBackPressed)
+        PublishSection(
+            onBackPressed = onBackPressed,
+            onNextClick = onNextClick
+        )
     }
 }
