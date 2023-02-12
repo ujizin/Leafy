@@ -15,7 +15,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.tooling.preview.Preview
@@ -52,7 +51,10 @@ fun TextField(
                 ) {
                     innerTextField()
                     if (placeholder != null && value.isEmpty()) {
-                        Text(text = placeholder.capitalize(), color = Color(0x7F3F4549))
+                        Text(
+                            text = placeholder.capitalize(),
+                            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5F)
+                        )
                     }
                 }
             }
