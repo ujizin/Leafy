@@ -1,10 +1,14 @@
 package br.com.devlucasyuji.publish
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import br.com.devlucasyuji.components.extensions.OnClick
+import br.com.devlucasyuji.navigation.AnimatedEnterTransition
+import br.com.devlucasyuji.navigation.AnimatedExitTransition
 import br.com.devlucasyuji.navigation.Args
 import br.com.devlucasyuji.navigation.Destination
 import br.com.devlucasyuji.navigation.composable
@@ -12,11 +16,15 @@ import br.com.devlucasyuji.navigation.composable
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.publishGraph(
     onBackPressed: OnClick,
-    onNextClick: OnClick
+    onNextClick: OnClick,
+    enterTransition: AnimatedEnterTransition = { fadeIn() },
+    exitTransition: AnimatedExitTransition = { fadeOut() }
 ) {
     composable(
         destination = Destination.Publish,
-        arguments = listOf(navArgument(Args.ImageFilePath) { type = NavType.StringType })
+        arguments = listOf(navArgument(Args.ImageFilePath) { type = NavType.StringType }),
+        enterTransition = enterTransition,
+        exitTransition = exitTransition,
     ) {
         PublishSection(
             onBackPressed = onBackPressed,

@@ -65,7 +65,7 @@ class MainActivity : ComponentActivity() {
             alarmGraph(
                 onBackPressed = { navController.navigateUp() },
                 enterTransition = { slideIntoContainer(AnimatedContentScope.SlideDirection.Start) },
-                exitTransition = { slideOutOfContainer(AnimatedContentScope.SlideDirection.End) }
+                exitTransition = { slideOutOfContainer(AnimatedContentScope.SlideDirection.Start) }
             )
             cameraGraph(
                 onBackPressed = { navController.navigateUp() },
@@ -83,7 +83,8 @@ class MainActivity : ComponentActivity() {
             )
             publishGraph(
                 onBackPressed = { navController.navigateUp() },
-                onNextClick = { navController.navigate(Destination.Alarm) }
+                onNextClick = { navController.navigate(Destination.Alarm) },
+                exitTransition = { slideOutOfContainer(AnimatedContentScope.SlideDirection.Start) }
             )
         }
     }
