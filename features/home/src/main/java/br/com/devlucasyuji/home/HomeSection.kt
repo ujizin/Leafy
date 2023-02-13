@@ -26,7 +26,7 @@ import br.com.devlucasyuji.components.extensions.capitalize
 import br.com.devlucasyuji.components.extensions.section
 import br.com.devlucasyuji.components.ui.EmptySection
 import br.com.devlucasyuji.components.ui.Section
-import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
+import br.com.devlucasyuji.components.ui.animated.AnimatedButtonIcon
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.components.ui.card.BoxImage
 import br.com.devlucasyuji.components.ui.card.CardSize
@@ -61,10 +61,10 @@ private fun HomeScreen(result: HomeUIState.Success, onEmptyPhotoClick: OnClick) 
                 ).capitalize(),
                 subTitle = stringResource(id = R.string.welcome_back).capitalize(),
                 leadingIcon = {
-                    AnimatedIcon(icon = Icons.Hamburger, animation = Animation.SlideToEnd)
+                    AnimatedButtonIcon(icon = Icons.Hamburger, animation = Animation.SlideToEnd)
                 },
                 trailingIcon = {
-                    AnimatedIcon(icon = Icons.Magnifier, animation = Animation.SlideToStart)
+                    AnimatedButtonIcon(icon = Icons.Magnifier, animation = Animation.SlideToStart)
                 }
             )
         }
@@ -107,7 +107,7 @@ private fun LazyItemScope.HomePhotoCard(photo: Photo) {
             subTitle = photo.description,
             verticalAlignment = Alignment.Bottom
         ) {
-            AnimatedIcon(icon = Icons.Shared, tint = Color.White, size = 24.dp)
+            AnimatedButtonIcon(icon = Icons.Shared, tint = Color.White, size = 24.dp)
         }
     }
 }

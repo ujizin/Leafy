@@ -34,7 +34,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import br.com.devlucasyuji.camera.viewmodel.CameraUiState
 import br.com.devlucasyuji.components.extensions.OnClick
-import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
+import br.com.devlucasyuji.components.ui.animated.AnimatedButtonIcon
 import br.com.devlucasyuji.components.ui.image.Icons
 import com.ujizin.camposer.CameraPreview
 import com.ujizin.camposer.state.CameraState
@@ -94,7 +94,7 @@ private fun ActionRow(
     ) {
         Box() {}
         Box() {}
-        AnimatedIcon(icon = Icons.Close, tint = Color.White, onClick = onCloseClicked)
+        AnimatedButtonIcon(icon = Icons.Close, tint = Color.White, onClick = onCloseClicked)
     }
 }
 

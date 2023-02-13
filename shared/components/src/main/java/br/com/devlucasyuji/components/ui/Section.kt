@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.devlucasyuji.components.extensions.Content
-import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
+import br.com.devlucasyuji.components.ui.animated.AnimatedButtonIcon
 import br.com.devlucasyuji.components.ui.animated.animation.Animate.Animated
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.components.ui.header.HeaderTitle
@@ -58,8 +58,8 @@ private fun PreviewSection() {
             modifier = Modifier.padding(top = 32.dp),
             title = "Hello Lucas",
             subTitle = "Welcome back!",
-            leadingIcon = { AnimatedIcon(icon = Icons.Hamburger) },
-            trailingIcon = { AnimatedIcon(icon = Icons.Magnifier) },
+            leadingIcon = { AnimatedButtonIcon(icon = Icons.Hamburger) },
+            trailingIcon = { AnimatedButtonIcon(icon = Icons.Magnifier) },
             headerAnimation = Animation.None
         )
     }

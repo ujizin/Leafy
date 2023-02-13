@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import br.com.devlucasyuji.components.extensions.section
 import br.com.devlucasyuji.components.ui.Section
-import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
+import br.com.devlucasyuji.components.ui.animated.AnimatedButtonIcon
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.components.ui.image.Icons
 
@@ -16,13 +16,13 @@ fun SearchSection() {
         Section(
             modifier = Modifier.section(),
             leadingIcon = {
-                AnimatedIcon(
+                AnimatedButtonIcon(
                     icon = Icons.Hamburger,
                     animation = Animation.SlideToTop,
                 )
             },
             trailingIcon = {
-                AnimatedIcon(
+                AnimatedButtonIcon(
                     icon = Icons.Settings,
                     animation = Animation.SlideToTop
                 )

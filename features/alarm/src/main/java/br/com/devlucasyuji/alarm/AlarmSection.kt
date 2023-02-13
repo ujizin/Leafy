@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import br.com.devlucasyuji.alarm.components.timer_box.TimerBox
 import br.com.devlucasyuji.components.extensions.section
 import br.com.devlucasyuji.components.ui.Section
-import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
+import br.com.devlucasyuji.components.ui.animated.AnimatedButtonIcon
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.components.ui.button.Button
 import br.com.devlucasyuji.components.ui.image.Icons
@@ -25,7 +25,7 @@ fun AlarmSection(
             .section(),
         title = stringResource(R.string.alarm_title),
         trailingIcon = {
-            AnimatedIcon(icon = Icons.Back, onClick = onBackPressed)
+            AnimatedButtonIcon(icon = Icons.Back, onClick = onBackPressed)
         },
         headerAnimation = Animation.None
     ) {

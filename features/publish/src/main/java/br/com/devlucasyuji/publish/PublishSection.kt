@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.components.ui.Section
-import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
+import br.com.devlucasyuji.components.ui.animated.AnimatedButtonIcon
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.components.ui.button.Button
 import br.com.devlucasyuji.components.ui.image.Icons
@@ -40,7 +40,7 @@ fun PublishSection(
         subTitle = stringResource(R.string.publish_description),
         animation = Animation.SlideToTopLargeDuration,
         trailingIcon = {
-            AnimatedIcon(icon = Icons.Back, onClick = onBackPressed)
+            AnimatedButtonIcon(icon = Icons.Back, onClick = onBackPressed)
         },
     ) {
         var title by remember { mutableStateOf("") }
