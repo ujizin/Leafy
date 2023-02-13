@@ -25,10 +25,16 @@ internal fun getTypography(color: ColorScheme) = Typography(
         color = color.onBackground,
         platformStyle = PlatformTextStyle(includeFontPadding = false)
     ),
+    headlineSmall = TextStyle(
+        fontFamily = PoppinsFamily,
+        fontSize = 16.sp,
+        color = color.onBackground,
+        fontWeight = FontWeight.Bold
+    ),
     bodyMedium = TextStyle(
         fontFamily = PoppinsFamily,
         fontSize = 16.sp,
         color = color.onBackground,
         platformStyle = PlatformTextStyle(includeFontPadding = false)
-    ),
+    )
 )
