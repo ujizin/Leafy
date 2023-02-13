@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import br.com.devlucasyuji.alarm.components.alarm_box.AlarmBox
+import br.com.devlucasyuji.alarm.components.timer_box.TimerBox
 import br.com.devlucasyuji.components.extensions.section
 import br.com.devlucasyuji.components.ui.Section
 import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
@@ -29,11 +29,11 @@ fun AlarmSection(
         },
         headerAnimation = Animation.None
     ) {
-        AlarmBox(
+        TimerBox(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1F),
-            onTimeChange = {}
+            onTimeChange = { _, _ -> }
         )
         Button(
             modifier = Modifier

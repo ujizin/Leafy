@@ -1,5 +1,6 @@
 package br.com.devlucasyuji.components.ui.button
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -23,12 +24,14 @@ fun Button(
     onClick: OnClick,
     capitalize: Boolean = true,
     shape: Shape = RoundedCornerShape(4.dp),
+    contentPadding: PaddingValues = PaddingValues(horizontal = 24.dp, vertical = 16.dp),
     content: @Composable Content = {},
 ) {
     Material3Button(
         enabled = enabled,
         modifier = modifier,
         shape = shape,
+        contentPadding = contentPadding,
         onClick = onClick,
     ) {
         text?.let { text ->
