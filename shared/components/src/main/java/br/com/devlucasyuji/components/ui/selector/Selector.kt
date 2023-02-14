@@ -11,58 +11,97 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import br.com.devlucasyuji.components.extensions.capitalize
 import br.com.devlucasyuji.themes.CameraReminderTheme
 
 @Composable
 fun Selector(
     modifier: Modifier = Modifier,
     title: String,
-    value: String
+    currentValue: String,
+    values: List<String>,
+    onValueChange: (String) -> Unit,
+) {
+    LaunchedEffect(currentValue) {
+        check(values.contains(currentValue)) { "current value must to be on values" }
+    }
+    RowItemSelector(
+        modifier = modifier,
+        title = title,
+        currentValue = currentValue,
+        onSelectorClicked = {
+
+        }
+    )
+}
+
+@Composable
+fun RowItemSelector(
+    modifier: Modifier = Modifier,
+    title: String,
+    currentValue: String,
+    onSelectorClicked: () -> Unit,
 ) {
     Row(
-        modifier = modifier.then(Modifier.clickable { /* TODO add bottomSheet */ }),
-        horizontalArrangement = Arrangement.SpaceBetween
+        modifier = modifier.then(Modifier.clickable(onClick = onSelectorClicked)),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(text = title, style = MaterialTheme.typography.titleSmall)
-        Row {
-            Text(text = value)
+        Text(text = title.capitalize(), style = MaterialTheme.typography.titleSmall)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(text = currentValue.capitalize())
             DownArrow(
                 Modifier
-                    .width(6.dp)
-                    .height(3.dp)
+                    .width(16.dp)
+                    .height(4.dp)
                     .padding(start = 8.dp),
-                tint = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.primary
             )
         }
     }
 }
 
 @Composable
-private fun DownArrow(modifier: Modifier = Modifier, tint: Color = Color.Unspecified) {
+private fun DownArrow(
+    modifier: Modifier = Modifier,
+    strokeWidth: Dp = 2.dp,
+    color: Color = MaterialTheme.colorScheme.primary
+) {
     Canvas(modifier) {
-        drawLine(
-            color = tint,
-            start = Offset(0F, 0F),
-            end = Offset(size.width / 2F, size.height),
-            strokeWidth = 2.dp.toPx(),
-        )
-        drawLine(tint, Offset(size.width / 2F, size.height), Offset(size.width, 0F), 2.dp.toPx())
+        val middleX = size.width / 2F
+        val path = Path()
+        with(path) {
+            moveTo(0F, 0F)
+            lineTo(middleX, size.height)
+            lineTo(size.width, 0F)
+        }
+
+        drawPath(path, color = color, style = Stroke(strokeWidth.toPx()))
+
     }
 }
 
-@Preview
+@Preview(showSystemUi = true)
 @Composable
 fun PreviewSelector() {
     CameraReminderTheme {
         Selector(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp),
             title = "ring",
-            value = "rang"
+            currentValue = "rang",
+            values = listOf(),
+            onValueChange = {}
         )
     }
 }
