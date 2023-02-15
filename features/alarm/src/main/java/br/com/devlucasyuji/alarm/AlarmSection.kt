@@ -9,15 +9,17 @@ import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.devlucasyuji.alarm.components.timer_box.TimerBox
-import br.com.devlucasyuji.components.extensions.screenPadding
+import br.com.devlucasyuji.components.extensions.paddingScreen
 import br.com.devlucasyuji.components.ui.Section
 import br.com.devlucasyuji.components.ui.animated.AnimatedButtonIcon
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
@@ -33,9 +35,11 @@ fun AlarmSection(
     onBackPressed: () -> Unit,
     viewModel: AlarmViewModel = hiltViewModel(),
 ) {
+    val scope = rememberCoroutineScope()
     val modalState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
     )
+    var currentRing by remember { mutableStateOf("teste") }
     val selectorValues = remember { listOf("teste", "teste2") }
     ModalBottomSheetLayout(
         sheetState = modalState,
@@ -44,41 +48,47 @@ fun AlarmSection(
             ModalSelector(
                 modifier = Modifier,
                 title = "Ring",
-                currentValue = "teste",
+                currentValue = currentRing,
                 values = selectorValues,
-                onValueChanged = {},
+                onValueChanged = { value ->
+                    scope.launch {
+                        modalState.hide()
+                        currentRing = value
+                    }
+                },
             )
         }) {
         Section(
-            modifier = Modifier
-                .fillMaxSize()
-                .screenPadding(),
+            modifier = Modifier.fillMaxSize(),
             title = stringResource(R.string.alarm_title),
             trailingIcon = {
                 AnimatedButtonIcon(icon = Icons.Back, onClick = onBackPressed)
             },
             headerAnimation = Animation.None
         ) {
-            val scope = rememberCoroutineScope()
             TimerBox(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1F),
+                    .weight(1F)
+                    .paddingScreen(),
                 onTimeChange = { _, _ -> }
             )
             Selector(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 24.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .paddingScreen(vertical = 24.dp),
                 title = "alarm",
-                currentValue = "teste",
+                currentValue = currentRing,
                 values = selectorValues,
-                onSelectorClicked = {git pu
+                onSelectorClicked = {
                     scope.launch { modalState.show() }
                 }
             )
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 16.dp),
+                    .padding(vertical = 16.dp)
+                    .paddingScreen(),
                 text = stringResource(R.string.next),
                 onClick = { }
             )
