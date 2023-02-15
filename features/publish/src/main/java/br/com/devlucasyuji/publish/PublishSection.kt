@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.devlucasyuji.components.extensions.OnClick
+import br.com.devlucasyuji.components.extensions.paddingScreen
 import br.com.devlucasyuji.components.ui.Section
 import br.com.devlucasyuji.components.ui.animated.AnimatedButtonIcon
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
@@ -34,8 +35,7 @@ fun PublishSection(
     Section(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(20.dp),
+            .verticalScroll(rememberScrollState()),
         title = stringResource(R.string.publish_title),
         subTitle = stringResource(R.string.publish_description),
         animation = Animation.SlideToTopLargeDuration,
@@ -48,7 +48,7 @@ fun PublishSection(
         TextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 32.dp),
+                .padding(top = 32.dp, start = 20.dp, end = 20.dp),
             placeholder = stringResource(R.string.title),
             value = title,
             onValueChange = { title = it }
@@ -57,7 +57,7 @@ fun PublishSection(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1.25F)
-                .padding(top = 16.dp),
+                .padding(top = 16.dp, start = 20.dp, end = 20.dp),
             placeholder = stringResource(R.string.description),
             value = description,
             onValueChange = { description = it },
@@ -66,7 +66,7 @@ fun PublishSection(
         Button(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp),
+                .paddingScreen(vertical = 16.dp),
             text = stringResource(R.string.next),
             onClick = onNextClick // TODO validate text fields first
         )

@@ -7,6 +7,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 fun Modifier.innerShadow(colors: List<Color>, shape: Shape = RectangleShape) = then(
@@ -16,4 +17,6 @@ fun Modifier.innerShadow(colors: List<Color>, shape: Shape = RectangleShape) = t
     )
 )
 
-fun Modifier.screenPadding() = then(Modifier.padding(top = 32.dp, start = 20.dp, end = 20.dp))
+fun Modifier.paddingScreen(horizontal: Dp = 20.dp, vertical: Dp = 0.dp) = then(
+    Modifier.padding(horizontal = horizontal, vertical = vertical)
+)
