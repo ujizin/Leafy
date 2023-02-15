@@ -16,4 +16,4 @@ fun Modifier.innerShadow(colors: List<Color>, shape: Shape = RectangleShape) = t
     )
 )
 
-fun Modifier.section() = then(Modifier.padding(top = 32.dp, start = 20.dp, end = 20.dp))
+fun Modifier.screenPadding() = then(Modifier.padding(top = 32.dp, start = 20.dp, end = 20.dp))

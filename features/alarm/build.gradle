@@ -15,4 +15,5 @@ dependencies {
     implementation projects.shared.components
 
     implementation projects.shared.themes
+    implementation libs.compose.material
 }

@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.components.extensions.capitalize
-import br.com.devlucasyuji.components.extensions.section
+import br.com.devlucasyuji.components.extensions.screenPadding
 import br.com.devlucasyuji.components.ui.EmptySection
 import br.com.devlucasyuji.components.ui.Section
 import br.com.devlucasyuji.components.ui.animated.AnimatedButtonIcon
@@ -54,7 +54,7 @@ private fun HomeScreen(result: HomeUIState.Success, onEmptyPhotoClick: OnClick) 
     NavLazyColumn {
         item {
             Section(
-                modifier = Modifier.section(),
+                modifier = Modifier.screenPadding(),
                 title = stringResource(
                     id = R.string.hello_user,
                     result.nickname.capitalize()
