@@ -17,6 +17,25 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import br.com.devlucasyuji.components.extensions.capitalize
+
+@Composable
+fun MultiModalSelector(
+    modifier: Modifier = Modifier,
+    title: String,
+    currentValue: String,
+    values: List<String>,
+    onValueChanged: (String) -> Unit,
+) {
+    // TODO add multi modal selector
+    ModalSelector(
+        modifier = modifier,
+        title = title,
+        currentValue = currentValue,
+        values = values,
+        onValueChanged = onValueChanged
+    )
+}
 
 @Composable
 fun ModalSelector(
@@ -29,7 +48,7 @@ fun ModalSelector(
     Column(modifier) {
         Text(
             modifier = Modifier.padding(start = 20.dp, top = 32.dp, end = 20.dp),
-            text = title, style = MaterialTheme.typography.titleMedium
+            text = title.capitalize(), style = MaterialTheme.typography.titleMedium
         )
         Spacer(modifier = Modifier.height(16.dp))
         values.forEach { text ->
@@ -37,7 +56,7 @@ fun ModalSelector(
                 Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp, vertical = 16.dp),
-                text = text,
+                text = text.capitalize(),
                 selected = currentValue == text
             ) {
                 onValueChanged(text)

@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="ringtone">toque</string>
+    <string name="repeat">repetir</string>
     <string name="alarm_title">adicione um alarm para regar sua planta</string>
     <string name="next">próximo</string>
+    <string-array name="repeat_values">
+        <item>uma vez</item>
+        <item>diariamente</item>
+        <item>Seg à Sex</item>
+    </string-array>
 </resources>
