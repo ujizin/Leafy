@@ -23,6 +23,7 @@ import br.com.devlucasyuji.components.extensions.capitalize
 fun MultiModalSelector(
     modifier: Modifier = Modifier,
     title: String,
+    enabled: Boolean = true,
     currentValue: String,
     values: List<String>,
     onValueChanged: (String) -> Unit,
@@ -31,6 +32,7 @@ fun MultiModalSelector(
     ModalSelector(
         modifier = modifier,
         title = title,
+        enabled = enabled,
         currentValue = currentValue,
         values = values,
         onValueChanged = onValueChanged
@@ -41,6 +43,7 @@ fun MultiModalSelector(
 fun ModalSelector(
     modifier: Modifier = Modifier,
     title: String,
+    enabled: Boolean = true,
     currentValue: String,
     values: List<String>,
     onValueChanged: (String) -> Unit,
@@ -57,6 +60,7 @@ fun ModalSelector(
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp, vertical = 16.dp),
                 text = text.capitalize(),
+                enabled = enabled,
                 selected = currentValue == text
             ) {
                 onValueChanged(text)
@@ -70,11 +74,12 @@ fun ModalItemSelector(
     modifier: Modifier = Modifier,
     text: String,
     selected: Boolean,
+    enabled: Boolean = true,
     onItemSelectorClicked: () -> Unit,
 ) {
     Row(
         modifier = Modifier
-            .clickable(onClick = onItemSelectorClicked)
+            .then(if (enabled) Modifier.clickable(onClick = onItemSelectorClicked) else Modifier)
             .then(modifier),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {

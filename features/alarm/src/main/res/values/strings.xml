@@ -3,7 +3,7 @@
     <string name="alarm_title">add alarm to feed the plant</string>
     <string name="ringtone">ringtone</string>
     <string name="repeat">repeat</string>
-    <string name="next">next</string>
+    <string name="save">save</string>
     <string-array name="repeat_values">
         <item>once</item>
         <item>daily</item>

@@ -37,7 +37,7 @@ import br.com.devlucasyuji.components.ui.selector.Selector
 import kotlinx.coroutines.launch
 
 enum class AlarmSheet {
-    Repeat, Ringtone
+    Repeat, Ringtone, Hidden
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -51,7 +51,7 @@ fun AlarmSection(
         initialValue = ModalBottomSheetValue.Hidden,
     )
 
-    var sheetType by remember { mutableStateOf<AlarmSheet?>(null) }
+    var sheetType by remember { mutableStateOf(AlarmSheet.Hidden) }
 
     val ringValues = remember { listOf("rang", "ring") }
     var ringtone by remember { mutableStateOf(ringValues.first()) }
@@ -60,7 +60,13 @@ fun AlarmSection(
     var repeat by remember { mutableStateOf(repeatValues.first()) }
 
     LaunchedEffect(sheetType) {
-        if (sheetType != null) modalState.show()
+        if (sheetType != AlarmSheet.Hidden) modalState.show()
+    }
+
+    LaunchedEffect(modalState.isAnimationRunning) {
+        if (!modalState.isAnimationRunning && !modalState.isVisible) {
+            sheetType = AlarmSheet.Hidden
+        }
     }
 
     BackHandler {
@@ -74,10 +80,10 @@ fun AlarmSection(
         sheetState = modalState,
         sheetShape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
         sheetContent = {
-            val type = sheetType ?: return@ModalBottomSheetLayout run { Box(Modifier.size(1.dp)) }
-            when (type) {
+            when (sheetType) {
                 AlarmSheet.Ringtone -> ModalSelector(
                     title = stringResource(R.string.ringtone),
+                    enabled = !modalState.isAnimationRunning,
                     currentValue = ringtone,
                     values = ringValues,
                     onValueChanged = { value ->
@@ -85,16 +91,19 @@ fun AlarmSection(
                         scope.launch { modalState.hide() }
                     },
                 )
-
+                // TODO add a multiple modal selector for repeat mode on V2
                 AlarmSheet.Repeat -> MultiModalSelector(
                     title = stringResource(R.string.repeat),
                     currentValue = repeat,
+                    enabled = !modalState.isAnimationRunning,
                     values = repeatValues,
                     onValueChanged = { value ->
                         repeat = value
                         scope.launch { modalState.hide() }
                     }
                 )
+
+                AlarmSheet.Hidden -> Box(Modifier.size(1.dp))
             }
 
         }) {
@@ -158,7 +167,7 @@ private fun AlarmContent(
                 .fillMaxWidth()
                 .padding(vertical = 16.dp)
                 .paddingScreen(),
-            text = stringResource(R.string.next),
+            text = stringResource(R.string.save),
             onClick = { }
         )
     }
