@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,13 +25,29 @@ import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.components.ui.button.Button
 import br.com.devlucasyuji.components.ui.image.Icons
 import br.com.devlucasyuji.components.ui.textfield.TextField
+import br.com.devlucasyuji.publish.viewmodel.PublishUiState
 import br.com.devlucasyuji.publish.viewmodel.PublishViewModel
 
 @Composable
 fun PublishSection(
     onBackPressed: OnClick,
-    onNextClick: OnClick,
+    onFinishPublish: OnClick,
     viewModel: PublishViewModel = hiltViewModel()
+) {
+    val uiState by viewModel.uiState.collectAsState()
+    when (uiState) {
+        PublishUiState.Finish -> onFinishPublish()
+        PublishUiState.Initial -> PublishContent(
+            onBackPressed = onBackPressed,
+            onNextClicked = viewModel::sendDraftPlant
+        )
+    }
+}
+
+@Composable
+fun PublishContent(
+    onBackPressed: OnClick,
+    onNextClicked: (title: String, description: String) -> Unit
 ) {
     Section(
         modifier = Modifier
@@ -67,8 +84,9 @@ fun PublishSection(
             modifier = Modifier
                 .fillMaxWidth()
                 .paddingScreen(vertical = 16.dp),
+            enabled = title.isNotBlank() && description.isNotBlank(),
             text = stringResource(R.string.next),
-            onClick = onNextClick // TODO validate text fields first
+            onClick = { onNextClicked(title, description) }
         )
     }
 }

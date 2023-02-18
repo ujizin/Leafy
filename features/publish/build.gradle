@@ -13,6 +13,7 @@ android {
 dependencies {
     implementation projects.shared.navigation
     implementation projects.shared.components
+    implementation projects.domain
 
     implementation libs.coil
 }

@@ -24,7 +24,7 @@ fun NavGraphBuilder.publishGraph(
     ) {
         PublishSection(
             onBackPressed = onBackPressed,
-            onNextClick = onNextClick
+            onFinishPublish = onNextClick
         )
     }
 }
