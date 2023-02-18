@@ -34,8 +34,20 @@ object LocalModule {
 
     @Singleton
     @Provides
-    fun provideLocalPlantDataSource(database: Database): PlantDataSource = PlantLocalDataSource(
+    fun provideMemoryDatabase(@ApplicationContext context: Context): MemoryDatabase =
+        Room.inMemoryDatabaseBuilder(
+            context,
+            MemoryDatabase::class.java,
+        ).build()
+
+    @Singleton
+    @Provides
+    fun provideLocalPlantDataSource(
+        database: Database,
+        memoryDatabase: MemoryDatabase,
+    ): PlantDataSource = PlantLocalDataSource(
         plantDao = database.plantDao(),
+        memoryPlantDao = memoryDatabase.plantDao(),
         mapper = PlantMapper()
     )
 

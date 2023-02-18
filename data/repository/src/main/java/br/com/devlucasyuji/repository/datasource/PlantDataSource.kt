@@ -41,4 +41,11 @@ interface PlantDataSource {
      * @param plant plant to be deleted
      * */
     suspend fun deletePlant(plant: Plant)
+
+    /**
+     * Add or update the draft [Plant] passed on parameter.
+     *
+     * @param plant [Plant] to be added in memory.
+     * */
+    suspend fun updateDraftPlant(plant: Plant)
 }

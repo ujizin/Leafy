@@ -42,4 +42,11 @@ interface PlantRepository {
      * @param plant plant to be deleted
      * */
     fun deletePlant(plant: Plant): Flow<Unit>
+
+    /**
+     * Update or add draft plant.
+     *
+     * @param plant plant to be added
+     * */
+    fun updateDraftPlant(plant: Plant): Flow<Unit>
 }

@@ -5,11 +5,13 @@ import br.com.devlucasyuji.domain.repository.PlantRepository
 import br.com.devlucasyuji.domain.repository.UserRepository
 import br.com.devlucasyuji.domain.usecase.file.SaveFile
 import br.com.devlucasyuji.domain.usecase.file.implementation.SaveFileImpl
+import br.com.devlucasyuji.domain.usecase.plant.AddDraftPlant
 import br.com.devlucasyuji.domain.usecase.plant.AddPlant
 import br.com.devlucasyuji.domain.usecase.plant.DeletePlant
-import br.com.devlucasyuji.domain.usecase.plant.implementation.AddPlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.LoadAllPlant
 import br.com.devlucasyuji.domain.usecase.plant.UpdatePlant
+import br.com.devlucasyuji.domain.usecase.plant.implementation.AddDraftPlantImpl
+import br.com.devlucasyuji.domain.usecase.plant.implementation.AddPlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.DeletePlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.LoadAllPlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.UpdatePlantImpl
@@ -36,6 +38,12 @@ object UseCaseModule {
     fun provideAddPlant(
         repository: PlantRepository
     ): AddPlant = AddPlantImpl(repository)
+
+    @Provides
+    @Singleton
+    fun provideAddDraftPlant(
+        repository: PlantRepository
+    ): AddDraftPlant = AddDraftPlantImpl(repository)
 
     @Provides
     @Singleton
