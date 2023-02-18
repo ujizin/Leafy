@@ -44,6 +44,13 @@ interface PlantRepository {
     fun deletePlant(plant: Plant): Flow<Unit>
 
     /**
+     * Get draft plant.
+     *
+     * @return plant hold in memory
+     * */
+    fun getDraftPlant(): Flow<Plant?>
+
+    /**
      * Update or add draft plant.
      *
      * @param plant plant to be added

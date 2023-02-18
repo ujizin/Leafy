@@ -39,4 +39,8 @@ internal class PlantLocalDataSource(
             else -> insert(plantEntity)
         }
     }
+
+    override suspend fun getDraftPlant(): Plant? {
+        return memoryPlantDao.getDraftPlant()?.let(mapper::toPlant)
+    }
 }

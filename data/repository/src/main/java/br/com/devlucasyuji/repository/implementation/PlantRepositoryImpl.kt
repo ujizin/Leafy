@@ -36,6 +36,10 @@ internal class PlantRepositoryImpl(
         emit(dataSource.deletePlant(mapper.toRepo(plant)))
     }.flowOn(dispatcher)
 
+    override fun getDraftPlant() = flow {
+        emit(dataSource.getDraftPlant()?.let(mapper::toDomain))
+    }.flowOn(dispatcher)
+
     override fun updateDraftPlant(plant: Plant) = flow {
         emit(dataSource.updateDraftPlant(mapper.toRepo(plant)))
     }.flowOn(dispatcher)

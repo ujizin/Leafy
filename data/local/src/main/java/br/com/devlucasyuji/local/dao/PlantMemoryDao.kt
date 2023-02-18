@@ -12,8 +12,11 @@ import br.com.devlucasyuji.local.model.PlantEntity
  * */
 interface PlantMemoryDao {
 
+    @Query("SELECT * FROM plant LIMIT 1")
+    suspend fun getDraftPlant(): PlantEntity?
+
     /**
-     *
+     * Get [PlantEntity] by id.
      * */
     @Query("SELECT * FROM plant where plant_id= :plantId LIMIT 1")
     suspend fun getById(plantId: Long): PlantEntity?

@@ -1,6 +1,7 @@
 package br.com.devlucasyuji.domain.model
 
 import java.io.File
+import java.util.UUID
 
 /***
  * Plant Model
@@ -21,4 +22,15 @@ data class Plant(
     val description: String,
     val favorite: Boolean,
     val albumId: Long? = null,
+)
+
+/**
+ * Create draft plant.
+ * */
+internal fun Plant?.orCreateDraft() = this ?: Plant(
+    title = "untitled",
+    date = "unknown",
+    file = File.createTempFile(UUID.randomUUID().toString(), "jpg"),
+    description = "no description",
+    favorite = false
 )

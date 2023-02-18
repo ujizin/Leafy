@@ -48,4 +48,10 @@ interface PlantDataSource {
      * @param plant [Plant] to be added in memory.
      * */
     suspend fun updateDraftPlant(plant: Plant)
+
+    /**
+     * Get draft [Plant].
+     *
+     * */
+    suspend fun getDraftPlant(): Plant?
 }
