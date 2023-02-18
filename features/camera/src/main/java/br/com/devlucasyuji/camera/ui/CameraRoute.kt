@@ -22,7 +22,7 @@ import com.ujizin.camposer.state.rememberCameraState
 @OptIn(ExperimentalPermissionsApi::class)
 internal fun CameraRoute(
     viewModel: CameraViewModel = hiltViewModel(),
-    onImageSaved: (filepath: String) -> Unit,
+    onImageSaved: () -> Unit,
     onCloseClicked: OnClick
 ) {
     val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
@@ -53,11 +53,12 @@ internal fun CameraRoute(
                             viewModel.onBackCamera()
                         },
                         onSaveClicked = {
-                            viewModel.saveImage(context, state.imageByteArray, onImageSaved)
+                            viewModel.saveImage(context, state.imageByteArray)
                         }
                     )
                 }
 
+                CameraUiState.OnImageSaved -> onImageSaved()
                 else -> Unit
             }
         }

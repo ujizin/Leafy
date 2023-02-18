@@ -4,12 +4,9 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavType
-import androidx.navigation.navArgument
 import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.navigation.AnimatedEnterTransition
 import br.com.devlucasyuji.navigation.AnimatedExitTransition
-import br.com.devlucasyuji.navigation.Args
 import br.com.devlucasyuji.navigation.Destination
 import br.com.devlucasyuji.navigation.composable
 
@@ -22,7 +19,6 @@ fun NavGraphBuilder.publishGraph(
 ) {
     composable(
         destination = Destination.Publish,
-        arguments = listOf(navArgument(Args.ImageFilePath) { type = NavType.StringType }),
         enterTransition = enterTransition,
         exitTransition = exitTransition,
     ) {

@@ -1,6 +1,5 @@
 package br.com.devlucasyuji.navigation
 
-import br.com.devlucasyuji.navigation.Args.ImageFilePath
 
 enum class Destination(
     private val destinationName: String,
@@ -11,7 +10,7 @@ enum class Destination(
     Camera("camera", NavigationItem.None),
     Alarms("alarms", NavigationItem.Alarm),
     Others("others", NavigationItem.Others),
-    Publish("publish/{$ImageFilePath}", NavigationItem.None),
+    Publish("publish", NavigationItem.None),
     Alarm("alarm", NavigationItem.None);
 
     val route: String get() = "$HOST/$destinationName"

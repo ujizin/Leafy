@@ -1,6 +1,5 @@
 package br.com.devlucasyuji.camerareminder
 
-import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,7 +15,6 @@ import br.com.devlucasyuji.components.ui.Scaffold
 import br.com.devlucasyuji.components.ui.navigation.navigationEnterTransition
 import br.com.devlucasyuji.components.ui.navigation.navigationExitTransition
 import br.com.devlucasyuji.home.homeGraph
-import br.com.devlucasyuji.navigation.Args
 import br.com.devlucasyuji.navigation.Destination
 import br.com.devlucasyuji.navigation.navigate
 import br.com.devlucasyuji.publish.publishGraph
@@ -69,13 +67,7 @@ class MainActivity : ComponentActivity() {
             )
             cameraGraph(
                 onBackPressed = { navController.navigateUp() },
-                onSaveClicked = { imagePath ->
-                    navController.navigate(
-                        Destination.Publish.withArguments(
-                            Args.ImageFilePath to Uri.encode(imagePath)
-                        )
-                    )
-                }
+                onSaveClicked = { navController.navigate(Destination.Publish) }
             )
             settingsGraph(
                 enterTransition = { navigationEnterTransition(navController) },
