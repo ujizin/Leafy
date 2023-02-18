@@ -6,17 +6,17 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 /**
- * Photo [Entity]
+ * Plant [Entity]
  *
- * @param id the photo id
- * @param title the photo title
- * @param date the photo date
- * @param filePath file path of the photo
- * @param description the photo description
- * @param albumId the album id linked to the photo
+ * @param id the plant id
+ * @param title the plant title
+ * @param date the plant date
+ * @param filePath file path of the plant
+ * @param description the plant description
+ * @param albumId the album id linked to the plant
  * */
 @Entity(
-    tableName = "photo",
+    tableName = "plant",
     foreignKeys = [
         ForeignKey(
             entity = AlbumEntity::class,
@@ -26,19 +26,19 @@ import androidx.room.PrimaryKey
         )
     ]
 )
-data class PhotoEntity(
-    @ColumnInfo(name = "photo_id")
+data class PlantEntity(
+    @ColumnInfo(name = "plant_id")
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    @ColumnInfo(name = "photo_title")
+    @ColumnInfo(name = "plant_title")
     val title: String,
-    @ColumnInfo(name = "photo_date")
+    @ColumnInfo(name = "plant_date")
     val date: String,
-    @ColumnInfo(name = "photo_file_path")
+    @ColumnInfo(name = "plant_file_path")
     val filePath: String,
-    @ColumnInfo(name = "photo_description")
+    @ColumnInfo(name = "plant_description")
     val description: String,
-    @ColumnInfo(name = "photo_favorite")
+    @ColumnInfo(name = "plant_favorite")
     val favorite: Boolean,
     @ColumnInfo(name = "album_id")
     val albumId: Long? = null,

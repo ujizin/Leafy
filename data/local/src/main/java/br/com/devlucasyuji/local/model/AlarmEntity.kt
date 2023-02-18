@@ -10,15 +10,15 @@ import androidx.room.PrimaryKey
  *
  * @param id the alarm id
  * @param ring the ring's alarm
- * @param photoId the photo id linked to the alarm
+ * @param plantId the plant id linked to the alarm
  * */
 @Entity(
     tableName = "alarm",
     foreignKeys = [
         ForeignKey(
-            entity = PhotoEntity::class,
-            parentColumns = ["photo_id"],
-            childColumns = ["photo_id"],
+            entity = PlantEntity::class,
+            parentColumns = ["plant_id"],
+            childColumns = ["plant_id"],
             onDelete = ForeignKey.SET_DEFAULT
         )
     ]
@@ -29,6 +29,6 @@ data class AlarmEntity(
     val id: Long = 0,
     @ColumnInfo(name = "alarm_ring")
     val ring: String,
-    @ColumnInfo(name = "photo_id")
-    val photoId: Long,
+    @ColumnInfo(name = "plant_id")
+    val plantId: Long,
 )

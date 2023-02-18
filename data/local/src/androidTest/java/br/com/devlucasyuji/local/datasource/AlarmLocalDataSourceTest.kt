@@ -3,7 +3,7 @@ package br.com.devlucasyuji.local.datasource
 import br.com.devlucasyuji.local.BaseDatabaseTest
 import br.com.devlucasyuji.local.dao.AlarmDao
 import br.com.devlucasyuji.local.model.AlarmEntity
-import br.com.devlucasyuji.local.model.PhotoEntity
+import br.com.devlucasyuji.local.model.PlantEntity
 import org.junit.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -16,13 +16,13 @@ class AlarmLocalDataSourceTest : BaseDatabaseTest() {
 
     private val fakeAlarm = AlarmEntity(id = 1, ring = "alarm", 1)
 
-    private val fakePhoto = PhotoEntity(
+    private val fakePlant = PlantEntity(
         id = 1,
-        title = "fake-photo",
+        title = "fake-plant",
         date = "2022-06-20T14:18:11.01",
         filePath = ":data//fake/path",
         favorite = false,
-        description = "this is a fake photo",
+        description = "this is a fake plant",
         albumId = null
     )
 
@@ -31,7 +31,7 @@ class AlarmLocalDataSourceTest : BaseDatabaseTest() {
         alarmDao = db.alarmDao()
 
         runTest {
-            db.photoDao().insert(fakePhoto)
+            db.plantDao().insert(fakePlant)
         }
     }
 
@@ -47,8 +47,8 @@ class AlarmLocalDataSourceTest : BaseDatabaseTest() {
     }
 
     @Test
-    fun writeAlarmsAndFindByPhotoId() = runTest {
-        db.photoDao().insert(fakePhoto.copy(id = 2))
+    fun writeAlarmsAndFindByPlantId() = runTest {
+        db.plantDao().insert(fakePlant.copy(id = 2))
 
         val fakeAlarm2 = AlarmEntity(id = 2, ring = "alarm-2", 2)
         val fakeAlarm3 = AlarmEntity(id = 2, ring = "alarm-2", 1)
@@ -56,7 +56,7 @@ class AlarmLocalDataSourceTest : BaseDatabaseTest() {
         alarmDao.insert(fakeAlarm, fakeAlarm2, fakeAlarm3)
 
         val expectedAlarms = listOf(fakeAlarm, fakeAlarm3)
-        val actualAlarms = alarmDao.findByPhotoId(1)
+        val actualAlarms = alarmDao.findByPlantId(1)
 
         assertEquals(expectedAlarms, actualAlarms)
     }

@@ -2,10 +2,10 @@ package br.com.devlucasyuji.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.devlucasyuji.domain.model.Photo
+import br.com.devlucasyuji.domain.model.Plant
 import br.com.devlucasyuji.domain.result.ifAnyError
 import br.com.devlucasyuji.domain.result.ifSuccess
-import br.com.devlucasyuji.domain.usecase.photo.LoadAllPhoto
+import br.com.devlucasyuji.domain.usecase.plant.LoadAllPlant
 import br.com.devlucasyuji.domain.usecase.user.LoadUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -16,21 +16,21 @@ import kotlinx.coroutines.flow.stateIn
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    loadAllPhoto: LoadAllPhoto,
+    loadAllPlant: LoadAllPlant,
     loadUser: LoadUser,
 ) : ViewModel() {
 
     val homeState: StateFlow<HomeUIState> = combine(
-        loadAllPhoto(),
+        loadAllPlant(),
         loadUser(),
-    ) { photoResult, userResult ->
+    ) { plantResult, userResult ->
 
-        ifAnyError(userResult, photoResult) {
+        ifAnyError(userResult, plantResult) {
             return@combine HomeUIState.Error(it.first())
         }
 
-        ifSuccess(userResult, photoResult) { user, photos ->
-            return@combine HomeUIState.Success(user.nickname, photos)
+        ifSuccess(userResult, plantResult) { user, plants ->
+            return@combine HomeUIState.Success(user.nickname, plants)
         }
 
         return@combine HomeUIState.Loading
@@ -45,7 +45,7 @@ class HomeViewModel @Inject constructor(
 sealed interface HomeUIState {
     data class Success(
         val nickname: String,
-        val photos: List<Photo>
+        val plants: List<Plant>
     ) : HomeUIState
 
     data class Error(val throwable: Throwable?) : HomeUIState

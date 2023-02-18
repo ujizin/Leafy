@@ -23,13 +23,13 @@ interface AlarmDao {
     suspend fun getAll(): List<AlarmEntity>
 
     /**
-     * Find all [AlarmEntity] by photo id.
+     * Find all [AlarmEntity] by plant id.
      *
-     * @param photoId photo id to find all [AlarmEntity]
+     * @param plantId plant id to find all [AlarmEntity]
      * @return list of [AlarmEntity]
      * */
-    @Query("SELECT * FROM alarm WHERE photo_id = :photoId")
-    suspend fun findByPhotoId(photoId: Long): List<AlarmEntity>?
+    @Query("SELECT * FROM alarm WHERE plant_id = :plantId")
+    suspend fun findByPlantId(plantId: Long): List<AlarmEntity>?
 
     /**
      * Insert a new [AlarmEntity].

@@ -91,7 +91,7 @@ fun AlarmSection(
                         scope.launch { modalState.hide() }
                     },
                 )
-                // TODO add a multiple modal selector for repeat mode on V2
+                // TODO add a multiple modal selector for repeat mode on V 2
                 AlarmSheet.Repeat -> MultiModalSelector(
                     title = stringResource(R.string.repeat),
                     currentValue = repeat,

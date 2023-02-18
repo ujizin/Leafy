@@ -4,10 +4,10 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import br.com.devlucasyuji.local.dao.AlarmDao
 import br.com.devlucasyuji.local.dao.AlbumDao
-import br.com.devlucasyuji.local.dao.PhotoDao
+import br.com.devlucasyuji.local.dao.PlantDao
 import br.com.devlucasyuji.local.model.AlarmEntity
 import br.com.devlucasyuji.local.model.AlbumEntity
-import br.com.devlucasyuji.local.model.PhotoEntity
+import br.com.devlucasyuji.local.model.PlantEntity
 
 /**
  * Database class.
@@ -16,7 +16,7 @@ import br.com.devlucasyuji.local.model.PhotoEntity
     entities = [
         AlarmEntity::class,
         AlbumEntity::class,
-        PhotoEntity::class,
+        PlantEntity::class,
     ],
     version = 1,
 )
@@ -26,7 +26,7 @@ abstract class Database : RoomDatabase() {
 
     abstract fun albumDao(): AlbumDao
 
-    abstract fun photoDao(): PhotoDao
+    abstract fun plantDao(): PlantDao
 
     companion object {
         internal const val NAME = "camera_reminder_db"

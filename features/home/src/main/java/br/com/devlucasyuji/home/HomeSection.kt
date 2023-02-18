@@ -31,7 +31,7 @@ import br.com.devlucasyuji.components.ui.card.BoxImage
 import br.com.devlucasyuji.components.ui.card.CardSize
 import br.com.devlucasyuji.components.ui.image.Icons
 import br.com.devlucasyuji.components.ui.label.TitleRow
-import br.com.devlucasyuji.domain.model.Photo
+import br.com.devlucasyuji.domain.model.Plant
 
 @Composable
 fun HomeRoute(
@@ -49,7 +49,7 @@ fun HomeRoute(
 }
 
 @Composable
-private fun HomeScreen(result: HomeUIState.Success, onEmptyPhotoClick: OnClick) {
+private fun HomeScreen(result: HomeUIState.Success, onEmptyPlantClick: OnClick) {
     NavLazyColumn {
         item {
             Section(
@@ -67,14 +67,14 @@ private fun HomeScreen(result: HomeUIState.Success, onEmptyPhotoClick: OnClick) 
             )
         }
         when {
-            result.photos.isEmpty() -> item {
+            result.plants.isEmpty() -> item {
                 EmptySection(
                     modifier = Modifier.padding(vertical = 32.dp, horizontal = 20.dp),
-                    onClick = onEmptyPhotoClick
+                    onClick = onEmptyPlantClick
                 )
             }
 
-            else -> items(result.photos) { HomePhotoCard(it) }
+            else -> items(result.plants) { HomePlantCard(it) }
         }
     }
 }
@@ -90,20 +90,20 @@ fun NavLazyColumn(modifier: Modifier = Modifier, content: LazyListScope.() -> Un
 
 @Composable
 @OptIn(ExperimentalFoundationApi::class)
-private fun LazyItemScope.HomePhotoCard(photo: Photo) {
+private fun LazyItemScope.HomePlantCard(plant: Plant) {
     BoxImage(
         modifier = Modifier
             .animateItemPlacement()
             .height(CardSize.Large.height)
             .padding(horizontal = 20.dp, vertical = 8.dp),
-        data = photo.file,
-        contentDescription = photo.description,
+        data = plant.file,
+        contentDescription = plant.description,
     ) {
         TitleRow(
-            title = photo.title,
+            title = plant.title,
             titleStyle = MaterialTheme.typography.titleLarge.copy(color = Color.White),
             subTitleStyle = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
-            subTitle = photo.description,
+            subTitle = plant.description,
             verticalAlignment = Alignment.Bottom
         ) {
             AnimatedButtonIcon(icon = Icons.Shared, tint = Color.White, size = 24.dp)

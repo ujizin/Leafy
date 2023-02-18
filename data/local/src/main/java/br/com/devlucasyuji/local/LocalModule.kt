@@ -2,13 +2,12 @@ package br.com.devlucasyuji.local
 
 import android.content.Context
 import androidx.room.Room
-import br.com.devlucasyuji.local.datasource.PhotoLocalDataSource
+import br.com.devlucasyuji.local.datasource.PlantLocalDataSource
 import br.com.devlucasyuji.local.datasource.UserLocalDataSource
 import br.com.devlucasyuji.local.datastore.UserDataStore
-import br.com.devlucasyuji.local.datastore.implementation.UserDataStoreImpl
-import br.com.devlucasyuji.local.mapper.PhotoMapper
+import br.com.devlucasyuji.local.mapper.PlantMapper
 import br.com.devlucasyuji.local.mapper.UserMapper
-import br.com.devlucasyuji.repository.datasource.PhotoDataSource
+import br.com.devlucasyuji.repository.datasource.PlantDataSource
 import br.com.devlucasyuji.repository.datasource.UserDataSource
 import dagger.Module
 import dagger.Provides
@@ -35,9 +34,9 @@ object LocalModule {
 
     @Singleton
     @Provides
-    fun provideLocalPhotoDataSource(database: Database): PhotoDataSource = PhotoLocalDataSource(
-        photoDao = database.photoDao(),
-        mapper = PhotoMapper()
+    fun provideLocalPlantDataSource(database: Database): PlantDataSource = PlantLocalDataSource(
+        plantDao = database.plantDao(),
+        mapper = PlantMapper()
     )
 
     @Singleton
