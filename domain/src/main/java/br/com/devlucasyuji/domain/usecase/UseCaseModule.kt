@@ -2,6 +2,7 @@ package br.com.devlucasyuji.domain.usecase
 
 import br.com.devlucasyuji.domain.repository.FileRepository
 import br.com.devlucasyuji.domain.repository.PlantRepository
+import br.com.devlucasyuji.domain.repository.RingtoneRepository
 import br.com.devlucasyuji.domain.repository.UserRepository
 import br.com.devlucasyuji.domain.usecase.file.SaveFile
 import br.com.devlucasyuji.domain.usecase.file.implementation.SaveFileImpl
@@ -15,6 +16,8 @@ import br.com.devlucasyuji.domain.usecase.plant.implementation.AddPlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.DeletePlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.LoadAllPlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.UpdatePlantImpl
+import br.com.devlucasyuji.domain.usecase.ringtone.LoadRingtones
+import br.com.devlucasyuji.domain.usecase.ringtone.implementation.LoadRingtonesImpl
 import br.com.devlucasyuji.domain.usecase.user.LoadUser
 import br.com.devlucasyuji.domain.usecase.user.implementation.LoadUserImpl
 import dagger.Module
@@ -68,4 +71,10 @@ object UseCaseModule {
     fun provideSaveFile(
         repository: FileRepository,
     ): SaveFile = SaveFileImpl(repository)
+
+    @Provides
+    @Singleton
+    fun provideLoadRingtones(
+        repository: RingtoneRepository
+    ): LoadRingtones = LoadRingtonesImpl(repository)
 }
