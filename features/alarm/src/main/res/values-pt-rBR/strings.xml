@@ -3,7 +3,7 @@
     <string name="ringtone">toque</string>
     <string name="repeat">repetir</string>
     <string name="alarm_title">adicione um alarm para regar sua planta</string>
-    <string name="next">próximo</string>
+    <string name="save">salvar</string>
     <string-array name="repeat_values">
         <item>uma vez</item>
         <item>diariamente</item>
