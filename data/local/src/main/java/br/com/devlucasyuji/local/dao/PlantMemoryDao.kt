@@ -1,5 +1,6 @@
 package br.com.devlucasyuji.local.dao
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -10,6 +11,7 @@ import br.com.devlucasyuji.local.model.PlantEntity
 /**
  * Dao class to handle with [PlantEntity] in memory.
  * */
+@Dao
 interface PlantMemoryDao {
 
     @Query("SELECT * FROM plant LIMIT 1")
