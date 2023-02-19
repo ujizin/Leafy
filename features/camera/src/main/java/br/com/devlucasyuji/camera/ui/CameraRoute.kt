@@ -53,12 +53,11 @@ internal fun CameraRoute(
                             viewModel.onBackCamera()
                         },
                         onSaveClicked = {
-                            viewModel.saveImage(context, state.imageByteArray)
+                            viewModel.saveImage(context, state.imageByteArray, onImageSaved)
                         }
                     )
                 }
 
-                CameraUiState.OnImageSaved -> onImageSaved()
                 else -> Unit
             }
         }

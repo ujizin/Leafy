@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onCompletion
@@ -50,12 +51,13 @@ class CameraViewModel @Inject constructor(
     fun saveImage(
         context: Context,
         imageByteArray: ByteArray,
+        onImageSaved: () -> Unit,
     ) {
         viewModelScope.launch {
             val file = saveFile(context.filesDir, imageByteArray, "jpg")
-            addDraftPlant(file = file).onCompletion {
-                _uiState.update { CameraUiState.OnImageSaved }
-            }
+            addDraftPlant(file = file)
+                .onCompletion { onImageSaved() }
+                .first()
         }
     }
 }
@@ -65,5 +67,4 @@ sealed interface CameraUiState {
     class Preview(val imageByteArray: ByteArray) : CameraUiState
     data class Error(val message: String) : CameraUiState
 
-    object OnImageSaved : CameraUiState
 }
