@@ -5,7 +5,7 @@ import br.com.devlucasyuji.domain.repository.RingtoneRepository
 import br.com.devlucasyuji.domain.usecase.ringtone.LoadRingtones
 import kotlinx.coroutines.flow.Flow
 
-class LoadRingtonesImpl(
+internal class LoadRingtonesImpl(
     private val ringtoneRepository: RingtoneRepository
 ) : LoadRingtones {
 

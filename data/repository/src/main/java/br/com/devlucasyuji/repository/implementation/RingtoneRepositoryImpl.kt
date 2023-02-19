@@ -1,5 +1,6 @@
 package br.com.devlucasyuji.repository.implementation
 
+import android.content.Context
 import android.media.RingtoneManager
 import android.net.Uri
 import br.com.devlucasyuji.domain.model.Ringtone
@@ -10,12 +11,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class RingtoneRepositoryImpl(
-    private val ringtoneManager: RingtoneManager,
+internal class RingtoneRepositoryImpl(
+    private val context: Context,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : RingtoneRepository {
 
     override fun getRingtones(): Flow<List<Ringtone>> = flow {
+        val ringtoneManager = RingtoneManager(context)
         ringtoneManager.setType(RingtoneManager.TYPE_RINGTONE)
 
         val cursor = ringtoneManager.cursor

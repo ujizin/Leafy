@@ -1,7 +1,6 @@
 package br.com.devlucasyuji.repository
 
 import android.content.Context
-import android.media.RingtoneManager
 import br.com.devlucasyuji.domain.repository.FileRepository
 import br.com.devlucasyuji.domain.repository.PlantRepository
 import br.com.devlucasyuji.domain.repository.RingtoneRepository
@@ -50,5 +49,5 @@ object RepositoryModule {
     @Singleton
     fun provideRingtoneRepository(
         @ApplicationContext context: Context
-    ): RingtoneRepository = RingtoneRepositoryImpl(RingtoneManager(context))
+    ): RingtoneRepository = RingtoneRepositoryImpl(context)
 }
