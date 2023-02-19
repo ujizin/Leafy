@@ -11,10 +11,10 @@ interface AddDraftPlant {
     /**
      * Add draft plant.
      *
-     * @param title plant's title to be added|
-     * @param date plant's date to be added|
-     * @param file plant's file to be added|
-     * @param description plant's description to be added|
+     * @param title plant's title to be added
+     * @param date plant's date to be added
+     * @param file plant's file to be added
+     * @param description plant's description to be added
      * */
     operator fun invoke(
         title: String? = null,
