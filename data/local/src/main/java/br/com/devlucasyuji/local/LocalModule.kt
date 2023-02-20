@@ -2,11 +2,14 @@ package br.com.devlucasyuji.local
 
 import android.content.Context
 import androidx.room.Room
+import br.com.devlucasyuji.local.datasource.AlarmLocalDataSource
 import br.com.devlucasyuji.local.datasource.PlantLocalDataSource
 import br.com.devlucasyuji.local.datasource.UserLocalDataSource
 import br.com.devlucasyuji.local.datastore.UserDataStore
+import br.com.devlucasyuji.local.mapper.AlarmMapper
 import br.com.devlucasyuji.local.mapper.PlantMapper
 import br.com.devlucasyuji.local.mapper.UserMapper
+import br.com.devlucasyuji.repository.datasource.AlarmDataSource
 import br.com.devlucasyuji.repository.datasource.PlantDataSource
 import br.com.devlucasyuji.repository.datasource.UserDataSource
 import dagger.Module
@@ -49,6 +52,15 @@ object LocalModule {
         plantDao = database.plantDao(),
         memoryPlantDao = memoryDatabase.plantDao(),
         mapper = PlantMapper()
+    )
+
+    @Singleton
+    @Provides
+    fun provideLocalAlarmDataSource(
+        database: Database,
+    ): AlarmDataSource = AlarmLocalDataSource(
+        alarmDao = database.alarmDao(),
+        mapper = AlarmMapper()
     )
 
     @Singleton

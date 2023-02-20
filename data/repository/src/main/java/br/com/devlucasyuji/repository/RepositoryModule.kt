@@ -1,16 +1,20 @@
 package br.com.devlucasyuji.repository
 
 import android.content.Context
+import br.com.devlucasyuji.domain.repository.AlarmRepository
 import br.com.devlucasyuji.domain.repository.FileRepository
 import br.com.devlucasyuji.domain.repository.PlantRepository
 import br.com.devlucasyuji.domain.repository.RingtoneRepository
 import br.com.devlucasyuji.domain.repository.UserRepository
+import br.com.devlucasyuji.repository.datasource.AlarmDataSource
 import br.com.devlucasyuji.repository.datasource.PlantDataSource
 import br.com.devlucasyuji.repository.datasource.UserDataSource
+import br.com.devlucasyuji.repository.implementation.AlarmRepositoryImpl
 import br.com.devlucasyuji.repository.implementation.FileRepositoryImpl
 import br.com.devlucasyuji.repository.implementation.PlantRepositoryImpl
 import br.com.devlucasyuji.repository.implementation.RingtoneRepositoryImpl
 import br.com.devlucasyuji.repository.implementation.UserRepositoryImpl
+import br.com.devlucasyuji.repository.mapper.AlarmMapper
 import br.com.devlucasyuji.repository.mapper.PlantMapper
 import br.com.devlucasyuji.repository.mapper.UserMapper
 import dagger.Module
@@ -32,6 +36,13 @@ object RepositoryModule {
     fun providePlantRepository(dataSource: PlantDataSource): PlantRepository = PlantRepositoryImpl(
         dataSource = dataSource,
         mapper = PlantMapper(),
+    )
+
+    @Provides
+    @Singleton
+    fun provideAlarmRepository(dataSource: AlarmDataSource): AlarmRepository = AlarmRepositoryImpl(
+        dataSource = dataSource,
+        mapper = AlarmMapper()
     )
 
     @Provides
