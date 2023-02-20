@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
  * Alarm [Entity]
  *
  * @param id the alarm id
- * @param ring the ring's alarm
+ * @param ringtoneUriString the ring's alarm
  * @param plantId the plant id linked to the alarm
  * */
 @Entity(
@@ -27,8 +27,14 @@ data class AlarmEntity(
     @ColumnInfo(name = "alarm_id")
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    @ColumnInfo(name = "alarm_ring")
-    val ring: String,
+    @ColumnInfo(name = "alarm_ringtone")
+    val ringtoneUriString: String,
     @ColumnInfo(name = "plant_id")
     val plantId: Long,
+    @ColumnInfo(name = "repeat_interval_in_millis")
+    val repeatIntervalTimeInMillis: Long,
+    @ColumnInfo(name = "hours")
+    val hours: Int,
+    @ColumnInfo(name = "minutes")
+    val minutes: Int,
 )

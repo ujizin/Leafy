@@ -4,11 +4,17 @@ package br.com.devlucasyuji.repository.model
  *  Contract Alarm Model to PlantDataSource
  *
  *  @param id the alarm id
- *  @param plantId the id's plant
- *  @param ring the ring's alarm
+ *  @param plantId the plant's id
+ *  @param ringtoneUriString the alarm's ringtone uri
+ *  @param repeatIntervalInMillis alarm's repeat mode
+ *  @param hours alarm's hour
+ *  @param minutes alarm's minutes
  * */
 data class Alarm(
     val id: Long = 0,
-    val ring: String,
     val plantId: Long,
+    val ringtoneUriString: String,
+    val repeatIntervalInMillis: Long,
+    val hours: Int,
+    val minutes: Int,
 )
