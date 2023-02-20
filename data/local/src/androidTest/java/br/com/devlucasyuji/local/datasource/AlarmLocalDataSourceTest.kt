@@ -4,9 +4,9 @@ import br.com.devlucasyuji.local.BaseDatabaseTest
 import br.com.devlucasyuji.local.dao.AlarmDao
 import br.com.devlucasyuji.local.model.AlarmEntity
 import br.com.devlucasyuji.local.model.PlantEntity
-import org.junit.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
@@ -14,12 +14,11 @@ class AlarmLocalDataSourceTest : BaseDatabaseTest() {
 
     private lateinit var alarmDao: AlarmDao
 
-    private val fakeAlarm = AlarmEntity(id = 1, ring = "alarm", 1)
+    private val fakeAlarm = AlarmEntity(id = 1, ringtoneUriString = "alarm", 1, -1, 10, 10)
 
     private val fakePlant = PlantEntity(
         id = 1,
         title = "fake-plant",
-        date = "2022-06-20T14:18:11.01",
         filePath = ":data//fake/path",
         favorite = false,
         description = "this is a fake plant",
@@ -37,7 +36,7 @@ class AlarmLocalDataSourceTest : BaseDatabaseTest() {
 
     @Test
     fun writeAlarmsAndReadInList() = runTest {
-        val fakeAlarm2 = AlarmEntity(id = 2, ring = "alarm-2", 1)
+        val fakeAlarm2 = AlarmEntity(id = 2, ringtoneUriString = "alarm-2", 1, -1, 10, 9)
         val expectedAlarms = arrayOf(fakeAlarm, fakeAlarm2)
         alarmDao.insert(*expectedAlarms)
 
@@ -50,8 +49,8 @@ class AlarmLocalDataSourceTest : BaseDatabaseTest() {
     fun writeAlarmsAndFindByPlantId() = runTest {
         db.plantDao().insert(fakePlant.copy(id = 2))
 
-        val fakeAlarm2 = AlarmEntity(id = 2, ring = "alarm-2", 2)
-        val fakeAlarm3 = AlarmEntity(id = 2, ring = "alarm-2", 1)
+        val fakeAlarm2 = AlarmEntity(id = 2, ringtoneUriString = "alarm-2", 2, -1, 10, 10)
+        val fakeAlarm3 = AlarmEntity(id = 2, ringtoneUriString = "alarm-3", 1, -1, 9, 13)
 
         alarmDao.insert(fakeAlarm, fakeAlarm2, fakeAlarm3)
 
@@ -63,7 +62,7 @@ class AlarmLocalDataSourceTest : BaseDatabaseTest() {
 
     @Test
     fun writeAlarmAndUpdate() = runTest {
-        val expectedAlarm = fakeAlarm.copy(ring = "updated-alarm")
+        val expectedAlarm = fakeAlarm.copy(ringtoneUriString = "updated-alarm")
         alarmDao.insert(fakeAlarm)
         alarmDao.update(expectedAlarm)
 
