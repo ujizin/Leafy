@@ -9,10 +9,10 @@ import br.com.devlucasyuji.repository.model.Plant
 internal class PlantMapper {
 
     fun toPlant(plantEntity: PlantEntity) = with(plantEntity) {
-        Plant(id, title, date, filePath, description, favorite, albumId)
+        Plant(id, title, filePath, description, favorite, albumId)
     }
 
     fun toPlantEntity(plant: Plant) = with(plant) {
-        PlantEntity(id, title, date, filePath, description, favorite, albumId)
+        PlantEntity(id, title, filePath, description, favorite, albumId)
     }
 }

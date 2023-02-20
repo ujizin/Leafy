@@ -8,5 +8,5 @@ internal class AddPlantImpl(
     private val plantRepository: PlantRepository,
 ) : AddPlant {
 
-    override fun invoke(vararg plants: Plant) = plantRepository.insertPlants(plants.toList())
+    override fun invoke(plant: Plant) = plantRepository.insertPlant(plant)
 }

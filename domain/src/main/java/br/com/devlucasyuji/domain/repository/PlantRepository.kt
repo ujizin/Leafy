@@ -48,7 +48,7 @@ interface PlantRepository {
      *
      * @return plant hold in memory
      * */
-    fun getDraftPlant(): Flow<Plant?>
+    fun getDraftPlant(): Flow<Plant>
 
     /**
      * Update or add draft plant.

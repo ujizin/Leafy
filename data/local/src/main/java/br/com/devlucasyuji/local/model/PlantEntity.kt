@@ -32,8 +32,6 @@ data class PlantEntity(
     val id: Long = 0,
     @ColumnInfo(name = "plant_title")
     val title: String,
-    @ColumnInfo(name = "plant_date")
-    val date: String,
     @ColumnInfo(name = "plant_file_path")
     val filePath: String,
     @ColumnInfo(name = "plant_description")

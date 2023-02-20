@@ -1,6 +1,5 @@
 package br.com.devlucasyuji.domain.usecase.plant.implementation
 
-import br.com.devlucasyuji.domain.model.orCreateDraft
 import br.com.devlucasyuji.domain.repository.PlantRepository
 import br.com.devlucasyuji.domain.usecase.plant.AddDraftPlant
 import kotlinx.coroutines.flow.Flow
@@ -14,14 +13,12 @@ internal class AddDraftPlantImpl(
 
     override fun invoke(
         title: String?,
-        date: String?,
         file: File?,
         description: String?,
     ): Flow<Unit> = flow {
-        val plant = plantRepository.getDraftPlant().first().orCreateDraft().let { plant ->
+        val plant = plantRepository.getDraftPlant().first().let { plant ->
             plant.copy(
                 title = title ?: plant.title,
-                date = date ?: plant.date,
                 description = description ?: plant.description
             )
         }

@@ -5,6 +5,7 @@ import br.com.devlucasyuji.domain.usecase.plant.implementation.AddDraftPlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.AddPlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.DeletePlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.LoadAllPlantImpl
+import br.com.devlucasyuji.domain.usecase.plant.implementation.LoadDraftPlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.UpdatePlantImpl
 import dagger.Module
 import dagger.Provides
@@ -30,12 +31,6 @@ object PlantModule {
 
     @Provides
     @Singleton
-    fun provideAddDraftPlant(
-        repository: PlantRepository
-    ): AddDraftPlant = AddDraftPlantImpl(repository)
-
-    @Provides
-    @Singleton
     fun provideUpdatePlant(
         repository: PlantRepository
     ): UpdatePlant = UpdatePlantImpl(repository)
@@ -46,4 +41,15 @@ object PlantModule {
         repository: PlantRepository
     ): DeletePlant = DeletePlantImpl(repository)
 
+    @Provides
+    @Singleton
+    fun provideAddDraftPlant(
+        repository: PlantRepository
+    ): AddDraftPlant = AddDraftPlantImpl(repository)
+
+    @Provides
+    @Singleton
+    fun provideLoadDraftPlant(
+        repository: PlantRepository
+    ): LoadDraftPlant = LoadDraftPlantImpl(repository)
 }

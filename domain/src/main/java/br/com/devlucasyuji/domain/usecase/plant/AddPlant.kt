@@ -11,7 +11,7 @@ interface AddPlant {
     /**
      * Add a plant.
      *
-     * @param plants plants to be added
+     * @param plant plants to be added
      * */
-    operator fun invoke(vararg plants: Plant): Flow<Unit>
+    operator fun invoke(plant: Plant): Flow<Unit>
 }

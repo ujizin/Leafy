@@ -8,7 +8,6 @@ import java.util.UUID
  *
  * @param id the plant id
  * @param title the plant title
- * @param date the date of the plant
  * @param file the file path of the plant
  * @param description the plant description
  * @param favorite indicates if plant is favorite
@@ -17,20 +16,17 @@ import java.util.UUID
 data class Plant(
     val id: Long = 0,
     val title: String,
-    val date: String,
     val file: File,
     val description: String,
     val favorite: Boolean,
     val albumId: Long? = null,
-)
-
-/**
- * Create draft plant.
- * */
-internal fun Plant?.orCreateDraft() = this ?: Plant(
-    title = "untitled",
-    date = "unknown",
-    file = File.createTempFile(UUID.randomUUID().toString(), "jpg"),
-    description = "no description",
-    favorite = false
-)
+) {
+    companion object {
+        fun createDraft() = Plant(
+            title = "untitled",
+            file = File.createTempFile(UUID.randomUUID().toString(), "jpg"),
+            description = "no description",
+            favorite = false
+        )
+    }
+}

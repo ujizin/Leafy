@@ -5,7 +5,6 @@ package br.com.devlucasyuji.repository.model
  *
  * @param id the plant id
  * @param title the plant title
- * @param date the date of the plant
  * @param filePath the file path of the plant
  * @param description the plant description
  * @param favorite indicates if plant is favorite
@@ -14,7 +13,6 @@ package br.com.devlucasyuji.repository.model
 data class Plant(
     val id: Long = 0,
     val title: String,
-    val date: String,
     val filePath: String,
     val description: String,
     val favorite: Boolean,
