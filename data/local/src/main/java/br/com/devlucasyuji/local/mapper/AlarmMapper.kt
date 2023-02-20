@@ -9,10 +9,10 @@ import br.com.devlucasyuji.repository.model.Alarm
 internal class AlarmMapper {
 
     fun toAlarmEntity(alarm: Alarm) = with(alarm) {
-        AlarmEntity(id, ring, plantId)
+        AlarmEntity(id, ringtoneUriString, plantId, repeatIntervalInMillis, hours, minutes)
     }
 
     fun toAlarm(alarm: AlarmEntity) = with(alarm) {
-        Alarm(id, ring, plantId)
+        Alarm(id, plantId, ringtoneUriString, repeatIntervalTimeInMillis, hours, minutes)
     }
 }
