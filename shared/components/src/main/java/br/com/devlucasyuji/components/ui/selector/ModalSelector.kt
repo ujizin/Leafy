@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -54,16 +56,18 @@ fun ModalSelector(
             text = title.capitalize(), style = MaterialTheme.typography.titleMedium
         )
         Spacer(modifier = Modifier.height(16.dp))
-        values.forEach { text ->
-            ModalItemSelector(
-                Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp, vertical = 16.dp),
-                text = text.capitalize(),
-                enabled = enabled,
-                selected = currentValue == text
-            ) {
-                onValueChanged(text)
+        LazyColumn {
+            items(values) { text ->
+                ModalItemSelector(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp, vertical = 16.dp),
+                    text = text.capitalize(),
+                    enabled = enabled,
+                    selected = currentValue == text
+                ) {
+                    onValueChanged(text)
+                }
             }
         }
     }

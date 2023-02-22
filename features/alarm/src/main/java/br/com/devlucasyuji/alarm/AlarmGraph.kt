@@ -12,6 +12,7 @@ import br.com.devlucasyuji.navigation.composable
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.alarmGraph(
     onBackPressed: () -> Unit,
+    onSaved: () -> Unit,
     enterTransition: AnimatedEnterTransition = { fadeIn() },
     exitTransition: AnimatedExitTransition = { fadeOut() }
 ) {
@@ -20,6 +21,6 @@ fun NavGraphBuilder.alarmGraph(
         enterTransition = enterTransition,
         exitTransition = exitTransition,
     ) {
-        AlarmSection(onBackPressed = onBackPressed)
+        AlarmSection(onBackPressed = onBackPressed, onSaved = onSaved)
     }
 }

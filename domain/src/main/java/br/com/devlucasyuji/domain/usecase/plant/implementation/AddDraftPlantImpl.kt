@@ -19,7 +19,8 @@ internal class AddDraftPlantImpl(
         val plant = plantRepository.getDraftPlant().first().let { plant ->
             plant.copy(
                 title = title ?: plant.title,
-                description = description ?: plant.description
+                description = description ?: plant.description,
+                file = file ?: plant.file,
             )
         }
 

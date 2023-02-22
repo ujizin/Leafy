@@ -17,6 +17,7 @@ import br.com.devlucasyuji.components.ui.navigation.navigationExitTransition
 import br.com.devlucasyuji.home.homeGraph
 import br.com.devlucasyuji.navigation.Destination
 import br.com.devlucasyuji.navigation.navigate
+import br.com.devlucasyuji.navigation.navigateUp
 import br.com.devlucasyuji.publish.publishGraph
 import br.com.devlucasyuji.search.searchGraph
 import br.com.devlucasyuji.settings.settingsGraph
@@ -62,6 +63,7 @@ class MainActivity : ComponentActivity() {
             )
             alarmGraph(
                 onBackPressed = { navController.navigateUp() },
+                onSaved = { navController.navigateUp(times = 3) },
                 enterTransition = { slideIntoContainer(AnimatedContentScope.SlideDirection.Start) },
                 exitTransition = { slideOutOfContainer(AnimatedContentScope.SlideDirection.Start) }
             )

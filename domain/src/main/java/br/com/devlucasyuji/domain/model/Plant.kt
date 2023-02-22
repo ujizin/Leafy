@@ -24,7 +24,7 @@ data class Plant(
     companion object {
         fun createDraft() = Plant(
             title = "untitled",
-            file = File.createTempFile(UUID.randomUUID().toString(), "jpg"),
+            file = File.createTempFile(UUID.randomUUID().toString(), ".jpg"),
             description = "no description",
             favorite = false
         )

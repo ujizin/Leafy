@@ -4,9 +4,7 @@
     <string name="ringtone">ringtone</string>
     <string name="repeat">repeat</string>
     <string name="save">save</string>
-    <string-array name="repeat_values">
-        <item>once</item>
-        <item>daily</item>
-        <item>Mon to Fri</item>
-    </string-array>
+    <string name="once">once</string>
+    <string name="daily">daily</string>
+    <string name="mon_to_friday">Mon to Fri</string>
 </resources>

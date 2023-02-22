@@ -32,7 +32,7 @@ internal fun CameraPreviewSection(
         AsyncImage(
             modifier = Modifier.fillMaxSize(),
             model = previewImage,
-            contentScale = ContentScale.Crop,
+            contentScale = ContentScale.Fit,
             contentDescription = null,
             onSuccess = { onSuccess() }
         )

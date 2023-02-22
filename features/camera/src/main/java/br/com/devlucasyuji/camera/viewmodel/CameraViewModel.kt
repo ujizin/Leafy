@@ -54,10 +54,11 @@ class CameraViewModel @Inject constructor(
         onImageSaved: () -> Unit,
     ) {
         viewModelScope.launch {
-            val file = saveFile(context.filesDir, imageByteArray, "jpg")
-            addDraftPlant(file = file)
-                .onCompletion { onImageSaved() }
-                .first()
+            addDraftPlant(
+                file = saveFile(context.cacheDir, imageByteArray, "jpg")
+            ).onCompletion {
+                onImageSaved()
+            }.first()
         }
     }
 }
