@@ -23,6 +23,8 @@ internal class PlantLocalDataSource(
 
     override suspend fun getPlants(): List<Plant> = plantDao.getAll().map(mapper::toPlant)
 
+    override suspend fun getPlant(id: Long): Plant? = plantDao.findById(id)?.let(mapper::toPlant)
+
     override suspend fun updatePlant(plant: Plant) {
         plantDao.update(mapper.toPlantEntity(plant))
     }

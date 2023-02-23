@@ -22,6 +22,9 @@ interface PlantDao {
     @Query("SELECT * FROM plant")
     suspend fun getAll(): List<PlantEntity>
 
+    @Query("SELECT * FROM plant where plant_id=:id")
+    suspend fun findById(id: Long): PlantEntity?
+
     /**
      * Find all plant entity by album id
      *

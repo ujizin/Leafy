@@ -29,6 +29,13 @@ interface PlantDataSource {
     suspend fun getPlants(): List<Plant>
 
     /**
+     * Get plant by id.
+     *
+     * @param id the plant's id.
+     * */
+    suspend fun getPlant(id: Long): Plant?
+
+    /**
      * Update the [Plant] passed on parameter.
      *
      * @param plant [Plant] to be updated

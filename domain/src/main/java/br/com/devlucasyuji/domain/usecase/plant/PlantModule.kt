@@ -6,6 +6,7 @@ import br.com.devlucasyuji.domain.usecase.plant.implementation.AddPlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.DeletePlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.LoadAllPlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.LoadDraftPlantImpl
+import br.com.devlucasyuji.domain.usecase.plant.implementation.LoadPlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.UpdatePlantImpl
 import dagger.Module
 import dagger.Provides
@@ -22,6 +23,12 @@ object PlantModule {
     fun provideLoadAllPlants(
         repository: PlantRepository
     ): LoadAllPlant = LoadAllPlantImpl(repository)
+
+    @Provides
+    @Singleton
+    fun provideLoadPlant(
+        repository: PlantRepository
+    ): LoadPlant = LoadPlantImpl(repository)
 
     @Provides
     @Singleton

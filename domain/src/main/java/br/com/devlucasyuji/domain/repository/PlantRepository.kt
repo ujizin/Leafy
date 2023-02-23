@@ -16,6 +16,13 @@ interface PlantRepository {
     fun getPlants(): Flow<List<Plant>>
 
     /**
+     * Get plant by id.
+     *
+     * @param id the plant's id
+     * */
+    fun getPlant(id: Long): Flow<Plant?>
+
+    /**
      * Insert plant.
      *
      * @param plant plant to be added
