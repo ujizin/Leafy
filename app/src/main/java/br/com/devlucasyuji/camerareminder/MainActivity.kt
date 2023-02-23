@@ -8,8 +8,8 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
-import br.com.devlucasyuji.alarm.alarmGraph
-import br.com.devlucasyuji.alarms.alarmsGraph
+import br.com.devlucasyuji.alarm.alarm.alarmGraph
+import br.com.devlucasyuji.alarm.alarms.alarmsGraph
 import br.com.devlucasyuji.camera.cameraGraph
 import br.com.devlucasyuji.components.ui.Scaffold
 import br.com.devlucasyuji.components.ui.navigation.navigationEnterTransition

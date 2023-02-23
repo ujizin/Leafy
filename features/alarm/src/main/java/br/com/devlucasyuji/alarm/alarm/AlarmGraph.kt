@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.alarm
+package br.com.devlucasyuji.alarm.alarm
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn

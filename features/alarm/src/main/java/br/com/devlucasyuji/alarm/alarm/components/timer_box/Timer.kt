@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.alarm.components.timer_box
+package br.com.devlucasyuji.alarm.alarm.components.timer_box
 
 import java.text.DecimalFormat
 

@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.extensions
+package br.com.devlucasyuji.alarm.extensions
 
 import android.app.AlarmManager
 import android.content.Context

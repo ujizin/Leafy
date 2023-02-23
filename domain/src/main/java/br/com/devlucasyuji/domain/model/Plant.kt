@@ -16,8 +16,8 @@ import java.util.UUID
 data class Plant(
     val id: Long = 0,
     val title: String,
-    val file: File,
     val description: String,
+    val file: File,
     val favorite: Boolean,
     val albumId: Long? = null,
 ) {

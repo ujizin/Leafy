@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.alarm.components
+package br.com.devlucasyuji.alarm.alarm.components
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

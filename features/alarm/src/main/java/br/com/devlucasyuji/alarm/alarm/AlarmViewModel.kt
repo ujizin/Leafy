@@ -1,8 +1,11 @@
-package br.com.devlucasyuji.alarm
+package br.com.devlucasyuji.alarm.alarm
 
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.devlucasyuji.AlarmScheduler
+import br.com.devlucasyuji.alarm.AlarmScheduler
+import br.com.devlucasyuji.alarm.model.RepeatMode
+import br.com.devlucasyuji.alarm.receiver.AlarmReceiver
 import br.com.devlucasyuji.domain.model.Alarm
 import br.com.devlucasyuji.domain.model.Ringtone
 import br.com.devlucasyuji.domain.result.Result
@@ -10,7 +13,6 @@ import br.com.devlucasyuji.domain.usecase.alarm.AddAlarm
 import br.com.devlucasyuji.domain.usecase.plant.AddPlant
 import br.com.devlucasyuji.domain.usecase.plant.LoadDraftPlant
 import br.com.devlucasyuji.domain.usecase.ringtone.LoadRingtones
-import br.com.devlucasyuji.model.RepeatMode
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -58,25 +60,25 @@ class AlarmViewModel @Inject constructor(
                     else -> null
                 }
             }.flatMapConcat { plant ->
-                addPlant(plant).flatMapConcat {
+                addPlant(plant).flatMapConcat { id ->
                     addAlarm(
                         Alarm(
-                            plantId = plant.id,
+                            plantId = id,
                             ringtoneUri = ringtone.uri,
                             repeatIntervalInMillis = repeatMode.intervalTimeMillis,
                             minutes = minutes,
                             hours = hours,
                         )
-                    )
+                    ).onEach {
+                        alarmScheduler.scheduleAlarm(
+                            hours = hours,
+                            minutes = minutes,
+                            ringtoneUri = ringtone.uri,
+                            intervalInMillis = repeatMode.intervalTimeMillis,
+                            bundle = bundleOf(AlarmReceiver.ALARM_PLANT_ID_EXTRA to id)
+                        )
+                    }
                 }
-            }
-            .onEach {
-                alarmScheduler.scheduleAlarm(
-                    hours = hours,
-                    minutes = minutes,
-                    ringtoneUri = ringtone.uri,
-                    intervalInMillis = repeatMode.intervalTimeMillis
-                )
             }
             .onCompletion { onPlantPublished() }
             .catch {

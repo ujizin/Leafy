@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.alarm
+package br.com.devlucasyuji.alarm.alarm
 
 import android.media.RingtoneManager
 import androidx.activity.compose.BackHandler
@@ -27,7 +27,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import br.com.devlucasyuji.alarm.components.timer_box.TimerBox
+import br.com.devlucasyuji.alarm.R
+import br.com.devlucasyuji.alarm.alarm.components.timer_box.TimerBox
+import br.com.devlucasyuji.alarm.model.RepeatMode
 import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.components.extensions.paddingScreen
 import br.com.devlucasyuji.components.ui.Section
@@ -40,7 +42,6 @@ import br.com.devlucasyuji.components.ui.selector.MultiModalSelector
 import br.com.devlucasyuji.components.ui.selector.Selector
 import br.com.devlucasyuji.domain.model.Ringtone
 import br.com.devlucasyuji.domain.model.orDefault
-import br.com.devlucasyuji.model.RepeatMode
 import kotlinx.coroutines.launch
 
 enum class AlarmSheet {

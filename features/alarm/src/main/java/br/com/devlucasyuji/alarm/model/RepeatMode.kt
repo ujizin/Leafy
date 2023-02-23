@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.model
+package br.com.devlucasyuji.alarm.model
 
 import android.content.Context
 import androidx.annotation.StringRes

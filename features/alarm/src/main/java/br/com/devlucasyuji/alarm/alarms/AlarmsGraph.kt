@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.alarms
+package br.com.devlucasyuji.alarm.alarms
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.navigation.NavGraphBuilder
