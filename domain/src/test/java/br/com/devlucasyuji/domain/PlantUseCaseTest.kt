@@ -16,7 +16,6 @@ import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.verify
-import java.io.File
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
@@ -24,6 +23,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import java.io.File
 
 @ExperimentalCoroutinesApi
 class PlantUseCaseTest {
@@ -68,9 +68,9 @@ class PlantUseCaseTest {
     @Test
     fun `when load plant then expect return plants on repository`() = runTest {
         val expectedPlants = listOf(
-            Plant(id = 1, "", "", File(""), "", false),
-            Plant(id = 2, "", "", File(""), "", false),
-            Plant(id = 3, "", "", File(""), "", false)
+            Plant(id = 1, "", "", File(""), false),
+            Plant(id = 2, "", "", File(""), false),
+            Plant(id = 3, "", "", File(""), false)
         )
 
         every { plantRepository.getPlants() } returns flowOf(expectedPlants)

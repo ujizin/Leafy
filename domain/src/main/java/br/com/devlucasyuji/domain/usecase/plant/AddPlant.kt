@@ -13,5 +13,5 @@ interface AddPlant {
      *
      * @param plant plants to be added
      * */
-    operator fun invoke(plant: Plant): Flow<Unit>
+    operator fun invoke(plant: Plant): Flow<Long>
 }

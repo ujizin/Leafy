@@ -20,7 +20,7 @@ internal class PlantRepositoryImpl(
         emit(mapper.toDomain(dataSource.getPlants()))
     }.flowOn(dispatcher)
 
-    override fun getPlant(id: Long): Flow<Plant?> = flow<Plant?> {
+    override fun getPlant(id: Long): Flow<Plant?> = flow {
         emit(dataSource.getPlant(id)?.let(mapper::toDomain))
     }.flowOn(dispatcher)
 

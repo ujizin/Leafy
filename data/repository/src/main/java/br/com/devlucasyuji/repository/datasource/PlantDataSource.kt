@@ -11,8 +11,10 @@ interface PlantDataSource {
      * Inserts a new [Plant].
      *
      * @param plant [Plant] to be added
+     *
+     * @return return the new plant's id
      * */
-    suspend fun insertPlant(plant: Plant)
+    suspend fun insertPlant(plant: Plant): Long
 
     /**
      * Inserts a new list of [Plant].

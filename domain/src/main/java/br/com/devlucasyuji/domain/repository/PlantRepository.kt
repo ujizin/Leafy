@@ -27,7 +27,7 @@ interface PlantRepository {
      *
      * @param plant plant to be added
      * */
-    fun insertPlant(plant: Plant): Flow<Unit>
+    fun insertPlant(plant: Plant): Flow<Long>
 
     /**
      * Insert a list of plant.
