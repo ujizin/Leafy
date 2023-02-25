@@ -21,7 +21,7 @@ interface PlantDataSource {
      *
      * @param plants list of [Plant] to be added
      * */
-    suspend fun insertPlant(plants: List<Plant>)
+    suspend fun insertPlants(plants: List<Plant>)
 
     /**
      * Get all [Plant] from data source.

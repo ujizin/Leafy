@@ -16,9 +16,9 @@ internal class PlantLocalDataSource(
         return plantDao.insert(mapper.toPlantEntity(plant))
     }
 
-    override suspend fun insertPlant(plants: List<Plant>) {
-        val plantsEntities = plants.map { mapper.toPlantEntity(it) }.toTypedArray()
-        plantDao.insert(*plantsEntities)
+    override suspend fun insertPlants(plants: List<Plant>) {
+        val plantsEntities = plants.map(mapper::toPlantEntity).toTypedArray()
+        plantDao.insertAll(*plantsEntities)
     }
 
     override suspend fun getPlants(): List<Plant> = plantDao.getAll().map(mapper::toPlant)

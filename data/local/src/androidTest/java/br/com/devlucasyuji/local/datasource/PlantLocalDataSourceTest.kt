@@ -4,9 +4,9 @@ import br.com.devlucasyuji.local.BaseDatabaseTest
 import br.com.devlucasyuji.local.dao.PlantDao
 import br.com.devlucasyuji.local.model.AlbumEntity
 import br.com.devlucasyuji.local.model.PlantEntity
-import org.junit.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
@@ -17,7 +17,6 @@ class PlantLocalDataSourceTest : BaseDatabaseTest() {
     private val fakePlant = PlantEntity(
         id = 1,
         title = "fake-plant",
-        date = "2022-06-20T14:16:11.01",
         filePath = ":data//fake/path",
         favorite = false,
         description = "this is a fake plant",
@@ -35,7 +34,7 @@ class PlantLocalDataSourceTest : BaseDatabaseTest() {
         val fakePlant3 = fakePlant.copy(id = 3, title = "fake-plant 3")
 
         val expectedPlants = arrayOf(fakePlant, fakePlant2, fakePlant3)
-        plantDao.insert(*expectedPlants)
+        plantDao.insertAll(*expectedPlants)
 
         val actualPlants = plantDao.getAll()
         assertEquals(expectedPlants.toList(), actualPlants)
@@ -52,7 +51,7 @@ class PlantLocalDataSourceTest : BaseDatabaseTest() {
         val fakePlant3 = fakePlant.copy(id = 3, title = "fake-plant 3", albumId = 2)
         val fakePlant4 = fakePlant.copy(id = 4, title = "fake-plant 4", albumId = 2)
 
-        plantDao.insert(fakePlant, fakePlant2, fakePlant3, fakePlant4)
+        plantDao.insertAll(fakePlant, fakePlant2, fakePlant3, fakePlant4)
 
         val expectedPlants = arrayOf(fakePlant3, fakePlant4)
 

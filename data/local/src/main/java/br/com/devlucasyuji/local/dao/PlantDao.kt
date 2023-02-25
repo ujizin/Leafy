@@ -40,7 +40,15 @@ interface PlantDao {
      * @return return the new plant's id
      * */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(vararg plant: PlantEntity): Long
+    suspend fun insert(plant: PlantEntity): Long
+
+
+    /**
+     * Insert news [PlantEntity].
+     *
+     * */
+    @Insert
+    suspend fun insertAll(vararg plant: PlantEntity)
 
     /**
      * Update a [PlantEntity] passed on parameter.

@@ -12,7 +12,7 @@ internal class PlantMapper {
     fun toDomain(plants: List<DataPlant>) = plants.map { toDomain(it) }
 
     fun toDomain(plant: DataPlant) = with(plant) {
-        Plant(id, title, File(filePath), description, favorite, albumId)
+        Plant(id, title, description, File(filePath), favorite, albumId)
     }
 
     fun toRepo(plants: List<Plant>) = plants.map { toRepo(it) }

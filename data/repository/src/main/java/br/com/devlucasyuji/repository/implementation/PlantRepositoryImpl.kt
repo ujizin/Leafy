@@ -29,7 +29,7 @@ internal class PlantRepositoryImpl(
     }.flowOn(dispatcher)
 
     override fun insertPlants(plants: List<Plant>) = flow {
-        emit(dataSource.insertPlant(mapper.toRepo(plants)))
+        emit(dataSource.insertPlants(mapper.toRepo(plants)))
     }.flowOn(dispatcher)
 
     override fun updatePlant(plant: Plant) = flow {
