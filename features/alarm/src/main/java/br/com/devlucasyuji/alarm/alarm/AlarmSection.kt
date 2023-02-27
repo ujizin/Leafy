@@ -29,6 +29,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.devlucasyuji.alarm.R
 import br.com.devlucasyuji.alarm.alarm.components.timer_box.TimerBox
+import br.com.devlucasyuji.alarm.extensions.alarmManager
+import br.com.devlucasyuji.alarm.extensions.hasAlarmPermission
+import br.com.devlucasyuji.alarm.extensions.startAlarmPermission
 import br.com.devlucasyuji.alarm.model.RepeatMode
 import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.components.extensions.paddingScreen
@@ -57,15 +60,21 @@ fun AlarmSection(
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
 
-    LaunchedEffect(viewModel) { viewModel.setupRingtones() }
-
     val repeatValues = remember { RepeatMode.values().toList() }
     val ringtones by remember { derivedStateOf { (uiState as? AlarmUiState.Initialized)?.ringtones.orEmpty() } }
-    var ringtone by remember(ringtones) { mutableStateOf(ringtones.firstOrNull().orDefault(context)) }
+    var ringtone by remember(ringtones) {
+        mutableStateOf(ringtones.firstOrNull().orDefault(context))
+    }
     var repeatMode by remember { mutableStateOf(repeatValues.first()) }
 
     var hours by remember { mutableStateOf(0) }
     var minutes by remember { mutableStateOf(0) }
+
+    LaunchedEffect(viewModel) { viewModel.setupRingtones() }
+
+    LaunchedEffect(context.alarmManager.hasAlarmPermission) {
+        context.startAlarmPermission()
+    }
 
     AlarmScreen(
         ringtoneValues = ringtones,
