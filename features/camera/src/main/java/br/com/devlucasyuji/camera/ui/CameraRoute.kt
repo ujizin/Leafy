@@ -13,6 +13,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.devlucasyuji.camera.viewmodel.CameraUiState
 import br.com.devlucasyuji.camera.viewmodel.CameraViewModel
 import br.com.devlucasyuji.components.extensions.OnClick
+import br.com.devlucasyuji.components.extensions.startSettingsPermission
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberPermissionState
@@ -26,6 +27,7 @@ internal fun CameraRoute(
     onCloseClicked: OnClick
 ) {
     val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
+    val context = LocalContext.current
     when (val status = cameraPermissionState.status) {
         PermissionStatus.Granted -> {
             val uiState by viewModel.uiState.collectAsState()
@@ -44,7 +46,6 @@ internal fun CameraRoute(
 
             when (state) {
                 is CameraUiState.Preview -> {
-                    val context = LocalContext.current
                     CameraPreviewSection(
                         previewImage = state.imageByteArray,
                         onSuccess = { previewLoaded = true },
@@ -62,8 +63,12 @@ internal fun CameraRoute(
             }
         }
 
-        is PermissionStatus.Denied -> CameraDenied(status) {
-            cameraPermissionState.launchPermissionRequest()
+        is PermissionStatus.Denied -> CameraDenied(status.shouldShowRationale) {
+            if (status.shouldShowRationale) {
+                cameraPermissionState.launchPermissionRequest()
+            } else {
+                context.startSettingsPermission()
+            }
         }
     }
 

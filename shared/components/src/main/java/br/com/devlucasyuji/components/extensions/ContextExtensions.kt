@@ -1,38 +1,15 @@
-import android.app.Activity
+package br.com.devlucasyuji.components.extensions
+
 import android.content.Context
-import android.content.ContextWrapper
-import androidx.core.content.ContextCompat
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
-import java.util.concurrent.Executor
+import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 
-fun Context.findActivity(): Activity? = when (this) {
-    is Activity -> this
-    is ContextWrapper -> baseContext.findActivity()
-    else -> null
+fun Context.startSettingsPermission() {
+    val intent = Intent(
+        Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+        Uri.parse("package:${packageName}"
+        )
+    )
+    startActivity(intent)
 }
-
-fun Context.hideSystemUi() {
-    val activity = this.findActivity() ?: return
-    val window = activity.window ?: return
-    WindowCompat.setDecorFitsSystemWindows(window, false)
-    WindowInsetsControllerCompat(window, window.decorView).let { controller ->
-        controller.hide(WindowInsetsCompat.Type.systemBars())
-        controller.systemBarsBehavior =
-            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-    }
-}
-
-fun Context.showSystemUi() {
-    val activity = this.findActivity() ?: return
-    val window = activity.window ?: return
-    WindowCompat.setDecorFitsSystemWindows(window, true)
-    WindowInsetsControllerCompat(
-        window,
-        window.decorView
-    ).show(WindowInsetsCompat.Type.systemBars())
-}
-
-val Context.executor: Executor
-    get() = ContextCompat.getMainExecutor(this)
