@@ -13,7 +13,7 @@ enum class Icons(
     Home(R.drawable.home, R.string.home),
     Info(R.drawable.info, R.string.info),
     Alarm(R.drawable.alarm, R.string.alarm),
-    Star(R.drawable.star, R.string.star),
+    Star(R.drawable.star, R.string.review_us),
     Settings(R.drawable.settings, R.string.settings),
     Add(R.drawable.add, R.string.add),
     Shared(R.drawable.shared, R.string.shared),

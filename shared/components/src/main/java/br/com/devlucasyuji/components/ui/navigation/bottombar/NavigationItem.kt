@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.components.ui.navigation
+package br.com.devlucasyuji.components.ui.navigation.bottombar
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Box
@@ -19,8 +19,8 @@ import br.com.devlucasyuji.components.extensions.capitalize
 @Composable
 internal fun RowScope.NavBarItem(
     modifier: Modifier = Modifier,
-    selectedItem: NavItem,
-    item: NavItem,
+    selectedItem: BottomNavItem?,
+    item: BottomNavItem,
     onClick: OnClick
 ) {
     val labelRes = item.labelRes ?: return Box(Modifier.size(64.dp))

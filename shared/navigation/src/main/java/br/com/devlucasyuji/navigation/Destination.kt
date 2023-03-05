@@ -3,15 +3,14 @@ package br.com.devlucasyuji.navigation
 
 enum class Destination(
     private val destinationName: String,
-    val navigationItem: NavigationItem = NavigationItem.None,
 ) {
-    Home("home", NavigationItem.Home),
-    Search("search", NavigationItem.Search),
-    Camera("camera", NavigationItem.None),
-    Alarms("alarms", NavigationItem.Alarm),
-    Others("others", NavigationItem.Others),
-    Publish("publish", NavigationItem.None),
-    Alarm("alarm", NavigationItem.None);
+    Home("home"),
+    Search("search"),
+    Camera("camera"),
+    Alarms("alarms"),
+    Others("others"),
+    Publish("publish"),
+    Alarm("alarm");
 
     val route: String get() = "$HOST/$destinationName"
 

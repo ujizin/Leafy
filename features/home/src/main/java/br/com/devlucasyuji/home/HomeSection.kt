@@ -36,20 +36,30 @@ import br.com.devlucasyuji.domain.model.Plant
 @Composable
 fun HomeRoute(
     viewModel: HomeViewModel = hiltViewModel(),
-    onTakePictureClick: OnClick
+    onTakePictureClick: OnClick,
+    onDrawerClick: OnClick
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         val state by viewModel.homeState.collectAsState()
         when (val result: HomeUIState = state) {
             HomeUIState.Loading -> {}
-            is HomeUIState.Success -> HomeScreen(result, onTakePictureClick)
+            is HomeUIState.Success -> HomeScreen(
+                result = result,
+                onEmptyPlantClick = onTakePictureClick,
+                onDrawerClick = onDrawerClick,
+            )
+
             is HomeUIState.Error -> {}
         }
     }
 }
 
 @Composable
-private fun HomeScreen(result: HomeUIState.Success, onEmptyPlantClick: OnClick) {
+private fun HomeScreen(
+    result: HomeUIState.Success,
+    onEmptyPlantClick: OnClick,
+    onDrawerClick: OnClick
+) {
     NavLazyColumn {
         item {
             Section(
@@ -59,7 +69,11 @@ private fun HomeScreen(result: HomeUIState.Success, onEmptyPlantClick: OnClick) 
                 ).capitalize(),
                 subTitle = stringResource(id = R.string.welcome_back).capitalize(),
                 leadingIcon = {
-                    AnimatedButtonIcon(icon = Icons.Hamburger, animation = Animation.SlideToEnd)
+                    AnimatedButtonIcon(
+                        icon = Icons.Hamburger,
+                        animation = Animation.SlideToEnd,
+                        onClick = onDrawerClick
+                    )
                 },
                 trailingIcon = {
                     AnimatedButtonIcon(icon = Icons.Magnifier, animation = Animation.SlideToStart)

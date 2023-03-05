@@ -5,7 +5,8 @@
     <string name="home">home</string>
     <string name="info">info</string>
     <string name="alarm">alarm</string>
-    <string name="star">review</string>
+    <string name="review_us">review us</string>
+    <string name="about">about</string>
     <string name="settings">settings</string>
     <string name="add">add</string>
     <string name="others">others</string>

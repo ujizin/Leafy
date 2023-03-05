@@ -13,12 +13,16 @@ fun NavGraphBuilder.homeGraph(
     enterTransition: AnimatedEnterTransition,
     exitTransition: AnimatedExitTransition,
     onTakePictureClick: OnClick,
+    onDrawerClick: OnClick
 ) {
     composable(
         destination = Destination.Home,
         enterTransition = enterTransition,
         exitTransition = exitTransition,
     ) {
-        HomeRoute(onTakePictureClick = onTakePictureClick)
+        HomeRoute(
+            onTakePictureClick = onTakePictureClick,
+            onDrawerClick = onDrawerClick,
+        )
     }
 }
