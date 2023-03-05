@@ -5,9 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.devlucasyuji.camera.viewmodel.CameraUiState
@@ -32,10 +29,9 @@ internal fun CameraRoute(
         PermissionStatus.Granted -> {
             val uiState by viewModel.uiState.collectAsState()
             val state: CameraUiState = uiState
-            var previewLoaded by remember { mutableStateOf(false) }
             val cameraState = rememberCameraState()
 
-            if (!previewLoaded) {
+            if (state !is CameraUiState.Preview) {
                 CameraSection(
                     uiState = state,
                     cameraState = cameraState,
@@ -48,11 +44,7 @@ internal fun CameraRoute(
                 is CameraUiState.Preview -> {
                     CameraPreviewSection(
                         previewImage = state.imageByteArray,
-                        onSuccess = { previewLoaded = true },
-                        onBackPressed = {
-                            previewLoaded = false
-                            viewModel.onBackCamera()
-                        },
+                        onBackPressed = viewModel::onBackCamera,
                         onSaveClicked = {
                             viewModel.saveImage(context, state.imageByteArray, onImageSaved)
                         }
