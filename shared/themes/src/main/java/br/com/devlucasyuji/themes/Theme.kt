@@ -16,7 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.ViewCompat
 
-private val DarkColorScheme = darkColorScheme(
+private val darkColorScheme = darkColorScheme(
     primary = Color.Green,
     secondary = Color.Cyan,
     tertiary = Color.Cloud,
@@ -27,12 +27,13 @@ private val DarkColorScheme = darkColorScheme(
     onBackground = Color.Gray,
     secondaryContainer = Color.Cloud,
     onSecondaryContainer = Color.DarkGreen,
+    outline = Color.Green,
     surfaceVariant = Color.Cyan,
     onSurfaceVariant = Color.Cloud,
     onSurface = Color.DarkGray
 )
 
-private val LightColorScheme = lightColorScheme(
+private val lightColorScheme = lightColorScheme(
     primary = Color.Green,
     secondary = Color.Cyan,
     tertiary = Color.Cloud,
@@ -40,6 +41,7 @@ private val LightColorScheme = lightColorScheme(
     background = Color.Cloud,
     onPrimary = Color.Cloud,
     onSecondary = Color.Gray,
+    outline = Color.Green,
     onBackground = Color.Gray,
     secondaryContainer = Color.Cloud,
     onSecondaryContainer = Color.DarkGreen,
@@ -59,8 +61,9 @@ fun CameraReminderTheme(
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+
+        darkTheme -> darkColorScheme
+        else -> lightColorScheme
     }
     val view = LocalView.current
     if (!view.isInEditMode) {
