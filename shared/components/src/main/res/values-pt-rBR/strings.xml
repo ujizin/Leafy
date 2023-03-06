@@ -6,4 +6,5 @@
     <string name="camera_permission_description">"oh no! nós precisamos usar a câmera! você poderia me permitir a usar? "</string>
     <string name="camera_permission_denied_description">oh no, você negou o uso da câmera! Por favor, permita a câmera no aplicativo de configuração para usar essa ferramenta</string>
     <string name="save">salvar</string>
+    <string name="edit_name">editar nome</string>
 </resources>
