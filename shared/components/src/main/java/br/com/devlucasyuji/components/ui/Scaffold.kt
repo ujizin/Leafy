@@ -26,11 +26,12 @@ fun Scaffold(
     navController: NavController,
     content: @Composable BoxScope.() -> Unit
 ) {
+    val currentDrawerItem by navController.currentNavItemAsState<DrawerItem>()
     ModalNavigationDrawer(
         drawerState = drawerState,
+        gesturesEnabled = currentDrawerItem != null,
         drawerContent = {
             val scope = rememberCoroutineScope()
-            val currentDrawerItem by navController.currentNavItemAsState(DrawerItem.Home)
             DrawerContent(
                 drawerItem = currentDrawerItem,
                 onDrawerClicked = { drawerItem ->
