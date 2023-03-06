@@ -2,4 +2,5 @@
 <resources>
     <string name="about">sobre</string>
     <string name="about_button">visite o projeto no GitHub</string>
+    <string name="about_description">O projeto foi criado para me manter atualizado sobre o desenvolvimento do Android enquanto persigo meu novo hobby de plantas. Se você é um desenvolvedor Android, sinta-se à vontade para acessar ou contribuir para o projeto de código aberto!</string>
 </resources>
