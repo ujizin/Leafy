@@ -38,6 +38,9 @@ fun Scaffold(
                     scope.launch { drawerState.close() }
                     navController.navigate(drawerItem.destination)
                 },
+                onCloseDrawer = {
+                    scope.launch { drawerState.close() }
+                }
             )
         },
     ) {

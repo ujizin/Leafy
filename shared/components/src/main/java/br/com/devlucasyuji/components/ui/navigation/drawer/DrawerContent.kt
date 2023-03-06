@@ -22,7 +22,10 @@ import br.com.devlucasyuji.components.ui.header.HeaderTitle
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun DrawerContent(
-    modifier: Modifier = Modifier, drawerItem: DrawerItem?, onDrawerClicked: (DrawerItem) -> Unit
+    modifier: Modifier = Modifier,
+    drawerItem: DrawerItem?,
+    onDrawerClicked: (DrawerItem) -> Unit,
+    onCloseDrawer: () -> Unit,
 ) {
     ModalDrawerSheet(modifier) {
         Column(Modifier.padding(horizontal = 12.dp, vertical = 32.dp)) {
@@ -34,7 +37,8 @@ internal fun DrawerContent(
             DrawerItems(
                 drawerItems = remember { DrawerItem.values().toList() },
                 drawerItem = drawerItem,
-                onDrawerClicked = onDrawerClicked
+                onDrawerClicked = onDrawerClicked,
+                onCloseDrawer = onCloseDrawer
             )
         }
     }
@@ -46,8 +50,10 @@ private fun DrawerItems(
     drawerItems: List<DrawerItem>,
     drawerItem: DrawerItem?,
     onDrawerClicked: (DrawerItem) -> Unit,
+    onCloseDrawer: () -> Unit,
 ) {
     drawerItems.forEach { item ->
+        val isSelected = remember(drawerItem) { drawerItem?.destination == item.destination }
         NavigationDrawerItem(
             modifier = Modifier.padding(vertical = 4.dp),
             icon = {
@@ -58,8 +64,10 @@ private fun DrawerItems(
                 )
             },
             label = { Text(text = stringResource(id = item.labelRes).capitalize()) },
-            selected = drawerItem?.destination == item.destination,
-            onClick = { onDrawerClicked(item) },
+            selected = isSelected,
+            onClick = {
+                if (isSelected) onCloseDrawer() else onDrawerClicked(item)
+            }
         )
     }
 }
