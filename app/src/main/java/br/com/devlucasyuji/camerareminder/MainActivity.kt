@@ -2,6 +2,7 @@ package br.com.devlucasyuji.camerareminder
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -12,6 +13,7 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import br.com.devlucasyuji.alarm.alarm.alarmGraph
 import br.com.devlucasyuji.alarm.alarms.alarmsGraph
@@ -56,6 +58,9 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun CameraNavigation(navController: NavHostController, drawerState: DrawerState) {
         val scope = rememberCoroutineScope()
+
+        BackHandler { scope.launch { navController.navigateUp(drawerState) } }
+
         AnimatedNavHost(
             navController = navController,
             startDestination = Destination.Home.route,
@@ -75,13 +80,13 @@ class MainActivity : ComponentActivity() {
                 exitTransition = { navigationExitTransition(navController) }
             )
             alarmGraph(
-                onBackPressed = { navController.navigateUp() },
+                onBackPressed = navController::navigateUp,
                 onSaved = { navController.navigateUp(times = 3) },
                 enterTransition = { slideIntoContainer(AnimatedContentScope.SlideDirection.Start) },
                 exitTransition = { slideOutOfContainer(AnimatedContentScope.SlideDirection.Start) }
             )
             cameraGraph(
-                onBackPressed = { navController.navigateUp() },
+                onBackPressed = navController::navigateUp,
                 onSaveClicked = { navController.navigate(Destination.Publish) }
             )
             settingsGraph(
@@ -89,13 +94,23 @@ class MainActivity : ComponentActivity() {
                 exitTransition = { navigationExitTransition(navController) }
             )
             publishGraph(
-                onBackPressed = { navController.navigateUp() },
+                onBackPressed = navController::navigateUp,
                 onNextClick = { navController.navigate(Destination.Alarm) },
                 exitTransition = { slideOutOfContainer(AnimatedContentScope.SlideDirection.Start) }
             )
             aboutGraph(
-                onBackPressed = { navController.navigateUp() }
+                onBackPressed = navController::navigateUp
             )
         }
+    }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    suspend fun NavController.navigateUp(drawerState: DrawerState) {
+        if (drawerState.isOpen) {
+            drawerState.close()
+            return
+        }
+
+        if (!navigateUp()) finish()
     }
 }
