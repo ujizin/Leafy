@@ -10,7 +10,9 @@ enum class Destination(
     Alarms("alarms"),
     Others("others"),
     Publish("publish"),
-    Alarm("alarm");
+    Alarm("alarm"),
+    About("about"),
+    Review("review");
 
     val route: String get() = "$HOST/$destinationName"
 

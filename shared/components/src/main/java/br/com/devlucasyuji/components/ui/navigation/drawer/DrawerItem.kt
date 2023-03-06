@@ -14,7 +14,7 @@ enum class DrawerItem(
     Home(R.drawable.home, R.string.home, Destination.Home),
     Search(R.drawable.magnifier, R.string.search, Destination.Search),
     Alarms(R.drawable.alarm, R.string.alarm, Destination.Alarms),
-    ReviewUs(R.drawable.star, R.string.review_us, Destination.Home),
-    About(R.drawable.info, R.string.about, Destination.Home),
-    Settings(R.drawable.others, R.string.settings, Destination.Home),
+    ReviewUs(R.drawable.star, R.string.review_us, Destination.Review),
+    About(R.drawable.info, R.string.about, Destination.About),
+    Settings(R.drawable.others, R.string.settings, Destination.Others),
 }
