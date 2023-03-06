@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about">about</string>
+    <string name="about_button">visit project on GitHub</string>
+    <string name="about_project_url" translatable="false">https://github.com/ujizin/CameraReminder</string>
+</resources>
