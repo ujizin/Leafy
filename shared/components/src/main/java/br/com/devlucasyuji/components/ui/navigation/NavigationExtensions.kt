@@ -20,7 +20,11 @@ private enum class NavDirection {
 }
 
 private fun navDirection(navController: NavController): NavDirection {
-    val previousDestination = navController.previousBackStackEntry?.destination?.route
+    val previousBackStackEntry = navController.previousBackStackEntry ?: return run {
+        return@run NavDirection.End
+    }
+
+    val previousDestination = previousBackStackEntry.destination.route
     val currentDestination = navController.currentBackStackEntry?.destination?.route
 
     val previousBottomNavItem = BottomNavItem.values().firstOrNull {
