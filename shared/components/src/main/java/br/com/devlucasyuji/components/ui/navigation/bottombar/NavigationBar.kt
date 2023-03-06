@@ -1,5 +1,6 @@
 package br.com.devlucasyuji.components.ui.navigation.bottombar
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.offset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,16 +26,34 @@ internal fun NavigationBar(navController: NavController) {
 
     if (hideBottomNavigationBar) return
 
-    Animated(animation = Animation.SlideToTop.copy(delayMillis = Animation.SmallDelay)) {
-        androidx.compose.material3.NavigationBar {
-            BottomNavItem.values().forEach { item ->
-                NavBarItem(selectedItem = navItem, item = item) {
-                    navController.navigateToItem(item)
+    BottomNavigationBar(
+        bottomNavItem = navItem,
+        bottomNavItems = remember { BottomNavItem.values().toList() },
+        onNavItemClicked = { destination ->
+            navController.navigateToItem(destination)
+        }
+    )
+}
+
+@Composable
+private fun BottomNavigationBar(
+    modifier: Modifier = Modifier,
+    bottomNavItem: BottomNavItem?,
+    bottomNavItems: List<BottomNavItem>,
+    onNavItemClicked: (BottomNavItem) -> Unit,
+) {
+    Box(modifier = modifier) {
+        Animated(animation = Animation.SlideToTop.copy(delayMillis = Animation.SmallDelay)) {
+            androidx.compose.material3.NavigationBar {
+                bottomNavItems.forEach { item ->
+                    NavBarItem(selectedItem = bottomNavItem, item = item, onClick = {
+                        onNavItemClicked(item)
+                    })
                 }
             }
         }
         CameraButton(Modifier.offset(y = (-32).dp)) {
-            navController.navigateToItem(BottomNavItem.Camera)
+            onNavItemClicked(BottomNavItem.Camera)
         }
     }
 }
