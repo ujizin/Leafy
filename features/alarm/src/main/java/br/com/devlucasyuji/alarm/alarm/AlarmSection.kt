@@ -134,7 +134,8 @@ fun AlarmScreen(
         }
     }
 
-    ModalBottomSheetLayout(modifier = modifier,
+    ModalBottomSheetLayout(
+        modifier = modifier,
         sheetState = modalState,
         sheetShape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
         sheetContent = {

@@ -73,7 +73,8 @@ class MainActivity : ComponentActivity() {
             )
             searchGraph(
                 enterTransition = { navigationEnterTransition(navController) },
-                exitTransition = { navigationExitTransition(navController) }
+                exitTransition = { navigationExitTransition(navController) },
+                onDrawerClick = { scope.launch { drawerState.open() } },
             )
             alarmsGraph(
                 enterTransition = { navigationEnterTransition(navController) },
