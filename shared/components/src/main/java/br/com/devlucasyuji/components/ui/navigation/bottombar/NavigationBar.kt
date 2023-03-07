@@ -8,6 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import br.com.devlucasyuji.components.state.keyboardAsState
 import br.com.devlucasyuji.components.ui.animated.animation.Animate.Animated
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.components.ui.button.CameraButton
@@ -18,13 +19,14 @@ import br.com.devlucasyuji.navigation.navigate
 @Composable
 internal fun NavigationBar(navController: NavController) {
     val navItem by navController.currentNavItemAsState<BottomNavItem>()
+    val isKeyboardOpen by keyboardAsState()
     val hideBottomNavigationBar = remember(navItem) {
         BottomNavItem.values().none { destination ->
             destination.destination != Destination.Camera && destination.destination == navItem?.destination
         }
     }
 
-    if (hideBottomNavigationBar) return
+    if (hideBottomNavigationBar || isKeyboardOpen) return
 
     BottomNavigationBar(
         bottomNavItem = navItem,
