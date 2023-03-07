@@ -1,11 +1,12 @@
 package br.com.devlucasyuji.components.ui
 
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -53,14 +54,7 @@ private fun HeaderSection(
     subTitle: String,
     headerAnimation: Animation,
 ) {
-    val titlePadding = remember {
-        PaddingValues(
-            top = when {
-                trailingIcon != null || leadingIcon != null -> 24.dp
-                else -> 0.dp
-            }
-        )
-    }
+    val paddingTop by animateDpAsState(targetValue = if (trailingIcon != null || leadingIcon != null) 24.dp else 0.dp)
     Column(modifier) {
         Toolbar(trailingIcon = trailingIcon, leadingIcon = leadingIcon)
 
@@ -68,7 +62,7 @@ private fun HeaderSection(
             title = title,
             subTitle = subTitle,
             animation = headerAnimation,
-            modifier = Modifier.padding(titlePadding)
+            modifier = Modifier.padding(top = paddingTop)
         )
     }
 }
