@@ -23,6 +23,7 @@ import br.com.devlucasyuji.components.ui.animated.AnimatedButtonIcon
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.components.ui.button.Button
 import br.com.devlucasyuji.components.ui.image.Icons
+import br.com.devlucasyuji.components.ui.textfield.Placeholder
 import br.com.devlucasyuji.components.ui.textfield.TextField
 import br.com.devlucasyuji.publish.viewmodel.PublishViewModel
 
@@ -62,7 +63,7 @@ fun PublishContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 32.dp, start = 20.dp, end = 20.dp),
-            placeholder = stringResource(R.string.title),
+            placeholder = { Placeholder(text = stringResource(R.string.title)) },
             value = title,
             onValueChange = { title = it }
         )
@@ -71,7 +72,7 @@ fun PublishContent(
                 .fillMaxWidth()
                 .aspectRatio(1.25F)
                 .padding(top = 16.dp, start = 20.dp, end = 20.dp),
-            placeholder = stringResource(R.string.description),
+            placeholder = { Placeholder(text = stringResource(R.string.description)) },
             value = description,
             onValueChange = { description = it },
         )
