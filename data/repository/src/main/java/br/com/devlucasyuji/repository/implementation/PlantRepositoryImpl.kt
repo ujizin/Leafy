@@ -40,6 +40,10 @@ internal class PlantRepositoryImpl(
         emit(dataSource.deletePlant(mapper.toRepo(plant)))
     }.flowOn(dispatcher)
 
+    override fun findPlantBySentence(sentence: String) = flow {
+        emit(dataSource.findPlantBySentence(sentence).map(mapper::toDomain))
+    }.flowOn(dispatcher)
+
     override fun getDraftPlant() = flow {
         emit(dataSource.getDraftPlant()?.let(mapper::toDomain) ?: Plant.createDraft())
     }.flowOn(dispatcher)

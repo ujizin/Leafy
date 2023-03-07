@@ -63,4 +63,11 @@ interface PlantDataSource {
      *
      * */
     suspend fun getDraftPlant(): Plant?
+
+    /**
+     * Find plant by title or description.
+     *
+     * @param sentence sentence to find plants
+     * */
+    suspend fun findPlantBySentence(sentence: String): List<Plant>
 }

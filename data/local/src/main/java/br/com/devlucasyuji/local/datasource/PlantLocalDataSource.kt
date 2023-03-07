@@ -42,6 +42,10 @@ internal class PlantLocalDataSource(
         }
     }
 
+    override suspend fun findPlantBySentence(sentence: String): List<Plant> {
+        return plantDao.findBySentence(sentence).map(mapper::toPlant)
+    }
+
     override suspend fun getDraftPlant(): Plant? {
         return memoryPlantDao.getDraftPlant()?.let(mapper::toPlant)
     }

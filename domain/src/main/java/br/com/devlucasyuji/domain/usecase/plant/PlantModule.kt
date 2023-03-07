@@ -4,6 +4,7 @@ import br.com.devlucasyuji.domain.repository.PlantRepository
 import br.com.devlucasyuji.domain.usecase.plant.implementation.AddDraftPlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.AddPlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.DeletePlantImpl
+import br.com.devlucasyuji.domain.usecase.plant.implementation.FindPlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.LoadAllPlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.LoadDraftPlantImpl
 import br.com.devlucasyuji.domain.usecase.plant.implementation.LoadPlantImpl
@@ -35,6 +36,12 @@ object PlantModule {
     fun provideAddPlant(
         repository: PlantRepository
     ): AddPlant = AddPlantImpl(repository)
+
+    @Provides
+    @Singleton
+    fun provideFindPlant(
+        repository: PlantRepository
+    ): FindPlant = FindPlantImpl(repository)
 
     @Provides
     @Singleton

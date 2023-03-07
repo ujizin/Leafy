@@ -63,4 +63,11 @@ interface PlantRepository {
      * @param plant plant to be added
      * */
     fun updateDraftPlant(plant: Plant): Flow<Unit>
+
+    /**
+     * Find plant by sentence (title or description).
+     *
+     * @param sentence sentence to find plants
+     * */
+    fun findPlantBySentence(sentence: String): Flow<List<Plant>>
 }

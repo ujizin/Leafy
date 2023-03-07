@@ -22,6 +22,11 @@ interface PlantDao {
     @Query("SELECT * FROM plant")
     suspend fun getAll(): List<PlantEntity>
 
+    /**
+     *  Find plant by id.
+     *
+     *  @param id id to be found.
+     * */
     @Query("SELECT * FROM plant where plant_id=:id")
     suspend fun findById(id: Long): PlantEntity?
 
@@ -33,6 +38,14 @@ interface PlantDao {
      * */
     @Query("SELECT * FROM plant WHERE album_id = :albumId")
     suspend fun findByAlbumId(albumId: Long): List<PlantEntity>
+
+    /**
+     *  Find plants by title or description.
+     *
+     *  @param sentence sentence to find plants
+     * */
+    @Query("SELECT * FROM plant WHERE plant_title LIKE '%' || :sentence || '%' OR plant_description LIKE '%' || :sentence || '%'")
+    suspend fun findBySentence(sentence: String): List<PlantEntity>
 
     /**
      * Insert a new [PlantEntity].
