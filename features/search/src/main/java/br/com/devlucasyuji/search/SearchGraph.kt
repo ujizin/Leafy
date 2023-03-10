@@ -7,6 +7,7 @@ import br.com.devlucasyuji.navigation.AnimatedEnterTransition
 import br.com.devlucasyuji.navigation.AnimatedExitTransition
 import br.com.devlucasyuji.navigation.Destination
 import br.com.devlucasyuji.navigation.composable
+import br.com.devlucasyuji.search.ui.SearchSection
 
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.searchGraph(
