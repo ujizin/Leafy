@@ -26,7 +26,10 @@ internal fun NavigationBar(navController: NavController) {
         }
     }
 
-    if (hideBottomNavigationBar || isKeyboardOpen) return
+    if (hideBottomNavigationBar || isKeyboardOpen) {
+        Box(Modifier)
+        return
+    }
 
     BottomNavigationBar(
         bottomNavItem = navItem,
@@ -45,7 +48,7 @@ private fun BottomNavigationBar(
     onNavItemClicked: (BottomNavItem) -> Unit,
 ) {
     Box(modifier = modifier) {
-        Animated(animation = Animation.SlideToTop.copy(delayMillis = Animation.SmallDelay)) {
+        Animated(animation = Animation.SlideToTop.copy(durationMillis = Animation.SmallDuration)) {
             androidx.compose.material3.NavigationBar {
                 bottomNavItems.forEach { item ->
                     NavBarItem(selectedItem = bottomNavItem, item = item, onClick = {
