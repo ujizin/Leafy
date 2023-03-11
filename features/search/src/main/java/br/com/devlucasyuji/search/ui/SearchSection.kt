@@ -1,9 +1,18 @@
 package br.com.devlucasyuji.search.ui
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
+import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -24,6 +33,7 @@ import br.com.devlucasyuji.components.ui.Section
 import br.com.devlucasyuji.components.ui.animated.AnimatedButtonIcon
 import br.com.devlucasyuji.components.ui.animated.AnimatedIcon
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
+import br.com.devlucasyuji.components.ui.card.CardSize
 import br.com.devlucasyuji.components.ui.image.Icons
 import br.com.devlucasyuji.components.ui.textfield.Placeholder
 import br.com.devlucasyuji.components.ui.textfield.TextField
@@ -31,43 +41,71 @@ import br.com.devlucasyuji.search.R
 import br.com.devlucasyuji.search.SearchUiState
 import br.com.devlucasyuji.search.SearchViewModel
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SearchSection(
     onDrawerClick: OnClick,
     viewModel: SearchViewModel = hiltViewModel()
 ) {
     val isKeyboardOpen by keyboardAsState()
+    val uiState by viewModel.searchUiState.collectAsState()
+    val state = rememberLazyStaggeredGridState()
+    var searchText by remember { mutableStateOf("") }
 
-    Section(
-        modifier = Modifier.fillMaxSize(),
-        leadingIcon = if (!isKeyboardOpen) leadingIcon(onDrawerClick) else null,
-        trailingIcon = if (!isKeyboardOpen) trailingIcon() else null,
-        title = stringResource(R.string.search).capitalize()
+    LaunchedEffect(searchText) { viewModel.search(searchText) }
+
+    LaunchedEffect(viewModel) { viewModel.getPlants() }
+
+    LazyVerticalStaggeredGrid(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 20.dp),
+        state = state,
+        columns = StaggeredGridCells.Fixed(2),
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        val uiState by viewModel.searchUiState.collectAsState()
-        var searchText by remember { mutableStateOf("") }
+        item(span = StaggeredGridItemSpan.FullLine) {
+            Section(
+                modifier = Modifier.fillMaxWidth(),
+                headerPaddingValues = PaddingValues(top = 32.dp),
+                leadingIcon = if (!isKeyboardOpen) leadingIcon(onDrawerClick) else null,
+                trailingIcon = if (!isKeyboardOpen) trailingIcon() else null,
+                title = stringResource(R.string.search).capitalize()
+            )
+        }
 
-        LaunchedEffect(viewModel) { viewModel.getPlants() }
-        LaunchedEffect(searchText) { viewModel.search(searchText) }
-
-        TextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 24.dp),
-            placeholder = { SearchPlaceholder() },
-            value = searchText,
-            onValueChange = { searchText = it }
-        )
+        item(span = StaggeredGridItemSpan.FullLine) {
+            TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                placeholder = { SearchPlaceholder() },
+                value = searchText,
+                onValueChange = { searchText = it }
+            )
+        }
 
         when (val result: SearchUiState = uiState) {
-            SearchUiState.Initial -> SearchLoading(
-                Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp)
-            )
+            SearchUiState.Initial -> item {
+                SearchLoading(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp)
+                )
+            }
 
-            SearchUiState.Empty -> SearchEmptyList()
-            is SearchUiState.Loaded -> SearchList(result.items, isKeyboardOpen)
+            SearchUiState.Empty -> item { SearchEmptyList() }
+            is SearchUiState.Loaded -> searchItems(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = CardSize.Small.height, max = CardSize.Large.height),
+                data = result.items,
+            )
+        }
+
+        item(span = StaggeredGridItemSpan.FullLine) {
+            Spacer(Modifier.size(32.dp))
         }
     }
 }

@@ -7,10 +7,10 @@ data class Animation internal constructor(
     val durationMillis: Int = MediumDuration,
 ) {
     companion object {
-        const val SmallDelay = 250
         const val MediumDelay = 500
         const val LargeDelay = 1000
 
+        const val SmallDuration = 500
         private const val MediumDuration = 750
         private const val LargeDuration = 1_000
 

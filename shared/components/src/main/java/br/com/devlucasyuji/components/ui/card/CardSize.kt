@@ -5,7 +5,7 @@ import androidx.compose.ui.unit.dp
 
 enum class CardSize(val height: Dp) {
     None(Dp.Unspecified),
-    Small(80.dp),
-    Medium(120.dp),
+    Small(150.dp),
+    Medium(200.dp),
     Large(350.dp);
 }

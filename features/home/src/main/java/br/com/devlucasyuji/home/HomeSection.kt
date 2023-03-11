@@ -88,15 +88,14 @@ private fun HomeScreen(
                 )
             }
 
-            else -> items(result.plants) { HomePlantCard(it) }
+            else -> items(result.plants, key = { it.id }) { HomePlantCard(it) }
         }
     }
 }
 
 @Composable
-fun NavLazyColumn(modifier: Modifier = Modifier, content: LazyListScope.() -> Unit) {
+fun NavLazyColumn(content: LazyListScope.() -> Unit) {
     LazyColumn {
-        item { Spacer(modifier = modifier) }
         content()
         item { Spacer(Modifier.size(32.dp)) }
     }
@@ -108,7 +107,7 @@ private fun LazyItemScope.HomePlantCard(plant: Plant) {
     BoxImage(
         modifier = Modifier
             .animateItemPlacement()
-            .height(CardSize.Large.height)
+            .height(CardSize.Medium.height)
             .padding(horizontal = 20.dp, vertical = 8.dp),
         data = plant.file,
         contentDescription = plant.description,

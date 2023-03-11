@@ -25,7 +25,7 @@ fun TitleRow(
     subTitleStyle: TextStyle = MaterialTheme.typography.bodyMedium,
     animation: Animation = Animation.SlideToTop,
     iconSpacedBy: Dp = 8.dp,
-    icons: @Composable Content
+    icons: @Composable Content = {}
 ) {
     Animated(animation = animation) {
         Row(

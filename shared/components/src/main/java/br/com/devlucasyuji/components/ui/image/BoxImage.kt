@@ -1,11 +1,13 @@
 package br.com.devlucasyuji.components.ui.image
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -40,12 +42,13 @@ fun BoxImage(
             modifier = with(LocalDensity.current) {
                 Modifier
                     .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.primary)
                     .onGloballyPositioned {
                         imageHeight = it.size.height.toDp()
                     }
             },
             painter = painter,
-            contentScale = ContentScale.FillWidth,
+            contentScale = ContentScale.Fit,
             contentDescription = contentDescription,
         )
         Box(
