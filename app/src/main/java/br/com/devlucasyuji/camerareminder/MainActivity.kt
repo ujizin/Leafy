@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -51,7 +52,9 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberAnimatedNavController()
                 val drawerState = rememberDrawerState(DrawerValue.Closed)
                 Scaffold(
-                    modifier = Modifier.imePadding(),
+                    modifier = Modifier
+                        .imePadding()
+                        .navigationBarsPadding(),
                     drawerState = drawerState,
                     navController = navController
                 ) { CameraNavigation(navController, drawerState) }
