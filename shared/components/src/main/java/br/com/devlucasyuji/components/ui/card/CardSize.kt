@@ -7,5 +7,5 @@ enum class CardSize(val height: Dp) {
     None(Dp.Unspecified),
     Small(80.dp),
     Medium(120.dp),
-    Large(200.dp);
+    Large(350.dp);
 }

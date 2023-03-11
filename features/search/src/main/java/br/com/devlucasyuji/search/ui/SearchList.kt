@@ -1,14 +1,16 @@
 package br.com.devlucasyuji.search.ui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.itemsIndexed
-import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
+import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,37 +26,43 @@ import br.com.devlucasyuji.domain.model.Plant
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-internal fun SearchList(data: List<Plant>) {
-    val state = rememberLazyGridState()
-    LazyVerticalGrid(
+internal fun SearchList(data: List<Plant>, isKeyboardOpen: Boolean) {
+    val state = rememberLazyStaggeredGridState()
+
+    LazyVerticalStaggeredGrid(
+        modifier = Modifier.padding(horizontal = 20.dp),
         state = state,
-        columns = GridCells.Fixed(2)
+        columns = StaggeredGridCells.Fixed(2),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        itemsIndexed(items = data) { index, plant ->
-            Column(Modifier.offset(y = if (index % 2 == 1) 32.dp else (-32).dp)) {
-                BoxImage(
-                    modifier = Modifier
-                        .animateItemPlacement()
-                        .height(CardSize.Large.height)
-                        .padding(horizontal = 20.dp, vertical = 8.dp),
-                    data = plant.file,
-                    contentDescription = plant.description,
+        items(items = data) { plant ->
+            BoxImage(
+                modifier = Modifier
+                    //.animateItemPlacement()
+//                    .heightIn(min = CardSize.Small.height, max = CardSize.Large.height)
+                    .fillMaxWidth()
+                    .heightIn(min = 1.dp, max = CardSize.Large.height),
+                data = plant.file,
+                contentDescription = plant.title,
+            ) {
+                TitleRow(
+                    title = plant.title,
+                    titleStyle = MaterialTheme.typography.titleLarge.copy(color = Color.White),
+                    subTitleStyle = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
+                    subTitle = plant.description,
+                    verticalAlignment = Alignment.Bottom
                 ) {
-                    TitleRow(
-                        title = plant.title,
-                        titleStyle = MaterialTheme.typography.titleLarge.copy(color = Color.White),
-                        subTitleStyle = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
-                        subTitle = plant.description,
-                        verticalAlignment = Alignment.Bottom
-                    ) {
-                        AnimatedButtonIcon(
-                            icon = Icons.Shared,
-                            tint = Color.White,
-                            size = 24.dp
-                        )
-                    }
+                    AnimatedButtonIcon(
+                        icon = Icons.Shared,
+                        tint = Color.White,
+                        size = 24.dp
+                    )
                 }
             }
+        }
+        item {
+            Spacer(Modifier.size(if (isKeyboardOpen) 32.dp else 0.dp))
         }
     }
 }

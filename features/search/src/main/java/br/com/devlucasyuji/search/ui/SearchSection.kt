@@ -67,7 +67,7 @@ fun SearchSection(
             )
 
             SearchUiState.Empty -> SearchEmptyList()
-            is SearchUiState.Loaded -> SearchList(result.items)
+            is SearchUiState.Loaded -> SearchList(result.items, isKeyboardOpen)
         }
     }
 }
