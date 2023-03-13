@@ -17,7 +17,10 @@ import br.com.devlucasyuji.navigation.Destination
 import br.com.devlucasyuji.navigation.navigate
 
 @Composable
-internal fun NavigationBar(navController: NavController) {
+internal fun NavigationBar(
+    navController: NavController,
+    showBottomNavigation: Boolean,
+) {
     val navItem by navController.currentNavItemAsState<BottomNavItem>()
     val isKeyboardOpen by keyboardAsState()
     val hideBottomNavigationBar = remember(navItem) {
@@ -33,6 +36,7 @@ internal fun NavigationBar(navController: NavController) {
 
     BottomNavigationBar(
         bottomNavItem = navItem,
+        showBottomNavigation = showBottomNavigation,
         bottomNavItems = remember { BottomNavItem.values().toList() },
         onNavItemClicked = { destination ->
             navController.navigateToItem(destination)
@@ -44,11 +48,15 @@ internal fun NavigationBar(navController: NavController) {
 private fun BottomNavigationBar(
     modifier: Modifier = Modifier,
     bottomNavItem: BottomNavItem?,
+    showBottomNavigation: Boolean,
     bottomNavItems: List<BottomNavItem>,
     onNavItemClicked: (BottomNavItem) -> Unit,
 ) {
     Box(modifier = modifier) {
-        Animated(animation = Animation.SlideToTop.copy(durationMillis = Animation.SmallDuration)) {
+        Animated(
+            visibleTarget = showBottomNavigation,
+            animation = Animation.SlideToTop.copy(durationMillis = Animation.SmallDuration)
+        ) {
             androidx.compose.material3.NavigationBar {
                 bottomNavItems.forEach { item ->
                     NavBarItem(selectedItem = bottomNavItem, item = item, onClick = {
@@ -56,9 +64,9 @@ private fun BottomNavigationBar(
                     })
                 }
             }
-        }
-        CameraButton(Modifier.offset(y = (-32).dp)) {
-            onNavItemClicked(BottomNavItem.Camera)
+            CameraButton(Modifier.offset(y = (-32).dp)) {
+                onNavItemClicked(BottomNavItem.Camera)
+            }
         }
     }
 }

@@ -13,7 +13,11 @@ import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
@@ -51,20 +55,33 @@ class MainActivity : ComponentActivity() {
             CameraReminderTheme(dynamicColor = true) {
                 val navController = rememberAnimatedNavController()
                 val drawerState = rememberDrawerState(DrawerValue.Closed)
+                var showBottomNavigation by remember { mutableStateOf(true) }
+
                 Scaffold(
                     modifier = Modifier
                         .imePadding()
                         .navigationBarsPadding(),
                     drawerState = drawerState,
-                    navController = navController
-                ) { CameraNavigation(navController, drawerState) }
+                    navController = navController,
+                    showBottomNavigation = showBottomNavigation,
+                ) {
+                    CameraNavigation(
+                        navController = navController,
+                        drawerState = drawerState,
+                        onNavigationChanged = { showBottomNavigation = it }
+                    )
+                }
             }
         }
     }
 
     @OptIn(ExperimentalAnimationApi::class, ExperimentalMaterial3Api::class)
     @Composable
-    fun CameraNavigation(navController: NavHostController, drawerState: DrawerState) {
+    fun CameraNavigation(
+        navController: NavHostController,
+        drawerState: DrawerState,
+        onNavigationChanged: (Boolean) -> Unit
+    ) {
         val scope = rememberCoroutineScope()
 
         BackHandler { scope.launch { navController.navigateUp(drawerState) } }
@@ -83,6 +100,7 @@ class MainActivity : ComponentActivity() {
                 enterTransition = { navigationEnterTransition(navController) },
                 exitTransition = { navigationExitTransition(navController) },
                 onDrawerClick = { scope.launch { drawerState.open() } },
+                onScrollList = { onNavigationChanged(it) }
             )
             alarmsGraph(
                 enterTransition = { navigationEnterTransition(navController) },

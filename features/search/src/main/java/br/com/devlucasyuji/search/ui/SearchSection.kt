@@ -20,6 +20,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.movableContentOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -40,21 +41,29 @@ import br.com.devlucasyuji.components.ui.textfield.TextField
 import br.com.devlucasyuji.search.R
 import br.com.devlucasyuji.search.SearchUiState
 import br.com.devlucasyuji.search.SearchViewModel
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SearchSection(
     onDrawerClick: OnClick,
-    viewModel: SearchViewModel = hiltViewModel()
+    viewModel: SearchViewModel = hiltViewModel(),
+    onNavigationChanged: (Boolean) -> Unit,
 ) {
     val isKeyboardOpen by keyboardAsState()
     val uiState by viewModel.searchUiState.collectAsState()
     val state = rememberLazyStaggeredGridState()
+    val isScrolling by rememberUpdatedState(state.isScrollInProgress)
     var searchText by rememberSaveable { mutableStateOf("") }
 
     LaunchedEffect(searchText) { viewModel.search(searchText) }
 
     LaunchedEffect(viewModel) { viewModel.getPlants() }
+
+    LaunchedEffect(isScrolling) {
+        if (!isScrolling) delay(1_000)
+        onNavigationChanged(!isScrolling)
+    }
 
     LazyVerticalStaggeredGrid(
         modifier = Modifier

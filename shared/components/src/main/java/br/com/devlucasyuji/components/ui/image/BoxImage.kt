@@ -42,7 +42,7 @@ fun BoxImage(
             modifier = with(LocalDensity.current) {
                 Modifier
                     .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.primary)
+                    .background(MaterialTheme.colorScheme.secondaryContainer)
                     .onGloballyPositioned {
                         imageHeight = it.size.height.toDp()
                     }

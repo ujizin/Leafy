@@ -8,6 +8,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -48,6 +49,7 @@ object Animate {
     fun Animated(
         modifier: Modifier = Modifier,
         animation: Animation,
+        visibleTarget: Boolean = true,
         content: @Composable () -> Unit,
     ) {
         if (animation.direction == Direction.None) {
@@ -57,8 +59,8 @@ object Animate {
         val visible = rememberSaveable { mutableStateOf(false) }
         val visibleState = remember {
             MutableTransitionState(visible.value).apply {
-                targetState = true
-                visible.value = true
+                targetState = visibleTarget
+                visible.value = visibleTarget
             }
         }
 
@@ -69,6 +71,7 @@ object Animate {
                 animation.durationMillis,
                 animation.delayMillis
             ),
+            exit = slideOutVertically { it * 2 } // TODO add exit animation
         ) { content() }
     }
 }
