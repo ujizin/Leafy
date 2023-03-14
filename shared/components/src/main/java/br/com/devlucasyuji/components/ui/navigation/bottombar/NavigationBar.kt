@@ -1,6 +1,7 @@
 package br.com.devlucasyuji.components.ui.navigation.bottombar
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -23,20 +24,15 @@ internal fun NavigationBar(
 ) {
     val navItem by navController.currentNavItemAsState<BottomNavItem>()
     val isKeyboardOpen by keyboardAsState()
-    val hideBottomNavigationBar = remember(navItem) {
-        BottomNavItem.values().none { destination ->
-            destination.destination != Destination.Camera && destination.destination == navItem?.destination
+    val isBottomNavItem = remember(navItem) {
+        BottomNavItem.values().any { bottomNavItem ->
+            bottomNavItem.destination != Destination.Camera && bottomNavItem.destination == navItem?.destination
         }
-    }
-
-    if (hideBottomNavigationBar || isKeyboardOpen) {
-        Box(Modifier)
-        return
     }
 
     BottomNavigationBar(
         bottomNavItem = navItem,
-        showBottomNavigation = showBottomNavigation,
+        showBottomNavigation = isBottomNavItem && !isKeyboardOpen && showBottomNavigation,
         bottomNavItems = remember { BottomNavItem.values().toList() },
         onNavItemClicked = { destination ->
             navController.navigateToItem(destination)
@@ -64,7 +60,12 @@ private fun BottomNavigationBar(
                     })
                 }
             }
-            CameraButton(Modifier.offset(y = (-32).dp)) {
+
+            CameraButton(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .offset(y = (-32).dp),
+            ) {
                 onNavItemClicked(BottomNavItem.Camera)
             }
         }
