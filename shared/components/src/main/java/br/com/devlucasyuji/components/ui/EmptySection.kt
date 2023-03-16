@@ -1,6 +1,5 @@
 package br.com.devlucasyuji.components.ui
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,6 +14,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.devlucasyuji.components.R
@@ -27,8 +27,8 @@ import br.com.devlucasyuji.themes.CameraReminderTheme
 @Composable
 fun EmptySection(
     modifier: Modifier = Modifier,
-    @StringRes descriptionRes: Int = R.string.empty_plant,
-    @StringRes buttonRes: Int = R.string.take_a_picture,
+    description: String = stringResource(id = R.string.empty_plant).capitalize(),
+    buttonTitle: String = stringResource(id = R.string.take_a_picture).capitalize(),
     enabled: Boolean = true,
     icons: Icons = Icons.Leaf,
     onClick: OnClick,
@@ -46,11 +46,13 @@ fun EmptySection(
         )
         Text(
             modifier = Modifier.padding(16.dp),
-            text = stringResource(id = descriptionRes).capitalize(),
+            text = description.capitalize(),
             textAlign = TextAlign.Center,
+            maxLines = 3,
+            overflow = TextOverflow.Ellipsis
         )
         Button(
-            text = stringResource(id = buttonRes).capitalize(),
+            text = buttonTitle.capitalize(),
             enabled = enabled,
             onClick = onClick
         )

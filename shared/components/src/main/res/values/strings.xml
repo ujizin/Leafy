@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">Camera Reminder</string>
-    <string name="take_a_picture">take a picture</string>
+    <string name="take_a_picture">take a new picture</string>
     <string name="empty_plant">oh no, it looks like that you haven\'t registered any plant yet</string>
     <string name="camera_permission_description">oh no, we need to use the camera! could you allow me to use please?</string>
     <string name="camera_permission_denied_description">oh no, you denied to use the camera! Please, allow camera on settings app to use this feature</string>
