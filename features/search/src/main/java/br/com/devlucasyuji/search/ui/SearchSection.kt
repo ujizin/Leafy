@@ -17,10 +17,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.movableContentOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -47,22 +48,25 @@ import kotlinx.coroutines.delay
 @Composable
 fun SearchSection(
     onDrawerClick: OnClick,
+    onTakePictureClick: OnClick,
+    onScroll: (Boolean) -> Unit,
     viewModel: SearchViewModel = hiltViewModel(),
-    onNavigationChanged: (Boolean) -> Unit,
 ) {
     val isKeyboardOpen by keyboardAsState()
     val uiState by viewModel.searchUiState.collectAsState()
     val state = rememberLazyStaggeredGridState()
-    val isScrolling by rememberUpdatedState(state.isScrollInProgress)
+    val isScrolling by remember {
+        derivedStateOf {
+            (state.canScrollBackward || state.canScrollForward) && state.isScrollInProgress
+        }
+    }
     var searchText by rememberSaveable { mutableStateOf("") }
 
-    LaunchedEffect(searchText) { viewModel.search(searchText) }
-
-    LaunchedEffect(viewModel) { viewModel.getPlants() }
+    LaunchedEffect(viewModel, searchText) { viewModel.search(searchText) }
 
     LaunchedEffect(isScrolling) {
         if (!isScrolling) delay(1_000)
-        onNavigationChanged(!isScrolling)
+        onScroll(!isScrolling)
     }
 
     LazyVerticalStaggeredGrid(
@@ -104,7 +108,16 @@ fun SearchSection(
                 )
             }
 
-            SearchUiState.Empty -> item { SearchEmptyList() }
+            SearchUiState.Empty -> item(span = StaggeredGridItemSpan.FullLine) {
+                SearchEmptyList(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(20.dp),
+                    searchText = searchText,
+                    onTakePictureClick = onTakePictureClick
+                )
+            }
+
             is SearchUiState.Loaded -> searchItems(
                 modifier = Modifier
                     .fillMaxWidth()

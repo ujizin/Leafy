@@ -100,7 +100,8 @@ class MainActivity : ComponentActivity() {
                 enterTransition = { navigationEnterTransition(navController) },
                 exitTransition = { navigationExitTransition(navController) },
                 onDrawerClick = { scope.launch { drawerState.open() } },
-                onScrollList = { onNavigationChanged(it) }
+                onTakePictureClick = { navController.navigate(Destination.Camera) },
+                onScroll = onNavigationChanged
             )
             alarmsGraph(
                 enterTransition = { navigationEnterTransition(navController) },

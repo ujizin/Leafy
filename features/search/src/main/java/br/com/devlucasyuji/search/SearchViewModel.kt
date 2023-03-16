@@ -24,14 +24,11 @@ class SearchViewModel @Inject constructor(
     private val _searchUiState = MutableStateFlow<SearchUiState>(SearchUiState.Initial)
     val searchUiState = _searchUiState.asStateFlow()
 
-    fun getPlants() {
-        loadPlants().onEachPlant().launchIn(viewModelScope)
-    }
-
     fun search(sentence: String) {
-        if (sentence.isBlank()) return getPlants()
-
-        findPlant(sentence).onEachPlant().launchIn(viewModelScope)
+        when {
+            sentence.isBlank() -> loadPlants()
+            else -> findPlant(sentence)
+        }.onEachPlant().launchIn(viewModelScope)
     }
 
     private fun Flow<Result<List<Plant>>>.onEachPlant() = onEach { result ->
@@ -39,7 +36,13 @@ class SearchViewModel @Inject constructor(
             when (result) {
                 is Result.Error -> SearchUiState.Initial
                 Result.Loading -> currentState
-                is Result.Success -> SearchUiState.Loaded(result.data)
+                is Result.Success -> {
+                    if (result.data.isEmpty()) {
+                        SearchUiState.Empty
+                    } else {
+                        SearchUiState.Loaded(result.data)
+                    }
+                }
             }
         }
     }

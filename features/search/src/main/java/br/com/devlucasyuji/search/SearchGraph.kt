@@ -14,11 +14,17 @@ fun NavGraphBuilder.searchGraph(
     enterTransition: AnimatedEnterTransition,
     exitTransition: AnimatedExitTransition,
     onDrawerClick: OnClick,
-    onScrollList: (Boolean) -> Unit,
+    onTakePictureClick: OnClick,
+    onScroll: (Boolean) -> Unit
 ) {
     composable(
         destination = Destination.Search,
         enterTransition = enterTransition,
         exitTransition = exitTransition
-    ) { SearchSection(onDrawerClick = onDrawerClick, onNavigationChanged = onScrollList) }
+    ) {
+        SearchSection(
+            onDrawerClick = onDrawerClick,
+            onScroll = onScroll,
+            onTakePictureClick = onTakePictureClick,
+        ) }
 }
