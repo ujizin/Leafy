@@ -5,7 +5,7 @@ enum class Destination(
     private val destinationName: String,
 ) {
     Home("home"),
-    Search("search"),
+    Search("search?auto_focus={${Args.SearchAutoFocus}}"),
     Camera("camera"),
     Alarms("alarms"),
     Others("others"),
@@ -16,10 +16,10 @@ enum class Destination(
 
     val route: String get() = "$HOST/$destinationName"
 
-    fun withArguments(vararg arguments: Pair<String, String>): String {
+    fun withArguments(vararg arguments: Pair<String, Any>): String {
         var destinationName = this.destinationName
         arguments.forEach { (key, value) ->
-            destinationName = destinationName.replace("{$key}", value)
+            destinationName = destinationName.replace("{$key}", "$value")
         }
         return "$HOST/$destinationName"
     }

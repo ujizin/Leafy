@@ -25,6 +25,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -54,6 +56,9 @@ fun SearchSection(
 ) {
     val isKeyboardOpen by keyboardAsState()
     val uiState by viewModel.searchUiState.collectAsState()
+
+    val focusRequester = remember { FocusRequester() }
+
     val state = rememberLazyStaggeredGridState()
     val isScrolling by remember {
         derivedStateOf {
@@ -92,7 +97,8 @@ fun SearchSection(
             TextField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 8.dp),
+                    .padding(vertical = 8.dp)
+                    .focusRequester(focusRequester),
                 placeholder = { SearchPlaceholder() },
                 value = searchText,
                 onValueChange = { searchText = it }
@@ -100,7 +106,11 @@ fun SearchSection(
         }
 
         when (val result: SearchUiState = uiState) {
-            SearchUiState.Initial -> item {
+            is SearchUiState.Initial -> item {
+                LaunchedEffect(result.autoFocus) {
+                    if (result.autoFocus) focusRequester.requestFocus()
+                }
+
                 SearchLoading(
                     Modifier
                         .fillMaxWidth()

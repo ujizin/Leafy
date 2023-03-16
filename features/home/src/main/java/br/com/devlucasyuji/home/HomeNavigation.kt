@@ -13,6 +13,7 @@ fun NavGraphBuilder.homeGraph(
     enterTransition: AnimatedEnterTransition,
     exitTransition: AnimatedExitTransition,
     onTakePictureClick: OnClick,
+    onSearchClick: OnClick,
     onDrawerClick: OnClick
 ) {
     composable(
@@ -23,6 +24,7 @@ fun NavGraphBuilder.homeGraph(
         HomeRoute(
             onTakePictureClick = onTakePictureClick,
             onDrawerClick = onDrawerClick,
+            onSearchClick = onSearchClick,
         )
     }
 }

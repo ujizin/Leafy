@@ -30,6 +30,7 @@ import br.com.devlucasyuji.components.ui.Scaffold
 import br.com.devlucasyuji.components.ui.navigation.navigationEnterTransition
 import br.com.devlucasyuji.components.ui.navigation.navigationExitTransition
 import br.com.devlucasyuji.home.homeGraph
+import br.com.devlucasyuji.navigation.Args
 import br.com.devlucasyuji.navigation.Destination
 import br.com.devlucasyuji.navigation.navigate
 import br.com.devlucasyuji.navigation.navigateUp
@@ -94,6 +95,11 @@ class MainActivity : ComponentActivity() {
                 enterTransition = { navigationEnterTransition(navController) },
                 exitTransition = { navigationExitTransition(navController) },
                 onTakePictureClick = { navController.navigate(Destination.Camera) },
+                onSearchClick = {
+                    navController.navigate(
+                        Destination.Search.withArguments(Args.SearchAutoFocus to true)
+                    )
+                },
                 onDrawerClick = { scope.launch { drawerState.open() } },
             )
             searchGraph(

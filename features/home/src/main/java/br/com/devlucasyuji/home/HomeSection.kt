@@ -36,7 +36,8 @@ import br.com.devlucasyuji.domain.model.Plant
 fun HomeRoute(
     viewModel: HomeViewModel = hiltViewModel(),
     onTakePictureClick: OnClick,
-    onDrawerClick: OnClick
+    onDrawerClick: OnClick,
+    onSearchClick: OnClick
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         val state by viewModel.homeState.collectAsState()
@@ -45,6 +46,7 @@ fun HomeRoute(
             is HomeUIState.Success -> HomeScreen(
                 result = result,
                 onEmptyPlantClick = onTakePictureClick,
+                onSearchClick = onSearchClick,
                 onDrawerClick = onDrawerClick,
             )
 
@@ -57,6 +59,7 @@ fun HomeRoute(
 private fun HomeScreen(
     result: HomeUIState.Success,
     onEmptyPlantClick: OnClick,
+    onSearchClick: OnClick,
     onDrawerClick: OnClick
 ) {
     NavLazyColumn {
@@ -75,7 +78,11 @@ private fun HomeScreen(
                     )
                 },
                 trailingIcon = {
-                    AnimatedButtonIcon(icon = Icons.Magnifier, animation = Animation.SlideToStart)
+                    AnimatedButtonIcon(
+                        icon = Icons.Magnifier,
+                        animation = Animation.SlideToStart,
+                        onClick = onSearchClick,
+                    )
                 }
             )
         }
