@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="search">search</string>
+    <string name="search_empty_description">oh no! There\'s no result for \"%s\".</string>
 </resources>
