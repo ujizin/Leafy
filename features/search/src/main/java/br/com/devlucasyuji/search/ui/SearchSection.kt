@@ -114,7 +114,7 @@ fun SearchSection(
         }
 
         item(span = StaggeredGridItemSpan.FullLine) {
-            Spacer(Modifier.size(32.dp))
+            Spacer(Modifier.padding(64.dp))
         }
     }
 }
