@@ -70,7 +70,7 @@ fun SearchSection(
     LaunchedEffect(viewModel, searchText) { viewModel.search(searchText) }
 
     LaunchedEffect(isScrolling) {
-        if (!isScrolling) delay(1_000)
+        if (!isScrolling) delay(500)
         onScroll(!isScrolling)
     }
 
