@@ -7,6 +7,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
+import br.com.devlucasyuji.camera.ui.camera.Camera
 import br.com.devlucasyuji.camera.viewmodel.CameraUiState
 import br.com.devlucasyuji.camera.viewmodel.CameraViewModel
 import br.com.devlucasyuji.components.extensions.OnClick
@@ -32,7 +33,7 @@ internal fun CameraRoute(
             val cameraState = rememberCameraState()
 
             if (state !is CameraUiState.Preview) {
-                CameraSection(
+                Camera(
                     uiState = state,
                     cameraState = cameraState,
                     onCloseClicked = onCloseClicked,
