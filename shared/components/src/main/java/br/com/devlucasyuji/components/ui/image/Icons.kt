@@ -21,5 +21,7 @@ enum class Icons(
     Leaf(R.drawable.leaf, R.string.leaf),
     Others(R.drawable.others, R.string.others),
     Close(R.drawable.close, R.string.close),
+    Gallery(R.drawable.gallery, R.string.gallery),
+    Refresh(R.drawable.refresh, R.string.refresh),
     Back(R.drawable.back, R.string.back);
 }

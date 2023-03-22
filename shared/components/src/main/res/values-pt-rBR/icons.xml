@@ -15,5 +15,7 @@
     <string name="folder">pasta</string>
     <string name="leaf">folha</string>
     <string name="close">fechar</string>
+    <string name="gallery">galeria</string>
+    <string name="refresh">atualizar</string>
     <string name="back">voltar</string>
 </resources>

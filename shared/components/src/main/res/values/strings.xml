@@ -8,4 +8,6 @@
     <string name="camera_permission_allow">allow camera</string>
     <string name="save">save</string>
     <string name="edit_name">edit name</string>
+    <string name="gallery">gallery</string>
+    <string name="refresh">refresh</string>
 </resources>
