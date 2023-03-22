@@ -38,6 +38,7 @@ fun CameraFooter(
     modifier: Modifier = Modifier,
     onTakePicture: OnClick,
     onGalleryClick: OnClick,
+    onSwitchClick: OnClick,
 ) {
     Box(
         modifier = Modifier
@@ -54,7 +55,7 @@ fun CameraFooter(
         )
         ButtonSwitchCamera(
             modifier = Modifier.align(Alignment.CenterEnd),
-            onClick = {},
+            onClick = onSwitchClick,
         )
     }
 }

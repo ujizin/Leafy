@@ -20,6 +20,7 @@ import br.com.devlucasyuji.camera.viewmodel.CameraUiState
 import br.com.devlucasyuji.components.extensions.OnClick
 import com.ujizin.camposer.CameraPreview
 import com.ujizin.camposer.state.CameraState
+import com.ujizin.camposer.state.rememberCamSelector
 
 @Composable
 internal fun Camera(
@@ -31,11 +32,14 @@ internal fun Camera(
     if (uiState is CameraUiState.Error) {
         ErrorPopUp(uiState.message)
     }
+
     var zoomRatio by remember { mutableStateOf(cameraState.minZoom) }
+    var camSelector by rememberCamSelector()
 
     CameraPreview(
         modifier = Modifier.fillMaxSize(),
         cameraState = cameraState,
+        camSelector = camSelector,
         zoomRatio = zoomRatio,
         onZoomRatioChanged = { zoomRatio = it }
     ) {
@@ -54,7 +58,8 @@ internal fun Camera(
                     .fillMaxWidth()
                     .padding(horizontal = 48.dp, vertical = 32.dp),
                 onTakePicture = onTakePicture,
-                onGalleryClick = {}
+                onGalleryClick = {},
+                onSwitchClick = { camSelector = camSelector.inverse }
             )
         }
     }
