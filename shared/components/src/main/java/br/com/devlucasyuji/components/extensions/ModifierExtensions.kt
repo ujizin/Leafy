@@ -1,6 +1,7 @@
 package br.com.devlucasyuji.components.extensions
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -19,4 +20,8 @@ fun Modifier.innerShadow(colors: List<Color>, shape: Shape = RectangleShape) = t
 
 fun Modifier.paddingScreen(horizontal: Dp = 20.dp, vertical: Dp = 0.dp) = then(
     Modifier.padding(horizontal = horizontal, vertical = vertical)
+)
+
+fun Modifier.noClickable() = then(
+    Modifier.clickable(enabled = false, onClick = {})
 )
