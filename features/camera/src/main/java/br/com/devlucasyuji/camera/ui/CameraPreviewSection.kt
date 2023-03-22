@@ -1,13 +1,10 @@
 package br.com.devlucasyuji.camera.ui
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,20 +26,16 @@ internal fun CameraPreviewSection(
 ) {
     BackHandler(onBack = onBackPressed)
     Box(Modifier.fillMaxSize()) {
+        AsyncImage(
+            modifier = Modifier.fillMaxSize(),
+            model = previewImage,
+            contentDescription = null
+        )
         AnimatedButtonIcon(
             modifier = Modifier.padding(16.dp),
             icon = Icons.Back,
             animation = Animation.SlideToBottom,
             onClick = onBackPressed
-        )
-        AsyncImage(
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(2F)
-                .align(Alignment.Center)
-                .background(MaterialTheme.colorScheme.surface),
-            model = previewImage,
-            contentDescription = null
         )
         Button(
             modifier = Modifier
