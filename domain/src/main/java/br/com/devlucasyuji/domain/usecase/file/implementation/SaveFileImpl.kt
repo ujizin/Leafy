@@ -1,5 +1,6 @@
 package br.com.devlucasyuji.domain.usecase.file.implementation
 
+import android.graphics.Bitmap
 import br.com.devlucasyuji.domain.repository.FileRepository
 import br.com.devlucasyuji.domain.usecase.file.SaveFile
 import java.io.File
@@ -10,7 +11,7 @@ internal class SaveFileImpl(
 
     override operator fun invoke(
         parentFile: File,
-        byteArray: ByteArray,
+        bitmap: Bitmap,
         extension: String
-    ): File = repository.saveByteArray(parentFile, byteArray, extension)
+    ): File = repository.saveBitmap(parentFile, bitmap, extension)
 }

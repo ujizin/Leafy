@@ -1,5 +1,6 @@
 package br.com.devlucasyuji.domain.repository
 
+import android.graphics.Bitmap
 import java.io.File
 
 interface FileRepository {
@@ -7,8 +8,8 @@ interface FileRepository {
      * Save byte array in file.
      *
      * @param parentFile the parent file where's to be saved.
-     * @param byteArray the byte array to be saved.
+     * @param bitmap the bitmap to be saved.
      * @param extension extension from file.
      * */
-    fun saveByteArray(parentFile: File, byteArray: ByteArray, extension: String): File
+    fun saveBitmap(parentFile: File, bitmap: Bitmap, extension: String): File
 }

@@ -1,6 +1,8 @@
 package br.com.devlucasyuji.repository.implementation
 
+import android.graphics.Bitmap
 import br.com.devlucasyuji.domain.repository.FileRepository
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.util.UUID
@@ -13,10 +15,14 @@ internal class FileRepositoryImpl : FileRepository {
     private fun File.createNewUniqueFile(extension: String) =
         File(this, createUniqueName(extension)).apply { createNewFile() }
 
-    override fun saveByteArray(parentFile: File, byteArray: ByteArray, extension: String): File {
+    override fun saveBitmap(parentFile: File, bitmap: Bitmap, extension: String): File {
         val file = parentFile.createNewUniqueFile(extension)
+        val stream = ByteArrayOutputStream()
+
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+
         FileOutputStream(file).apply {
-            write(byteArray)
+            write(stream.toByteArray())
             close()
         }
         return file
