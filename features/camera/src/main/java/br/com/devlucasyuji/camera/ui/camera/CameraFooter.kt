@@ -101,14 +101,14 @@ fun ButtonGallery(
                 MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.25F),
                 CircleShape
             )
-            .padding(8.dp)
+            .padding(12.dp)
             .then(modifier),
         shape = CircleShape,
         onClick = onClick
     ) {
         AnimatedIcon(
             modifier = Modifier
-                .size(32.dp)
+                .size(24.dp)
                 .align(Alignment.Center),
             icon = Icons.Gallery
         )
