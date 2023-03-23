@@ -1,5 +1,6 @@
 package br.com.devlucasyuji.components.ui.navigation.drawer
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -16,6 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import br.com.devlucasyuji.components.R
+import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.components.extensions.capitalize
 import br.com.devlucasyuji.components.ui.header.HeaderTitle
 
@@ -24,12 +26,14 @@ import br.com.devlucasyuji.components.ui.header.HeaderTitle
 internal fun DrawerContent(
     modifier: Modifier = Modifier,
     drawerItem: DrawerItem?,
+    onUserClick: OnClick,
     onDrawerClicked: (DrawerItem) -> Unit,
     onCloseDrawer: () -> Unit,
 ) {
     ModalDrawerSheet(modifier) {
         Column(Modifier.padding(horizontal = 12.dp, vertical = 32.dp)) {
             HeaderTitle(
+                modifier = Modifier.clickable(onClick = onUserClick),
                 title = "Lucas", // TODO name from data
                 subTitle = stringResource(R.string.edit_name).capitalize()
             )

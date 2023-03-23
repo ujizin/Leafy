@@ -16,6 +16,7 @@ import br.com.devlucasyuji.components.ui.navigation.bottombar.NavigationBar
 import br.com.devlucasyuji.components.ui.navigation.currentNavItemAsState
 import br.com.devlucasyuji.components.ui.navigation.drawer.DrawerContent
 import br.com.devlucasyuji.components.ui.navigation.drawer.DrawerItem
+import br.com.devlucasyuji.navigation.Destination
 import br.com.devlucasyuji.navigation.navigate
 import kotlinx.coroutines.launch
 
@@ -37,6 +38,10 @@ fun Scaffold(
             val scope = rememberCoroutineScope()
             DrawerContent(
                 drawerItem = currentDrawerItem,
+                onUserClick = {
+                    scope.launch { drawerState.close() }
+                    navController.navigate(Destination.Preferences)
+                },
                 onDrawerClicked = { drawerItem ->
                     scope.launch { drawerState.close() }
                     navController.navigate(drawerItem.destination)

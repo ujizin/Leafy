@@ -1,6 +1,8 @@
 package com.ujizin.preferences
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.devlucasyuji.components.extensions.OnClick
@@ -15,6 +17,7 @@ internal fun Preferences(
     viewModel: PreferencesViewModel = hiltViewModel(),
 ) {
     Section(
+        modifier = Modifier.fillMaxSize(),
         title = stringResource(R.string.preferences_title),
         trailingIcon = {
             AnimatedButtonIcon(icon = Icons.Back, onClick = onBackPressed)
