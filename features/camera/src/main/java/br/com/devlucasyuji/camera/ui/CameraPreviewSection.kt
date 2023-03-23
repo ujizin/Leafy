@@ -1,5 +1,6 @@
 package br.com.devlucasyuji.camera.ui
 
+import android.graphics.Bitmap
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,15 +21,15 @@ import coil.compose.AsyncImage
 
 @Composable
 internal fun CameraPreviewSection(
-    previewImage: ByteArray,
-    onSaveClicked: (ByteArray) -> Unit,
+    bitmap: Bitmap,
+    onSaveClicked: (Bitmap) -> Unit,
     onBackPressed: OnClick,
 ) {
     BackHandler(onBack = onBackPressed)
     Box(Modifier.fillMaxSize()) {
         AsyncImage(
             modifier = Modifier.fillMaxSize(),
-            model = previewImage,
+            model = bitmap,
             contentDescription = null
         )
         AnimatedButtonIcon(
@@ -43,7 +44,7 @@ internal fun CameraPreviewSection(
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter),
             text = stringResource(id = R.string.save),
-            onClick = { onSaveClicked(previewImage) }
+            onClick = { onSaveClicked(bitmap) }
         )
     }
 }

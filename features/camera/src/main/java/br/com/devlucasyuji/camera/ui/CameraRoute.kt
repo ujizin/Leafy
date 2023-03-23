@@ -1,6 +1,9 @@
 package br.com.devlucasyuji.camera.ui
 
 import android.Manifest
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -26,33 +29,41 @@ internal fun CameraRoute(
 ) {
     val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
     val context = LocalContext.current
+
     when (val status = cameraPermissionState.status) {
         PermissionStatus.Granted -> {
             val uiState by viewModel.uiState.collectAsState()
-            val state: CameraUiState = uiState
             val cameraState = rememberCameraState()
-
-            if (state !is CameraUiState.Preview) {
-                Camera(
-                    uiState = state,
-                    cameraState = cameraState,
-                    onCloseClicked = onCloseClicked,
-                    onTakePicture = { viewModel.takePicture(cameraState) }
+            val launcher = rememberLauncherForActivityResult(PickVisualMedia()) launcher@{ uri ->
+                if (uri == null) return@launcher
+                viewModel.preparePreview(
+                    contentResolver = context.contentResolver,
+                    uri = uri,
                 )
             }
 
-            when (state) {
-                is CameraUiState.Preview -> {
-                    CameraPreviewSection(
-                        previewImage = state.imageByteArray,
-                        onBackPressed = viewModel::onBackCamera,
-                        onSaveClicked = {
-                            viewModel.saveImage(context, state.imageByteArray, onImageSaved)
-                        }
-                    )
-                }
+            when (val state = uiState) {
+                is CameraUiState.Preview -> CameraPreviewSection(
+                    bitmap = state.bitmap,
+                    onBackPressed = viewModel::onBackCamera,
+                    onSaveClicked = {
+                        viewModel.saveImage(
+                            context = context,
+                            bitmap = state.bitmap,
+                            onImageSaved = onImageSaved
+                        )
+                    }
+                )
 
-                else -> Unit
+                else -> Camera(
+                    uiState = state,
+                    cameraState = cameraState,
+                    onCloseClicked = onCloseClicked,
+                    onTakePicture = { viewModel.takePicture(cameraState) },
+                    onGalleryClick = {
+                        launcher.launch(PickVisualMediaRequest(PickVisualMedia.ImageOnly))
+                    }
+                )
             }
         }
 

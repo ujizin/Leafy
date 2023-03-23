@@ -28,6 +28,7 @@ internal fun Camera(
     cameraState: CameraState,
     onCloseClicked: OnClick,
     onTakePicture: OnClick,
+    onGalleryClick: OnClick,
 ) {
     if (uiState is CameraUiState.Error) {
         ErrorPopUp(uiState.message)
@@ -58,7 +59,7 @@ internal fun Camera(
                     .fillMaxWidth()
                     .padding(horizontal = 48.dp, vertical = 32.dp),
                 onTakePicture = onTakePicture,
-                onGalleryClick = {},
+                onGalleryClick = onGalleryClick,
                 onSwitchClick = { camSelector = camSelector.inverse }
             )
         }
