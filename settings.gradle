@@ -37,3 +37,4 @@ include ':shared:navigation'
 include ':shared:test'
 
 include ':features:about'
+include ':features:preferences'

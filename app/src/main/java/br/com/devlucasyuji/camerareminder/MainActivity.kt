@@ -41,6 +41,7 @@ import br.com.devlucasyuji.themes.CameraReminderTheme
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.ujizin.about.aboutGraph
+import com.ujizin.preferences.preferencesGraph
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -132,9 +133,8 @@ class MainActivity : ComponentActivity() {
                 onNextClick = { navController.navigate(Destination.Alarm) },
                 exitTransition = { slideOutOfContainer(AnimatedContentScope.SlideDirection.Start) }
             )
-            aboutGraph(
-                onBackPressed = navController::navigateUp
-            )
+            aboutGraph(onBackPressed = navController::navigateUp)
+            preferencesGraph(onBackPressed = navController::navigateUp)
         }
     }
 

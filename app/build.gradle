@@ -23,6 +23,7 @@ dependencies {
     implementation projects.features.camera
     implementation projects.features.publish
     implementation projects.features.about
+    implementation projects.features.preferences
 
     implementation projects.data.local
 
