@@ -40,7 +40,7 @@ class AlarmViewModel @Inject constructor(
 
     fun setupRingtones() {
         getRingtones()
-            .onEach { ringtones -> _uiState.update { AlarmUiState.Initialized(ringtones) } }
+            .onEach { ringtones -> _uiState.update { AlarmUiState.Initialized(ringtones.distinctBy { it.title }) } }
             .launchIn(viewModelScope)
     }
 

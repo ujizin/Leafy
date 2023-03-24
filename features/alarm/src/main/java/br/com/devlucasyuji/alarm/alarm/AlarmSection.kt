@@ -1,18 +1,10 @@
 package br.com.devlucasyuji.alarm.alarm
 
 import android.media.RingtoneManager
-import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetLayout
-import androidx.compose.material.ModalBottomSheetState
-import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -20,13 +12,14 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
 import br.com.devlucasyuji.alarm.R
 import br.com.devlucasyuji.alarm.alarm.components.timer_box.TimerBox
 import br.com.devlucasyuji.alarm.extensions.alarmManager
@@ -34,6 +27,7 @@ import br.com.devlucasyuji.alarm.extensions.hasAlarmPermission
 import br.com.devlucasyuji.alarm.extensions.startAlarmPermission
 import br.com.devlucasyuji.alarm.model.RepeatMode
 import br.com.devlucasyuji.components.extensions.OnClick
+import br.com.devlucasyuji.components.extensions.observeAsState
 import br.com.devlucasyuji.components.extensions.paddingScreen
 import br.com.devlucasyuji.components.ui.Section
 import br.com.devlucasyuji.components.ui.animated.AnimatedButtonIcon
@@ -45,11 +39,6 @@ import br.com.devlucasyuji.components.ui.selector.MultiModalSelector
 import br.com.devlucasyuji.components.ui.selector.Selector
 import br.com.devlucasyuji.domain.model.Ringtone
 import br.com.devlucasyuji.domain.model.orDefault
-import kotlinx.coroutines.launch
-
-enum class AlarmSheet {
-    Repeat, Ringtone, Hidden
-}
 
 @Composable
 fun AlarmSection(
@@ -77,6 +66,7 @@ fun AlarmSection(
     }
 
     AlarmScreen(
+        modifier = Modifier.fillMaxSize(),
         ringtoneValues = ringtones,
         repeatModeValues = repeatValues,
         onBackPressed = onBackPressed,
@@ -100,7 +90,6 @@ fun AlarmSection(
     )
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AlarmScreen(
     modifier: Modifier = Modifier,
@@ -115,66 +104,45 @@ fun AlarmScreen(
     onSaveClicked: OnClick,
 ) {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
-    val modalState = rememberModalBottomSheetState(
-        initialValue = ModalBottomSheetValue.Hidden,
-    )
     val ringtonePlayer = remember(ringtone) { RingtoneManager.getRingtone(context, ringtone.uri) }
+    var ringtoneShowModal by remember { mutableStateOf(false) }
+    var repeatShowModal by remember { mutableStateOf(false) }
 
-    var sheetType by remember { mutableStateOf(AlarmSheet.Hidden) }
+    RingtoneEffect(ringtonePlayer, ringtoneShowModal)
 
-    RingtoneEffect(ringtonePlayer, modalState.isVisible)
-
-    ModalEffect(modalState, sheetType) { sheetType = AlarmSheet.Hidden }
-
-    BackHandler {
-        when {
-            modalState.isVisible -> scope.launch { modalState.hide() }
-            else -> onBackPressed()
-        }
-    }
-
-    ModalBottomSheetLayout(
+    AlarmContent(
         modifier = modifier,
-        sheetState = modalState,
-        sheetShape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
-        sheetContent = {
-            when (sheetType) {
-                AlarmSheet.Ringtone -> ModalSelector(
-                    title = stringResource(R.string.ringtone),
-                    enabled = !modalState.isAnimationRunning,
-                    currentValue = ringtone.title,
-                    values = remember { ringtoneValues.map { it.title } },
-                    onValueChanged = { value ->
-                        ringtonePlayer.stop()
-                        onRingtoneChanged(ringtoneValues.first { it.title == value })
-                    },
-                )
-                // TODO add a multiple modal selector for repeat mode on V 2
-                AlarmSheet.Repeat -> MultiModalSelector(title = stringResource(R.string.repeat),
-                    currentValue = stringResource(id = repeat.display),
-                    enabled = !modalState.isAnimationRunning,
-                    values = repeatModeValues.map { stringResource(it.display) },
-                    onValueChanged = { value ->
-                        onRepeatChanged(RepeatMode.getByDisplayValue(context, value))
-                        scope.launch { modalState.hide() }
-                    })
-
-                AlarmSheet.Hidden -> Box(Modifier.size(1.dp))
-            }
-
-        }) {
-        AlarmContent(
-            modifier = Modifier.fillMaxSize(),
-            ringtone = ringtone.title,
-            repeat = stringResource(repeat.display),
-            onRingtoneClicked = { sheetType = AlarmSheet.Ringtone },
-            onRepeatClicked = { sheetType = AlarmSheet.Repeat },
-            onTimeChanged = onTimeChanged,
-            onBackPressed = onBackPressed,
-            onSaveClicked = onSaveClicked
-        )
-    }
+        ringtone = ringtone.title,
+        repeat = stringResource(repeat.display),
+        ringtoneContent = {
+            ModalSelector(
+                title = stringResource(R.string.ringtone),
+                currentValue = ringtone.title,
+                values = remember { ringtoneValues.map { it.title } },
+                onValueChanged = { value ->
+                    ringtonePlayer.stop()
+                    onRingtoneChanged(ringtoneValues.first { it.title == value })
+                },
+            )
+        },
+        repeatShowModal = repeatShowModal,
+        ringtoneShowModal = ringtoneShowModal,
+        repeatContent = {
+            MultiModalSelector(
+                title = stringResource(R.string.repeat),
+                currentValue = stringResource(id = repeat.display),
+                values = repeatModeValues.map { stringResource(it.display) },
+                onValueChanged = { value ->
+                    onRepeatChanged(RepeatMode.getByDisplayValue(context, value))
+                    repeatShowModal = false
+                })
+        },
+        onRepeatModalStateChanged = { isVisible -> repeatShowModal = isVisible },
+        onRingtoneModalStateChanged = { isVisible -> ringtoneShowModal = isVisible },
+        onTimeChanged = onTimeChanged,
+        onBackPressed = onBackPressed,
+        onSaveClicked = onSaveClicked
+    )
 }
 
 @Composable
@@ -183,9 +151,13 @@ private fun AlarmContent(
     ringtone: String,
     repeat: String,
     onBackPressed: OnClick,
-    onRingtoneClicked: OnClick,
+    repeatShowModal: Boolean,
+    onRepeatModalStateChanged: (Boolean) -> Unit,
+    ringtoneShowModal: Boolean,
+    onRingtoneModalStateChanged: (Boolean) -> Unit,
+    ringtoneContent: @Composable ColumnScope.() -> Unit,
+    repeatContent: @Composable ColumnScope.() -> Unit,
     onTimeChanged: (hours: Int, minutes: Int) -> Unit,
-    onRepeatClicked: OnClick,
     onSaveClicked: OnClick,
 ) {
     Section(
@@ -205,16 +177,20 @@ private fun AlarmContent(
                 .fillMaxWidth()
                 .paddingScreen(vertical = 16.dp),
             title = stringResource(R.string.ringtone),
-            currentValue = ringtone,
-            onSelectorClicked = onRingtoneClicked
+            onModalStateChanged = onRingtoneModalStateChanged,
+            showModal = ringtoneShowModal,
+            value = ringtone,
+            content = ringtoneContent,
         )
         Selector(
             modifier = Modifier
                 .fillMaxWidth()
                 .paddingScreen(vertical = 16.dp),
             title = stringResource(R.string.repeat),
-            currentValue = repeat,
-            onSelectorClicked = onRepeatClicked
+            showModal = repeatShowModal,
+            onModalStateChanged = onRepeatModalStateChanged,
+            value = repeat,
+            content = repeatContent
         )
         Button(
             modifier = Modifier
@@ -227,29 +203,22 @@ private fun AlarmContent(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ModalEffect(
-    modalState: ModalBottomSheetState, sheetType: AlarmSheet, onModalHidden: () -> Unit
-) {
-    LaunchedEffect(sheetType) {
-        if (sheetType != AlarmSheet.Hidden) modalState.show()
-    }
+fun RingtoneEffect(ringtonePlayer: android.media.Ringtone, isModalVisible: Boolean) {
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
+    val lifecycleState by lifecycle.observeAsState()
 
-    LaunchedEffect(modalState.isAnimationRunning) {
-        if (!modalState.isAnimationRunning && !modalState.isVisible) {
-            onModalHidden()
+    LaunchedEffect(lifecycleState) {
+        if (lifecycleState == Lifecycle.Event.ON_STOP || lifecycleState == Lifecycle.Event.ON_PAUSE) {
+            ringtonePlayer.stop()
         }
     }
-}
 
-@Composable
-fun RingtoneEffect(ringtonePlayer: android.media.Ringtone, modalState: Boolean) {
     LaunchedEffect(ringtonePlayer) {
-        if (modalState) ringtonePlayer.play()
+        if (isModalVisible && !ringtonePlayer.isPlaying) ringtonePlayer.play()
     }
 
-    LaunchedEffect(modalState) {
-        if (!modalState) ringtonePlayer.stop()
+    LaunchedEffect(isModalVisible) {
+        if (!isModalVisible) ringtonePlayer.stop()
     }
 }
