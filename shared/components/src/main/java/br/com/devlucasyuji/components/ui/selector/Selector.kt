@@ -126,7 +126,9 @@ fun PreviewSelector() {
                 .padding(20.dp),
             title = "ring",
             value = "rang",
-            content = {}
+            content = {
+                Text("Foo")
+            }
         )
     }
 }
@@ -142,7 +144,9 @@ fun PreviewSelectorWithSubtitle() {
             title = "ring",
             subTitle = "rong",
             value = "rang",
-            content = {}
+            content = {
+                Text("Foo")
+            }
         )
     }
 }
@@ -157,7 +161,9 @@ fun PreviewSelectorWithNoValue() {
                 .padding(20.dp),
             title = "ring",
             subTitle = "rong",
-            content = {}
+            content = {
+                Text("Foo")
+            }
         )
     }
 }
