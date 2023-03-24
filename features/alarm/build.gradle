@@ -16,7 +16,4 @@ dependencies {
 
     implementation projects.shared.themes
     implementation projects.domain
-
-    // TODO Remove when M3 releases bottom sheet.
-    implementation libs.compose.material
 }
