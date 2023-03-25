@@ -1,6 +1,7 @@
 package br.com.devlucasyuji.local.datastore
 
 import br.com.devlucasyuji.local.model.UserStore
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Data store to User.
@@ -12,7 +13,7 @@ interface UserDataStore {
      *
      * @return an user
      * */
-    suspend fun getUser(): UserStore
+    fun getUser(): Flow<UserStore>
 
     /**
      * Update an user.

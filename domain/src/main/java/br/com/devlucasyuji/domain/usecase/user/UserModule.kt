@@ -2,6 +2,7 @@ package br.com.devlucasyuji.domain.usecase.user
 
 import br.com.devlucasyuji.domain.repository.UserRepository
 import br.com.devlucasyuji.domain.usecase.user.implementation.LoadUserImpl
+import br.com.devlucasyuji.domain.usecase.user.implementation.UpdateUserImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,4 +19,9 @@ object UserModule {
         repository: UserRepository
     ): LoadUser = LoadUserImpl(repository)
 
+    @Provides
+    @Singleton
+    fun provideUpdateUser(
+        repository: UserRepository
+    ): UpdateUser = UpdateUserImpl(repository)
 }

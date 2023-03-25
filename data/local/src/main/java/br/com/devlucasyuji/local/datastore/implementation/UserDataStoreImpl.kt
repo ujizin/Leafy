@@ -8,7 +8,10 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import br.com.devlucasyuji.local.datastore.UserDataStore
 import br.com.devlucasyuji.local.model.UserStore
-import kotlinx.coroutines.flow.first
+import br.com.devlucasyuji.local.model.orDefault
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.map
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -31,20 +34,22 @@ internal class UserDataStoreImpl(
         }
     }
 
-    override suspend fun getUser(): UserStore {
-        val preferences = userStore.data.first()
+    override fun getUser(): Flow<UserStore> = userStore.data.map { preferences ->
         val userStore = preferences[userKey] ?: run {
-            createUser(UserStore.default())
-            return getUser()
+            return@map UserStore.default().also { createUser(it) }
         }
 
-        return serializer.decodeFromString(userStore)
+        serializer.decodeFromString(userStore)
     }
 
     override suspend fun updateUser(user: UserStore) {
         userStore.edit { preferences ->
             preferences[userKey] = serializer.encodeToString(
-                value = getUser().copy(nickname = user.nickname)
+                value = getUser().firstOrNull().orDefault().copy(
+                    nickname = user.nickname,
+                    theme = user.theme,
+                    language = user.language,
+                )
             )
         }
     }

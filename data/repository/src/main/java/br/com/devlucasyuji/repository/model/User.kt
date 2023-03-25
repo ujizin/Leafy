@@ -7,4 +7,6 @@ package br.com.devlucasyuji.repository.model
  * */
 data class User(
     val nickname: String,
+    val theme: String,
+    val language: String,
 )

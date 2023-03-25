@@ -1,6 +1,7 @@
 package br.com.devlucasyuji.repository.datasource
 
 import br.com.devlucasyuji.repository.model.User
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Interface User to data source implementation.
@@ -12,7 +13,7 @@ interface UserDataSource {
      *
      * @return an user
      * */
-    suspend fun getUser(): User
+    fun getUser(): Flow<User>
 
     /**
      * Update [User].
