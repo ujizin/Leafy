@@ -1,4 +1,4 @@
-package br.com.devlucasyuji.components.extensions
+package br.com.devlucasyuji.components.state
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
