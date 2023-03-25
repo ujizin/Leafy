@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="preferences_title">preferences</string>
+    <string name="name">name</string>
+    <string name="language">language</string>
+    <string name="app_theme">app theme</string>
 </resources>
