@@ -25,6 +25,7 @@ dependencies {
     implementation projects.features.about
     implementation projects.features.preferences
 
+    implementation projects.domain
     implementation projects.data.local
 
     implementation projects.shared.components
