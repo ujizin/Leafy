@@ -27,8 +27,8 @@ import br.com.devlucasyuji.alarm.extensions.hasAlarmPermission
 import br.com.devlucasyuji.alarm.extensions.startAlarmPermission
 import br.com.devlucasyuji.alarm.model.RepeatMode
 import br.com.devlucasyuji.components.extensions.OnClick
-import br.com.devlucasyuji.components.extensions.observeAsState
 import br.com.devlucasyuji.components.extensions.paddingScreen
+import br.com.devlucasyuji.components.state.observeAsState
 import br.com.devlucasyuji.components.ui.Section
 import br.com.devlucasyuji.components.ui.animated.AnimatedButtonIcon
 import br.com.devlucasyuji.components.ui.animated.animation.Animation

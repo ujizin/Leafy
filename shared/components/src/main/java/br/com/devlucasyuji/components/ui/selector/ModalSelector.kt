@@ -52,7 +52,7 @@ fun ModalSelector(
 ) {
     Column(modifier) {
         Text(
-            modifier = Modifier.padding(start = 20.dp, top = 32.dp, end = 20.dp),
+            modifier = Modifier.padding(horizontal = 20.dp),
             text = title.capitalize(), style = MaterialTheme.typography.titleMedium
         )
         Spacer(modifier = Modifier.height(16.dp))

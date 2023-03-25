@@ -77,7 +77,7 @@ fun Selector(
         Column {
             Text(text = title.capitalize(), style = MaterialTheme.typography.titleSmall)
             if (subTitle != null) {
-                Spacer(Modifier.height(12.dp))
+                Spacer(Modifier.height(4.dp))
                 Text(text = subTitle.capitalize())
             }
         }
