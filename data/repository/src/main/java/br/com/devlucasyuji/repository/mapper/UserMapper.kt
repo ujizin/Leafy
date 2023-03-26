@@ -1,5 +1,6 @@
 package br.com.devlucasyuji.repository.mapper
 
+import br.com.devlucasyuji.domain.model.Language
 import br.com.devlucasyuji.domain.model.Theme
 import br.com.devlucasyuji.domain.model.User
 import br.com.devlucasyuji.repository.model.User as DataUser
@@ -13,8 +14,8 @@ internal class UserMapper {
         User(
             nickname = nickname,
             settings = User.Settings(
-                language = language,
-                theme = Theme.valueOf(theme)
+                language = language?.let(Language::valueOf) ?: Language.systemLanguage,
+                theme = theme?.let(Theme::valueOf) ?: Theme.System
             )
         )
     }
@@ -23,7 +24,7 @@ internal class UserMapper {
         DataUser(
             nickname = nickname,
             theme = settings.theme.toString(),
-            language = settings.language
+            language = settings.language.toString()
         )
     }
 }

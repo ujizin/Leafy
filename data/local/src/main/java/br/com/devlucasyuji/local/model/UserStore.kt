@@ -1,13 +1,12 @@
 package br.com.devlucasyuji.local.model
 
 import kotlinx.serialization.Serializable
-import java.util.Locale
 
 @Serializable
 data class UserStore(
     val nickname: String,
-    val theme: String,
-    val language: String,
+    val theme: String? = null,
+    val language: String? = null,
     val createdAt: String? = null
 ) {
 
@@ -17,8 +16,8 @@ data class UserStore(
         // TODO get a new Date library to use on created at
         fun default() = UserStore(
             nickname = DEFAULT_NICKNAME,
-            theme = "System",
-            language = Locale.getDefault().displayLanguage.orEmpty(),
+            theme = null,
+            language = null,
             createdAt = " "
         )
     }
