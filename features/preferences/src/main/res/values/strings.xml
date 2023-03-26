@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="preferences_title">preferences</string>
-    <string name="name">name</string>
+    <string name="nickname">nickname</string>
     <string name="language">language</string>
     <string name="app_theme">app theme</string>
+    <string name="update">update</string>
+    <string name="portuguese">portuguese</string>
+    <string name="english">english</string>
 </resources>
