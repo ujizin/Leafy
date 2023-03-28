@@ -13,6 +13,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
@@ -39,8 +40,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             val user by rememberUser()
             val darkTheme = user.isUserInDarkTheme()
+            val language by rememberUpdatedState(user.settings.language)
 
-            LaunchedEffect(user) { setUserLanguage(user.settings.language) }
+            LaunchedEffect(language) { setUserLanguage(language) }
 
             CompositionLocalProvider(LocalUser provides user) {
                 CameraReminderTheme(
