@@ -41,13 +41,14 @@ class MainActivity : ComponentActivity() {
             val user by rememberUser()
             val darkTheme = user.isUserInDarkTheme()
             val language by rememberUpdatedState(user.settings.language)
+            val dynamicColor by rememberUpdatedState(user.settings.dynamicColor)
 
             LaunchedEffect(language) { setUserLanguage(language) }
 
             CompositionLocalProvider(LocalUser provides user) {
                 CameraReminderTheme(
                     darkTheme = darkTheme,
-                    dynamicColor = true
+                    dynamicColor = dynamicColor,
                 ) {
                     val navController = rememberAnimatedNavController()
                     val drawerState = rememberDrawerState(DrawerValue.Closed)

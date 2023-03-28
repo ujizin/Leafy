@@ -15,7 +15,8 @@ internal class UserMapper {
             nickname = nickname,
             settings = User.Settings(
                 language = language?.let(Language::valueOf) ?: Language.systemLanguage,
-                theme = theme?.let(Theme::valueOf) ?: Theme.System
+                theme = theme?.let(Theme::valueOf) ?: Theme.System,
+                dynamicColor = dynamicColor
             )
         )
     }
@@ -24,7 +25,8 @@ internal class UserMapper {
         DataUser(
             nickname = nickname,
             theme = settings.theme.toString(),
-            language = settings.language.toString()
+            language = settings.language.toString(),
+            dynamicColor = settings.dynamicColor,
         )
     }
 }

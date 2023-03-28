@@ -7,6 +7,7 @@ data class UserStore(
     val nickname: String,
     val theme: String? = null,
     val language: String? = null,
+    val dynamicColor: Boolean,
     val createdAt: String? = null
 ) {
 
@@ -18,6 +19,7 @@ data class UserStore(
             nickname = DEFAULT_NICKNAME,
             theme = null,
             language = null,
+            dynamicColor = true,
             createdAt = " "
         )
     }

@@ -14,12 +14,14 @@ data class User(
     /**
      * Settings from user.
      *
-     * @param theme user theme.
-     * @param language user language.
+     * @param theme user theme
+     * @param language user language
+     * @param dynamicColor check if user uses dynamic color
      * */
     data class Settings(
         val theme: Theme,
         val language: Language,
+        val dynamicColor: Boolean,
     )
 
     companion object {
@@ -28,7 +30,8 @@ data class User(
                 nickname = "User",
                 settings = Settings(
                     theme = Theme.System,
-                    language = Language.systemLanguage
+                    language = Language.systemLanguage,
+                    dynamicColor = true,
                 )
             )
     }
