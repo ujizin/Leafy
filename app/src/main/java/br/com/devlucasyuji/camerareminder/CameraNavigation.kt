@@ -35,7 +35,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun CameraReminderNavigation(
+fun LeafyNavigation(
     navController: NavHostController,
     drawerState: DrawerState,
     onBackPressed: () -> Unit,

@@ -49,7 +49,7 @@ private val lightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun CameraReminderTheme(
+fun LeafyTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit

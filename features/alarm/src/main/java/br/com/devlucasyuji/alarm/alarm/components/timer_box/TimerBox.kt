@@ -30,7 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.devlucasyuji.alarm.alarm.components.AutoSizeText
-import br.com.devlucasyuji.themes.CameraReminderTheme
+import br.com.devlucasyuji.themes.LeafyTheme
 import kotlin.math.floor
 
 /**
@@ -175,7 +175,7 @@ private fun TimerUnitBox(
 @Preview
 @Composable
 fun PreviewAlarmBox() {
-    CameraReminderTheme {
+    LeafyTheme {
         var hour by remember { mutableStateOf(14) }
         var minute by remember { mutableStateOf(14) }
         Column {

@@ -18,7 +18,7 @@ import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import br.com.devlucasyuji.components.local.LocalUser
 import br.com.devlucasyuji.domain.model.Language
-import br.com.devlucasyuji.themes.CameraReminderTheme
+import br.com.devlucasyuji.themes.LeafyTheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
             LaunchedEffect(language) { setUserLanguage(language) }
 
             CompositionLocalProvider(LocalUser provides user) {
-                CameraReminderTheme(
+                LeafyTheme(
                     darkTheme = darkTheme,
                     dynamicColor = dynamicColor,
                 ) {
@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
                     val drawerState = rememberDrawerState(DrawerValue.Closed)
                     val scope = rememberCoroutineScope()
 
-                    CameraReminderNavigation(
+                    LeafyNavigation(
                         navController = navController,
                         drawerState = drawerState,
                         onBackPressed = { scope.launch { navController.navigateUp(drawerState) } }

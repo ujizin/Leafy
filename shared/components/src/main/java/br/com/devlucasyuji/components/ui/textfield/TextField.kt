@@ -25,7 +25,7 @@ import br.com.devlucasyuji.components.extensions.Content
 import br.com.devlucasyuji.components.extensions.capitalize
 import br.com.devlucasyuji.components.ui.animated.animation.Animate.Animated
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
-import br.com.devlucasyuji.themes.CameraReminderTheme
+import br.com.devlucasyuji.themes.LeafyTheme
 
 @Composable
 fun TextField(
@@ -84,7 +84,7 @@ fun Placeholder(
 @Preview
 @Composable
 private fun PreviewTextField() {
-    CameraReminderTheme {
+    LeafyTheme {
         var value by remember { mutableStateOf("") }
         TextField(value = value, onValueChange = { value = it })
     }

@@ -3,9 +3,9 @@
 
 <img src="assets/icon.png" />
 
-# CameraReminder
+# Leafy
 
-CameraReminder is an open-source project that save photos and keep reminding you with alarms from places, documents, keys and other stuffs... The project purpose is to study the latest features with Android development. 🚀
+Leafy is an open-source project that save photos and keep reminding you with alarms from places, documents, keys and other stuffs... The project purpose is to study the latest features with Android development. 🚀
 
 ## 📗 Tech Stack
 

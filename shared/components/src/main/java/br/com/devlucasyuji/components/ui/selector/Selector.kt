@@ -31,7 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import br.com.devlucasyuji.components.extensions.capitalize
-import br.com.devlucasyuji.themes.CameraReminderTheme
+import br.com.devlucasyuji.themes.LeafyTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -119,7 +119,7 @@ private fun DownArrow(
 @Preview
 @Composable
 fun PreviewSelector() {
-    CameraReminderTheme {
+    LeafyTheme {
         Selector(
             modifier = Modifier
                 .fillMaxWidth()
@@ -136,7 +136,7 @@ fun PreviewSelector() {
 @Preview
 @Composable
 fun PreviewSelectorWithSubtitle() {
-    CameraReminderTheme {
+    LeafyTheme {
         Selector(
             modifier = Modifier
                 .fillMaxWidth()
@@ -154,7 +154,7 @@ fun PreviewSelectorWithSubtitle() {
 @Preview
 @Composable
 fun PreviewSelectorWithNoValue() {
-    CameraReminderTheme {
+    LeafyTheme {
         Selector(
             modifier = Modifier
                 .fillMaxWidth()

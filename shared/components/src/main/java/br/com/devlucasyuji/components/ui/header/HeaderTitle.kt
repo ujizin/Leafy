@@ -9,7 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import br.com.devlucasyuji.components.extensions.Empty
 import br.com.devlucasyuji.components.ui.animated.AnimatedText
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
-import br.com.devlucasyuji.themes.CameraReminderTheme
+import br.com.devlucasyuji.themes.LeafyTheme
 
 @Composable
 fun HeaderTitle(
@@ -35,7 +35,7 @@ fun HeaderTitle(
 @Preview("Header Title with Subtitle")
 @Composable
 private fun PreviewHeaderTitleWithSubtitle() {
-    CameraReminderTheme {
+    LeafyTheme {
         HeaderTitle(
             title = "Hi Lucas",
             subTitle = "Welcome back!",
@@ -47,7 +47,7 @@ private fun PreviewHeaderTitleWithSubtitle() {
 @Preview("Header Title")
 @Composable
 private fun PreviewHeaderTitle() {
-    CameraReminderTheme {
+    LeafyTheme {
         HeaderTitle(
             title = "Hi Lucas",
             animation = Animation.None

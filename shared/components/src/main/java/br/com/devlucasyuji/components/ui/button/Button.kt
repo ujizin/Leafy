@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import br.com.devlucasyuji.components.extensions.Content
 import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.components.ui.animated.AnimatedText
-import br.com.devlucasyuji.themes.CameraReminderTheme
+import br.com.devlucasyuji.themes.LeafyTheme
 import androidx.compose.material3.Button as Material3Button
 
 @Composable
@@ -53,7 +53,7 @@ fun Button(
 @Preview
 @Composable
 fun PreviewButton() {
-    CameraReminderTheme {
+    LeafyTheme {
         Button(text = "Hello world!", onClick = {})
     }
 }

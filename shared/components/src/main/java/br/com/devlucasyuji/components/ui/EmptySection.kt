@@ -22,7 +22,7 @@ import br.com.devlucasyuji.components.extensions.OnClick
 import br.com.devlucasyuji.components.extensions.capitalize
 import br.com.devlucasyuji.components.ui.button.Button
 import br.com.devlucasyuji.components.ui.image.Icons
-import br.com.devlucasyuji.themes.CameraReminderTheme
+import br.com.devlucasyuji.themes.LeafyTheme
 
 @Composable
 fun EmptySection(
@@ -62,7 +62,7 @@ fun EmptySection(
 @Preview
 @Composable
 fun PreviewEmptySection() {
-    CameraReminderTheme {
+    LeafyTheme {
         EmptySection {}
     }
 }

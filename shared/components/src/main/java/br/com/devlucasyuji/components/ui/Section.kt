@@ -16,7 +16,7 @@ import br.com.devlucasyuji.components.ui.animated.animation.Animate.Animated
 import br.com.devlucasyuji.components.ui.animated.animation.Animation
 import br.com.devlucasyuji.components.ui.header.HeaderTitle
 import br.com.devlucasyuji.components.ui.image.Icons
-import br.com.devlucasyuji.themes.CameraReminderTheme
+import br.com.devlucasyuji.themes.LeafyTheme
 
 @Composable
 fun Section(
@@ -70,7 +70,7 @@ private fun HeaderSection(
 @Preview(showSystemUi = true)
 @Composable
 private fun PreviewSection() {
-    CameraReminderTheme {
+    LeafyTheme {
         Section(
             modifier = Modifier.padding(top = 32.dp),
             title = "Hello Lucas",
