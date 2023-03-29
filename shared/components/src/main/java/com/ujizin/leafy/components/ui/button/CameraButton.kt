@@ -1,0 +1,72 @@
+package com.ujizin.leafy.components.ui.button
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.ujizin.leafy.components.extensions.OnClick
+import com.ujizin.leafy.components.ui.animated.animation.Animate.Animated
+import com.ujizin.leafy.components.ui.animated.animation.Animation
+import com.ujizin.leafy.shared.components.R
+import com.ujizin.leafy.themes.LeafyTheme
+
+@Composable
+internal fun CameraButton(
+    modifier: Modifier = Modifier,
+    animation: Animation = Animation.SlideToBottom.copy(delayMillis = Animation.MediumDelay),
+    iconAnimation: Animation = Animation.SlideToTop.copy(delayMillis = Animation.LargeDelay),
+    onClick: OnClick,
+) {
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
+    ) {
+        Animated(animation = animation) {
+            Box(
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .size(72.dp)
+                    .background(MaterialTheme.colorScheme.background, CircleShape)
+                    .clickable(
+                        indication = rememberRipple(bounded = true),
+                        onClick = onClick,
+                        interactionSource = remember { MutableInteractionSource() }
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                Animated(animation = iconAnimation) {
+                    Icon(
+                        modifier = Modifier.size(32.dp),
+                        painter = painterResource(id = R.drawable.camera),
+                        tint = MaterialTheme.colorScheme.primary,
+                        contentDescription = null
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun PreviewCameraButton() {
+    LeafyTheme(dynamicColor = false) {
+        CameraButton(
+            animation = Animation.None,
+            iconAnimation = Animation.None
+        ) {}
+    }
+}

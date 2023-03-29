@@ -9,7 +9,7 @@ plugins {
 apply from: '../../config-android.gradle'
 
 android {
-    namespace 'br.com.devlucasyuji.camerareminder.local'
+    namespace 'com.ujizin.leafy.data.local'
 
     testOptions {
         unitTests.returnDefaultValues = true

@@ -6,7 +6,7 @@ apply from: '../../config-android.gradle'
 apply from: '../../config-compose.gradle'
 
 android {
-    namespace 'br.com.devlucasyuji.test'
+    namespace 'com.ujizin.leafy.test'
 }
 
 dependencies {

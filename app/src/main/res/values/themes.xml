@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.CameraReminder" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.Leafy" parent="android:Theme.Material.Light.NoActionBar" />
 
     <style name="Theme.Splash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/launcher_background_color</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
-        <item name="postSplashScreenTheme">@style/Theme.CameraReminder</item>
+        <item name="postSplashScreenTheme">@style/Theme.Leafy</item>
     </style>
 </resources>

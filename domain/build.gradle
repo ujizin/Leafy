@@ -6,7 +6,7 @@ plugins {
 apply from: '../config-android.gradle'
 
 android {
-    namespace 'br.com.devlucasyuji.domain'
+    namespace 'com.ujizin.leafy.domain'
 }
 
 dependencies {

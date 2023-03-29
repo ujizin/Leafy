@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
 }
 android {
-    namespace 'br.com.devlucasyuji.camerareminder.shared.themes'
+    namespace 'com.ujizin.leafy.shared.themes'
 }
 
 apply from: '../../config-android.gradle'

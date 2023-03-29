@@ -7,9 +7,9 @@ apply from: '../config-android.gradle'
 apply from: '../config-compose.gradle'
 
 android {
-    namespace 'br.com.devlucasyuji.camerareminder'
+    namespace 'com.ujizin.leafy'
     defaultConfig {
-        applicationId "br.com.devlucasyuji.camerareminder"
+        applicationId "com.ujizin.leafy"
     }
 }
 

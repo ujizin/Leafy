@@ -7,7 +7,7 @@ apply from: "$rootDir/config-compose.gradle"
 apply from: "$rootDir/config-android.gradle"
 
 android {
-    namespace 'br.com.devlucasyuji.settings'
+    namespace 'com.ujizin.leafy.features.settings'
 }
 
 dependencies {

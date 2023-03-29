@@ -7,7 +7,7 @@ apply from: '../../config-android.gradle'
 apply from: '../../config-compose.gradle'
 
 android {
-    namespace 'br.com.devlucasyuji.camera'
+    namespace 'com.ujizin.leafy.features.camera'
 }
 
 dependencies {
