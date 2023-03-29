@@ -19,33 +19,33 @@ import androidx.core.view.ViewCompat
 private val darkColorScheme = darkColorScheme(
     primary = Color.Green800,
     secondary = Color.Green200,
-    tertiary = Color.Cloud,
-    surface = Color.Cloud,
-    background = Color.Cloud,
-    onPrimary = Color.Cloud,
-    onSecondary = Color.Gray,
-    onBackground = Color.Gray,
+    tertiary = Color.Gray100,
+    surface = Color.Gray200,
+    background = Color.Gray100,
+    onPrimary = Color.Gray100,
+    onSecondary = Color.Gray800,
+    onBackground = Color.Gray800,
     secondaryContainer = Color.Green200,
-    onSecondaryContainer = Color.Gray,
+    onSecondaryContainer = Color.Gray800,
     outline = Color.Green800,
     surfaceVariant = Color.Green200,
-    onSurface = Color.DarkGray
+    onSurface = Color.Gray900
 )
 
 private val lightColorScheme = lightColorScheme(
     primary = Color.Green800,
     secondary = Color.Green200,
-    tertiary = Color.Cloud,
-    surface = Color.Cloud,
-    background = Color.Cloud,
-    onPrimary = Color.Cloud,
-    onSecondary = Color.Gray,
+    tertiary = Color.Gray100,
+    surface = Color.Gray200,
+    background = Color.Gray100,
+    onPrimary = Color.Gray100,
+    onSecondary = Color.Gray800,
     outline = Color.Green800,
-    onBackground = Color.Gray,
+    onBackground = Color.Gray800,
     secondaryContainer = Color.Green200,
-    onSecondaryContainer = Color.Gray,
+    onSecondaryContainer = Color.Gray800,
     surfaceVariant = Color.Green200,
-    onSurface = Color.DarkGray
+    onSurface = Color.Gray900
 )
 
 @Composable

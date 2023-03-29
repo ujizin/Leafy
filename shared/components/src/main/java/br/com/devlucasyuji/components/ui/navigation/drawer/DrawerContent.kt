@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Text
@@ -67,6 +68,7 @@ private fun DrawerItems(
             icon = {
                 Icon(
                     modifier = Modifier.size(24.dp),
+                    tint = MaterialTheme.colorScheme.onSurface,
                     painter = painterResource(id = item.iconRes),
                     contentDescription = null
                 )
