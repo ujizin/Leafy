@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">Camera Reminder</string>
+    <string name="app_name" translatable="false">Leafy</string>
     <string name="take_a_picture">take a new picture</string>
     <string name="empty_plant">oh no, it looks like that you haven\'t registered any plant yet</string>
     <string name="camera_permission_description">oh no, we need to use the camera! could you allow me to use please?</string>
