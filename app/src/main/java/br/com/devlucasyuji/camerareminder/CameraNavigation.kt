@@ -1,5 +1,6 @@
 package br.com.devlucasyuji.camerareminder
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.imePadding
@@ -37,6 +38,7 @@ import kotlinx.coroutines.launch
 fun CameraReminderNavigation(
     navController: NavHostController,
     drawerState: DrawerState,
+    onBackPressed: () -> Unit,
 ) {
     val scope = rememberCoroutineScope()
 
@@ -50,6 +52,8 @@ fun CameraReminderNavigation(
         navController = navController,
         showBottomNavigation = showBottomNavigation,
     ) {
+        BackHandler(onBack = onBackPressed)
+
         AnimatedNavHost(
             navController = navController,
             startDestination = Destination.Home.route,

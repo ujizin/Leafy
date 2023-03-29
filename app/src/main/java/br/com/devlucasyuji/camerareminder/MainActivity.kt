@@ -3,7 +3,6 @@ package br.com.devlucasyuji.camerareminder
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material3.DrawerState
@@ -54,11 +53,10 @@ class MainActivity : ComponentActivity() {
                     val drawerState = rememberDrawerState(DrawerValue.Closed)
                     val scope = rememberCoroutineScope()
 
-                    BackHandler { scope.launch { navController.navigateUp(drawerState) } }
-
                     CameraReminderNavigation(
                         navController = navController,
                         drawerState = drawerState,
+                        onBackPressed = { scope.launch { navController.navigateUp(drawerState) } }
                     )
                 }
             }
