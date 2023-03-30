@@ -4,11 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.ujizin.leafy.components.extensions.OnClick
-import com.ujizin.leafy.components.extensions.capitalize
-import com.ujizin.leafy.components.ui.EmptySection
+import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.ui.extensions.capitalize
+import com.ujizin.leafy.core.ui.components.EmptySection
 import com.ujizin.leafy.features.search.R
-import com.ujizin.leafy.shared.components.R as CR
+import com.ujizin.leafy.core.components.R as CR
 
 @Composable
 internal fun SearchEmptyList(

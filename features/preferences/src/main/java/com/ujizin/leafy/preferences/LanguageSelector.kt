@@ -8,8 +8,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import com.ujizin.leafy.components.ui.selector.ModalSelector
-import com.ujizin.leafy.components.ui.selector.Selector
+import com.ujizin.leafy.core.ui.components.selector.ModalSelector
+import com.ujizin.leafy.core.ui.components.selector.Selector
 import com.ujizin.leafy.domain.model.Language
 import com.ujizin.leafy.features.preferences.R
 import com.ujizin.leafy.preferences.extensions.displayResId

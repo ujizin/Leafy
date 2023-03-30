@@ -9,9 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.ujizin.leafy.components.extensions.OnClick
-import com.ujizin.leafy.components.ui.animated.AnimatedButtonIcon
-import com.ujizin.leafy.components.ui.image.Icons
+import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
+import com.ujizin.leafy.core.ui.components.image.Icons
 
 @Composable
 internal fun CameraHeader(

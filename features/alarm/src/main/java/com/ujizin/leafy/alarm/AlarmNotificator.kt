@@ -4,7 +4,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.net.Uri
 import androidx.core.app.NotificationCompat
-import com.ujizin.leafy.shared.components.R
+import com.ujizin.leafy.core.components.R
 
 /**
  * Create alarm notification for Android system.

@@ -28,10 +28,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
-import com.ujizin.leafy.components.extensions.OnClick
-import com.ujizin.leafy.components.extensions.noClickable
-import com.ujizin.leafy.components.ui.animated.AnimatedIcon
-import com.ujizin.leafy.components.ui.image.Icons
+import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.ui.extensions.noClickable
+import com.ujizin.leafy.core.ui.components.animated.AnimatedIcon
+import com.ujizin.leafy.core.ui.components.image.Icons
 
 @Composable
 fun CameraFooter(

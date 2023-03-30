@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.ujizin.leafy.camera.viewmodel.CameraUiState
-import com.ujizin.leafy.components.extensions.OnClick
+import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.camposer.CameraPreview
 import com.ujizin.camposer.state.CameraState
 import com.ujizin.camposer.state.rememberCamSelector

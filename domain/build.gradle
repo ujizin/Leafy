@@ -14,5 +14,5 @@ dependencies {
     testImplementation libs.coroutines.test
     testImplementation libs.mockk
     testImplementation libs.bundles.test
-    testImplementation projects.shared.test
+    testImplementation projects.core.test
 }

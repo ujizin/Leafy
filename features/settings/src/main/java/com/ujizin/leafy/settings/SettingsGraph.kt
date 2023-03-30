@@ -2,10 +2,10 @@ package com.ujizin.leafy.settings
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.navigation.NavGraphBuilder
-import com.ujizin.leafy.navigation.AnimatedEnterTransition
-import com.ujizin.leafy.navigation.AnimatedExitTransition
-import com.ujizin.leafy.navigation.Destination
-import com.ujizin.leafy.navigation.composable
+import com.ujizin.leafy.core.navigation.AnimatedEnterTransition
+import com.ujizin.leafy.core.navigation.AnimatedExitTransition
+import com.ujizin.leafy.core.navigation.Destination
+import com.ujizin.leafy.core.navigation.composable
 
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.settingsGraph(

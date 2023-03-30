@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ujizin.camposer.extensions.takePicture
 import com.ujizin.camposer.state.CameraState
-import com.ujizin.leafy.components.extensions.decodeToBitmapWithRotation
-import com.ujizin.leafy.components.extensions.launchCatching
+import com.ujizin.leafy.core.ui.extensions.decodeToBitmapWithRotation
+import com.ujizin.leafy.core.ui.extensions.launchCatching
 import com.ujizin.leafy.domain.usecase.file.SaveFile
 import com.ujizin.leafy.domain.usecase.plant.AddDraftPlant
 import dagger.hilt.android.lifecycle.HiltViewModel

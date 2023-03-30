@@ -11,7 +11,7 @@ import com.ujizin.leafy.domain.usecase.plant.implementation.AddPlantImpl
 import com.ujizin.leafy.domain.usecase.plant.implementation.DeletePlantImpl
 import com.ujizin.leafy.domain.usecase.plant.implementation.LoadAllPlantImpl
 import com.ujizin.leafy.domain.usecase.plant.implementation.UpdatePlantImpl
-import com.ujizin.leafy.test.TestDispatcherRule
+import com.ujizin.leafy.core.test.TestDispatcherRule
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK

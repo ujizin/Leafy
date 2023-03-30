@@ -16,16 +16,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.ujizin.leafy.components.extensions.OnClick
-import com.ujizin.leafy.components.extensions.paddingScreen
-import com.ujizin.leafy.components.ui.animated.AnimatedButtonIcon
-import com.ujizin.leafy.components.ui.animated.animation.Animation
+import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.ui.extensions.paddingScreen
+import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
+import com.ujizin.leafy.core.ui.components.animated.animation.Animation
 import com.ujizin.leafy.publish.viewmodel.PublishViewModel
-import com.ujizin.leafy.components.ui.Section
-import com.ujizin.leafy.components.ui.button.Button
-import com.ujizin.leafy.components.ui.image.Icons
-import com.ujizin.leafy.components.ui.textfield.Placeholder
-import com.ujizin.leafy.components.ui.textfield.TextField
+import com.ujizin.leafy.core.ui.components.Section
+import com.ujizin.leafy.core.ui.components.button.Button
+import com.ujizin.leafy.core.ui.components.image.Icons
+import com.ujizin.leafy.core.ui.components.textfield.Placeholder
+import com.ujizin.leafy.core.ui.components.textfield.TextField
 import com.ujizin.leafy.features.publish.R
 
 @Composable

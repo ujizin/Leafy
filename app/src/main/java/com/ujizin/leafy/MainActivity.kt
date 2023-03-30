@@ -16,9 +16,9 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
-import com.ujizin.leafy.themes.LeafyTheme
+import com.ujizin.leafy.core.themes.LeafyTheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.ujizin.leafy.components.local.LocalUser
+import com.ujizin.leafy.core.ui.local.LocalUser
 import com.ujizin.leafy.domain.model.Language
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

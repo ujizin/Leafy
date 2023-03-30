@@ -30,7 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ujizin.leafy.alarm.alarm.components.AutoSizeText
-import com.ujizin.leafy.themes.LeafyTheme
+import com.ujizin.leafy.core.themes.LeafyTheme
 import kotlin.math.floor
 
 /**

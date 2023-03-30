@@ -20,16 +20,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.ujizin.leafy.components.extensions.OnClick
-import com.ujizin.leafy.components.extensions.capitalize
-import com.ujizin.leafy.components.ui.EmptySection
-import com.ujizin.leafy.components.ui.Section
-import com.ujizin.leafy.components.ui.animated.AnimatedButtonIcon
-import com.ujizin.leafy.components.ui.animated.animation.Animation
-import com.ujizin.leafy.components.ui.card.BoxImage
-import com.ujizin.leafy.components.ui.image.Icons
-import com.ujizin.leafy.components.ui.card.CardSize
-import com.ujizin.leafy.components.ui.label.TitleRow
+import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.ui.extensions.capitalize
+import com.ujizin.leafy.core.ui.components.EmptySection
+import com.ujizin.leafy.core.ui.components.Section
+import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
+import com.ujizin.leafy.core.ui.components.animated.animation.Animation
+import com.ujizin.leafy.core.ui.components.card.BoxImage
+import com.ujizin.leafy.core.ui.components.image.Icons
+import com.ujizin.leafy.core.ui.components.card.CardSize
+import com.ujizin.leafy.core.ui.components.label.TitleRow
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.features.home.R
 

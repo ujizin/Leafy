@@ -3,9 +3,9 @@ package com.ujizin.leafy.preferences
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.ujizin.leafy.components.extensions.capitalize
-import com.ujizin.leafy.components.ui.selector.ModalSelector
-import com.ujizin.leafy.components.ui.selector.Selector
+import com.ujizin.leafy.core.ui.extensions.capitalize
+import com.ujizin.leafy.core.ui.components.selector.ModalSelector
+import com.ujizin.leafy.core.ui.components.selector.Selector
 import com.ujizin.leafy.domain.model.Theme
 import com.ujizin.leafy.features.preferences.R
 

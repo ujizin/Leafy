@@ -28,7 +28,7 @@ dependencies {
     implementation projects.domain
     implementation projects.data.local
 
-    implementation projects.shared.components
-    implementation projects.shared.themes
-    implementation projects.shared.navigation
+    implementation projects.core.ui
+    implementation projects.core.themes
+    implementation projects.core.navigation
 }

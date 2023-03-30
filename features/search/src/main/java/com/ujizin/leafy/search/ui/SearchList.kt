@@ -7,8 +7,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.ujizin.leafy.components.ui.card.BoxImage
-import com.ujizin.leafy.components.ui.label.TitleRow
+import com.ujizin.leafy.core.ui.components.card.BoxImage
+import com.ujizin.leafy.core.ui.components.label.TitleRow
 import com.ujizin.leafy.domain.model.Plant
 
 @OptIn(ExperimentalFoundationApi::class)

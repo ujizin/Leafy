@@ -6,7 +6,7 @@ import android.net.Uri
 import com.ujizin.leafy.alarm.receiver.AlarmReceiver
 import com.ujizin.leafy.domain.result.Result
 import com.ujizin.leafy.domain.usecase.plant.LoadPlant
-import com.ujizin.leafy.shared.components.R
+import com.ujizin.leafy.core.components.R
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 

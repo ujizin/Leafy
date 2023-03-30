@@ -7,11 +7,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.ujizin.leafy.shared.components.R
-import com.ujizin.leafy.components.extensions.OnClick
-import com.ujizin.leafy.components.extensions.capitalize
-import com.ujizin.leafy.components.ui.EmptySection
-import com.ujizin.leafy.components.ui.image.Icons
+import com.ujizin.leafy.core.components.R
+import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.ui.extensions.capitalize
+import com.ujizin.leafy.core.ui.components.EmptySection
+import com.ujizin.leafy.core.ui.components.image.Icons
 
 @Composable
 internal fun CameraDenied(shouldShowRationale: Boolean, onCameraRequest: OnClick) {

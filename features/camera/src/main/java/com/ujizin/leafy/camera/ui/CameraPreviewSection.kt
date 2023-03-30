@@ -11,13 +11,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.ujizin.leafy.shared.components.R
-import com.ujizin.leafy.components.extensions.OnClick
-import com.ujizin.leafy.components.ui.animated.animation.Animation
+import com.ujizin.leafy.core.components.R
+import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.ui.components.animated.animation.Animation
 import coil.compose.AsyncImage
-import com.ujizin.leafy.components.ui.animated.AnimatedButtonIcon
-import com.ujizin.leafy.components.ui.button.Button
-import com.ujizin.leafy.components.ui.image.Icons
+import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
+import com.ujizin.leafy.core.ui.components.button.Button
+import com.ujizin.leafy.core.ui.components.image.Icons
 
 @Composable
 internal fun CameraPreviewSection(

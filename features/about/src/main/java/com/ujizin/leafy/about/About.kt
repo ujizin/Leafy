@@ -20,13 +20,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ujizin.leafy.components.extensions.OnClick
-import com.ujizin.leafy.components.ui.Section
-import com.ujizin.leafy.components.ui.animated.AnimatedButtonIcon
-import com.ujizin.leafy.components.ui.button.Button
-import com.ujizin.leafy.components.ui.image.Icons
+import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.ui.components.Section
+import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
+import com.ujizin.leafy.core.ui.components.button.Button
+import com.ujizin.leafy.core.ui.components.image.Icons
 import com.ujizin.leafy.features.about.R
-import com.ujizin.leafy.shared.components.R as CR
+import com.ujizin.leafy.core.components.R as CR
 
 @Composable
 fun About(onBackPressed: OnClick) {

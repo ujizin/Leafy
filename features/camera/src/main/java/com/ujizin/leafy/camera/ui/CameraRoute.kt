@@ -13,8 +13,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ujizin.leafy.camera.ui.camera.Camera
 import com.ujizin.leafy.camera.viewmodel.CameraUiState
 import com.ujizin.leafy.camera.viewmodel.CameraViewModel
-import com.ujizin.leafy.components.extensions.OnClick
-import com.ujizin.leafy.components.extensions.startSettingsPermission
+import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.ui.extensions.startSettingsPermission
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberPermissionState

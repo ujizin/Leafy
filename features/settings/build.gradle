@@ -11,6 +11,6 @@ android {
 }
 
 dependencies {
-    implementation projects.shared.navigation
-    implementation projects.shared.components
+    implementation projects.core.navigation
+    implementation projects.core.ui
 }

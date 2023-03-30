@@ -7,7 +7,7 @@ import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.Result
 import com.ujizin.leafy.domain.usecase.plant.FindPlant
 import com.ujizin.leafy.domain.usecase.plant.LoadAllPlant
-import com.ujizin.leafy.navigation.Args
+import com.ujizin.leafy.core.navigation.Args
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

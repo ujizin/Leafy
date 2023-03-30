@@ -8,9 +8,9 @@ import androidx.compose.animation.core.Spring.StiffnessMediumLow
 import androidx.compose.animation.core.spring
 import androidx.navigation.NavGraphBuilder
 import com.ujizin.leafy.camera.ui.CameraRoute
-import com.ujizin.leafy.components.extensions.OnClick
-import com.ujizin.leafy.navigation.Destination
-import com.ujizin.leafy.navigation.composable
+import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.navigation.Destination
+import com.ujizin.leafy.core.navigation.composable
 
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.cameraGraph(

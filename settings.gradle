@@ -13,7 +13,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "camera-reminder"
+rootProject.name = "leafy"
 
 enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
@@ -31,10 +31,10 @@ include ':features:settings'
 include ':features:camera'
 include ':features:publish'
 
-include ':shared:components'
-include ':shared:themes'
-include ':shared:navigation'
-include ':shared:test'
+include ':core:ui'
+include ':core:themes'
+include ':core:navigation'
+include ':core:test'
 
 include ':features:about'
 include ':features:preferences'

@@ -2,9 +2,9 @@ package com.ujizin.leafy.about
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.navigation.NavGraphBuilder
-import com.ujizin.leafy.components.extensions.OnClick
-import com.ujizin.leafy.navigation.Destination
-import com.ujizin.leafy.navigation.composable
+import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.navigation.Destination
+import com.ujizin.leafy.core.navigation.composable
 
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.aboutGraph(
