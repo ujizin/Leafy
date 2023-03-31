@@ -18,7 +18,6 @@ import com.ujizin.leafy.core.ui.components.selector.Selector
 import com.ujizin.leafy.core.ui.components.textfield.Placeholder
 import com.ujizin.leafy.core.ui.components.textfield.TextField
 import com.ujizin.leafy.core.ui.extensions.capitalize
-import com.ujizin.leafy.core.ui.extensions.paddingScreen
 import com.ujizin.leafy.features.preferences.R
 
 @Composable
@@ -36,7 +35,11 @@ fun UserSelector(
         onModalStateChanged = { showModal = it },
     ) {
         UserTextField(
-            modifier = Modifier.paddingScreen(vertical = 20.dp),
+            modifier = Modifier.padding(
+                start = 20.dp,
+                end = 20.dp,
+                bottom = 20.dp,
+            ),
             label = stringResource(R.string.nickname).capitalize(),
             nickname = nickname,
             onSaveNickname = { nickname ->
@@ -57,11 +60,11 @@ fun UserTextField(
     Column(modifier) {
         var newNickname by remember { mutableStateOf(nickname) }
 
-        Text(text = label, style = MaterialTheme.typography.titleSmall)
+        Text(text = label, style = MaterialTheme.typography.titleMedium)
         TextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 4.dp),
+                .padding(top = 16.dp),
             value = newNickname,
             placeholder = { Placeholder(text = nickname) },
             onValueChange = { newNickname = it },
