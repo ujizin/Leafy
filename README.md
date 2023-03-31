@@ -1,28 +1,30 @@
 ![Build Unit Tests](https://github.com/devlucasyuji/camerareminder/actions/workflows/workflow.yml/badge.svg)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-<img src="assets/icon.png" />
+<img src="assets/background-leafy.jpg" width="100%"/>
 
 # Leafy
 
-Leafy is an open-source project that save photos and keep reminding you with alarms from places, documents, keys and other stuffs... The project purpose is to study the latest features with Android development. 🚀
+Leafy is a free app for plant lovers that helps you save photos of your plants and set reminders to feed them. It's open-source and a great resource for developers to learn about the latest Android features. Try it out today! 🌱📱
 
-## 📗 Tech Stack
+## 🏗️ Built with
 
+- Jetpack Compose
+- Navigation Compose
 - 100% Kotlin
-- Asynchronous using Coroutines
-- Jetpack Compose to UI
-- DI with Hilt
-- Database with Room
+- Kotlin Coroutines + Flow
+- Hilt
+- Room
 - Ktlint
+- Much more!
 
 ## 🗃 Architecture 
 
-The architecture is based on the Hexagonal Architecture using modularization for better separation of concerns.
+The architecture of the app is based on the Hexagonal Architecture design pattern, which is a proven approach to separating concerns and achieving better maintainability, testability, and scalability. The app uses modularization to organize its components, making it easier to work with and understand the code.
 
-Here is an example preview of the dependency flow:
+An example of the app's dependency flow can be seen in the preview below:
 
-<img src="assets/example-architecture.jpg" width="850px"/>
+<img src="assets/example-architecture.jpg" width="100%"/>
 
 ## 📋 License
 
