@@ -20,16 +20,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.ujizin.leafy.core.ui.extensions.OnClick
-import com.ujizin.leafy.core.ui.extensions.capitalize
 import com.ujizin.leafy.core.ui.components.EmptySection
 import com.ujizin.leafy.core.ui.components.Section
 import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
 import com.ujizin.leafy.core.ui.components.card.BoxImage
-import com.ujizin.leafy.core.ui.components.image.Icons
 import com.ujizin.leafy.core.ui.components.card.CardSize
+import com.ujizin.leafy.core.ui.components.image.Icons
 import com.ujizin.leafy.core.ui.components.label.TitleRow
+import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.ui.extensions.capitalize
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.features.home.R
 
@@ -68,14 +68,14 @@ private fun HomeScreen(
             Section(
                 title = stringResource(
                     id = R.string.hello_user,
-                    result.nickname.capitalize()
+                    result.nickname.capitalize(),
                 ).capitalize(),
                 subTitle = stringResource(id = R.string.welcome_back).capitalize(),
                 leadingIcon = {
                     AnimatedButtonIcon(
                         icon = Icons.Hamburger,
                         animation = Animation.SlideToEnd,
-                        onClick = onDrawerClick
+                        onClick = onDrawerClick,
                     )
                 },
                 trailingIcon = {
@@ -84,14 +84,14 @@ private fun HomeScreen(
                         animation = Animation.SlideToStart,
                         onClick = onSearchClick,
                     )
-                }
+                },
             )
         }
         when {
             result.plants.isEmpty() -> item {
                 EmptySection(
                     modifier = Modifier.padding(vertical = 32.dp, horizontal = 20.dp),
-                    onClick = onEmptyPlantClick
+                    onClick = onEmptyPlantClick,
                 )
             }
 
@@ -124,7 +124,7 @@ private fun LazyItemScope.HomePlantCard(plant: Plant) {
             titleStyle = MaterialTheme.typography.titleLarge.copy(color = Color.White),
             subTitleStyle = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
             subTitle = plant.description,
-            verticalAlignment = Alignment.Bottom
+            verticalAlignment = Alignment.Bottom,
         ) {
             AnimatedButtonIcon(icon = Icons.Shared, tint = Color.White, size = 24.dp)
         }

@@ -33,7 +33,7 @@ internal fun RowScope.NavBarItem(
                 modifier = Modifier.size(24.dp),
                 tint = MaterialTheme.colorScheme.onSurface,
                 painter = painterResource(iconRes),
-                contentDescription = null
+                contentDescription = null,
             )
         },
         label = {

@@ -15,7 +15,7 @@ class AlarmMapper {
             ringtoneUriString = ringtoneUri.toString(),
             repeatIntervalInMillis = repeatIntervalInMillis,
             hours = hours,
-            minutes = minutes
+            minutes = minutes,
         )
     }
 
@@ -26,7 +26,7 @@ class AlarmMapper {
             ringtoneUri = ringtoneUri,
             repeatIntervalInMillis = repeatIntervalInMillis,
             hours = hours,
-            minutes = minutes
+            minutes = minutes,
         )
     }
 }

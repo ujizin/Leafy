@@ -29,7 +29,7 @@ private val darkColorScheme = darkColorScheme(
     onSecondaryContainer = Color.Gray800,
     outline = Color.Green800,
     surfaceVariant = Color.Green200,
-    onSurface = Color.Gray900
+    onSurface = Color.Gray900,
 )
 
 private val lightColorScheme = lightColorScheme(
@@ -45,7 +45,7 @@ private val lightColorScheme = lightColorScheme(
     secondaryContainer = Color.Green200,
     onSecondaryContainer = Color.Gray800,
     surfaceVariant = Color.Green200,
-    onSurface = Color.Gray900
+    onSurface = Color.Gray900,
 )
 
 @Composable
@@ -76,6 +76,6 @@ fun LeafyTheme(
         typography = getTypography(colorScheme),
         content = {
             ProvideTextStyle(value = MaterialTheme.typography.bodyMedium, content = content)
-        }
+        },
     )
 }

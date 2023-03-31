@@ -9,10 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.ujizin.leafy.core.ui.extensions.Content
 import com.ujizin.leafy.core.ui.components.animated.animation.Animate.Animated
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
 import com.ujizin.leafy.core.ui.components.header.HeaderTitle
+import com.ujizin.leafy.core.ui.extensions.Content
 
 @Composable
 fun TitleRow(
@@ -39,7 +39,7 @@ fun TitleRow(
                 subTitle = subTitle,
                 animation = Animation.None,
                 titleStyle = titleStyle,
-                subTitleStyle = subTitleStyle
+                subTitleStyle = subTitleStyle,
             )
             Row(horizontalArrangement = Arrangement.spacedBy(iconSpacedBy)) { icons() }
         }

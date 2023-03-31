@@ -16,7 +16,7 @@ fun ByteArrayOutputStream.decodeToBitmapWithRotation(): Bitmap? {
 
     val orientation = ExifInterface(ByteArrayInputStream(byteArray)).getAttributeInt(
         ExifInterface.TAG_ORIENTATION,
-        ExifInterface.ORIENTATION_UNDEFINED
+        ExifInterface.ORIENTATION_UNDEFINED,
     )
 
     val degrees = when (orientation) {

@@ -1,9 +1,9 @@
 package com.ujizin.leafy.repository.implementation
 
-import com.ujizin.leafy.repository.datasource.AlarmDataSource
-import com.ujizin.leafy.repository.mapper.AlarmMapper
 import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.repository.AlarmRepository
+import com.ujizin.leafy.repository.datasource.AlarmDataSource
+import com.ujizin.leafy.repository.mapper.AlarmMapper
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
@@ -18,5 +18,4 @@ class AlarmRepositoryImpl(
     override fun insertAlarm(alarm: Alarm) = flow {
         emit(dataSource.insertAlarm(mapper.toRepo(alarm)))
     }.flowOn(dispatcher)
-
 }

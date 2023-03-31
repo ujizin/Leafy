@@ -16,7 +16,7 @@ class PublishViewModel @Inject constructor(
     fun sendDraftPlant(title: String, description: String, onFinishPublish: () -> Unit) {
         addDraftPlant(
             title = title,
-            description = description
+            description = description,
         ).onCompletion {
             onFinishPublish()
         }.launchIn(viewModelScope)

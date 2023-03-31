@@ -22,7 +22,7 @@ class AlarmLocalDataSourceTest : BaseDatabaseTest() {
         filePath = ":data//fake/path",
         favorite = false,
         description = "this is a fake plant",
-        albumId = null
+        albumId = null,
     )
 
     override fun setUp() {

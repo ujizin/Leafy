@@ -3,11 +3,11 @@ package com.ujizin.leafy.search
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ujizin.leafy.core.navigation.Args
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.Result
 import com.ujizin.leafy.domain.usecase.plant.FindPlant
 import com.ujizin.leafy.domain.usecase.plant.LoadAllPlant
-import com.ujizin.leafy.core.navigation.Args
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,8 +26,8 @@ class SearchViewModel @Inject constructor(
 
     private val initAutoFocus: Boolean = checkNotNull(savedStateHandle[Args.SearchAutoFocus])
 
-    private val _searchUiState = MutableStateFlow<SearchUiState>(SearchUiState.Initial(initAutoFocus))
-    val searchUiState = _searchUiState.asStateFlow()
+    private val _uiState = MutableStateFlow<SearchUiState>(SearchUiState.Initial(initAutoFocus))
+    val uiState = _uiState.asStateFlow()
 
     fun search(sentence: String) {
         when {
@@ -37,7 +37,7 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun Flow<Result<List<Plant>>>.onEachPlant() = onEach { result ->
-        _searchUiState.update { currentState ->
+        _uiState.update { currentState ->
             when (result) {
                 is Result.Error -> SearchUiState.Initial(initAutoFocus)
                 Result.Loading -> currentState

@@ -8,8 +8,9 @@ import android.provider.Settings
 fun Context.startSettingsPermission() {
     val intent = Intent(
         Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-        Uri.parse("package:${packageName}"
-        )
+        Uri.parse(
+            "package:$packageName",
+        ),
     )
     startActivity(intent)
 }

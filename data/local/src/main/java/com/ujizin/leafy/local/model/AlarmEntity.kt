@@ -19,9 +19,9 @@ import androidx.room.PrimaryKey
             entity = PlantEntity::class,
             parentColumns = ["plant_id"],
             childColumns = ["plant_id"],
-            onDelete = ForeignKey.SET_DEFAULT
-        )
-    ]
+            onDelete = ForeignKey.SET_DEFAULT,
+        ),
+    ],
 )
 data class AlarmEntity(
     @ColumnInfo(name = "alarm_id")
@@ -36,5 +36,5 @@ data class AlarmEntity(
     @ColumnInfo(name = "hours")
     val hours: Int,
     @ColumnInfo(name = "minutes")
-    val minutes: Int,
+    val minutes: Int
 )

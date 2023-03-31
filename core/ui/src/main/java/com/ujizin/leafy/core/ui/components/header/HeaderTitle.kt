@@ -6,10 +6,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
-import com.ujizin.leafy.core.ui.extensions.Empty
+import com.ujizin.leafy.core.themes.LeafyTheme
 import com.ujizin.leafy.core.ui.components.animated.AnimatedText
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
-import com.ujizin.leafy.core.themes.LeafyTheme
+import com.ujizin.leafy.core.ui.extensions.Empty
 
 @Composable
 fun HeaderTitle(
@@ -18,7 +18,7 @@ fun HeaderTitle(
     title: String,
     titleStyle: TextStyle = MaterialTheme.typography.titleLarge,
     subTitle: String = String.Empty,
-    subTitleStyle: TextStyle = MaterialTheme.typography.bodyMedium,
+    subTitleStyle: TextStyle = MaterialTheme.typography.bodyMedium
 ) {
     Column(modifier) {
         AnimatedText(animation = animation, text = title, style = titleStyle)
@@ -26,7 +26,7 @@ fun HeaderTitle(
             AnimatedText(
                 animation = animation.copy(delayMillis = animation.durationMillis),
                 text = subTitle,
-                style = subTitleStyle
+                style = subTitleStyle,
             )
         }
     }
@@ -39,7 +39,7 @@ private fun PreviewHeaderTitleWithSubtitle() {
         HeaderTitle(
             title = "Hi Lucas",
             subTitle = "Welcome back!",
-            animation = Animation.None
+            animation = Animation.None,
         )
     }
 }
@@ -50,7 +50,7 @@ private fun PreviewHeaderTitle() {
     LeafyTheme {
         HeaderTitle(
             title = "Hi Lucas",
-            animation = Animation.None
+            animation = Animation.None,
         )
     }
 }

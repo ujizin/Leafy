@@ -20,7 +20,7 @@ data class UserStore(
             theme = null,
             language = null,
             dynamicColor = true,
-            createdAt = " "
+            createdAt = " ",
         )
     }
 }

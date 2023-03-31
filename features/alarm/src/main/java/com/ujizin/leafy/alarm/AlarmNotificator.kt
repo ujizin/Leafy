@@ -19,7 +19,7 @@ object AlarmNotificator {
         context: Context,
         title: String,
         description: String,
-        uri: Uri,
+        uri: Uri
     ) {
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_monochrome)
@@ -30,10 +30,9 @@ object AlarmNotificator {
             .build()
 
         val notificationManager = context.getSystemService(
-            Context.NOTIFICATION_SERVICE
+            Context.NOTIFICATION_SERVICE,
         ) as NotificationManager
 
         notificationManager.notify(1, notification)
     }
-
 }

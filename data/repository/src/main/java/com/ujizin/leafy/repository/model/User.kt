@@ -11,5 +11,5 @@ data class User(
     val nickname: String,
     val theme: String?,
     val language: String?,
-    val dynamicColor: Boolean,
+    val dynamicColor: Boolean
 )

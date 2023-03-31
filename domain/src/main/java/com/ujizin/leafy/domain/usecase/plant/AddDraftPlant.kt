@@ -18,6 +18,6 @@ interface AddDraftPlant {
     operator fun invoke(
         title: String? = null,
         file: File? = null,
-        description: String? = null,
+        description: String? = null
     ): Flow<Unit>
 }

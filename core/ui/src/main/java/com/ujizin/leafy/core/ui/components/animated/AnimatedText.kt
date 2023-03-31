@@ -7,9 +7,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
+import com.ujizin.leafy.core.themes.LeafyTheme
 import com.ujizin.leafy.core.ui.components.animated.animation.Animate.Animated
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
-import com.ujizin.leafy.core.themes.LeafyTheme
+import com.ujizin.leafy.core.ui.extensions.capitalize
 
 @Composable
 fun AnimatedText(
@@ -18,7 +19,7 @@ fun AnimatedText(
     color: Color = Color.Unspecified,
     capitalize: Boolean = true,
     style: TextStyle = LocalTextStyle.current,
-    animation: Animation = Animation.None,
+    animation: Animation = Animation.None
 ) {
     Animated(animation = animation) {
         Text(

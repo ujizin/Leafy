@@ -42,14 +42,14 @@ object RepositoryModule {
     @Singleton
     fun provideAlarmRepository(dataSource: AlarmDataSource): AlarmRepository = AlarmRepositoryImpl(
         dataSource = dataSource,
-        mapper = AlarmMapper()
+        mapper = AlarmMapper(),
     )
 
     @Provides
     @Singleton
     fun provideUserRepository(dataSource: UserDataSource): UserRepository = UserRepositoryImpl(
         dataSource = dataSource,
-        userMapper = UserMapper()
+        userMapper = UserMapper(),
     )
 
     @Provides

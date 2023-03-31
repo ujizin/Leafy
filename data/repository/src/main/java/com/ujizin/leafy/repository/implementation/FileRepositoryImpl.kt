@@ -10,7 +10,7 @@ import java.util.UUID
 internal class FileRepositoryImpl : FileRepository {
 
     private fun createUniqueName(extension: String) =
-        "${UUID.randomUUID()}-${System.currentTimeMillis()}.${extension}"
+        "${UUID.randomUUID()}-${System.currentTimeMillis()}.$extension"
 
     private fun File.createNewUniqueFile(extension: String) =
         File(this, createUniqueName(extension)).apply { createNewFile() }

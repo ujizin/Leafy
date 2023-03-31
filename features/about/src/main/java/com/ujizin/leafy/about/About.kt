@@ -20,11 +20,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.core.ui.components.Section
 import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
 import com.ujizin.leafy.core.ui.components.button.Button
 import com.ujizin.leafy.core.ui.components.image.Icons
+import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.features.about.R
 import com.ujizin.leafy.core.components.R as CR
 
@@ -34,7 +34,7 @@ fun About(onBackPressed: OnClick) {
         trailingIcon = {
             AnimatedButtonIcon(icon = Icons.Back, onClick = onBackPressed)
         },
-        title = stringResource(id = R.string.about)
+        title = stringResource(id = R.string.about),
     ) {
         AboutSection(Modifier.weight(1F))
     }
@@ -51,7 +51,7 @@ private fun AboutSection(modifier: Modifier = Modifier) {
                 .aspectRatio(2F),
             contentScale = ContentScale.Fit,
             painter = painterResource(id = CR.drawable.ic_launcher_foreground),
-            contentDescription = null
+            contentDescription = null,
         )
 
         AboutContent(Modifier.padding(vertical = 24.dp, horizontal = 20.dp))
@@ -62,7 +62,7 @@ private fun AboutSection(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .padding(20.dp),
             text = stringResource(id = R.string.about_button),
-            onClick = context::openProject
+            onClick = context::openProject,
         )
     }
 }
@@ -72,12 +72,12 @@ private fun AboutContent(modifier: Modifier = Modifier) {
     Column(modifier) {
         Text(
             text = stringResource(id = CR.string.app_name),
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleMedium,
         )
         Text(
             modifier = Modifier.padding(top = 16.dp),
             lineHeight = 24.sp,
-            text = stringResource(id = R.string.about_description)
+            text = stringResource(id = R.string.about_description),
         )
     }
 }

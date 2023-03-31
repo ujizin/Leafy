@@ -8,5 +8,5 @@ package com.ujizin.leafy.domain.model
  * */
 data class Album(
     val id: Long = 0,
-    val title: String,
+    val title: String
 )

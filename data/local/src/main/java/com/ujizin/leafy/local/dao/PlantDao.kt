@@ -44,7 +44,13 @@ interface PlantDao {
      *
      *  @param sentence sentence to find plants
      * */
-    @Query("SELECT * FROM plant WHERE plant_title LIKE '%' || :sentence || '%' OR plant_description LIKE '%' || :sentence || '%'")
+    @Query(
+        """SELECT * FROM
+        plant WHERE plant_title
+        LIKE '%' || :sentence || '%'
+        OR plant_description LIKE '%' || :sentence || '%'
+        """,
+    )
     suspend fun findBySentence(sentence: String): List<PlantEntity>
 
     /**
@@ -54,7 +60,6 @@ interface PlantDao {
      * */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(plant: PlantEntity): Long
-
 
     /**
      * Insert news [PlantEntity].

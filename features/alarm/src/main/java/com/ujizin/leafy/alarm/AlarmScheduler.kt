@@ -55,13 +55,13 @@ class AlarmScheduler(private val context: Context) {
         hours: Int,
         minutes: Int,
         ringtoneUri: Uri,
-        bundle: Bundle,
+        bundle: Bundle
     ) {
         context.alarmManager.setRepeating(
             type,
             getTimeInMillis(hours, minutes),
             intervalInMillis,
-            createPendingIntent(ringtoneUri, intervalInMillis, bundle)
+            createPendingIntent(ringtoneUri, intervalInMillis, bundle),
         )
     }
 
@@ -78,13 +78,13 @@ class AlarmScheduler(private val context: Context) {
         hours: Int,
         minutes: Int,
         ringtoneUri: Uri,
-        bundle: Bundle,
+        bundle: Bundle
     ) {
         AlarmManagerCompat.setExactAndAllowWhileIdle(
             context.alarmManager,
             type,
             getTimeInMillis(hours, minutes),
-            createPendingIntent(ringtoneUri, bundle = bundle)
+            createPendingIntent(ringtoneUri, bundle = bundle),
         )
     }
 
@@ -127,6 +127,6 @@ class AlarmScheduler(private val context: Context) {
             putExtra(AlarmReceiver.REPEAT_MODE, intervalInMillis)
             putExtras(bundle)
         },
-        PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE,
     )
 }

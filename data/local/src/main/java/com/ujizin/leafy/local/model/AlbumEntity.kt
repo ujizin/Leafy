@@ -16,5 +16,5 @@ data class AlbumEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     @ColumnInfo(name = "album_title")
-    val title: String,
+    val title: String
 )

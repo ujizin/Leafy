@@ -18,7 +18,7 @@ internal class PlantMapper {
             description,
             File(filePath),
             favorite,
-            albumId
+            albumId,
         )
     }
 

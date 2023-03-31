@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PreferencesViewModel @Inject constructor(
-    private val updateUser: UpdateUser,
+    private val updateUser: UpdateUser
 ) : ViewModel() {
 
     fun update(user: User) {

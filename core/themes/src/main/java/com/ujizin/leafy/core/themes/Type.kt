@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.sp
 
 private val PoppinsFamily = FontFamily(
     Font(R.font.poppins_bold, FontWeight.Bold),
-    Font(R.font.poppins_regular, FontWeight.Normal)
+    Font(R.font.poppins_regular, FontWeight.Normal),
 )
 
 internal fun getTypography(color: ColorScheme) = Typography(
@@ -20,26 +20,26 @@ internal fun getTypography(color: ColorScheme) = Typography(
         fontSize = 32.sp,
         fontWeight = FontWeight.Bold,
         color = color.onBackground,
-        platformStyle = PlatformTextStyle(includeFontPadding = false)
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
     ),
     titleMedium = TextStyle(
         fontFamily = PoppinsFamily,
         fontSize = 24.sp,
         fontWeight = FontWeight.Bold,
         color = color.onBackground,
-        platformStyle = PlatformTextStyle(includeFontPadding = false)
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
     ),
     titleSmall = TextStyle(
         fontFamily = PoppinsFamily,
         fontSize = 16.sp,
         color = color.onBackground,
         fontWeight = FontWeight.Bold,
-        platformStyle = PlatformTextStyle(includeFontPadding = false)
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
     ),
     bodyMedium = TextStyle(
         fontFamily = PoppinsFamily,
         fontSize = 16.sp,
         color = color.onBackground,
-        platformStyle = PlatformTextStyle(includeFontPadding = false)
-    )
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
+    ),
 )

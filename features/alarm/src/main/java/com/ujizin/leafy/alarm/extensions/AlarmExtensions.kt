@@ -7,7 +7,6 @@ import android.content.Intent
 import android.os.Build
 import android.provider.Settings
 
-
 /**
  * Get alarm manager instance from context
  * */

@@ -6,9 +6,8 @@ import com.ujizin.leafy.domain.usecase.plant.UpdatePlant
 import kotlinx.coroutines.flow.Flow
 
 internal class UpdatePlantImpl(
-    private val plantRepository: PlantRepository,
+    private val plantRepository: PlantRepository
 ) : UpdatePlant {
 
     override fun invoke(plant: Plant): Flow<Unit> = plantRepository.updatePlant(plant)
-
 }

@@ -4,7 +4,6 @@ import androidx.room.Room
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.platform.app.InstrumentationRegistry
 import com.ujizin.leafy.core.test.TestDispatcherRule
-import com.ujizin.leafy.local.Database
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.After
 import org.junit.Before

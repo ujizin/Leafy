@@ -21,7 +21,6 @@ enum class RepeatMode(@StringRes val display: Int) {
         internal const val NO_REPEAT = -1L
         internal const val REPEAT_MON_TO_FRIDAY = -2L
 
-
         fun getByDisplayValue(context: Context, value: String) = values().first {
             context.getString(it.display) == value
         }

@@ -26,7 +26,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CameraViewModel @Inject constructor(
     private val saveFile: SaveFile,
-    private val addDraftPlant: AddDraftPlant,
+    private val addDraftPlant: AddDraftPlant
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<CameraUiState>(CameraUiState.Initial)
@@ -54,10 +54,10 @@ class CameraViewModel @Inject constructor(
     fun saveImage(
         context: Context,
         bitmap: Bitmap,
-        onImageSaved: () -> Unit,
+        onImageSaved: () -> Unit
     ) {
         addDraftPlant(
-            file = saveFile(context.cacheDir, bitmap, "jpg")
+            file = saveFile(context.cacheDir, bitmap, "jpg"),
         ).onCompletion {
             onImageSaved()
         }.launchIn(viewModelScope)
@@ -65,7 +65,7 @@ class CameraViewModel @Inject constructor(
 
     fun preparePreview(
         contentResolver: ContentResolver,
-        uri: Uri,
+        uri: Uri
     ) {
         val inputStream = contentResolver.openInputStream(uri)
         val bitmap = BitmapFactory.decodeStream(inputStream)
@@ -80,5 +80,4 @@ sealed interface CameraUiState {
     object Initial : CameraUiState
     class Preview(val bitmap: Bitmap) : CameraUiState
     data class Error(val message: String) : CameraUiState
-
 }

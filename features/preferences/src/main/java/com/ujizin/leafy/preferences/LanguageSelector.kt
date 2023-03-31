@@ -27,7 +27,7 @@ fun LanguageSelector(
         title = stringResource(R.string.language),
         showModal = showModal,
         onModalStateChanged = { showModal = it },
-        subTitle = stringResource(language.displayResId)
+        subTitle = stringResource(language.displayResId),
     ) {
         val context = LocalContext.current
         val languages = remember(language) { getLanguages(context) }
@@ -42,7 +42,7 @@ fun LanguageSelector(
                 val lang = languages.first { it.displayName == displayName }.language
                 onLanguageChanged(lang)
                 showModal = false
-            }
+            },
         )
     }
 }

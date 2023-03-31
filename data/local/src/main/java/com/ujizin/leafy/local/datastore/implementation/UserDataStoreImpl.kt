@@ -16,10 +16,9 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-
 internal class UserDataStoreImpl(
     context: Context,
-    private val serializer: Json,
+    private val serializer: Json
 ) : UserDataStore {
 
     private val Context.userStore by preferencesDataStore(name = USER_PREFERENCES_NAME)
@@ -49,7 +48,7 @@ internal class UserDataStoreImpl(
                     nickname = user.nickname,
                     theme = user.theme,
                     language = user.language,
-                )
+                ),
             )
         }
     }

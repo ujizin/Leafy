@@ -16,17 +16,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.ujizin.leafy.core.ui.extensions.OnClick
-import com.ujizin.leafy.core.ui.extensions.paddingScreen
+import com.ujizin.leafy.core.ui.components.Section
 import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
-import com.ujizin.leafy.publish.viewmodel.PublishViewModel
-import com.ujizin.leafy.core.ui.components.Section
 import com.ujizin.leafy.core.ui.components.button.Button
 import com.ujizin.leafy.core.ui.components.image.Icons
 import com.ujizin.leafy.core.ui.components.textfield.Placeholder
 import com.ujizin.leafy.core.ui.components.textfield.TextField
+import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.ui.extensions.paddingScreen
 import com.ujizin.leafy.features.publish.R
+import com.ujizin.leafy.publish.viewmodel.PublishViewModel
 
 @Composable
 fun PublishSection(
@@ -38,7 +38,7 @@ fun PublishSection(
         onBackPressed = onBackPressed,
         onNextClicked = { title, description ->
             viewModel.sendDraftPlant(title, description, onFinishPublish)
-        }
+        },
     )
 }
 
@@ -66,7 +66,7 @@ fun PublishContent(
                 .padding(top = 32.dp, start = 20.dp, end = 20.dp),
             placeholder = { Placeholder(text = stringResource(R.string.title)) },
             value = title,
-            onValueChange = { title = it }
+            onValueChange = { title = it },
         )
         TextField(
             modifier = Modifier
@@ -84,7 +84,7 @@ fun PublishContent(
                 .paddingScreen(vertical = 16.dp),
             enabled = title.isNotBlank() && description.isNotBlank(),
             text = stringResource(R.string.next),
-            onClick = { onNextClicked(title, description) }
+            onClick = { onNextClicked(title, description) },
         )
     }
 }

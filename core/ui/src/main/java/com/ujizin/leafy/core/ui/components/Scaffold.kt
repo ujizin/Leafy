@@ -12,12 +12,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import com.ujizin.leafy.core.navigation.Destination
+import com.ujizin.leafy.core.navigation.navigate
 import com.ujizin.leafy.core.ui.components.navigation.bottombar.NavigationBar
 import com.ujizin.leafy.core.ui.components.navigation.currentNavItemAsState
 import com.ujizin.leafy.core.ui.components.navigation.drawer.DrawerContent
 import com.ujizin.leafy.core.ui.components.navigation.drawer.DrawerItem
-import com.ujizin.leafy.core.navigation.Destination
-import com.ujizin.leafy.core.navigation.navigate
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -48,7 +48,7 @@ fun Scaffold(
                 },
                 onCloseDrawer = {
                     scope.launch { drawerState.close() }
-                }
+                },
             )
         },
     ) {
@@ -58,7 +58,7 @@ fun Scaffold(
         ) { innerPadding ->
             Box(
                 modifier = Modifier.padding(top = innerPadding.calculateTopPadding()),
-                content = content
+                content = content,
             )
         }
     }

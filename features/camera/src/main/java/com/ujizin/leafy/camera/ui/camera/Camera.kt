@@ -16,11 +16,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.ujizin.leafy.camera.viewmodel.CameraUiState
-import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.camposer.CameraPreview
 import com.ujizin.camposer.state.CameraState
 import com.ujizin.camposer.state.rememberCamSelector
+import com.ujizin.leafy.camera.viewmodel.CameraUiState
+import com.ujizin.leafy.core.ui.extensions.OnClick
 
 @Composable
 internal fun Camera(
@@ -28,7 +28,7 @@ internal fun Camera(
     cameraState: CameraState,
     onCloseClicked: OnClick,
     onTakePicture: OnClick,
-    onGalleryClick: OnClick,
+    onGalleryClick: OnClick
 ) {
     if (uiState is CameraUiState.Error) {
         ErrorPopUp(uiState.message)
@@ -42,12 +42,12 @@ internal fun Camera(
         cameraState = cameraState,
         camSelector = camSelector,
         zoomRatio = zoomRatio,
-        onZoomRatioChanged = { zoomRatio = it }
+        onZoomRatioChanged = { zoomRatio = it },
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.SpaceBetween,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             CameraHeader(
                 onSettingsClicked = {},
@@ -60,7 +60,7 @@ internal fun Camera(
                     .padding(horizontal = 48.dp, vertical = 32.dp),
                 onTakePicture = onTakePicture,
                 onGalleryClick = onGalleryClick,
-                onSwitchClick = { camSelector = camSelector.inverse }
+                onSwitchClick = { camSelector = camSelector.inverse },
             )
         }
     }

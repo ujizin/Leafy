@@ -6,6 +6,6 @@ object Shadow {
 
     val Black: List<Color> = listOf(
         Color.Black.copy(0.0F),
-        Color.Black.copy(0.75F)
+        Color.Black.copy(0.75F),
     )
 }

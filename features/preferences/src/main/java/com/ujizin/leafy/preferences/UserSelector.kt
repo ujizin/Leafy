@@ -13,19 +13,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.ujizin.leafy.core.ui.extensions.capitalize
-import com.ujizin.leafy.core.ui.extensions.paddingScreen
 import com.ujizin.leafy.core.ui.components.button.Button
 import com.ujizin.leafy.core.ui.components.selector.Selector
 import com.ujizin.leafy.core.ui.components.textfield.Placeholder
 import com.ujizin.leafy.core.ui.components.textfield.TextField
+import com.ujizin.leafy.core.ui.extensions.capitalize
+import com.ujizin.leafy.core.ui.extensions.paddingScreen
 import com.ujizin.leafy.features.preferences.R
 
 @Composable
 fun UserSelector(
     modifier: Modifier = Modifier,
     nickname: String,
-    onNicknameChanged: (String) -> Unit,
+    onNicknameChanged: (String) -> Unit
 ) {
     var showModal by remember { mutableStateOf(false) }
     Selector(
@@ -42,7 +42,7 @@ fun UserSelector(
             onSaveNickname = { nickname ->
                 onNicknameChanged(nickname)
                 showModal = false
-            }
+            },
         )
     }
 }
@@ -64,14 +64,14 @@ fun UserTextField(
                 .padding(top = 4.dp),
             value = newNickname,
             placeholder = { Placeholder(text = nickname) },
-            onValueChange = { newNickname = it }
+            onValueChange = { newNickname = it },
         )
         Button(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp),
             text = stringResource(R.string.update),
-            onClick = { onSaveNickname(newNickname) }
+            onClick = { onSaveNickname(newNickname) },
         )
     }
 }

@@ -2,7 +2,7 @@ package com.ujizin.leafy.preferences.model
 
 import android.content.Context
 import com.ujizin.leafy.domain.model.Language
-import com.ujizin.leafy.domain.model.Language.*
+import com.ujizin.leafy.domain.model.Language.values
 import com.ujizin.leafy.preferences.extensions.displayResId
 
 data class PreferenceLanguage(

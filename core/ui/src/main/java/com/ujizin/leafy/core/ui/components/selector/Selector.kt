@@ -31,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ujizin.leafy.core.themes.LeafyTheme
+import com.ujizin.leafy.core.ui.extensions.capitalize
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,7 +42,7 @@ fun Selector(
     value: String? = null,
     showModal: Boolean = false,
     onModalStateChanged: (Boolean) -> Unit = {},
-    content: @Composable ColumnScope.() -> Unit,
+    content: @Composable ColumnScope.() -> Unit
 ) {
     val modalState = rememberModalBottomSheetState()
     var internalShowModal by remember { mutableStateOf(showModal) }
@@ -89,7 +90,7 @@ fun Selector(
                     .padding(start = 8.dp)
                     .width(16.dp)
                     .height(8.dp),
-                color = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.primary,
             )
         }
     }
@@ -111,7 +112,6 @@ private fun DownArrow(
         }
 
         drawPath(path, color = color, style = Stroke(strokeWidth.toPx()))
-
     }
 }
 
@@ -127,7 +127,7 @@ fun PreviewSelector() {
             value = "rang",
             content = {
                 Text("Foo")
-            }
+            },
         )
     }
 }
@@ -145,7 +145,7 @@ fun PreviewSelectorWithSubtitle() {
             value = "rang",
             content = {
                 Text("Foo")
-            }
+            },
         )
     }
 }
@@ -162,7 +162,7 @@ fun PreviewSelectorWithNoValue() {
             subTitle = "rong",
             content = {
                 Text("Foo")
-            }
+            },
         )
     }
 }

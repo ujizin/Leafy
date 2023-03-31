@@ -6,7 +6,7 @@ import com.ujizin.leafy.core.components.R
 
 enum class Icons(
     @DrawableRes internal val resId: Int,
-    @StringRes internal val descriptionRes: Int,
+    @StringRes internal val descriptionRes: Int
 ) {
     Hamburger(R.drawable.hamburger, R.string.hamburger),
     Magnifier(R.drawable.magnifier, R.string.magnifier),
@@ -23,5 +23,5 @@ enum class Icons(
     Close(R.drawable.close, R.string.close),
     Gallery(R.drawable.gallery, R.string.gallery),
     Refresh(R.drawable.refresh, R.string.refresh),
-    Back(R.drawable.back, R.string.back);
+    Back(R.drawable.back, R.string.back)
 }

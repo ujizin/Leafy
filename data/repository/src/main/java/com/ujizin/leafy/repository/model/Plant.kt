@@ -16,5 +16,5 @@ data class Plant(
     val filePath: String,
     val description: String,
     val favorite: Boolean,
-    val albumId: Long? = null,
+    val albumId: Long? = null
 )

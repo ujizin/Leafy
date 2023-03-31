@@ -1,9 +1,9 @@
 package com.ujizin.leafy.repository.implementation
 
-import com.ujizin.leafy.repository.datasource.PlantDataSource
-import com.ujizin.leafy.repository.mapper.PlantMapper
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.repository.PlantRepository
+import com.ujizin.leafy.repository.datasource.PlantDataSource
+import com.ujizin.leafy.repository.mapper.PlantMapper
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -47,7 +47,7 @@ internal class PlantRepositoryImpl(
     override fun getDraftPlant() = flow {
         emit(
             dataSource.getDraftPlant()?.let(mapper::toDomain)
-                ?: Plant.createDraft()
+                ?: Plant.createDraft(),
         )
     }.flowOn(dispatcher)
 

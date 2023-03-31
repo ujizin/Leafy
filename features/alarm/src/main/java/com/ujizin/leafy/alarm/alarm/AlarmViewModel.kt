@@ -40,7 +40,9 @@ class AlarmViewModel @Inject constructor(
 
     fun setupRingtones() {
         getRingtones()
-            .onEach { ringtones -> _uiState.update { AlarmUiState.Initialized(ringtones.distinctBy { it.title }) } }
+            .onEach { ringtones ->
+                _uiState.update { AlarmUiState.Initialized(ringtones.distinctBy { it.title }) }
+            }
             .launchIn(viewModelScope)
     }
 
@@ -50,7 +52,7 @@ class AlarmViewModel @Inject constructor(
         repeatMode: RepeatMode,
         hours: Int,
         minutes: Int,
-        onPlantPublished: () -> Unit,
+        onPlantPublished: () -> Unit
     ) {
         loadDraftPlant()
             .mapNotNull { result ->
@@ -68,14 +70,14 @@ class AlarmViewModel @Inject constructor(
                             repeatIntervalInMillis = repeatMode.intervalTimeMillis,
                             minutes = minutes,
                             hours = hours,
-                        )
+                        ),
                     ).onEach {
                         alarmScheduler.scheduleAlarm(
                             hours = hours,
                             minutes = minutes,
                             ringtoneUri = ringtone.uri,
                             intervalInMillis = repeatMode.intervalTimeMillis,
-                            bundle = bundleOf(AlarmReceiver.ALARM_PLANT_ID_EXTRA to id)
+                            bundle = bundleOf(AlarmReceiver.ALARM_PLANT_ID_EXTRA to id),
                         )
                     }
                 }

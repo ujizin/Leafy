@@ -11,14 +11,15 @@ import androidx.compose.ui.Modifier
 object Animate {
 
     enum class Direction {
-        None, Start, Top, End, Bottom;
+        None, Start, Top, End, Bottom
     }
+
     @Composable
     fun Animated(
         modifier: Modifier = Modifier,
         animation: Animation,
         visibleTarget: Boolean = true,
-        content: @Composable () -> Unit,
+        content: @Composable () -> Unit
     ) {
         if (animation.direction == Direction.None) {
             content()
@@ -37,12 +38,12 @@ object Animate {
             visibleState = visibleState,
             enter = animation.enterTransition() + fadeInEaseInOut(
                 animation.durationMillis,
-                animation.delayMillis
+                animation.delayMillis,
             ),
             exit = animation.exitTransition() + fadeOutEaseInOut(
                 animation.durationMillis,
-                animation.delayMillis
-            )
+                animation.delayMillis,
+            ),
         ) { content() }
     }
 }

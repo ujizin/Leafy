@@ -17,5 +17,4 @@ object RingtoneModule {
     fun provideLoadRingtones(
         repository: RingtoneRepository
     ): LoadRingtones = LoadRingtonesImpl(repository)
-
 }

@@ -14,7 +14,7 @@ import android.net.Uri
 data class Ringtone(
     val id: String,
     val title: String,
-    val uri: Uri,
+    val uri: Uri
 )
 
 fun Ringtone?.orDefault(context: Context) = this ?: run {

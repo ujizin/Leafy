@@ -14,7 +14,7 @@ internal fun SearchLoading(modifier: Modifier = Modifier) {
         CircularProgressIndicator(
             modifier = Modifier
                 .size(32.dp)
-                .align(Alignment.Center)
+                .align(Alignment.Center),
         )
     }
 }

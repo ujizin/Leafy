@@ -11,32 +11,32 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.ujizin.leafy.core.components.R
-import com.ujizin.leafy.core.ui.extensions.OnClick
-import com.ujizin.leafy.core.ui.components.animated.animation.Animation
 import coil.compose.AsyncImage
+import com.ujizin.leafy.core.components.R
 import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
+import com.ujizin.leafy.core.ui.components.animated.animation.Animation
 import com.ujizin.leafy.core.ui.components.button.Button
 import com.ujizin.leafy.core.ui.components.image.Icons
+import com.ujizin.leafy.core.ui.extensions.OnClick
 
 @Composable
 internal fun CameraPreviewSection(
     bitmap: Bitmap,
     onSaveClicked: (Bitmap) -> Unit,
-    onBackPressed: OnClick,
+    onBackPressed: OnClick
 ) {
     BackHandler(onBack = onBackPressed)
     Box(Modifier.fillMaxSize()) {
         AsyncImage(
             modifier = Modifier.fillMaxSize(),
             model = bitmap,
-            contentDescription = null
+            contentDescription = null,
         )
         AnimatedButtonIcon(
             modifier = Modifier.padding(16.dp),
             icon = Icons.Back,
             animation = Animation.SlideToBottom,
-            onClick = onBackPressed
+            onClick = onBackPressed,
         )
         Button(
             modifier = Modifier
@@ -44,7 +44,7 @@ internal fun CameraPreviewSection(
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter),
             text = stringResource(id = R.string.save),
-            onClick = { onSaveClicked(bitmap) }
+            onClick = { onSaveClicked(bitmap) },
         )
     }
 }

@@ -22,7 +22,7 @@ fun AnimatedIcon(
             modifier = modifier,
             painter = painterResource(icon.resId),
             tint = tint,
-            contentDescription = stringResource(icon.descriptionRes)
+            contentDescription = stringResource(icon.descriptionRes),
         )
     }
 }

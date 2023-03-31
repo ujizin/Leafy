@@ -20,7 +20,8 @@ fun <T> Flow<T>.asResult(): Flow<Result<T>> = map<T, Result<T>> {
  * @param block callback that'll be called if there's an error
  * */
 inline fun <T : Any> ifAnyError(
-    vararg result: Result<T>, block: (List<Throwable>) -> Unit
+    vararg result: Result<T>,
+    block: (List<Throwable>) -> Unit
 ) {
     val errors = result.filterIsInstance<Result.Error>().mapNotNull { it.exception }
     if (errors.isNotEmpty()) block(errors)

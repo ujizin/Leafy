@@ -19,14 +19,14 @@ data class Plant(
     val description: String,
     val file: File,
     val favorite: Boolean,
-    val albumId: Long? = null,
+    val albumId: Long? = null
 ) {
     companion object {
         fun createDraft() = Plant(
             title = "untitled",
             file = File.createTempFile(UUID.randomUUID().toString(), ".jpg"),
             description = "no description",
-            favorite = false
+            favorite = false,
         )
     }
 }

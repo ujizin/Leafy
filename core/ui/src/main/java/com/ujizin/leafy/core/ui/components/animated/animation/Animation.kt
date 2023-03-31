@@ -1,10 +1,9 @@
 package com.ujizin.leafy.core.ui.components.animated.animation
 
-
 data class Animation internal constructor(
     val direction: Animate.Direction,
     val delayMillis: Int = 0,
-    val durationMillis: Int = MediumDuration,
+    val durationMillis: Int = MediumDuration
 ) {
     companion object {
         const val MediumDelay = 500

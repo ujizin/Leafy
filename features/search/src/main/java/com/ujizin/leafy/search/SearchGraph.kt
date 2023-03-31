@@ -4,12 +4,12 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.core.navigation.AnimatedEnterTransition
 import com.ujizin.leafy.core.navigation.AnimatedExitTransition
 import com.ujizin.leafy.core.navigation.Args.SearchAutoFocus
 import com.ujizin.leafy.core.navigation.Destination
 import com.ujizin.leafy.core.navigation.composable
+import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.search.ui.SearchSection
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -28,8 +28,8 @@ fun NavGraphBuilder.searchGraph(
             navArgument(SearchAutoFocus) {
                 type = NavType.BoolType
                 defaultValue = false
-            }
-        )
+            },
+        ),
     ) {
         SearchSection(
             onDrawerClick = onDrawerClick,

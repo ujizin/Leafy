@@ -16,8 +16,8 @@ internal class UserMapper {
             settings = User.Settings(
                 language = language?.let(Language::valueOf) ?: Language.systemLanguage,
                 theme = theme?.let(Theme::valueOf) ?: Theme.System,
-                dynamicColor = dynamicColor
-            )
+                dynamicColor = dynamicColor,
+            ),
         )
     }
 

@@ -18,10 +18,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ujizin.leafy.core.components.R
-import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.themes.LeafyTheme
 import com.ujizin.leafy.core.ui.components.button.Button
 import com.ujizin.leafy.core.ui.components.image.Icons
-import com.ujizin.leafy.core.themes.LeafyTheme
+import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.ui.extensions.capitalize
 
 @Composable
 fun EmptySection(
@@ -30,12 +31,12 @@ fun EmptySection(
     buttonTitle: String = stringResource(id = R.string.take_a_picture).capitalize(),
     enabled: Boolean = true,
     icons: Icons = Icons.Leaf,
-    onClick: OnClick,
+    onClick: OnClick
 ) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         Image(
             modifier = Modifier.defaultMinSize(minWidth = 128.dp, minHeight = 96.dp),
@@ -48,12 +49,12 @@ fun EmptySection(
             text = description.capitalize(),
             textAlign = TextAlign.Center,
             maxLines = 3,
-            overflow = TextOverflow.Ellipsis
+            overflow = TextOverflow.Ellipsis,
         )
         Button(
             text = buttonTitle.capitalize(),
             enabled = enabled,
-            onClick = onClick
+            onClick = onClick,
         )
     }
 }

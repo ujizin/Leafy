@@ -10,18 +10,22 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.ujizin.leafy.core.ui.extensions.Content
+import com.ujizin.leafy.core.themes.LeafyTheme
 import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
 import com.ujizin.leafy.core.ui.components.animated.animation.Animate.Animated
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
 import com.ujizin.leafy.core.ui.components.header.HeaderTitle
 import com.ujizin.leafy.core.ui.components.image.Icons
-import com.ujizin.leafy.core.themes.LeafyTheme
+import com.ujizin.leafy.core.ui.extensions.Content
 
 @Composable
 fun Section(
     modifier: Modifier = Modifier,
-    headerPaddingValues: PaddingValues = PaddingValues(top = 32.dp, start = 20.dp, end = 20.dp),
+    headerPaddingValues: PaddingValues = PaddingValues(
+        top = 32.dp,
+        start = 20.dp,
+        end = 20.dp,
+    ),
     title: String,
     subTitle: String = "",
     trailingIcon: @Composable Content? = null,
@@ -52,9 +56,11 @@ private fun HeaderSection(
     leadingIcon: @Composable Content?,
     title: String,
     subTitle: String,
-    headerAnimation: Animation,
+    headerAnimation: Animation
 ) {
-    val paddingTop by animateDpAsState(targetValue = if (trailingIcon != null || leadingIcon != null) 24.dp else 0.dp)
+    val paddingTop by animateDpAsState(
+        targetValue = if (trailingIcon != null || leadingIcon != null) 24.dp else 0.dp,
+    )
     Column(modifier) {
         Toolbar(trailingIcon = trailingIcon, leadingIcon = leadingIcon)
 
@@ -62,7 +68,7 @@ private fun HeaderSection(
             title = title,
             subTitle = subTitle,
             animation = headerAnimation,
-            modifier = Modifier.padding(top = paddingTop)
+            modifier = Modifier.padding(top = paddingTop),
         )
     }
 }
@@ -77,7 +83,7 @@ private fun PreviewSection() {
             subTitle = "Welcome back!",
             leadingIcon = { AnimatedButtonIcon(icon = Icons.Hamburger) },
             trailingIcon = { AnimatedButtonIcon(icon = Icons.Magnifier) },
-            headerAnimation = Animation.None
+            headerAnimation = Animation.None,
         )
     }
 }

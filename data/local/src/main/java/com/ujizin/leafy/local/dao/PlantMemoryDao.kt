@@ -7,7 +7,6 @@ import androidx.room.Query
 import androidx.room.Update
 import com.ujizin.leafy.local.model.PlantEntity
 
-
 /**
  * Dao class to handle with [PlantEntity] in memory.
  * */
@@ -37,5 +36,4 @@ interface PlantMemoryDao {
      * */
     @Update
     suspend fun update(plant: PlantEntity)
-
 }

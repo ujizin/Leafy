@@ -4,7 +4,6 @@ import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.Result
 import kotlinx.coroutines.flow.Flow
 
-
 /**
  * Find plant use case.
  * */

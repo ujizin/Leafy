@@ -8,10 +8,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.ujizin.leafy.core.components.R
-import com.ujizin.leafy.core.ui.extensions.OnClick
-import com.ujizin.leafy.core.ui.extensions.capitalize
 import com.ujizin.leafy.core.ui.components.EmptySection
 import com.ujizin.leafy.core.ui.components.image.Icons
+import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.ui.extensions.capitalize
 
 @Composable
 internal fun CameraDenied(shouldShowRationale: Boolean, onCameraRequest: OnClick) {
@@ -20,7 +20,7 @@ internal fun CameraDenied(shouldShowRationale: Boolean, onCameraRequest: OnClick
             when {
                 shouldShowRationale -> R.string.camera_permission_description
                 else -> R.string.camera_permission_denied_description
-            }
+            },
         )
     }
     EmptySection(
@@ -28,6 +28,6 @@ internal fun CameraDenied(shouldShowRationale: Boolean, onCameraRequest: OnClick
         description = stringResource(descriptionRes).capitalize(),
         buttonTitle = stringResource(R.string.camera_permission_allow).capitalize(),
         icons = Icons.Folder,
-        onClick = onCameraRequest
+        onClick = onCameraRequest,
     )
 }

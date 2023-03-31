@@ -35,6 +35,6 @@ fun AutoSizeText(
             } else {
                 readyToDraw = true
             }
-        }
+        },
     )
 }

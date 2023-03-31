@@ -17,12 +17,12 @@ internal fun Animation.enterTransition(): EnterTransition {
     return when (direction) {
         Animate.Direction.Start -> slideInHorizontally(
             animationSpec = animationSpec,
-            initialOffsetX = { it / 2 }
+            initialOffsetX = { it / 2 },
         )
 
         Animate.Direction.Top -> slideInVertically(
             animationSpec = animationSpec,
-            initialOffsetY = { it / 2 }
+            initialOffsetY = { it / 2 },
         )
 
         Animate.Direction.End -> slideInHorizontally(animationSpec = animationSpec)
@@ -36,12 +36,12 @@ internal fun Animation.exitTransition(): ExitTransition {
     return when (direction) {
         Animate.Direction.Start -> slideOutHorizontally(
             animationSpec = animationSpec,
-            targetOffsetX = { it * 2 }
+            targetOffsetX = { it * 2 },
         )
 
         Animate.Direction.Top -> slideOutVertically(
             animationSpec = animationSpec,
-            targetOffsetY = { it * 2 }
+            targetOffsetY = { it * 2 },
         )
 
         Animate.Direction.End -> slideOutHorizontally(animationSpec = animationSpec)
@@ -51,9 +51,9 @@ internal fun Animation.exitTransition(): ExitTransition {
 }
 
 internal fun fadeInEaseInOut(durationMillis: Int, delayMillis: Int) = fadeIn(
-    animationSpec = tween(durationMillis, delayMillis, FastOutSlowInEasing)
+    animationSpec = tween(durationMillis, delayMillis, FastOutSlowInEasing),
 )
 
 internal fun fadeOutEaseInOut(durationMillis: Int, delayMillis: Int) = fadeOut(
-    animationSpec = tween(durationMillis, delayMillis, FastOutSlowInEasing)
+    animationSpec = tween(durationMillis, delayMillis, FastOutSlowInEasing),
 )

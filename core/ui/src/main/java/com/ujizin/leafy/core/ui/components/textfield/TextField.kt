@@ -21,10 +21,11 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.ujizin.leafy.core.ui.extensions.Content
+import com.ujizin.leafy.core.themes.LeafyTheme
 import com.ujizin.leafy.core.ui.components.animated.animation.Animate.Animated
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
-import com.ujizin.leafy.core.themes.LeafyTheme
+import com.ujizin.leafy.core.ui.extensions.Content
+import com.ujizin.leafy.core.ui.extensions.capitalize
 
 @Composable
 fun TextField(
@@ -35,7 +36,7 @@ fun TextField(
     paddingValues: PaddingValues = PaddingValues(16.dp),
     animation: Animation = Animation.SlideToTop,
     placeholder: @Composable Content? = null,
-    onValueChange: (String) -> Unit,
+    onValueChange: (String) -> Unit
 ) {
     Animated(animation = animation) {
         BasicTextField(
@@ -49,14 +50,14 @@ fun TextField(
                 Box(
                     Modifier
                         .background(MaterialTheme.colorScheme.surfaceVariant, shape)
-                        .padding(paddingValues)
+                        .padding(paddingValues),
                 ) {
                     innerTextField()
                     if (placeholder != null && value.isEmpty()) {
                         placeholder()
                     }
                 }
-            }
+            },
         )
     }
 }
@@ -75,7 +76,7 @@ fun Placeholder(
 
         Text(
             text = text.capitalize(),
-            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5F)
+            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5F),
         )
     }
 }

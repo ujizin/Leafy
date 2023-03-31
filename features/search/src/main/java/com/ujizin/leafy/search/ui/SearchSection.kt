@@ -30,9 +30,6 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.ujizin.leafy.core.ui.extensions.OnClick
-import com.ujizin.leafy.core.ui.extensions.capitalize
-import com.ujizin.leafy.core.ui.state.keyboardAsState
 import com.ujizin.leafy.core.ui.components.Section
 import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
 import com.ujizin.leafy.core.ui.components.animated.AnimatedIcon
@@ -41,6 +38,9 @@ import com.ujizin.leafy.core.ui.components.card.CardSize
 import com.ujizin.leafy.core.ui.components.image.Icons
 import com.ujizin.leafy.core.ui.components.textfield.Placeholder
 import com.ujizin.leafy.core.ui.components.textfield.TextField
+import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.ui.extensions.capitalize
+import com.ujizin.leafy.core.ui.state.keyboardAsState
 import com.ujizin.leafy.features.search.R
 import com.ujizin.leafy.search.SearchUiState
 import com.ujizin.leafy.search.SearchViewModel
@@ -52,10 +52,10 @@ fun SearchSection(
     onDrawerClick: OnClick,
     onTakePictureClick: OnClick,
     onScroll: (Boolean) -> Unit,
-    viewModel: SearchViewModel = hiltViewModel(),
+    viewModel: SearchViewModel = hiltViewModel()
 ) {
     val isKeyboardOpen by keyboardAsState()
-    val uiState by viewModel.searchUiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsState()
 
     val focusRequester = remember { FocusRequester() }
 
@@ -89,7 +89,7 @@ fun SearchSection(
                 headerPaddingValues = PaddingValues(top = 32.dp),
                 leadingIcon = if (!isKeyboardOpen) leadingIcon(onDrawerClick) else null,
                 trailingIcon = if (!isKeyboardOpen) trailingIcon() else null,
-                title = stringResource(R.string.search).capitalize()
+                title = stringResource(R.string.search).capitalize(),
             )
         }
 
@@ -101,7 +101,7 @@ fun SearchSection(
                     .focusRequester(focusRequester),
                 placeholder = { SearchPlaceholder() },
                 value = searchText,
-                onValueChange = { searchText = it }
+                onValueChange = { searchText = it },
             )
         }
 
@@ -114,7 +114,7 @@ fun SearchSection(
                 SearchLoading(
                     Modifier
                         .fillMaxWidth()
-                        .padding(top = 16.dp)
+                        .padding(top = 16.dp),
                 )
             }
 
@@ -124,7 +124,7 @@ fun SearchSection(
                         .fillMaxWidth()
                         .padding(20.dp),
                     searchText = searchText,
-                    onTakePictureClick = onTakePictureClick
+                    onTakePictureClick = onTakePictureClick,
                 )
             }
 
@@ -150,7 +150,7 @@ private fun leadingIcon(onDrawerClick: OnClick) = movableContentOf {
     AnimatedButtonIcon(
         icon = Icons.Hamburger,
         animation = Animation.SlideToTop,
-        onClick = onDrawerClick
+        onClick = onDrawerClick,
     )
 }
 

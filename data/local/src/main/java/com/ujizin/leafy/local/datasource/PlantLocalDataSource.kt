@@ -9,7 +9,7 @@ import com.ujizin.leafy.repository.model.Plant
 internal class PlantLocalDataSource(
     private val plantDao: PlantDao,
     private val memoryPlantDao: PlantMemoryDao,
-    private val mapper: PlantMapper,
+    private val mapper: PlantMapper
 ) : PlantDataSource {
 
     override suspend fun insertPlant(plant: Plant): Long {

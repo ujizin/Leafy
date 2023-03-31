@@ -16,7 +16,7 @@ import com.ujizin.leafy.local.model.PlantEntity
     entities = [
         PlantEntity::class,
         AlarmEntity::class,
-        AlbumEntity::class
+        AlbumEntity::class,
     ],
     version = 1,
 )

@@ -10,10 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ujizin.leafy.core.themes.LeafyTheme
+import com.ujizin.leafy.core.ui.components.animated.AnimatedText
 import com.ujizin.leafy.core.ui.extensions.Content
 import com.ujizin.leafy.core.ui.extensions.OnClick
-import com.ujizin.leafy.core.ui.components.animated.AnimatedText
-import com.ujizin.leafy.core.themes.LeafyTheme
 import androidx.compose.material3.Button as Material3Button
 
 @Composable
@@ -25,7 +25,7 @@ fun Button(
     capitalize: Boolean = true,
     shape: Shape = RoundedCornerShape(4.dp),
     contentPadding: PaddingValues = PaddingValues(horizontal = 24.dp, vertical = 16.dp),
-    content: @Composable Content = {},
+    content: @Composable Content = {}
 ) {
     Material3Button(
         enabled = enabled,
@@ -39,7 +39,7 @@ fun Button(
                 newValue = when {
                     enabled -> MaterialTheme.colorScheme.onPrimary
                     else -> MaterialTheme.colorScheme.onSurface
-                }
+                },
             )
             AnimatedText(
                 color = contentColor,

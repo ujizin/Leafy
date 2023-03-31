@@ -7,7 +7,7 @@ import com.ujizin.leafy.repository.model.Alarm
 
 internal class AlarmLocalDataSource(
     private val alarmDao: AlarmDao,
-    private val mapper: AlarmMapper,
+    private val mapper: AlarmMapper
 ) : AlarmDataSource {
 
     override suspend fun insertAlarm(alarm: Alarm) {

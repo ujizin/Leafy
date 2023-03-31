@@ -28,17 +28,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
-import com.ujizin.leafy.core.ui.extensions.OnClick
-import com.ujizin.leafy.core.ui.extensions.noClickable
 import com.ujizin.leafy.core.ui.components.animated.AnimatedIcon
 import com.ujizin.leafy.core.ui.components.image.Icons
+import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.ui.extensions.noClickable
 
 @Composable
 fun CameraFooter(
     modifier: Modifier = Modifier,
     onTakePicture: OnClick,
     onGalleryClick: OnClick,
-    onSwitchClick: OnClick,
+    onSwitchClick: OnClick
 ) {
     Box(
         modifier = Modifier
@@ -63,7 +63,7 @@ fun CameraFooter(
 @Composable
 fun ButtonSwitchCamera(
     modifier: Modifier = Modifier,
-    onClick: OnClick,
+    onClick: OnClick
 ) {
     var rotate by remember { mutableStateOf(false) }
     val rotateAnimation by animateFloatAsState(targetValue = if (rotate) 0F else 180F)
@@ -79,13 +79,14 @@ fun ButtonSwitchCamera(
         onClick = {
             rotate = !rotate
             onClick()
-        }) {
+        },
+    ) {
         AnimatedIcon(
             modifier = Modifier
                 .size(24.dp)
                 .align(Alignment.Center)
                 .rotate(rotateAnimation),
-            icon = Icons.Refresh
+            icon = Icons.Refresh,
         )
     }
 }
@@ -93,24 +94,24 @@ fun ButtonSwitchCamera(
 @Composable
 fun ButtonGallery(
     modifier: Modifier = Modifier,
-    onClick: OnClick,
+    onClick: OnClick
 ) {
     ButtonPulse(
         modifier = Modifier
             .background(
                 MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.25F),
-                CircleShape
+                CircleShape,
             )
             .padding(12.dp)
             .then(modifier),
         shape = CircleShape,
-        onClick = onClick
+        onClick = onClick,
     ) {
         AnimatedIcon(
             modifier = Modifier
                 .size(24.dp)
                 .align(Alignment.Center),
-            icon = Icons.Gallery
+            icon = Icons.Gallery,
         )
     }
 }
@@ -127,7 +128,7 @@ private fun ButtonPicture(
             .border(BorderStroke(8.dp, Color.White), CircleShape)
             .then(modifier),
         shape = CircleShape,
-        onClick = onClick
+        onClick = onClick,
     )
 }
 
@@ -136,7 +137,7 @@ fun ButtonPulse(
     modifier: Modifier = Modifier,
     shape: Shape = RectangleShape,
     onClick: OnClick,
-    content: @Composable BoxScope.() -> Unit = {},
+    content: @Composable BoxScope.() -> Unit = {}
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val buttonPressed by interactionSource.collectIsPressedAsState()
@@ -148,10 +149,10 @@ fun ButtonPulse(
             .clickable(
                 interactionSource = interactionSource,
                 indication = rememberRipple(bounded = true),
-                onClick = onClick
+                onClick = onClick,
             )
             .scale(scaleAnimated)
             .then(modifier),
-        content = content
+        content = content,
     )
 }

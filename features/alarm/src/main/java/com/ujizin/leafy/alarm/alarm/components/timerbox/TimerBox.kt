@@ -1,4 +1,4 @@
-package com.ujizin.leafy.alarm.alarm.components.timer_box
+package com.ujizin.leafy.alarm.alarm.components.timerbox
 
 import androidx.annotation.IntRange
 import androidx.compose.animation.core.animateFloatAsState
@@ -43,7 +43,7 @@ fun TimerBox(
     modifier: Modifier = Modifier,
     @IntRange(0, 23) hour: Int? = null,
     @IntRange(0, 59) minute: Int? = null,
-    onTimeChange: (hour: Int, minute: Int) -> Unit,
+    onTimeChange: (hour: Int, minute: Int) -> Unit
 ) {
     Row(
         modifier = modifier,
@@ -57,14 +57,14 @@ fun TimerBox(
             timeUnit = TimeUnit.Hour,
             value = hour,
             horizontalAlignment = Alignment.End,
-            onTimeChange = { internalHour = it }
+            onTimeChange = { internalHour = it },
         )
         TimerUnitBox(
             modifier = Modifier.weight(1F),
             timeUnit = TimeUnit.Minutes,
             value = minute,
             horizontalAlignment = Alignment.Start,
-            onTimeChange = { internalMinute = it }
+            onTimeChange = { internalMinute = it },
         )
 
         LaunchedEffect(internalHour, internalMinute) {
@@ -92,7 +92,7 @@ private fun TimerUnitBox(
     quantity: Int = 5,
     value: Int? = null,
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
-    onTimeChange: (String) -> Unit,
+    onTimeChange: (String) -> Unit
 ) {
     val state = rememberLazyListState()
     var hapticInitialized by remember { mutableStateOf(false) }
@@ -101,13 +101,17 @@ private fun TimerUnitBox(
     LazyColumn(
         modifier = modifier,
         state = state,
-        horizontalAlignment = horizontalAlignment
+        horizontalAlignment = horizontalAlignment,
     ) {
         items(Int.MAX_VALUE) { listIndex ->
             val index = listIndex % timeUnit.numbers.size
             val number = timeUnit.numbers[index]
-            val middle by remember { derivedStateOf { state.firstVisibleItemIndex + quantityMiddle } }
-            val endIndex by remember { derivedStateOf { state.firstVisibleItemIndex + (quantity - 1) } }
+            val middle by remember {
+                derivedStateOf { state.firstVisibleItemIndex + quantityMiddle }
+            }
+            val endIndex by remember {
+                derivedStateOf { state.firstVisibleItemIndex + (quantity - 1) }
+            }
 
             val alpha by remember(listIndex) {
                 derivedStateOf {
@@ -129,7 +133,7 @@ private fun TimerUnitBox(
                 modifier = Modifier
                     .alpha(alpha)
                     .scale(
-                        animatedScale.coerceAtLeast(0.5F)
+                        animatedScale.coerceAtLeast(0.5F),
                     ),
                 text = number,
                 textStyle = TextStyle(
@@ -137,7 +141,7 @@ private fun TimerUnitBox(
                     textAlign = TextAlign.Center,
                     color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.Bold,
-                )
+                ),
             )
 
             val haptic = LocalHapticFeedback.current
@@ -154,7 +158,7 @@ private fun TimerUnitBox(
         val index = half % timeUnit.numbers.size
         val zeroIndex = half - index - quantityMiddle
         val scrollToIndex = zeroIndex + timeUnit.numbers.indexOf(
-            value.toDecimalFormat()
+            value.toDecimalFormat(),
         ).coerceAtLeast(0)
 
         state.scrollToItem(scrollToIndex)
@@ -186,7 +190,7 @@ fun PreviewAlarmBox() {
                 onTimeChange = { hr, min ->
                     hour = hr
                     minute = min
-                }
+                },
             )
             Text("hour: $hour")
             Text("minute: $minute")

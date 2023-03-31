@@ -7,7 +7,7 @@ import com.ujizin.leafy.repository.model.Album
 
 internal class AlbumLocalDataSource(
     private val albumDao: AlbumDao,
-    private val mapper: AlbumMapper,
+    private val mapper: AlbumMapper
 ) : AlbumDataSource {
 
     override suspend fun insertAlbum(album: Album) {

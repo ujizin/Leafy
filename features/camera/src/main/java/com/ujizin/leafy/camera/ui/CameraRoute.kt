@@ -10,15 +10,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.PermissionStatus
+import com.google.accompanist.permissions.rememberPermissionState
+import com.ujizin.camposer.state.rememberCameraState
 import com.ujizin.leafy.camera.ui.camera.Camera
 import com.ujizin.leafy.camera.viewmodel.CameraUiState
 import com.ujizin.leafy.camera.viewmodel.CameraViewModel
 import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.core.ui.extensions.startSettingsPermission
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.PermissionStatus
-import com.google.accompanist.permissions.rememberPermissionState
-import com.ujizin.camposer.state.rememberCameraState
 
 @Composable
 @OptIn(ExperimentalPermissionsApi::class)
@@ -50,9 +50,9 @@ internal fun CameraRoute(
                         viewModel.saveImage(
                             context = context,
                             bitmap = state.bitmap,
-                            onImageSaved = onImageSaved
+                            onImageSaved = onImageSaved,
                         )
-                    }
+                    },
                 )
 
                 else -> Camera(
@@ -62,7 +62,7 @@ internal fun CameraRoute(
                     onTakePicture = { viewModel.takePicture(cameraState) },
                     onGalleryClick = {
                         launcher.launch(PickVisualMediaRequest(PickVisualMedia.ImageOnly))
-                    }
+                    },
                 )
             }
         }

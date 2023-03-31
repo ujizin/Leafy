@@ -1,5 +1,6 @@
 package com.ujizin.leafy.domain
 
+import com.ujizin.leafy.core.test.TestDispatcherRule
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.repository.PlantRepository
 import com.ujizin.leafy.domain.result.Result
@@ -11,7 +12,6 @@ import com.ujizin.leafy.domain.usecase.plant.implementation.AddPlantImpl
 import com.ujizin.leafy.domain.usecase.plant.implementation.DeletePlantImpl
 import com.ujizin.leafy.domain.usecase.plant.implementation.LoadAllPlantImpl
 import com.ujizin.leafy.domain.usecase.plant.implementation.UpdatePlantImpl
-import com.ujizin.leafy.core.test.TestDispatcherRule
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
@@ -70,7 +70,7 @@ class PlantUseCaseTest {
         val expectedPlants = listOf(
             Plant(id = 1, "", "", File(""), false),
             Plant(id = 2, "", "", File(""), false),
-            Plant(id = 3, "", "", File(""), false)
+            Plant(id = 3, "", "", File(""), false),
         )
 
         every { plantRepository.getPlants() } returns flowOf(expectedPlants)

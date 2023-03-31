@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import com.ujizin.leafy.alarm.receiver.AlarmReceiver
+import com.ujizin.leafy.core.components.R
 import com.ujizin.leafy.domain.result.Result
 import com.ujizin.leafy.domain.usecase.plant.LoadPlant
-import com.ujizin.leafy.core.components.R
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.flow
  * Show alarm use case
  * */
 class ShowAlarm(
-    private val loadPlant: LoadPlant,
+    private val loadPlant: LoadPlant
 ) {
 
     operator fun invoke(context: Context, intent: Intent) = flow {

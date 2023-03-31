@@ -10,7 +10,6 @@ import androidx.room.PrimaryKey
  *
  * @param id the plant id
  * @param title the plant title
- * @param date the plant date
  * @param filePath file path of the plant
  * @param description the plant description
  * @param albumId the album id linked to the plant
@@ -22,9 +21,9 @@ import androidx.room.PrimaryKey
             entity = AlbumEntity::class,
             parentColumns = ["album_id"],
             childColumns = ["album_id"],
-            onDelete = ForeignKey.SET_DEFAULT
-        )
-    ]
+            onDelete = ForeignKey.SET_DEFAULT,
+        ),
+    ],
 )
 data class PlantEntity(
     @ColumnInfo(name = "plant_id")
@@ -39,5 +38,5 @@ data class PlantEntity(
     @ColumnInfo(name = "plant_favorite")
     val favorite: Boolean,
     @ColumnInfo(name = "album_id")
-    val albumId: Long? = null,
+    val albumId: Long? = null
 )

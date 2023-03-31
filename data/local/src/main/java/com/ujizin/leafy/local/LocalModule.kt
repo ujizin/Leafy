@@ -32,7 +32,7 @@ object LocalModule {
         Room.databaseBuilder(
             context,
             Database::class.java,
-            Database.NAME
+            Database.NAME,
         ).build()
 
     @Singleton
@@ -47,26 +47,26 @@ object LocalModule {
     @Provides
     fun provideLocalPlantDataSource(
         database: Database,
-        memoryDatabase: MemoryDatabase,
+        memoryDatabase: MemoryDatabase
     ): PlantDataSource = PlantLocalDataSource(
         plantDao = database.plantDao(),
         memoryPlantDao = memoryDatabase.plantDao(),
-        mapper = PlantMapper()
+        mapper = PlantMapper(),
     )
 
     @Singleton
     @Provides
     fun provideLocalAlarmDataSource(
-        database: Database,
+        database: Database
     ): AlarmDataSource = AlarmLocalDataSource(
         alarmDao = database.alarmDao(),
-        mapper = AlarmMapper()
+        mapper = AlarmMapper(),
     )
 
     @Singleton
     @Provides
     fun provideUserDataSource(userDataStore: UserDataStore): UserDataSource = UserLocalDataSource(
         userDataStore = userDataStore,
-        userMapper = UserMapper()
+        userMapper = UserMapper(),
     )
 }

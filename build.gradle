@@ -14,6 +14,13 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.spotless)
+}
+
+subprojects {
+    apply plugin: libs.plugins.spotless.get().pluginId
+
+    apply from: "$project.rootDir/spotless.gradle"
 }
 
 detekt {

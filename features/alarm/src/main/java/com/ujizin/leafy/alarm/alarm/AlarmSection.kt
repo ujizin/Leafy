@@ -20,14 +20,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
-import com.ujizin.leafy.alarm.alarm.components.timer_box.TimerBox
+import com.ujizin.leafy.alarm.alarm.components.timerbox.TimerBox
 import com.ujizin.leafy.alarm.extensions.alarmManager
 import com.ujizin.leafy.alarm.extensions.hasAlarmPermission
 import com.ujizin.leafy.alarm.extensions.startAlarmPermission
 import com.ujizin.leafy.alarm.model.RepeatMode
-import com.ujizin.leafy.core.ui.extensions.OnClick
-import com.ujizin.leafy.core.ui.extensions.paddingScreen
-import com.ujizin.leafy.core.ui.state.observeAsState
 import com.ujizin.leafy.core.ui.components.Section
 import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
@@ -36,6 +33,9 @@ import com.ujizin.leafy.core.ui.components.image.Icons
 import com.ujizin.leafy.core.ui.components.selector.ModalSelector
 import com.ujizin.leafy.core.ui.components.selector.MultiModalSelector
 import com.ujizin.leafy.core.ui.components.selector.Selector
+import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.ui.extensions.paddingScreen
+import com.ujizin.leafy.core.ui.state.observeAsState
 import com.ujizin.leafy.domain.model.Ringtone
 import com.ujizin.leafy.domain.model.orDefault
 import com.ujizin.leafy.features.alarm.R
@@ -44,13 +44,15 @@ import com.ujizin.leafy.features.alarm.R
 fun AlarmSection(
     onBackPressed: OnClick,
     viewModel: AlarmViewModel = hiltViewModel(),
-    onSaved: () -> Unit,
+    onSaved: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
 
     val repeatValues = remember { RepeatMode.values().toList() }
-    val ringtones by remember { derivedStateOf { (uiState as? AlarmUiState.Initialized)?.ringtones.orEmpty() } }
+    val ringtones by remember {
+        derivedStateOf { (uiState as? AlarmUiState.Initialized)?.ringtones.orEmpty() }
+    }
     var ringtone by remember(ringtones) {
         mutableStateOf(ringtones.firstOrNull().orDefault(context))
     }
@@ -84,7 +86,7 @@ fun AlarmSection(
                 repeatMode = repeatMode,
                 hours = hours,
                 minutes = minutes,
-                onPlantPublished = onSaved
+                onPlantPublished = onSaved,
             )
         },
     )
@@ -101,10 +103,12 @@ fun AlarmScreen(
     onRepeatChanged: (RepeatMode) -> Unit,
     onRingtoneChanged: (Ringtone) -> Unit,
     onBackPressed: OnClick,
-    onSaveClicked: OnClick,
+    onSaveClicked: OnClick
 ) {
     val context = LocalContext.current
-    val ringtonePlayer = remember(ringtone) { RingtoneManager.getRingtone(context, ringtone.uri) }
+    val ringtonePlayer = remember(ringtone) {
+        RingtoneManager.getRingtone(context, ringtone.uri)
+    }
     var ringtoneShowModal by remember { mutableStateOf(false) }
     var repeatShowModal by remember { mutableStateOf(false) }
 
@@ -135,13 +139,14 @@ fun AlarmScreen(
                 onValueChanged = { value ->
                     onRepeatChanged(RepeatMode.getByDisplayValue(context, value))
                     repeatShowModal = false
-                })
+                },
+            )
         },
         onRepeatModalStateChanged = { isVisible -> repeatShowModal = isVisible },
         onRingtoneModalStateChanged = { isVisible -> ringtoneShowModal = isVisible },
         onTimeChanged = onTimeChanged,
         onBackPressed = onBackPressed,
-        onSaveClicked = onSaveClicked
+        onSaveClicked = onSaveClicked,
     )
 }
 
@@ -158,20 +163,22 @@ private fun AlarmContent(
     ringtoneContent: @Composable ColumnScope.() -> Unit,
     repeatContent: @Composable ColumnScope.() -> Unit,
     onTimeChanged: (hours: Int, minutes: Int) -> Unit,
-    onSaveClicked: OnClick,
+    onSaveClicked: OnClick
 ) {
     Section(
-        modifier = modifier, title = stringResource(R.string.alarm_title), trailingIcon = {
+        modifier = modifier,
+        title = stringResource(R.string.alarm_title),
+        trailingIcon = {
             AnimatedButtonIcon(icon = Icons.Back, onClick = onBackPressed)
         },
-        headerAnimation = Animation.None
+        headerAnimation = Animation.None,
     ) {
         TimerBox(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1F)
                 .paddingScreen(),
-            onTimeChange = onTimeChanged
+            onTimeChange = onTimeChanged,
         )
         Selector(
             modifier = Modifier
@@ -191,7 +198,7 @@ private fun AlarmContent(
             showModal = repeatShowModal,
             onModalStateChanged = onRepeatModalStateChanged,
             value = repeat,
-            content = repeatContent
+            content = repeatContent,
         )
         Button(
             modifier = Modifier
@@ -199,7 +206,7 @@ private fun AlarmContent(
                 .padding(vertical = 16.dp)
                 .paddingScreen(),
             text = stringResource(R.string.save),
-            onClick = onSaveClicked
+            onClick = onSaveClicked,
         )
     }
 }
@@ -210,7 +217,10 @@ fun RingtoneEffect(ringtonePlayer: android.media.Ringtone, isModalVisible: Boole
     val lifecycleState by lifecycle.observeAsState()
 
     LaunchedEffect(lifecycleState) {
-        if (lifecycleState == Lifecycle.Event.ON_STOP || lifecycleState == Lifecycle.Event.ON_PAUSE) {
+        if (
+            lifecycleState == Lifecycle.Event.ON_STOP ||
+            lifecycleState == Lifecycle.Event.ON_PAUSE
+        ) {
             ringtonePlayer.stop()
         }
     }

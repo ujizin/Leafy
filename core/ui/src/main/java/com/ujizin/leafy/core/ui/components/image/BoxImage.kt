@@ -35,7 +35,7 @@ fun BoxImage(
 ) {
     Surface(
         modifier = modifier,
-        shape = RoundedCornerShape(4.dp)
+        shape = RoundedCornerShape(4.dp),
     ) {
         var imageHeight by remember { mutableStateOf(0.dp) }
         Image(

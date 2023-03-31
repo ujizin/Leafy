@@ -10,5 +10,4 @@ import kotlinx.coroutines.flow.Flow
 internal class LoadUserImpl(private val repository: UserRepository) : LoadUser {
 
     override fun invoke(): Flow<Result<User>> = repository.getUser().asResult()
-
 }

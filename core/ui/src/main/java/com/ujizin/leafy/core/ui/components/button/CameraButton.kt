@@ -17,22 +17,22 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.ujizin.leafy.core.ui.extensions.OnClick
-import com.ujizin.leafy.core.ui.components.animated.animation.Animate.Animated
-import com.ujizin.leafy.core.ui.components.animated.animation.Animation
 import com.ujizin.leafy.core.components.R
 import com.ujizin.leafy.core.themes.LeafyTheme
+import com.ujizin.leafy.core.ui.components.animated.animation.Animate.Animated
+import com.ujizin.leafy.core.ui.components.animated.animation.Animation
+import com.ujizin.leafy.core.ui.extensions.OnClick
 
 @Composable
 internal fun CameraButton(
     modifier: Modifier = Modifier,
     animation: Animation = Animation.SlideToBottom.copy(delayMillis = Animation.MediumDelay),
     iconAnimation: Animation = Animation.SlideToTop.copy(delayMillis = Animation.LargeDelay),
-    onClick: OnClick,
+    onClick: OnClick
 ) {
     Box(
         modifier = modifier,
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         Animated(animation = animation) {
             Box(
@@ -43,16 +43,16 @@ internal fun CameraButton(
                     .clickable(
                         indication = rememberRipple(bounded = true),
                         onClick = onClick,
-                        interactionSource = remember { MutableInteractionSource() }
+                        interactionSource = remember { MutableInteractionSource() },
                     ),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
             ) {
                 Animated(animation = iconAnimation) {
                     Icon(
                         modifier = Modifier.size(32.dp),
                         painter = painterResource(id = R.drawable.camera),
                         tint = MaterialTheme.colorScheme.primary,
-                        contentDescription = null
+                        contentDescription = null,
                     )
                 }
             }
@@ -66,7 +66,7 @@ private fun PreviewCameraButton() {
     LeafyTheme(dynamicColor = false) {
         CameraButton(
             animation = Animation.None,
-            iconAnimation = Animation.None
+            iconAnimation = Animation.None,
         ) {}
     }
 }

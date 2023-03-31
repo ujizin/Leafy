@@ -28,7 +28,7 @@ fun MultiModalSelector(
     enabled: Boolean = true,
     currentValue: String,
     values: List<String>,
-    onValueChanged: (String) -> Unit,
+    onValueChanged: (String) -> Unit
 ) {
     // TODO add multi modal selector
     ModalSelector(
@@ -37,7 +37,7 @@ fun MultiModalSelector(
         enabled = enabled,
         currentValue = currentValue,
         values = values,
-        onValueChanged = onValueChanged
+        onValueChanged = onValueChanged,
     )
 }
 
@@ -48,12 +48,13 @@ fun ModalSelector(
     enabled: Boolean = true,
     currentValue: String,
     values: List<String>,
-    onValueChanged: (String) -> Unit,
+    onValueChanged: (String) -> Unit
 ) {
     Column(modifier) {
         Text(
             modifier = Modifier.padding(horizontal = 20.dp),
-            text = title.capitalize(), style = MaterialTheme.typography.titleMedium
+            text = title.capitalize(),
+            style = MaterialTheme.typography.titleMedium,
         )
         Spacer(modifier = Modifier.height(16.dp))
         LazyColumn {
@@ -64,7 +65,7 @@ fun ModalSelector(
                         .padding(horizontal = 20.dp, vertical = 16.dp),
                     text = text.capitalize(),
                     enabled = enabled,
-                    selected = currentValue == text
+                    selected = currentValue == text,
                 ) {
                     onValueChanged(text)
                 }
@@ -79,13 +80,13 @@ fun ModalItemSelector(
     text: String,
     selected: Boolean,
     enabled: Boolean = true,
-    onItemSelectorClicked: () -> Unit,
+    onItemSelectorClicked: () -> Unit
 ) {
     Row(
         modifier = Modifier
             .then(if (enabled) Modifier.clickable(onClick = onItemSelectorClicked) else Modifier)
             .then(modifier),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Text(text = text)
         Box(
@@ -97,12 +98,12 @@ fun ModalItemSelector(
                     when {
                         selected -> Modifier.background(
                             MaterialTheme.colorScheme.onPrimary,
-                            CircleShape
+                            CircleShape,
                         )
 
                         else -> Modifier
-                    }
-                )
+                    },
+                ),
         )
     }
 }

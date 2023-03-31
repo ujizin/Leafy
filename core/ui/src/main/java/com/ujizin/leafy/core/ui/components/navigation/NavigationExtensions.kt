@@ -12,8 +12,8 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.navigation.NavController
-import com.ujizin.leafy.core.ui.components.navigation.bottombar.BottomNavItem
 import com.ujizin.leafy.core.navigation.Destination
+import com.ujizin.leafy.core.ui.components.navigation.bottombar.BottomNavItem
 
 private enum class NavDirection {
     Start, End, None
@@ -57,8 +57,8 @@ fun AnimatedContentScope<*>.navigationEnterTransition(
         direction,
         animationSpec = spring(
             Spring.DampingRatioLowBouncy,
-            Spring.StiffnessMediumLow
-        )
+            Spring.StiffnessMediumLow,
+        ),
     )
 }
 
@@ -76,13 +76,15 @@ fun AnimatedContentScope<*>.navigationExitTransition(
         direction,
         animationSpec = spring(
             Spring.DampingRatioLowBouncy,
-            Spring.StiffnessMediumLow
-        )
+            Spring.StiffnessMediumLow,
+        ),
     )
 }
 
 @Composable
-internal inline fun <reified T : NavItem> NavController.currentNavItemAsState(initialNavItem: T? = null): State<T?> {
+internal inline fun <reified T : NavItem> NavController.currentNavItemAsState(
+    initialNavItem: T? = null
+): State<T?> {
     val selectedItem = remember { mutableStateOf(initialNavItem) }
 
     DisposableEffect(this) {

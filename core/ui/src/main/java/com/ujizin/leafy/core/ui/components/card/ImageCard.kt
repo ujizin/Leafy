@@ -8,14 +8,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalContext
-import com.ujizin.leafy.core.ui.extensions.Content
-import com.ujizin.leafy.core.ui.components.animated.animation.Animate.Animated
-import com.ujizin.leafy.core.ui.components.animated.animation.Animation
-import com.ujizin.leafy.core.ui.components.image.BoxImage
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
+import com.ujizin.leafy.core.ui.components.animated.animation.Animate.Animated
+import com.ujizin.leafy.core.ui.components.animated.animation.Animation
+import com.ujizin.leafy.core.ui.components.image.BoxImage
+import com.ujizin.leafy.core.ui.extensions.Content
 
 @Composable
 fun BoxImage(
@@ -36,17 +36,17 @@ fun BoxImage(
     val painter = rememberAsyncImagePainter(model = model)
 
     val alphaAnimated by animateFloatAsState(
-        targetValue = if (painter.state is AsyncImagePainter.State.Success) 1F else 0F
+        targetValue = if (painter.state is AsyncImagePainter.State.Success) 1F else 0F,
     )
     Animated(
         modifier = Modifier.alpha(alphaAnimated),
-        animation = animation
+        animation = animation,
     ) {
         BoxImage(
             modifier = modifier,
             painter = painter,
             contentDescription = contentDescription,
-            contentAlignment = Alignment.BottomStart
+            contentAlignment = Alignment.BottomStart,
         ) { innerContent() }
     }
 }

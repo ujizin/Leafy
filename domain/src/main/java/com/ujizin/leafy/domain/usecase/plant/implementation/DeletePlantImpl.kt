@@ -9,5 +9,4 @@ internal class DeletePlantImpl(
 ) : DeletePlant {
 
     override fun invoke(plant: Plant) = plantRepository.deletePlant(plant)
-
 }

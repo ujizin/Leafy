@@ -28,7 +28,7 @@ fun NavGraphBuilder.composable(
     enterTransition: AnimatedEnterTransition = { fadeIn() },
     exitTransition: AnimatedExitTransition = { fadeOut() },
     popEnterTransition: (
-    AnimatedContentScope<NavBackStackEntry>.() -> EnterTransition?
+        AnimatedContentScope<NavBackStackEntry>.() -> EnterTransition?
     )? = enterTransition,
     popExitTransition: (
     AnimatedContentScope<NavBackStackEntry>.() -> ExitTransition?
@@ -45,7 +45,7 @@ fun NavGraphBuilder.composable(
         exitTransition = exitTransition,
         popEnterTransition = popEnterTransition,
         popExitTransition = popExitTransition,
-        content = content
+        content = content,
     )
 }
 

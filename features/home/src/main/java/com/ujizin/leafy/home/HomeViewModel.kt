@@ -8,16 +8,16 @@ import com.ujizin.leafy.domain.result.ifSuccess
 import com.ujizin.leafy.domain.usecase.plant.LoadAllPlant
 import com.ujizin.leafy.domain.usecase.user.LoadUser
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     loadAllPlant: LoadAllPlant,
-    loadUser: LoadUser,
+    loadUser: LoadUser
 ) : ViewModel() {
 
     val homeState: StateFlow<HomeUIState> = combine(
@@ -39,7 +39,6 @@ class HomeViewModel @Inject constructor(
         SharingStarted.WhileSubscribed(5_000),
         initialValue = HomeUIState.Loading,
     )
-
 }
 
 sealed interface HomeUIState {
@@ -50,5 +49,4 @@ sealed interface HomeUIState {
 
     data class Error(val throwable: Throwable?) : HomeUIState
     object Loading : HomeUIState
-
 }
