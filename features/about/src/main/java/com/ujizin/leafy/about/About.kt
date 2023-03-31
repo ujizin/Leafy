@@ -47,7 +47,7 @@ private fun AboutSection(modifier: Modifier = Modifier) {
         Image(
             modifier = Modifier
                 .padding(top = 32.dp)
-                .background(MaterialTheme.colorScheme.surface)
+                .background(MaterialTheme.colorScheme.secondaryContainer)
                 .aspectRatio(2F),
             contentScale = ContentScale.Fit,
             painter = painterResource(id = CR.drawable.ic_launcher_foreground),
