@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
             CompositionLocalProvider(LocalUser provides user) {
                 LeafyTheme(
                     darkTheme = darkTheme,
-                    dynamicColor = dynamicColor,
+                    dynamicColor = false,
                 ) {
                     val navController = rememberAnimatedNavController()
                     val drawerState = rememberDrawerState(DrawerValue.Closed)
