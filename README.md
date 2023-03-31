@@ -1,11 +1,13 @@
 ![Build Unit Tests](https://github.com/devlucasyuji/camerareminder/actions/workflows/workflow.yml/badge.svg)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-<img src="assets/background-leafy.jpg" width="100%"/>
+<img src="assets/background-leafy.png" width="100%"/>
 
 # Leafy
 
-Leafy is a free app for plant lovers that helps you save photos of your plants and set reminders to feed them. It's open-source and a great resource for developers to learn about the latest Android features. Try it out today! 🌱📱
+Leafy is a free app for plant lovers that helps you save photos of your plants and set reminders to
+feed them. It's open-source and a great resource for developers to learn about the latest Android
+features. Try it out today! 🌱📱
 
 ## 🏗️ Built with
 
@@ -18,9 +20,12 @@ Leafy is a free app for plant lovers that helps you save photos of your plants a
 - Ktlint
 - Much more!
 
-## 🗃 Architecture 
+## 🗃 Architecture
 
-The architecture of the app is based on the Hexagonal Architecture design pattern, which is a proven approach to separating concerns and achieving better maintainability, testability, and scalability. The app uses modularization to organize its components, making it easier to work with and understand the code.
+The architecture of the app is based on the Hexagonal Architecture design pattern, which is a proven
+approach to separating concerns and achieving better maintainability, testability, and scalability.
+The app uses modularization to organize its components, making it easier to work with and understand
+the code.
 
 An example of the app's dependency flow can be seen in the preview below:
 
