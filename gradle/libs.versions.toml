@@ -30,6 +30,7 @@ test-runner = "1.4.0"
 test-core-ktx = "1.4.0"
 mockk = "1.10.0"
 camposer = "0.1.0"
+spotless = "6.17.0"
 
 [libraries]
 
@@ -159,3 +160,4 @@ kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", vers
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "dagger.hilt.android.plugin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

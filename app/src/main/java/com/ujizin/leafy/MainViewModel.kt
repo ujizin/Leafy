@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val loadUser: LoadUser
+    private val loadUser: LoadUser,
 ) : ViewModel() {
 
     fun load(): Flow<MainUiState> = loadUser()
@@ -21,7 +21,6 @@ class MainViewModel @Inject constructor(
                 else -> MainUiState.Loading
             }
         }
-
 }
 
 sealed interface MainUiState {

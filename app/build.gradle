@@ -1,10 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.spotless)
 }
 
-apply from: '../config-android.gradle'
-apply from: '../config-compose.gradle'
+apply from: "$project.rootDir/config-android.gradle"
+apply from: "$project.rootDir/config-compose.gradle"
+apply from: "$project.rootDir/spotless.gradle"
 
 android {
     namespace 'com.ujizin.leafy'

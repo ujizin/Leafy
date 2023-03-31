@@ -16,8 +16,8 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
-import com.ujizin.leafy.core.themes.LeafyTheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.ujizin.leafy.core.themes.LeafyTheme
 import com.ujizin.leafy.core.ui.local.LocalUser
 import com.ujizin.leafy.domain.model.Language
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,7 +56,7 @@ class MainActivity : ComponentActivity() {
                     LeafyNavigation(
                         navController = navController,
                         drawerState = drawerState,
-                        onBackPressed = { scope.launch { navController.navigateUp(drawerState) } }
+                        onBackPressed = { scope.launch { navController.navigateUp(drawerState) } },
                     )
                 }
             }
