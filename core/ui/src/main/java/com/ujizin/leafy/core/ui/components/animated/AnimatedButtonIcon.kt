@@ -12,6 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.takeOrElse
 import com.ujizin.leafy.core.ui.components.animated.animation.Animate.Animated
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
 import com.ujizin.leafy.core.ui.components.image.Icons
@@ -29,12 +30,10 @@ fun AnimatedButtonIcon(
     Animated(animation = animation) {
         IconButton(
             onClick = onClick,
-            modifier = modifier
-                .size(32.dp)
-                .clickable(onClick = onClick),
+            modifier = modifier,
         ) {
             androidx.compose.material3.Icon(
-                modifier = Modifier.size(size),
+                modifier = Modifier.size(size.takeOrElse { 32.dp }),
                 painter = painterResource(icon.resId),
                 tint = tint ?: MaterialTheme.colorScheme.onBackground,
                 contentDescription = stringResource(icon.descriptionRes),
