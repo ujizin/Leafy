@@ -142,11 +142,11 @@ fun SearchSection(
     }
 }
 
-private fun trailingIcon() = movableContentOf {
+private fun trailingIcon(): @Composable () -> Unit = {
     AnimatedButtonIcon(icon = Icons.Settings, animation = Animation.SlideToTop)
 }
 
-private fun leadingIcon(onDrawerClick: OnClick) = movableContentOf {
+private fun leadingIcon(onDrawerClick: OnClick): @Composable () -> Unit = {
     AnimatedButtonIcon(
         icon = Icons.Hamburger,
         animation = Animation.SlideToTop,
