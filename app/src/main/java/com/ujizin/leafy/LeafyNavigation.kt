@@ -38,7 +38,7 @@ import kotlinx.coroutines.launch
 fun LeafyNavigation(
     navController: NavHostController,
     drawerState: DrawerState,
-    onBackPressed: () -> Unit
+    onBackPressed: () -> Unit,
 ) {
     val scope = rememberCoroutineScope()
 

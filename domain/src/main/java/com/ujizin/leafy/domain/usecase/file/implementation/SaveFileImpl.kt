@@ -6,12 +6,12 @@ import com.ujizin.leafy.domain.usecase.file.SaveFile
 import java.io.File
 
 internal class SaveFileImpl(
-    private val repository: FileRepository
+    private val repository: FileRepository,
 ) : SaveFile {
 
     override operator fun invoke(
         parentFile: File,
         bitmap: Bitmap,
-        extension: String
+        extension: String,
     ): File = repository.saveBitmap(parentFile, bitmap, extension)
 }

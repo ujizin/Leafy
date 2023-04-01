@@ -8,7 +8,7 @@ import com.ujizin.leafy.domain.usecase.plant.LoadDraftPlant
 import kotlinx.coroutines.flow.Flow
 
 class LoadDraftPlantImpl(
-    private val repository: PlantRepository
+    private val repository: PlantRepository,
 ) : LoadDraftPlant {
 
     override fun invoke(): Flow<Result<Plant>> = repository.getDraftPlant().asResult()

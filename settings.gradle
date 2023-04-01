@@ -21,8 +21,6 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include ':app'
 
 include ':domain'
-include ':data:local'
-include ':data:repository'
 
 include ':features:home'
 include ':features:search'
@@ -32,6 +30,8 @@ include ':features:camera'
 include ':features:publish'
 
 include ':core:ui'
+include ':core:local'
+include ':core:repository'
 include ':core:themes'
 include ':core:navigation'
 include ':core:test'

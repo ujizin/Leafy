@@ -8,7 +8,7 @@ package com.ujizin.leafy.domain.model
  * */
 data class User(
     val nickname: String,
-    val settings: Settings
+    val settings: Settings,
 ) {
 
     /**
@@ -21,7 +21,7 @@ data class User(
     data class Settings(
         val theme: Theme,
         val language: Language,
-        val dynamicColor: Boolean
+        val dynamicColor: Boolean,
     )
 
     companion object {
@@ -43,7 +43,7 @@ data class User(
 fun User.update(
     nickname: String? = null,
     theme: Theme? = null,
-    language: Language? = null
+    language: Language? = null,
 ) = copy(
     nickname = nickname ?: this.nickname,
     settings = settings.copy(

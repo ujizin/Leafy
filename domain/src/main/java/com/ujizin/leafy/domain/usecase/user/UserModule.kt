@@ -16,12 +16,12 @@ object UserModule {
     @Provides
     @Singleton
     fun provideLoadUser(
-        repository: UserRepository
+        repository: UserRepository,
     ): LoadUser = LoadUserImpl(repository)
 
     @Provides
     @Singleton
     fun provideUpdateUser(
-        repository: UserRepository
+        repository: UserRepository,
     ): UpdateUser = UpdateUserImpl(repository)
 }

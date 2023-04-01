@@ -22,48 +22,48 @@ object PlantModule {
     @Provides
     @Singleton
     fun provideLoadAllPlants(
-        repository: PlantRepository
+        repository: PlantRepository,
     ): LoadAllPlant = LoadAllPlantImpl(repository)
 
     @Provides
     @Singleton
     fun provideLoadPlant(
-        repository: PlantRepository
+        repository: PlantRepository,
     ): LoadPlant = LoadPlantImpl(repository)
 
     @Provides
     @Singleton
     fun provideAddPlant(
-        repository: PlantRepository
+        repository: PlantRepository,
     ): AddPlant = AddPlantImpl(repository)
 
     @Provides
     @Singleton
     fun provideFindPlant(
-        repository: PlantRepository
+        repository: PlantRepository,
     ): FindPlant = FindPlantImpl(repository)
 
     @Provides
     @Singleton
     fun provideUpdatePlant(
-        repository: PlantRepository
+        repository: PlantRepository,
     ): UpdatePlant = UpdatePlantImpl(repository)
 
     @Provides
     @Singleton
     fun provideDeletePlant(
-        repository: PlantRepository
+        repository: PlantRepository,
     ): DeletePlant = DeletePlantImpl(repository)
 
     @Provides
     @Singleton
     fun provideAddDraftPlant(
-        repository: PlantRepository
+        repository: PlantRepository,
     ): AddDraftPlant = AddDraftPlantImpl(repository)
 
     @Provides
     @Singleton
     fun provideLoadDraftPlant(
-        repository: PlantRepository
+        repository: PlantRepository,
     ): LoadDraftPlant = LoadDraftPlantImpl(repository)
 }

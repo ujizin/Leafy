@@ -15,6 +15,6 @@ object AlarmModule {
     @Provides
     @Singleton
     fun provideAddAlarm(
-        repository: AlarmRepository
+        repository: AlarmRepository,
     ): AddAlarm = AddAlarmImpl(repository)
 }

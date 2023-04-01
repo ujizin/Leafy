@@ -15,6 +15,6 @@ object RingtoneModule {
     @Provides
     @Singleton
     fun provideLoadRingtones(
-        repository: RingtoneRepository
+        repository: RingtoneRepository,
     ): LoadRingtones = LoadRingtonesImpl(repository)
 }

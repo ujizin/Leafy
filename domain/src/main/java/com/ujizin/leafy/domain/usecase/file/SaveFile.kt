@@ -15,6 +15,6 @@ interface SaveFile {
     operator fun invoke(
         parentFile: File,
         bitmap: Bitmap,
-        extension: String
+        extension: String,
     ): File
 }

@@ -1,7 +1,7 @@
 package com.ujizin.leafy.core.navigation
 
 enum class Destination(
-    private val destinationName: String
+    private val destinationName: String,
 ) {
     Home("home"),
     Search("search?auto_focus={${Args.SearchAutoFocus}}"),

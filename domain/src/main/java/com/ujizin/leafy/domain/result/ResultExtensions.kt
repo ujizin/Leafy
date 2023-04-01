@@ -21,7 +21,7 @@ fun <T> Flow<T>.asResult(): Flow<Result<T>> = map<T, Result<T>> {
  * */
 inline fun <T : Any> ifAnyError(
     vararg result: Result<T>,
-    block: (List<Throwable>) -> Unit
+    block: (List<Throwable>) -> Unit,
 ) {
     val errors = result.filterIsInstance<Result.Error>().mapNotNull { it.exception }
     if (errors.isNotEmpty()) block(errors)
@@ -37,7 +37,7 @@ inline fun <T : Any> ifAnyError(
 inline fun <R1, R2> ifSuccess(
     result: Result<R1>,
     result2: Result<R2>,
-    transform: (R1, R2) -> Unit
+    transform: (R1, R2) -> Unit,
 ) {
     if (result is Result.Success && result2 is Result.Success) {
         transform(result.data, result2.data)

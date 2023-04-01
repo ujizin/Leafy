@@ -6,7 +6,7 @@ import com.ujizin.leafy.domain.usecase.ringtone.LoadRingtones
 import kotlinx.coroutines.flow.Flow
 
 internal class LoadRingtonesImpl(
-    private val ringtoneRepository: RingtoneRepository
+    private val ringtoneRepository: RingtoneRepository,
 ) : LoadRingtones {
 
     override fun invoke(): Flow<List<Ringtone>> = ringtoneRepository.getRingtones()

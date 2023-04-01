@@ -25,7 +25,7 @@ fun AnimatedButtonIcon(
     animation: Animation = Animation.None,
     size: Dp = Dp.Unspecified,
     tint: Color? = null,
-    onClick: OnClick = {}
+    onClick: OnClick = {},
 ) {
     Animated(animation = animation) {
         IconButton(

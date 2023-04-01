@@ -18,5 +18,5 @@ data class Alarm(
     val ringtoneUri: Uri,
     val repeatIntervalInMillis: Long,
     val hours: Int,
-    val minutes: Int
+    val minutes: Int,
 )

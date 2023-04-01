@@ -8,13 +8,13 @@ import kotlinx.coroutines.flow.flow
 import java.io.File
 
 internal class AddDraftPlantImpl(
-    private val plantRepository: PlantRepository
+    private val plantRepository: PlantRepository,
 ) : AddDraftPlant {
 
     override fun invoke(
         title: String?,
         file: File?,
-        description: String?
+        description: String?,
     ): Flow<Unit> = flow {
         val plant = plantRepository.getDraftPlant().first().let { plant ->
             plant.copy(

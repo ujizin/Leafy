@@ -19,7 +19,7 @@ data class Plant(
     val description: String,
     val file: File,
     val favorite: Boolean,
-    val albumId: Long? = null
+    val albumId: Long? = null,
 ) {
     companion object {
         fun createDraft() = Plant(
