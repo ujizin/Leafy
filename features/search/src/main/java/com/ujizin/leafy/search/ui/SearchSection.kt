@@ -88,7 +88,6 @@ fun SearchSection(
                 modifier = Modifier.fillMaxWidth(),
                 headerPaddingValues = PaddingValues(top = 32.dp),
                 leadingIcon = if (!isKeyboardOpen) leadingIcon(onDrawerClick) else null,
-                trailingIcon = if (!isKeyboardOpen) trailingIcon() else null,
                 title = stringResource(R.string.search).capitalize(),
             )
         }
@@ -140,10 +139,6 @@ fun SearchSection(
             Spacer(Modifier.padding(64.dp))
         }
     }
-}
-
-private fun trailingIcon(): @Composable () -> Unit = {
-    AnimatedButtonIcon(icon = Icons.Settings, animation = Animation.SlideToTop)
 }
 
 private fun leadingIcon(onDrawerClick: OnClick): @Composable () -> Unit = {
