@@ -1,4 +1,4 @@
-package com.ujizin.leafy
+package com.ujizin.leafy.user
 
 import com.ujizin.leafy.domain.model.Language
 import java.util.Locale
