@@ -1,8 +1,10 @@
 package com.ujizin.leafy.alarm
 
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.net.Uri
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.ujizin.leafy.core.components.R
 
@@ -34,5 +36,24 @@ object AlarmNotificator {
         ) as NotificationManager
 
         notificationManager.notify(1, notification)
+    }
+
+    fun createChannel(context: Context) {
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            return
+        }
+
+        val notificationManager = context.getSystemService(
+            Context.NOTIFICATION_SERVICE,
+        ) as NotificationManager
+
+        val notificationChannel = NotificationChannel(
+            CHANNEL_ID,
+            "Leafy alarm", // TODO change name later
+            NotificationManager.IMPORTANCE_HIGH
+        )
+
+        notificationManager.createNotificationChannel(notificationChannel)
     }
 }

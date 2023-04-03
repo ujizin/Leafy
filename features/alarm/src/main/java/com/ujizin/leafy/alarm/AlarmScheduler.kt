@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.core.app.AlarmManagerCompat
 import com.ujizin.leafy.alarm.extensions.alarmManager
 import com.ujizin.leafy.alarm.model.RepeatMode
@@ -80,6 +81,7 @@ class AlarmScheduler(private val context: Context) {
         ringtoneUri: Uri,
         bundle: Bundle
     ) {
+        Log.d("Alarm scheduler", "Generated alarm at $hours:$minutes")
         AlarmManagerCompat.setExactAndAllowWhileIdle(
             context.alarmManager,
             type,
@@ -102,7 +104,8 @@ class AlarmScheduler(private val context: Context) {
         timeInMillis = currentTimeInMillis
         set(Calendar.HOUR_OF_DAY, hours)
         set(Calendar.MINUTE, minutes)
-        if (currentTimeInMillis <= System.currentTimeMillis()) {
+        if (timeInMillis <= System.currentTimeMillis()) {
+            Log.d("Alarm Scheduler", "Just tomorrow")
             add(Calendar.DATE, 1)
         }
 

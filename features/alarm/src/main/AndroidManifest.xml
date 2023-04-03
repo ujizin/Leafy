@@ -5,7 +5,7 @@
 
     <application>
         <receiver
-            android:name=".AlarmReceiver"
+            android:name="com.ujizin.leafy.alarm.receiver.AlarmReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />

@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.platform.LocalContext
 import com.ujizin.leafy.core.themes.LeafyTheme
+import com.ujizin.leafy.core.ui.components.AppPermission
 import com.ujizin.leafy.core.ui.extensions.Content
 import com.ujizin.leafy.core.ui.local.LocalUser
 import com.ujizin.leafy.user.setLanguage
@@ -24,10 +25,12 @@ fun AppConfiguration(
     LaunchedEffect(language) { context.setLanguage(language) }
 
     CompositionLocalProvider(LocalUser provides user) {
-        LeafyTheme(
-            darkTheme = darkTheme,
-            dynamicColor = dynamicColor,
-            content = content
-        )
+        AppPermission {
+            LeafyTheme(
+                darkTheme = darkTheme,
+                dynamicColor = dynamicColor,
+                content = content
+            )
+        }
     }
 }

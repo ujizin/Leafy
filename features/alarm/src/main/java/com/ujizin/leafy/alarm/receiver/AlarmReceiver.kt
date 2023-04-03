@@ -33,6 +33,6 @@ class AlarmReceiver : BroadcastReceiver() {
 
         const val ALARM_PLANT_ID_EXTRA = "alarm_plant_id"
 
-        const val SCHEDULE_ALARM_ACTION = "com.ujizin.camera_reminder.SCHEDULE_ALARM"
+        const val SCHEDULE_ALARM_ACTION = "com.ujizin.leafy.alarm.SCHEDULE_ALARM"
     }
 }
