@@ -2,6 +2,7 @@ package com.ujizin.leafy.alarm
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.net.Uri
 import android.os.Build
@@ -17,29 +18,21 @@ object AlarmNotificator {
 
     private val vibrateValues = longArrayOf(800, 500, 600, 300)
 
-    fun show(
+    fun getNotification(
         context: Context,
         title: String,
         description: String,
-        uri: Uri
-    ) {
-        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_monochrome)
-            .setContentTitle(title)
-            .setContentText(description)
-            .setSound(uri)
-            .setVibrate(vibrateValues)
-            .build()
-
-        val notificationManager = context.getSystemService(
-            Context.NOTIFICATION_SERVICE,
-        ) as NotificationManager
-
-        notificationManager.notify(1, notification)
-    }
+        contentIntent: PendingIntent,
+    ) = NotificationCompat.Builder(context, CHANNEL_ID)
+        .setSmallIcon(R.drawable.ic_launcher_monochrome)
+        .setContentTitle(title)
+        .setContentText(description)
+        .setVibrate(vibrateValues)
+        .setAutoCancel(false)
+        .setContentIntent(contentIntent)
+        .build()
 
     fun createChannel(context: Context) {
-
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             return
         }

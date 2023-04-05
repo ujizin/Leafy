@@ -2,7 +2,7 @@ package com.ujizin.leafy.alarm
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
+import android.os.Build
 import android.util.Log
 import com.ujizin.leafy.alarm.receiver.AlarmReceiver
 import com.ujizin.leafy.core.components.R
@@ -20,20 +20,28 @@ class ShowAlarm(
 
     operator fun invoke(context: Context, intent: Intent) = flow {
         val plantId = intent.getLongExtra(AlarmReceiver.ALARM_PLANT_ID_EXTRA, -1)
-        Log.d("Alarm Plant id", plantId.toString())
-
         val plantResult = loadPlant(plantId).first { it is Result.Success }
 
+        Log.d("ShowAlarm", "Ok...")
         if (plantResult is Result.Success) {
             val plant = plantResult.data
             val ringtone = intent.getStringExtra(AlarmReceiver.RINGTONE_CONTENT_EXTRA)
-            Log.d("alarm ringtone", "$ringtone")
-            val uri = Uri.parse(ringtone)
             val title = context.getString(R.string.app_name)
             val description = plant?.title ?: context.getString(R.string.alarm)
 
-            Log.d("Notification", "$title, $description")
-            AlarmNotificator.show(context, title, description, uri)
+            val serviceIntent = Intent(context, AlarmService::class.java).apply {
+                putExtra(AlarmService.TITLE_ARG, title)
+                putExtra(AlarmService.DESCRIPTION_ARG, description)
+                putExtra(AlarmService.RINGTONE_URI_STRINGIFY_ARG, ringtone)
+            }
+
+            Log.d("ShowAlarm", "Calling service...")
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                context.startForegroundService(serviceIntent)
+            } else {
+                context.startService(serviceIntent)
+            }
         }
 
         emit(Unit)
