@@ -18,4 +18,5 @@ dependencies {
 
     implementation libs.coil
     implementation libs.accompanist.permissions
+    implementation libs.androidx.app.compat
 }

@@ -21,7 +21,7 @@ fun AppConfiguration(
     val dynamicColor by rememberUpdatedState(user.settings.dynamicColor)
     val context = LocalContext.current
 
-    LaunchedEffect(language) { language.setLanguage(context) }
+    LaunchedEffect(language) { context.setLanguage(language) }
 
     CompositionLocalProvider(LocalUser provides user) {
         LeafyTheme(

@@ -6,8 +6,8 @@ import java.util.Locale
 /**
  * Get locale by language.
  */
-val Language.locale: Locale
+val Language.tag: String
     get() = when (this) {
-        Language.PT -> Locale("pt", "BR")
-        Language.EN -> Locale.ENGLISH
+        Language.PT -> "pt-BR"
+        Language.EN -> "en-US"
     }
