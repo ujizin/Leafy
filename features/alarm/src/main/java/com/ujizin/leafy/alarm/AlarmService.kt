@@ -9,6 +9,7 @@ import android.media.MediaPlayer
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.IBinder
+import androidx.core.app.NotificationCompat
 import com.ujizin.leafy.core.components.R
 import com.ujizin.leafy.core.ui.props.RequestCode
 import java.io.IOException
@@ -19,7 +20,11 @@ class AlarmService : Service() {
     private var mediaPlayer: MediaPlayer? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        startAlarm(intent)
+        when(intent?.action) {
+            STOP_ACTION -> stopSelf()
+            else -> startAlarm(intent)
+        }
+
         return START_NOT_STICKY
     }
 
@@ -38,23 +43,37 @@ class AlarmService : Service() {
     private fun getNotification(intent: Intent?): Notification {
         val title = intent?.getStringExtra(TITLE_ARG) ?: getString(R.string.app_name)
         val description = intent?.getStringExtra(DESCRIPTION_ARG) ?: getString(R.string.alarm)
-
-        val pendingIntent = PendingIntent.getActivity(
-            this,
-            RequestCode.ALARM,
-            packageManager.getLaunchIntentForPackage(packageName)?.apply {
-                action = STOP_ACTION
-            },
-            PendingIntent.FLAG_IMMUTABLE
-        )
+        val contentIntent = launcherAppIntent()
+        val stopIntent = alarmIntent(action = STOP_ACTION)
 
         return AlarmNotificator.getNotification(
             context = this,
             title = title,
             description = description,
-            contentIntent = pendingIntent,
+            contentIntent = contentIntent,
+            notificationActions = listOf(
+                NotificationCompat.Action(0, getString(R.string.stop), stopIntent)
+            )
         )
     }
+
+    private fun alarmIntent(action: String) = PendingIntent.getService(
+        this,
+        RequestCode.ALARM,
+        Intent(this, AlarmService::class.java).apply {
+            this.action = action
+        },
+        PendingIntent.FLAG_IMMUTABLE
+    )
+
+    private fun launcherAppIntent() = PendingIntent.getActivity(
+        this,
+        RequestCode.ALARM,
+        packageManager.getLaunchIntentForPackage(packageName)?.apply {
+            action = STOP_ACTION
+        },
+        PendingIntent.FLAG_IMMUTABLE
+    )
 
     private fun playRingtone(uri: Uri) {
         try {

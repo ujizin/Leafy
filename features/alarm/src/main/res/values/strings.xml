@@ -7,4 +7,5 @@
     <string name="once">once</string>
     <string name="daily">daily</string>
     <string name="mon_to_friday">Mon to Fri</string>
+    <string name="stop">stop</string>
 </resources>

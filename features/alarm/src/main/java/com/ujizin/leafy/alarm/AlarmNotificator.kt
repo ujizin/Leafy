@@ -4,7 +4,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
-import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.ujizin.leafy.core.components.R
@@ -22,14 +21,21 @@ object AlarmNotificator {
         context: Context,
         title: String,
         description: String,
-        contentIntent: PendingIntent,
+        fullScreenIntent: PendingIntent? = null,
+        contentIntent: PendingIntent? = null,
+        notificationActions: List<NotificationCompat.Action>,
     ) = NotificationCompat.Builder(context, CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_launcher_monochrome)
         .setContentTitle(title)
         .setContentText(description)
         .setVibrate(vibrateValues)
+        .setOngoing(true)
         .setAutoCancel(false)
+        .setPriority(NotificationCompat.PRIORITY_MAX)
+        .setCategory(NotificationCompat.CATEGORY_ALARM)
+        .setFullScreenIntent(fullScreenIntent, true)
         .setContentIntent(contentIntent)
+        .apply { notificationActions.forEach(::addAction) }
         .build()
 
     fun createChannel(context: Context) {

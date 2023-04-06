@@ -7,4 +7,5 @@
     <string name="once">uma vez</string>
     <string name="daily">diariamente</string>
     <string name="mon_to_friday">Seg à Sex</string>
+    <string name="stop">parar</string>
 </resources>
