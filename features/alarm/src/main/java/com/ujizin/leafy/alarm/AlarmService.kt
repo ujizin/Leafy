@@ -1,5 +1,6 @@
 package com.ujizin.leafy.alarm
 
+import android.app.Notification
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
@@ -9,6 +10,7 @@ import android.media.RingtoneManager
 import android.net.Uri
 import android.os.IBinder
 import com.ujizin.leafy.core.components.R
+import com.ujizin.leafy.core.ui.props.RequestCode
 import java.io.IOException
 
 
@@ -17,42 +19,41 @@ class AlarmService : Service() {
     private var mediaPlayer: MediaPlayer? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        when (intent?.action) {
-            STOP_ACTION -> startActivity(packageManager.getLaunchIntentForPackage(packageName)).run {
-                stopSelf()
-            }
-            else -> startAlarm(intent)
-        }
+        startAlarm(intent)
         return START_NOT_STICKY
     }
 
     private fun startAlarm(intent: Intent?) {
+        playRingtone(getRingtoneUri(intent))
+        val notification = getNotification(intent)
+        startForeground(1, notification)
+    }
+
+    private fun getRingtoneUri(
+        intent: Intent?
+    ): Uri = intent?.getStringExtra(RINGTONE_URI_STRINGIFY_ARG)
+        ?.let(Uri::parse)
+        .orDefaultRingtone()
+
+    private fun getNotification(intent: Intent?): Notification {
         val title = intent?.getStringExtra(TITLE_ARG) ?: getString(R.string.app_name)
         val description = intent?.getStringExtra(DESCRIPTION_ARG) ?: getString(R.string.alarm)
-        val uri = intent?.getStringExtra(RINGTONE_URI_STRINGIFY_ARG)
-            ?.let(Uri::parse)
-            .orDefaultRingtone()
 
-        val serviceIntent = Intent(this, AlarmService::class.java).apply {
-            action = STOP_ACTION
-        }
-
-        val pendingIntent = PendingIntent.getService(
+        val pendingIntent = PendingIntent.getActivity(
             this,
-            0,
-            serviceIntent,
+            RequestCode.ALARM,
+            packageManager.getLaunchIntentForPackage(packageName)?.apply {
+                action = STOP_ACTION
+            },
             PendingIntent.FLAG_IMMUTABLE
         )
 
-        val notification = AlarmNotificator.getNotification(
+        return AlarmNotificator.getNotification(
             context = this,
             title = title,
             description = description,
             contentIntent = pendingIntent,
         )
-
-        playRingtone(uri)
-        startForeground(1, notification)
     }
 
     private fun playRingtone(uri: Uri) {
@@ -83,10 +84,10 @@ class AlarmService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     companion object {
-        private const val STOP_ACTION = "alarm_service_stop"
         internal const val TITLE_ARG = "alarm_title"
         internal const val DESCRIPTION_ARG = "alarm_description"
         internal const val RINGTONE_URI_STRINGIFY_ARG = "alarm_ringtone_uri_stringify"
+        const val STOP_ACTION = "alarm_service_stop"
     }
 }
 
