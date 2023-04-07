@@ -14,11 +14,11 @@ import coil.request.ImageRequest
 import coil.size.Size
 import com.ujizin.leafy.core.ui.components.animated.animation.Animate.Animated
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
-import com.ujizin.leafy.core.ui.components.image.BoxImage
+import com.ujizin.leafy.core.ui.components.image.CardImage
 import com.ujizin.leafy.core.ui.extensions.Content
 
 @Composable
-fun BoxImage(
+fun ImageCard(
     modifier: Modifier = Modifier,
     data: Any?,
     contentDescription: String?,
@@ -42,7 +42,7 @@ fun BoxImage(
         modifier = Modifier.alpha(alphaAnimated),
         animation = animation,
     ) {
-        BoxImage(
+        CardImage(
             modifier = modifier,
             painter = painter,
             contentDescription = contentDescription,
