@@ -14,7 +14,7 @@ import com.ujizin.leafy.user.setLanguage
 
 @Composable
 fun AppConfiguration(
-    content: @Composable Content
+    content: @Composable Content,
 ) {
     val user by rememberUser()
     val darkTheme = user.isUserInDarkTheme()
@@ -29,7 +29,7 @@ fun AppConfiguration(
             LeafyTheme(
                 darkTheme = darkTheme,
                 dynamicColor = dynamicColor,
-                content = content
+                content = content,
             )
         }
     }

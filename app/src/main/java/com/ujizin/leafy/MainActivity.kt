@@ -2,10 +2,8 @@ package com.ujizin.leafy
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
