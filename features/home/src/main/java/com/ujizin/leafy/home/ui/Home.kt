@@ -1,4 +1,4 @@
-package com.ujizin.leafy.home
+package com.ujizin.leafy.home.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +12,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ujizin.leafy.core.themes.LeafyTheme
 import com.ujizin.leafy.core.ui.annotation.ThemePreviews
 import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.home.HomeUIState
+import com.ujizin.leafy.home.HomeViewModel
 
 @Composable
 fun HomeRoute(
