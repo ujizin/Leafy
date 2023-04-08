@@ -10,7 +10,8 @@ import android.media.RingtoneManager
 import android.net.Uri
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import com.ujizin.leafy.core.components.R
+import com.ujizin.leafy.features.alarm.R
+import com.ujizin.leafy.core.components.R as CR
 import com.ujizin.leafy.core.ui.props.RequestCode
 import java.io.IOException
 
@@ -41,8 +42,8 @@ class AlarmService : Service() {
         .orDefaultRingtone()
 
     private fun getNotification(intent: Intent?): Notification {
-        val title = intent?.getStringExtra(TITLE_ARG) ?: getString(R.string.app_name)
-        val description = intent?.getStringExtra(DESCRIPTION_ARG) ?: getString(R.string.alarm)
+        val title = intent?.getStringExtra(TITLE_ARG) ?: getString(CR.string.app_name)
+        val description = intent?.getStringExtra(DESCRIPTION_ARG) ?: getString(CR.string.alarm)
         val contentIntent = launcherAppIntent()
         val stopIntent = alarmIntent(action = STOP_ACTION)
 

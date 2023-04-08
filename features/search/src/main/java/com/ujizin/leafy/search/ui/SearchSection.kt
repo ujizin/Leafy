@@ -81,7 +81,7 @@ fun SearchSection(
         state = state,
         columns = StaggeredGridCells.Fixed(2),
         horizontalArrangement = Arrangement.spacedBy(4.dp),
-        verticalArrangement = Arrangement.spacedBy(4.dp),
+        verticalItemSpacing = 4.dp,
     ) {
         item(span = StaggeredGridItemSpan.FullLine) {
             Section(
