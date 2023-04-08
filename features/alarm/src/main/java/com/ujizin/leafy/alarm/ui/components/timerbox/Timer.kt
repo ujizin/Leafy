@@ -1,4 +1,4 @@
-package com.ujizin.leafy.alarm.alarm.components.timerbox
+package com.ujizin.leafy.alarm.ui.components.timerbox
 
 import java.text.DecimalFormat
 

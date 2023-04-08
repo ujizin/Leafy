@@ -1,4 +1,4 @@
-package com.ujizin.leafy.alarm.alarm
+package com.ujizin.leafy.alarm.ui
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn

@@ -1,4 +1,4 @@
-package com.ujizin.leafy.alarm.alarm
+package com.ujizin.leafy.alarm.ui
 
 import android.media.RingtoneManager
 import androidx.compose.foundation.layout.ColumnScope
@@ -20,11 +20,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.ujizin.leafy.alarm.alarm.components.timerbox.TimerBox
 import com.ujizin.leafy.alarm.extensions.alarmManager
 import com.ujizin.leafy.alarm.extensions.hasAlarmPermission
 import com.ujizin.leafy.alarm.extensions.startAlarmPermission
 import com.ujizin.leafy.alarm.model.RepeatMode
+import com.ujizin.leafy.alarm.ui.components.timerbox.TimerBox
 import com.ujizin.leafy.core.ui.components.Section
 import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation

@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.ujizin.leafy.about.aboutGraph
-import com.ujizin.leafy.alarm.alarm.alarmGraph
+import com.ujizin.leafy.alarm.ui.alarmGraph
 import com.ujizin.leafy.camera.cameraGraph
 import com.ujizin.leafy.core.navigation.Args
 import com.ujizin.leafy.core.navigation.Destination

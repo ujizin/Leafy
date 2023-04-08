@@ -1,4 +1,4 @@
-package com.ujizin.leafy.alarm.alarm.components.timerbox
+package com.ujizin.leafy.alarm.ui.components.timerbox
 
 import androidx.annotation.IntRange
 import androidx.compose.animation.core.animateFloatAsState
@@ -29,7 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ujizin.leafy.alarm.alarm.components.AutoSizeText
+import com.ujizin.leafy.alarm.ui.components.AutoSizeText
 import com.ujizin.leafy.core.themes.LeafyTheme
 import kotlin.math.floor
 

@@ -1,4 +1,4 @@
-package com.ujizin.leafy.alarm.alarm
+package com.ujizin.leafy.alarm.ui
 
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModel

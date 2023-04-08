@@ -1,4 +1,4 @@
-package com.ujizin.leafy.alarm.alarm.components
+package com.ujizin.leafy.alarm.ui.components
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
