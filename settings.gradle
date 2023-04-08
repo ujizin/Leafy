@@ -22,13 +22,6 @@ include ':app'
 
 include ':domain'
 
-include ':features:home'
-include ':features:search'
-include ':features:alarm'
-include ':features:settings'
-include ':features:camera'
-include ':features:publish'
-
 include ':core:ui'
 include ':core:local'
 include ':core:repository'
@@ -36,5 +29,13 @@ include ':core:themes'
 include ':core:navigation'
 include ':core:test'
 
+
+include ':features:home'
+include ':features:search'
+include ':features:alarm'
+include ':features:settings'
+include ':features:camera'
+include ':features:publish'
 include ':features:about'
 include ':features:preferences'
+include ':features:plant'

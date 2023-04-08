@@ -1,0 +1,18 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+apply from: '../../config-android.gradle'
+apply from: '../../config-compose.gradle'
+
+android {
+    namespace 'com.ujizin.leafy.features.plant'
+}
+
+dependencies {
+    implementation projects.core.navigation
+    implementation projects.core.ui
+    implementation projects.core.themes
+    implementation projects.domain
+}
