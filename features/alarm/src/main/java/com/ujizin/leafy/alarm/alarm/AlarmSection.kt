@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ujizin.leafy.alarm.alarm.components.timerbox.TimerBox
 import com.ujizin.leafy.alarm.extensions.alarmManager
 import com.ujizin.leafy.alarm.extensions.hasAlarmPermission
@@ -46,7 +46,7 @@ fun AlarmSection(
     viewModel: AlarmViewModel = hiltViewModel(),
     onSaved: () -> Unit
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
 
     val repeatValues = remember { RepeatMode.values().toList() }

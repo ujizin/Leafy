@@ -3,11 +3,11 @@ package com.ujizin.leafy
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ujizin.leafy.domain.model.Theme
 import com.ujizin.leafy.domain.model.User
 
@@ -15,7 +15,7 @@ import com.ujizin.leafy.domain.model.User
 fun rememberUser(viewModel: MainViewModel = hiltViewModel()): State<User> {
     val uiState by remember(viewModel) {
         viewModel.load()
-    }.collectAsState(initial = MainUiState.Loading)
+    }.collectAsStateWithLifecycle(initialValue = MainUiState.Loading)
 
     return remember {
         derivedStateOf {

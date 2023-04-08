@@ -4,11 +4,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ujizin.leafy.core.themes.LeafyTheme
 import com.ujizin.leafy.core.ui.annotation.ThemePreviews
 import com.ujizin.leafy.core.ui.extensions.OnClick
@@ -22,7 +22,7 @@ fun HomeRoute(
     onDrawerClick: OnClick,
     onSearchClick: OnClick
 ) {
-    val state by viewModel.homeState.collectAsState()
+    val state by viewModel.homeState.collectAsStateWithLifecycle()
 
     Home(
         state = state,
