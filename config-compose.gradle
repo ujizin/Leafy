@@ -9,13 +9,12 @@ android {
 }
 
 dependencies {
+    implementation platform(libs.compose.bom)
     implementation libs.bundles.compose
     implementation libs.hilt.compose
 
     debugImplementation libs.bundles.compose.debug
 
-    implementation libs.compose.activity
     implementation libs.bundles.androidx
-
     androidTestImplementation libs.compose.android.test
 }
