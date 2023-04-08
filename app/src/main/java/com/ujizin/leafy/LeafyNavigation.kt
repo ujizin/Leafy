@@ -17,7 +17,6 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.ujizin.leafy.about.aboutGraph
 import com.ujizin.leafy.alarm.alarm.alarmGraph
-import com.ujizin.leafy.alarm.alarms.alarmsGraph
 import com.ujizin.leafy.camera.cameraGraph
 import com.ujizin.leafy.core.navigation.Args
 import com.ujizin.leafy.core.navigation.Destination
@@ -26,6 +25,7 @@ import com.ujizin.leafy.core.navigation.navigateUp
 import com.ujizin.leafy.core.ui.components.Scaffold
 import com.ujizin.leafy.core.ui.components.navigation.navigationEnterTransition
 import com.ujizin.leafy.core.ui.components.navigation.navigationExitTransition
+import com.ujizin.leafy.features.tasks.tasksGraph
 import com.ujizin.leafy.home.homeGraph
 import com.ujizin.leafy.preferences.preferencesGraph
 import com.ujizin.leafy.publish.publishGraph
@@ -76,7 +76,7 @@ fun LeafyNavigation(
                 onTakePictureClick = { navController.navigate(Destination.Camera) },
                 onScroll = { showBottomNavigation = it },
             )
-            alarmsGraph(
+            tasksGraph(
                 enterTransition = { navigationEnterTransition(navController) },
                 exitTransition = { navigationExitTransition(navController) },
             )

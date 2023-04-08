@@ -3,8 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
 }
 
-apply from: "$project.rootDir/config-android.gradle"
-apply from: "$project.rootDir/config-compose.gradle"
+apply from: "$rootDir/config-android.gradle"
+apply from: "$rootDir/config-compose.gradle"
 
 android {
     namespace 'com.ujizin.leafy'
@@ -24,6 +24,7 @@ dependencies {
     implementation projects.features.publish
     implementation projects.features.about
     implementation projects.features.preferences
+    implementation projects.features.tasks
 
     implementation projects.domain
     implementation projects.core.local
