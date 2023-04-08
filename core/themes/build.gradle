@@ -6,5 +6,5 @@ android {
     namespace 'com.ujizin.leafy.core.themes'
 }
 
-apply from: '../../config-android.gradle'
-apply from: '../../config-compose.gradle'
+apply from: "$rootDir/config-compose.gradle"
+apply from: "$rootDir/config-android.gradle"
