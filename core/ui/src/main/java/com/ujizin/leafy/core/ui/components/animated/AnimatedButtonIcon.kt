@@ -1,6 +1,5 @@
 package com.ujizin.leafy.core.ui.components.animated
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -34,7 +33,7 @@ fun AnimatedButtonIcon(
         ) {
             androidx.compose.material3.Icon(
                 modifier = Modifier.size(size.takeOrElse { 32.dp }),
-                painter = painterResource(icon.resId),
+                painter = painterResource(icon.idRes),
                 tint = tint ?: MaterialTheme.colorScheme.onBackground,
                 contentDescription = stringResource(icon.descriptionRes),
             )

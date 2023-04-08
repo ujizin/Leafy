@@ -6,7 +6,7 @@ enum class Destination(
     Home("home"),
     Search("search?auto_focus={${Args.SearchAutoFocus}}"),
     Camera("camera"),
-    Alarms("alarms"),
+    Tasks("tasks"),
     Others("others"),
     Publish("publish"),
     Alarm("alarm"),

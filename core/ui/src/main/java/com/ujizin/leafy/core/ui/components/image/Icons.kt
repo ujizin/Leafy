@@ -5,7 +5,7 @@ import androidx.annotation.StringRes
 import com.ujizin.leafy.core.components.R
 
 enum class Icons(
-    @DrawableRes internal val resId: Int,
+    @DrawableRes internal val idRes: Int,
     @StringRes internal val descriptionRes: Int,
 ) {
     Hamburger(R.drawable.hamburger, R.string.hamburger),

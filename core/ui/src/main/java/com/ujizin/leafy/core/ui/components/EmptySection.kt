@@ -40,7 +40,7 @@ fun EmptySection(
     ) {
         Image(
             modifier = Modifier.defaultMinSize(minWidth = 128.dp, minHeight = 96.dp),
-            painter = painterResource(id = icons.resId),
+            painter = painterResource(id = icons.idRes),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary),
             contentDescription = stringResource(id = icons.descriptionRes),
         )

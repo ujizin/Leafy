@@ -14,6 +14,6 @@ internal enum class BottomNavItem(
     Home(R.drawable.home, R.string.home, Destination.Home),
     Search(R.drawable.magnifier, R.string.search, Destination.Search),
     Camera(destination = Destination.Camera),
-    Alarm(R.drawable.alarm, R.string.alarm, Destination.Alarms),
+    Alarm(R.drawable.alarm, R.string.tasks, Destination.Tasks),
     Others(R.drawable.others, R.string.others, Destination.Others),
 }

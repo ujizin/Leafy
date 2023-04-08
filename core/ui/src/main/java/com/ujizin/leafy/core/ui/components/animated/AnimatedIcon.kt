@@ -20,7 +20,7 @@ fun AnimatedIcon(
     Animated(animation = animation) {
         Icon(
             modifier = modifier,
-            painter = painterResource(icon.resId),
+            painter = painterResource(icon.idRes),
             tint = tint,
             contentDescription = stringResource(icon.descriptionRes),
         )
