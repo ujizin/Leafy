@@ -25,6 +25,7 @@ dependencies {
     implementation projects.features.about
     implementation projects.features.preferences
     implementation projects.features.tasks
+    implementation projects.features.plant
 
     implementation projects.domain
     implementation projects.core.local

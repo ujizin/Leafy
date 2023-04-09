@@ -25,6 +25,7 @@ import com.ujizin.leafy.core.navigation.navigateUp
 import com.ujizin.leafy.core.ui.components.Scaffold
 import com.ujizin.leafy.core.ui.components.navigation.navigationEnterTransition
 import com.ujizin.leafy.core.ui.components.navigation.navigationExitTransition
+import com.ujizin.leafy.features.plant.plantGraph
 import com.ujizin.leafy.features.tasks.tasksGraph
 import com.ujizin.leafy.home.homeGraph
 import com.ujizin.leafy.preferences.preferencesGraph
@@ -68,6 +69,7 @@ fun LeafyNavigation(
                     )
                 },
                 onDrawerClick = { scope.launch { drawerState.open() } },
+                onPlantClick = { navController.navigate(Destination.PlantDetails) }
             )
             searchGraph(
                 enterTransition = { navigationEnterTransition(navController) },
@@ -101,6 +103,7 @@ fun LeafyNavigation(
             )
             aboutGraph(onBackPressed = navController::navigateUp)
             preferencesGraph(onBackPressed = navController::navigateUp)
+            plantGraph(onBackPressed = navController::navigateUp)
         }
     }
 }

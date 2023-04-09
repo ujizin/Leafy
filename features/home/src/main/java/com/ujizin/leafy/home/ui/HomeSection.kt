@@ -31,7 +31,8 @@ internal fun HomeSection(
     plants: List<Plant>,
     onEmptyPlantClick: OnClick,
     onSearchClick: OnClick,
-    onDrawerClick: OnClick
+    onDrawerClick: OnClick,
+    onPlantClick: (Long) -> Unit,
 ) {
     NavLazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -67,7 +68,7 @@ internal fun HomeSection(
                 )
             }
 
-            else -> items(plants, key = { it.id }) { HomePlantCard(it) }
+            else -> items(plants, key = { it.id }) { HomePlantCard(it, onPlantClick) }
         }
     }
 }
@@ -87,7 +88,7 @@ fun NavLazyColumn(
 
 @Composable
 @OptIn(ExperimentalFoundationApi::class)
-private fun LazyItemScope.HomePlantCard(plant: Plant) {
+private fun LazyItemScope.HomePlantCard(plant: Plant, onPlantClick: (Long) -> Unit) {
     CardPlant(
         modifier = Modifier
             .animateItemPlacement()
@@ -95,6 +96,6 @@ private fun LazyItemScope.HomePlantCard(plant: Plant) {
             .aspectRatio(1F)
             .padding(horizontal = 20.dp),
         plant = plant,
-        onClick = {}
+        onClick = { onPlantClick(plant.id) }
     )
 }

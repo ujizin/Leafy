@@ -12,7 +12,9 @@ enum class Destination(
     Alarm("alarm"),
     About("about"),
     Review("review"),
-    Preferences("preferences");
+    Preferences("preferences"),
+    PlantDetails("plant"), // TODO set {id} parameter
+    ;
 
     val route: String get() = "$HOST/$destinationName"
 

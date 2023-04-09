@@ -20,7 +20,8 @@ fun HomeRoute(
     viewModel: HomeViewModel = hiltViewModel(),
     onTakePictureClick: OnClick,
     onDrawerClick: OnClick,
-    onSearchClick: OnClick
+    onSearchClick: OnClick,
+    onPlantClick: (id: Long) -> Unit,
 ) {
     val state by viewModel.homeState.collectAsStateWithLifecycle()
 
@@ -28,7 +29,8 @@ fun HomeRoute(
         state = state,
         onTakePictureClick = onTakePictureClick,
         onSearchClick = onSearchClick,
-        onDrawerClick = onDrawerClick
+        onDrawerClick = onDrawerClick,
+        onPlantClick = onPlantClick,
     )
 }
 
@@ -38,6 +40,7 @@ private fun Home(
     onTakePictureClick: OnClick,
     onSearchClick: OnClick,
     onDrawerClick: OnClick,
+    onPlantClick: (Long) -> Unit,
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -51,6 +54,7 @@ private fun Home(
                 onEmptyPlantClick = onTakePictureClick,
                 onSearchClick = onSearchClick,
                 onDrawerClick = onDrawerClick,
+                onPlantClick = onPlantClick,
             )
 
             is HomeUIState.Error -> {}
@@ -60,14 +64,15 @@ private fun Home(
 
 @ThemePreviews
 @Composable
-private fun PreviewHome() {
+private fun HomePreview() {
     LeafyTheme {
         Surface {
             Home(
                 state = HomeUIState.Success("ujizin", listOf()),
                 onTakePictureClick = {},
                 onSearchClick = {},
-                onDrawerClick = {}
+                onDrawerClick = {},
+                onPlantClick = {},
             )
         }
     }

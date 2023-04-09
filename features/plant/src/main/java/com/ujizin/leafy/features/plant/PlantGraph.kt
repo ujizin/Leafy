@@ -1,33 +1,28 @@
-package com.ujizin.leafy.home
+package com.ujizin.leafy.features.plant
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.navigation.NavGraphBuilder
 import com.ujizin.leafy.core.navigation.AnimatedEnterTransition
 import com.ujizin.leafy.core.navigation.AnimatedExitTransition
 import com.ujizin.leafy.core.navigation.Destination
 import com.ujizin.leafy.core.navigation.composable
 import com.ujizin.leafy.core.ui.extensions.OnClick
-import com.ujizin.leafy.home.ui.HomeRoute
 
 @OptIn(ExperimentalAnimationApi::class)
-fun NavGraphBuilder.homeGraph(
-    enterTransition: AnimatedEnterTransition,
-    exitTransition: AnimatedExitTransition,
-    onTakePictureClick: OnClick,
-    onSearchClick: OnClick,
-    onDrawerClick: OnClick,
-    onPlantClick: (Long) -> Unit
+fun NavGraphBuilder.plantGraph(
+    onBackPressed: OnClick,
+    enterTransition: AnimatedEnterTransition = { fadeIn() },
+    exitTransition: AnimatedExitTransition = { fadeOut() }
 ) {
     composable(
-        destination = Destination.Home,
+        destination = Destination.PlantDetails,
         enterTransition = enterTransition,
         exitTransition = exitTransition,
     ) {
-        HomeRoute(
-            onTakePictureClick = onTakePictureClick,
-            onDrawerClick = onDrawerClick,
-            onSearchClick = onSearchClick,
-            onPlantClick = onPlantClick,
+        PlantDetails(
+            onBackPressed = onBackPressed
         )
     }
 }
