@@ -10,18 +10,17 @@ import android.media.RingtoneManager
 import android.net.Uri
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import com.ujizin.leafy.features.alarm.R
-import com.ujizin.leafy.core.components.R as CR
 import com.ujizin.leafy.core.ui.props.RequestCode
+import com.ujizin.leafy.features.alarm.R
 import java.io.IOException
-
+import com.ujizin.leafy.core.components.R as CR
 
 class AlarmService : Service() {
 
     private var mediaPlayer: MediaPlayer? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        when(intent?.action) {
+        when (intent?.action) {
             STOP_ACTION -> stopSelf()
             else -> startAlarm(intent)
         }
@@ -36,7 +35,7 @@ class AlarmService : Service() {
     }
 
     private fun getRingtoneUri(
-        intent: Intent?
+        intent: Intent?,
     ): Uri = intent?.getStringExtra(RINGTONE_URI_STRINGIFY_ARG)
         ?.let(Uri::parse)
         .orDefaultRingtone()
@@ -53,8 +52,8 @@ class AlarmService : Service() {
             description = description,
             contentIntent = contentIntent,
             notificationActions = listOf(
-                NotificationCompat.Action(0, getString(R.string.stop), stopIntent)
-            )
+                NotificationCompat.Action(0, getString(R.string.stop), stopIntent),
+            ),
         )
     }
 
@@ -64,7 +63,7 @@ class AlarmService : Service() {
         Intent(this, AlarmService::class.java).apply {
             this.action = action
         },
-        PendingIntent.FLAG_IMMUTABLE
+        PendingIntent.FLAG_IMMUTABLE,
     )
 
     private fun launcherAppIntent() = PendingIntent.getActivity(
@@ -73,7 +72,7 @@ class AlarmService : Service() {
         packageManager.getLaunchIntentForPackage(packageName)?.apply {
             action = STOP_ACTION
         },
-        PendingIntent.FLAG_IMMUTABLE
+        PendingIntent.FLAG_IMMUTABLE,
     )
 
     private fun playRingtone(uri: Uri) {

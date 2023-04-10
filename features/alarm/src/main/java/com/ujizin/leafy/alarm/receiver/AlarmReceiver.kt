@@ -31,7 +31,7 @@ class AlarmReceiver : BroadcastReceiver() {
         const val RINGTONE_CONTENT_EXTRA = "ringtone_content"
         const val REPEAT_MODE = "repeat_mode"
 
-        const val ALARM_PLANT_ID_EXTRA = "alarm_plant_id"
+        const val ALARM_ID_EXTRA = "alarm_id"
 
         const val SCHEDULE_ALARM_ACTION = "com.ujizin.leafy.alarm.SCHEDULE_ALARM"
     }

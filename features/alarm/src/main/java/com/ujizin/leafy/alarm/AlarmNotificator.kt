@@ -50,7 +50,7 @@ object AlarmNotificator {
         val notificationChannel = NotificationChannel(
             CHANNEL_ID,
             "Leafy alarm", // TODO change name later
-            NotificationManager.IMPORTANCE_HIGH
+            NotificationManager.IMPORTANCE_HIGH,
         )
 
         notificationManager.createNotificationChannel(notificationChannel)

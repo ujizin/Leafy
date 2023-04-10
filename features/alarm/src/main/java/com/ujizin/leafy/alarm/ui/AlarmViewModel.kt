@@ -32,7 +32,7 @@ class AlarmViewModel @Inject constructor(
     private val addPlant: AddPlant,
     private val addAlarm: AddAlarm,
     private val alarmScheduler: AlarmScheduler,
-    private val getRingtones: LoadRingtones
+    private val getRingtones: LoadRingtones,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<AlarmUiState>(AlarmUiState.Initial)
@@ -52,7 +52,7 @@ class AlarmViewModel @Inject constructor(
         repeatMode: RepeatMode,
         hours: Int,
         minutes: Int,
-        onPlantPublished: () -> Unit
+        onPlantPublished: () -> Unit,
     ) {
         loadDraftPlant()
             .mapNotNull { result ->
@@ -70,14 +70,15 @@ class AlarmViewModel @Inject constructor(
                             repeatIntervalInMillis = repeatMode.intervalTimeMillis,
                             minutes = minutes,
                             hours = hours,
+                            enabled = true,
                         ),
-                    ).onEach {
+                    ).onEach { alarmId ->
                         alarmScheduler.scheduleAlarm(
                             hours = hours,
                             minutes = minutes,
                             ringtoneUri = ringtone.uri,
                             intervalInMillis = repeatMode.intervalTimeMillis,
-                            bundle = bundleOf(AlarmReceiver.ALARM_PLANT_ID_EXTRA to id),
+                            bundle = bundleOf(AlarmReceiver.ALARM_ID_EXTRA to alarmId),
                         )
                     }
                 }

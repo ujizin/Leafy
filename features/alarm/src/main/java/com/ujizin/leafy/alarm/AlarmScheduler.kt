@@ -32,7 +32,7 @@ class AlarmScheduler(private val context: Context) {
         minutes: Int,
         ringtoneUri: Uri,
         intervalInMillis: Long,
-        bundle: Bundle = Bundle.EMPTY
+        bundle: Bundle = Bundle.EMPTY,
     ) {
         when (intervalInMillis) {
             RepeatMode.NO_REPEAT -> setOnceAlarm(type, hours, minutes, ringtoneUri, bundle)
@@ -56,7 +56,7 @@ class AlarmScheduler(private val context: Context) {
         hours: Int,
         minutes: Int,
         ringtoneUri: Uri,
-        bundle: Bundle
+        bundle: Bundle,
     ) {
         context.alarmManager.setRepeating(
             type,
@@ -79,7 +79,7 @@ class AlarmScheduler(private val context: Context) {
         hours: Int,
         minutes: Int,
         ringtoneUri: Uri,
-        bundle: Bundle
+        bundle: Bundle,
     ) {
         Log.d("Alarm scheduler", "Generated alarm at $hours:$minutes")
         AlarmManagerCompat.setExactAndAllowWhileIdle(
@@ -98,7 +98,7 @@ class AlarmScheduler(private val context: Context) {
      * */
     private fun getTimeInMillis(
         hours: Int,
-        minutes: Int
+        minutes: Int,
     ): Long = with(Calendar.getInstance()) {
         val currentTimeInMillis = System.currentTimeMillis()
         timeInMillis = currentTimeInMillis
@@ -120,7 +120,7 @@ class AlarmScheduler(private val context: Context) {
     private fun createPendingIntent(
         ringtoneUri: Uri,
         intervalInMillis: Long = NO_REPEAT,
-        bundle: Bundle
+        bundle: Bundle,
     ): PendingIntent = PendingIntent.getBroadcast(
         context,
         0,

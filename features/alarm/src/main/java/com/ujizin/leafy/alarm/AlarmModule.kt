@@ -1,6 +1,7 @@
 package com.ujizin.leafy.alarm
 
 import android.content.Context
+import com.ujizin.leafy.domain.usecase.alarm.LoadAlarm
 import com.ujizin.leafy.domain.usecase.plant.LoadPlant
 import dagger.Module
 import dagger.Provides
@@ -19,5 +20,8 @@ object AlarmModule {
 
     @Provides
     @Singleton
-    fun provideShowAlarm(loadPlant: LoadPlant) = ShowAlarm(loadPlant)
+    fun provideShowAlarm(
+        loadPlant: LoadPlant,
+        loadAlarm: LoadAlarm,
+    ) = ShowAlarm(loadPlant, loadAlarm)
 }
