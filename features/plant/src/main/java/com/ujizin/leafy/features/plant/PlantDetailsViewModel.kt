@@ -4,40 +4,49 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ujizin.leafy.core.navigation.Args
+import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.model.Plant
-import com.ujizin.leafy.domain.result.Result
+import com.ujizin.leafy.domain.result.mapResult
+import com.ujizin.leafy.domain.usecase.alarm.LoadAlarms
+import com.ujizin.leafy.domain.usecase.alarm.UpdateAlarm
 import com.ujizin.leafy.domain.usecase.plant.LoadPlant
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailPlantViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val loadPlant: LoadPlant
+    loadPlant: LoadPlant,
+    loadAlarms: LoadAlarms,
+    private val updateAlarm: UpdateAlarm
 ) : ViewModel() {
 
     private val plantId: Long = checkNotNull(savedStateHandle[Args.PlantId])
 
-    private val _uiState = MutableStateFlow<DetailPlantUiState>(DetailPlantUiState.Initial)
-    val uiState = _uiState.asStateFlow()
+    @OptIn(FlowPreview::class)
+    val uiState = loadPlant(plantId)
+        .mapResult()
+        .flatMapConcat { plant ->
+            loadAlarms(plant.id)
+                .mapResult()
+                .map { alarms ->
+                    DetailPlantUiState.Loaded(plant, alarms)
+                }
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = DetailPlantUiState.Initial,
+        )
 
-    fun getPlant() {
-        loadPlant(plantId)
-            .onEach(::update)
-            .launchIn(viewModelScope)
-    }
-
-    private fun update(result: Result<Plant?>) = when (result) {
-        is Result.Success -> _uiState.update {
-            result.data?.let(DetailPlantUiState::Loaded) ?: DetailPlantUiState.NotFound
-        }
-
-        else -> Unit
+    fun update(alarm: Alarm) {
+        updateAlarm(alarm).launchIn(viewModelScope)
     }
 }
 
@@ -45,7 +54,10 @@ sealed interface DetailPlantUiState {
 
     object Initial : DetailPlantUiState
 
-    data class Loaded(private val plant: Plant) : DetailPlantUiState
+    data class Loaded(
+        val plant: Plant,
+        val alarms: List<Alarm>,
+    ) : DetailPlantUiState
 
     object NotFound : DetailPlantUiState
 }

@@ -3,6 +3,7 @@ package com.ujizin.leafy.domain.result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.onStart
 
 fun <T> Flow<T>.asResult(): Flow<Result<T>> = map<T, Result<T>> {
@@ -41,5 +42,13 @@ inline fun <R1, R2> ifSuccess(
 ) {
     if (result is Result.Success && result2 is Result.Success) {
         transform(result.data, result2.data)
+    }
+}
+
+fun <T : Any> Flow<Result<T?>>.mapResult(): Flow<T> = mapNotNull { result ->
+    when (result) {
+        is Result.Error -> throw result.exception!!
+        Result.Loading -> null
+        is Result.Success -> result.data
     }
 }
