@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     loadAllPlant: LoadAllPlant,
-    loadUser: LoadUser
+    loadUser: LoadUser,
 ) : ViewModel() {
 
     val homeState: StateFlow<HomeUIState> = combine(
@@ -44,7 +44,7 @@ class HomeViewModel @Inject constructor(
 sealed interface HomeUIState {
     data class Success(
         val nickname: String,
-        val plants: List<Plant>
+        val plants: List<Plant>,
     ) : HomeUIState
 
     data class Error(val throwable: Throwable?) : HomeUIState

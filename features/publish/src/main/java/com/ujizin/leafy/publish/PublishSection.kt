@@ -32,7 +32,7 @@ import com.ujizin.leafy.publish.viewmodel.PublishViewModel
 fun PublishSection(
     onBackPressed: OnClick,
     onFinishPublish: OnClick,
-    viewModel: PublishViewModel = hiltViewModel()
+    viewModel: PublishViewModel = hiltViewModel(),
 ) {
     PublishContent(
         onBackPressed = onBackPressed,
@@ -45,7 +45,7 @@ fun PublishSection(
 @Composable
 fun PublishContent(
     onBackPressed: OnClick,
-    onNextClicked: (title: String, description: String) -> Unit
+    onNextClicked: (title: String, description: String) -> Unit,
 ) {
     Section(
         modifier = Modifier

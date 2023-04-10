@@ -16,7 +16,7 @@ import com.ujizin.leafy.core.navigation.Destination
 import com.ujizin.leafy.core.ui.components.navigation.bottombar.BottomNavItem
 
 private enum class NavDirection {
-    Start, End, None
+    Start, End, None,
 }
 
 private fun navDirection(navController: NavController): NavDirection {

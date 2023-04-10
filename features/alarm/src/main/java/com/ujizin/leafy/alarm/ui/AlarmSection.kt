@@ -44,7 +44,7 @@ import com.ujizin.leafy.features.alarm.R
 fun AlarmSection(
     onBackPressed: OnClick,
     viewModel: AlarmViewModel = hiltViewModel(),
-    onSaved: () -> Unit
+    onSaved: () -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -103,7 +103,7 @@ fun AlarmScreen(
     onRepeatChanged: (RepeatMode) -> Unit,
     onRingtoneChanged: (Ringtone) -> Unit,
     onBackPressed: OnClick,
-    onSaveClicked: OnClick
+    onSaveClicked: OnClick,
 ) {
     val context = LocalContext.current
     val ringtonePlayer = remember(ringtone) {
@@ -163,7 +163,7 @@ private fun AlarmContent(
     ringtoneContent: @Composable ColumnScope.() -> Unit,
     repeatContent: @Composable ColumnScope.() -> Unit,
     onTimeChanged: (hours: Int, minutes: Int) -> Unit,
-    onSaveClicked: OnClick
+    onSaveClicked: OnClick,
 ) {
     Section(
         modifier = modifier,

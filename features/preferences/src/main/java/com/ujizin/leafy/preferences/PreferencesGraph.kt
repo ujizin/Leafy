@@ -8,7 +8,7 @@ import com.ujizin.leafy.core.ui.extensions.OnClick
 
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.preferencesGraph(
-    onBackPressed: OnClick
+    onBackPressed: OnClick,
 ) {
     composable(
         destination = Destination.Preferences,

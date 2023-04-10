@@ -8,7 +8,8 @@ import java.util.concurrent.TimeUnit
 enum class RepeatMode(@StringRes val display: Int) {
     Once(R.string.once),
     Daily(R.string.daily),
-    MonToFriday(R.string.mon_to_friday);
+    MonToFriday(R.string.mon_to_friday),
+    ;
 
     val intervalTimeMillis: Long
         get() = when (this) {

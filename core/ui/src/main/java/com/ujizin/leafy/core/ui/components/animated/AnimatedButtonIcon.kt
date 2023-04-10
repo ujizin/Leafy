@@ -28,8 +28,8 @@ fun AnimatedButtonIcon(
 ) {
     Animated(animation = animation) {
         IconButton(
-            onClick = onClick,
             modifier = modifier,
+            onClick = onClick,
         ) {
             androidx.compose.material3.Icon(
                 modifier = Modifier.size(size.takeOrElse { 32.dp }),

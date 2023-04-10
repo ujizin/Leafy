@@ -10,5 +10,5 @@ internal fun Int?.toDecimalFormat() = this?.let { decimalFormat.format(it) } ?: 
 
 internal enum class TimeUnit(val numbers: List<String>) {
     Hour((0..23).toList().toDecimalFormat()),
-    Minutes((0..59).toList().toDecimalFormat())
+    Minutes((0..59).toList().toDecimalFormat()),
 }

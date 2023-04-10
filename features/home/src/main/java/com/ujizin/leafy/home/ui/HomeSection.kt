@@ -76,10 +76,10 @@ internal fun HomeSection(
 @Composable
 fun NavLazyColumn(
     verticalArrangement: Arrangement.Vertical,
-    content: LazyListScope.() -> Unit
+    content: LazyListScope.() -> Unit,
 ) {
     LazyColumn(
-        verticalArrangement = verticalArrangement
+        verticalArrangement = verticalArrangement,
     ) {
         content()
         item { Spacer(Modifier.padding(64.dp)) }
@@ -96,6 +96,6 @@ private fun LazyItemScope.HomePlantCard(plant: Plant, onPlantClick: (Long) -> Un
             .aspectRatio(1F)
             .padding(horizontal = 20.dp),
         plant = plant,
-        onClick = { onPlantClick(plant.id) }
+        onClick = { onPlantClick(plant.id) },
     )
 }

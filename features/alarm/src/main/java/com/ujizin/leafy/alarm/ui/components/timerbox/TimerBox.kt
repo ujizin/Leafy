@@ -43,7 +43,7 @@ fun TimerBox(
     modifier: Modifier = Modifier,
     @IntRange(0, 23) hour: Int? = null,
     @IntRange(0, 59) minute: Int? = null,
-    onTimeChange: (hour: Int, minute: Int) -> Unit
+    onTimeChange: (hour: Int, minute: Int) -> Unit,
 ) {
     Row(
         modifier = modifier,
@@ -92,7 +92,7 @@ private fun TimerUnitBox(
     quantity: Int = 5,
     value: Int? = null,
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
-    onTimeChange: (String) -> Unit
+    onTimeChange: (String) -> Unit,
 ) {
     val state = rememberLazyListState()
     var hapticInitialized by remember { mutableStateOf(false) }
@@ -119,7 +119,8 @@ private fun TimerUnitBox(
                         state.firstVisibleItemIndex, endIndex -> 0.25F
                         middle -> 1F
                         in state.firstVisibleItemIndex until middle,
-                        in middle until endIndex -> 0.5F
+                        in middle until endIndex,
+                        -> 0.5F
 
                         else -> 0F
                     }

@@ -13,7 +13,7 @@ import com.ujizin.leafy.features.preferences.R
 fun ThemeSelector(
     modifier: Modifier = Modifier,
     theme: Theme,
-    onThemeChanged: (Theme) -> Unit
+    onThemeChanged: (Theme) -> Unit,
 ) {
     Selector(
         modifier = modifier,

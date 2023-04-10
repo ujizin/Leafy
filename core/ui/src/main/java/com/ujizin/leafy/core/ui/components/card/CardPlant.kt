@@ -34,7 +34,7 @@ fun CardPlant(
             AnimatedButtonIcon(
                 icon = Icons.Shared,
                 tint = Color.White,
-                size = 24.dp
+                size = 24.dp,
             )
         }
     }

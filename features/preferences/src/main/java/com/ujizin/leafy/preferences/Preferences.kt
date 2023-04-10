@@ -25,7 +25,7 @@ import com.ujizin.leafy.features.preferences.R
 @Composable
 internal fun Preferences(
     onBackPressed: OnClick,
-    viewModel: PreferencesViewModel = hiltViewModel()
+    viewModel: PreferencesViewModel = hiltViewModel(),
 ) {
     Section(
         modifier = Modifier.fillMaxSize(),
@@ -52,7 +52,7 @@ internal fun PreferencesContent(
     user: User,
     onNicknameChanged: (String) -> Unit,
     onThemeChanged: (Theme) -> Unit,
-    onLanguageChanged: (Language) -> Unit
+    onLanguageChanged: (Language) -> Unit,
 ) {
     Column(modifier) {
         UserSelector(

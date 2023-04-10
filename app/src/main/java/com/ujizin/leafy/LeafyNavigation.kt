@@ -69,7 +69,11 @@ fun LeafyNavigation(
                     )
                 },
                 onDrawerClick = { scope.launch { drawerState.open() } },
-                onPlantClick = { navController.navigate(Destination.PlantDetails) }
+                onPlantClick = { plantId ->
+                    navController.navigate(
+                        Destination.PlantDetails.withArguments(Args.PlantId to plantId),
+                    )
+                },
             )
             searchGraph(
                 enterTransition = { navigationEnterTransition(navController) },

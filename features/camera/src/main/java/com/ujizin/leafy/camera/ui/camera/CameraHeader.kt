@@ -17,7 +17,7 @@ import com.ujizin.leafy.core.ui.extensions.OnClick
 internal fun CameraHeader(
     onSettingsClicked: OnClick,
     onFlashModeClicked: OnClick,
-    onCloseClicked: OnClick
+    onCloseClicked: OnClick,
 ) {
     Row(
         modifier = Modifier

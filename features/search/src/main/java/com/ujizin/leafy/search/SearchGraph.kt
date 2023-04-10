@@ -18,7 +18,7 @@ fun NavGraphBuilder.searchGraph(
     exitTransition: AnimatedExitTransition,
     onDrawerClick: OnClick,
     onTakePictureClick: OnClick,
-    onScroll: (Boolean) -> Unit
+    onScroll: (Boolean) -> Unit,
 ) {
     composable(
         destination = Destination.Search,

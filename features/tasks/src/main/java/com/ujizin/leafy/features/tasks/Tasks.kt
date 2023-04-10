@@ -12,17 +12,17 @@ import com.ujizin.leafy.core.ui.components.Section
 
 @Composable
 fun TasksRoute(
-    viewModel: TasksViewModel = hiltViewModel()
+    viewModel: TasksViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     Tasks(
-        uiState = uiState
+        uiState = uiState,
     )
 }
 
 @Composable
 private fun Tasks(
-    uiState: TasksUiState
+    uiState: TasksUiState,
 ) {
     Box(Modifier.fillMaxSize()) {
         Section(title = "Alarm")
@@ -32,5 +32,4 @@ private fun Tasks(
 @ThemePreviews
 @Composable
 private fun TasksPreview() {
-
 }

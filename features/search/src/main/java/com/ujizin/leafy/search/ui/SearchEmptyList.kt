@@ -14,7 +14,7 @@ import com.ujizin.leafy.core.components.R as CR
 internal fun SearchEmptyList(
     searchText: String,
     modifier: Modifier = Modifier,
-    onTakePictureClick: OnClick
+    onTakePictureClick: OnClick,
 ) {
     val context = LocalContext.current
     val description = remember(searchText) {

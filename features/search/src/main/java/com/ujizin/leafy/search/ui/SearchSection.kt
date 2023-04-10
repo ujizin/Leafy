@@ -51,7 +51,7 @@ fun SearchSection(
     onDrawerClick: OnClick,
     onTakePictureClick: OnClick,
     onScroll: (Boolean) -> Unit,
-    viewModel: SearchViewModel = hiltViewModel()
+    viewModel: SearchViewModel = hiltViewModel(),
 ) {
     val isKeyboardOpen by keyboardAsState()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()

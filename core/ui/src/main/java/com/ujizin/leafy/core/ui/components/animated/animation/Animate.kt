@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 object Animate {
 
     enum class Direction {
-        None, Start, Top, End, Bottom
+        None, Start, Top, End, Bottom,
     }
 
     @Composable

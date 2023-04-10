@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PublishViewModel @Inject constructor(
-    private val addDraftPlant: AddDraftPlant
+    private val addDraftPlant: AddDraftPlant,
 ) : ViewModel() {
 
     fun sendDraftPlant(title: String, description: String, onFinishPublish: () -> Unit) {

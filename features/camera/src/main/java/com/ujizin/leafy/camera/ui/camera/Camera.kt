@@ -28,7 +28,7 @@ internal fun Camera(
     cameraState: CameraState,
     onCloseClicked: OnClick,
     onTakePicture: OnClick,
-    onGalleryClick: OnClick
+    onGalleryClick: OnClick,
 ) {
     if (uiState is CameraUiState.Error) {
         ErrorPopUp(uiState.message)

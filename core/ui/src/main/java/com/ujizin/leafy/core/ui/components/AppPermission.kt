@@ -15,7 +15,7 @@ fun AppPermission(
 ) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         val permissionState = rememberPermissionState(
-            permission = android.Manifest.permission.POST_NOTIFICATIONS
+            permission = android.Manifest.permission.POST_NOTIFICATIONS,
         )
 
         LaunchedEffect(permissionState.status) {

@@ -38,7 +38,7 @@ fun CameraFooter(
     modifier: Modifier = Modifier,
     onTakePicture: OnClick,
     onGalleryClick: OnClick,
-    onSwitchClick: OnClick
+    onSwitchClick: OnClick,
 ) {
     Box(
         modifier = Modifier
@@ -63,7 +63,7 @@ fun CameraFooter(
 @Composable
 fun ButtonSwitchCamera(
     modifier: Modifier = Modifier,
-    onClick: OnClick
+    onClick: OnClick,
 ) {
     var rotate by remember { mutableStateOf(false) }
     val rotateAnimation by animateFloatAsState(targetValue = if (rotate) 0F else 180F)
@@ -94,7 +94,7 @@ fun ButtonSwitchCamera(
 @Composable
 fun ButtonGallery(
     modifier: Modifier = Modifier,
-    onClick: OnClick
+    onClick: OnClick,
 ) {
     ButtonPulse(
         modifier = Modifier
@@ -119,7 +119,7 @@ fun ButtonGallery(
 @Composable
 private fun ButtonPicture(
     modifier: Modifier = Modifier,
-    onClick: OnClick
+    onClick: OnClick,
 ) {
     ButtonPulse(
         Modifier
@@ -137,7 +137,7 @@ fun ButtonPulse(
     modifier: Modifier = Modifier,
     shape: Shape = RectangleShape,
     onClick: OnClick,
-    content: @Composable BoxScope.() -> Unit = {}
+    content: @Composable BoxScope.() -> Unit = {},
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val buttonPressed by interactionSource.collectIsPressedAsState()

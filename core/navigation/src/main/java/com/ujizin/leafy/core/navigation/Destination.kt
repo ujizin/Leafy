@@ -13,7 +13,7 @@ enum class Destination(
     About("about"),
     Review("review"),
     Preferences("preferences"),
-    PlantDetails("plant"), // TODO set {id} parameter
+    PlantDetails("plant/{${Args.PlantId}}"),
     ;
 
     val route: String get() = "$HOST/$destinationName"

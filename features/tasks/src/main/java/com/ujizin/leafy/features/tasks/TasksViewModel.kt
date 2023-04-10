@@ -11,7 +11,6 @@ class TasksViewModel @Inject constructor() : ViewModel() {
 
     private val _uiState = MutableStateFlow<TasksUiState>(TasksUiState.Initial)
     val uiState = _uiState.asStateFlow()
-
 }
 
 sealed interface TasksUiState {

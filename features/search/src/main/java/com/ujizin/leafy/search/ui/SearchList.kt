@@ -10,7 +10,7 @@ import com.ujizin.leafy.domain.model.Plant
 @OptIn(ExperimentalFoundationApi::class)
 internal fun LazyStaggeredGridScope.searchItems(
     modifier: Modifier = Modifier,
-    data: List<Plant>
+    data: List<Plant>,
 ) {
     items(key = { it.id }, items = data) { plant ->
         CardPlant(

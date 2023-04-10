@@ -10,7 +10,7 @@ import com.ujizin.leafy.core.navigation.composable
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.tasksGraph(
     enterTransition: AnimatedEnterTransition,
-    exitTransition: AnimatedExitTransition
+    exitTransition: AnimatedExitTransition,
 ) {
     composable(
         destination = Destination.Tasks,

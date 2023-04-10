@@ -16,7 +16,7 @@ fun NavGraphBuilder.homeGraph(
     onTakePictureClick: OnClick,
     onSearchClick: OnClick,
     onDrawerClick: OnClick,
-    onPlantClick: (Long) -> Unit
+    onPlantClick: (Long) -> Unit,
 ) {
     composable(
         destination = Destination.Home,

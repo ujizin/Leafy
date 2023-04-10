@@ -25,7 +25,7 @@ import com.ujizin.leafy.core.ui.extensions.startSettingsPermission
 internal fun CameraRoute(
     viewModel: CameraViewModel = hiltViewModel(),
     onImageSaved: () -> Unit,
-    onCloseClicked: OnClick
+    onCloseClicked: OnClick,
 ) {
     val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
     val context = LocalContext.current

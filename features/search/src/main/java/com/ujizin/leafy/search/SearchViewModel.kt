@@ -21,7 +21,7 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val loadPlants: LoadAllPlant,
-    private val findPlant: FindPlant
+    private val findPlant: FindPlant,
 ) : ViewModel() {
 
     private val initAutoFocus: Boolean = checkNotNull(savedStateHandle[Args.SearchAutoFocus])

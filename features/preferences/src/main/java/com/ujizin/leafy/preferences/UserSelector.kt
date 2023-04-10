@@ -24,7 +24,7 @@ import com.ujizin.leafy.features.preferences.R
 fun UserSelector(
     modifier: Modifier = Modifier,
     nickname: String,
-    onNicknameChanged: (String) -> Unit
+    onNicknameChanged: (String) -> Unit,
 ) {
     var showModal by remember { mutableStateOf(false) }
     Selector(
@@ -55,7 +55,7 @@ fun UserTextField(
     modifier: Modifier = Modifier,
     label: String,
     nickname: String,
-    onSaveNickname: (String) -> Unit
+    onSaveNickname: (String) -> Unit,
 ) {
     Column(modifier) {
         var newNickname by remember { mutableStateOf(nickname) }

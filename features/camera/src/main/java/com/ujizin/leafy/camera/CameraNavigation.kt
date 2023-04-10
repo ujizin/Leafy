@@ -15,7 +15,7 @@ import com.ujizin.leafy.core.ui.extensions.OnClick
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.cameraGraph(
     onBackPressed: OnClick,
-    onSaveClicked: () -> Unit
+    onSaveClicked: () -> Unit,
 ) {
     composable(
         Destination.Camera,

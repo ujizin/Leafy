@@ -15,7 +15,7 @@ fun NavGraphBuilder.publishGraph(
     onBackPressed: OnClick,
     onNextClick: OnClick,
     enterTransition: AnimatedEnterTransition = { fadeIn() },
-    exitTransition: AnimatedExitTransition = { fadeOut() }
+    exitTransition: AnimatedExitTransition = { fadeOut() },
 ) {
     composable(
         destination = Destination.Publish,

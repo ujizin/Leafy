@@ -23,7 +23,7 @@ import com.ujizin.leafy.core.ui.extensions.OnClick
 internal fun CameraPreviewSection(
     bitmap: Bitmap,
     onSaveClicked: (Bitmap) -> Unit,
-    onBackPressed: OnClick
+    onBackPressed: OnClick,
 ) {
     BackHandler(onBack = onBackPressed)
     Box(Modifier.fillMaxSize()) {

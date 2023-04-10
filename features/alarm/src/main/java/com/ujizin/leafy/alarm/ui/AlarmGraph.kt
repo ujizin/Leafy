@@ -14,7 +14,7 @@ fun NavGraphBuilder.alarmGraph(
     onBackPressed: () -> Unit,
     onSaved: () -> Unit,
     enterTransition: AnimatedEnterTransition = { fadeIn() },
-    exitTransition: AnimatedExitTransition = { fadeOut() }
+    exitTransition: AnimatedExitTransition = { fadeOut() },
 ) {
     composable(
         destination = Destination.Alarm,

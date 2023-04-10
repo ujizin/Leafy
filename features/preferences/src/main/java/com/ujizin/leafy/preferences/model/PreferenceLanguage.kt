@@ -7,7 +7,7 @@ import com.ujizin.leafy.preferences.extensions.displayResId
 
 data class PreferenceLanguage(
     val language: Language,
-    val displayName: String
+    val displayName: String,
 )
 
 fun getLanguages(context: Context) = values().map {

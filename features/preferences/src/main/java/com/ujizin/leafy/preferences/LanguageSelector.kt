@@ -19,7 +19,7 @@ import com.ujizin.leafy.preferences.model.getLanguages
 fun LanguageSelector(
     modifier: Modifier = Modifier,
     language: Language,
-    onLanguageChanged: (Language) -> Unit
+    onLanguageChanged: (Language) -> Unit,
 ) {
     var showModal by remember { mutableStateOf(false) }
     Selector(
