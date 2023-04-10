@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -33,6 +34,7 @@ fun CardImage(
     contentDescription: String?,
     elevation: Dp = 4.dp,
     animation: Animation = Animation.SlideToTop,
+    shape: Shape = MaterialTheme.shapes.large,
     onClick: OnClick = {},
     innerContent: @Composable Content = {},
 ) {
@@ -56,7 +58,7 @@ fun CardImage(
         Card(
             modifier = modifier,
             elevation = CardDefaults.cardElevation(defaultElevation = elevation),
-            shape = MaterialTheme.shapes.large,
+            shape = shape,
             onClick = onClick,
         ) {
             BoxImage(
