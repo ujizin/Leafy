@@ -2,7 +2,7 @@
 <resources>
     <string name="ringtone">toque</string>
     <string name="repeat">repetir</string>
-    <string name="alarm_title">adicione um alarm para regar sua planta</string>
+    <string name="alarm_title">adicione um alarme para sua planta</string>
     <string name="save">salvar</string>
     <string name="once">uma vez</string>
     <string name="daily">diariamente</string>
