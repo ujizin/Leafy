@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -42,6 +43,9 @@ internal fun Preferences(
             onNicknameChanged = { nickname -> viewModel.update(user.update(nickname = nickname)) },
             onThemeChanged = { theme -> viewModel.update(user.update(theme = theme)) },
             onLanguageChanged = { language -> viewModel.update(user.update(language = language)) },
+            onDynamicColorChanged = { dynamicColor ->
+                viewModel.update(user.update(dynamicColor = dynamicColor))
+            },
         )
     }
 }
@@ -53,6 +57,7 @@ internal fun PreferencesContent(
     onNicknameChanged: (String) -> Unit,
     onThemeChanged: (Theme) -> Unit,
     onLanguageChanged: (Language) -> Unit,
+    onDynamicColorChanged: (Boolean) -> Unit,
 ) {
     Column(modifier) {
         UserSelector(
@@ -75,6 +80,18 @@ internal fun PreferencesContent(
                 .paddingScreen(vertical = 16.dp),
             theme = user.settings.theme,
             onThemeChanged = onThemeChanged,
+        )
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .paddingScreen(vertical = 16.dp)
+        )
+        DynamicColorRow(
+            modifier = Modifier
+                .fillMaxWidth()
+                .paddingScreen(),
+            dynamicColor = user.settings.dynamicColor,
+            onDynamicColorChanged = onDynamicColorChanged,
         )
     }
 }

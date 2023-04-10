@@ -48,6 +48,7 @@ internal class UserDataStoreImpl(
                     nickname = user.nickname,
                     theme = user.theme,
                     language = user.language,
+                    dynamicColor = user.dynamicColor
                 ),
             )
         }

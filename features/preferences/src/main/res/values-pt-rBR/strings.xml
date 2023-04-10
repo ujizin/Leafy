@@ -3,6 +3,7 @@
     <string name="preferences_title">preferências</string>
     <string name="nickname">apelido</string>
     <string name="app_theme">tema do app</string>
+    <string name="dynamic_color">cores dinâmica</string>
     <string name="language">idioma</string>
     <string name="update">atualizar</string>
     <string name="portuguese">português</string>

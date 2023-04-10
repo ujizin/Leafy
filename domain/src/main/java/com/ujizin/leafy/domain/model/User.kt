@@ -44,10 +44,12 @@ fun User.update(
     nickname: String? = null,
     theme: Theme? = null,
     language: Language? = null,
+    dynamicColor: Boolean? = null,
 ) = copy(
     nickname = nickname ?: this.nickname,
     settings = settings.copy(
         theme = theme ?: settings.theme,
         language = language ?: settings.language,
+        dynamicColor = dynamicColor ?: settings.dynamicColor
     ),
 )
