@@ -16,17 +16,18 @@ class AlarmMapper {
             repeatIntervalInMillis = repeatIntervalInMillis,
             hours = hours,
             minutes = minutes,
+            enabled = enabled
         )
     }
 
     fun toDomain(alarm: RepoAlarm) = with(alarm) {
-        val ringtoneUri = Uri.parse(ringtoneUriString)
         Alarm(
             plantId = plantId,
-            ringtoneUri = ringtoneUri,
+            ringtoneUri = Uri.parse(ringtoneUriString),
             repeatIntervalInMillis = repeatIntervalInMillis,
             hours = hours,
             minutes = minutes,
+            enabled = enabled,
         )
     }
 }

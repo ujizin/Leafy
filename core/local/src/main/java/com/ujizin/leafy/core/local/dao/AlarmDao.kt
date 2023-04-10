@@ -23,6 +23,14 @@ interface AlarmDao {
     suspend fun getAll(): List<AlarmEntity>
 
     /**
+     * Get all [AlarmEntity] by plant id.
+     *
+     * @param plantId the plant's id
+     * */
+    @Query("SELECT * FROM alarm WHERE plant_id = :plantId")
+    suspend fun getByPlantId(plantId: Long): List<AlarmEntity>
+
+    /**
      * Find all [AlarmEntity] by plant id.
      *
      * @param plantId plant id to find all [AlarmEntity]
@@ -32,12 +40,20 @@ interface AlarmDao {
     suspend fun findByPlantId(plantId: Long): List<AlarmEntity>?
 
     /**
+     * Find alarm by id.
+     *
+     * @param id the alarm's id
+     * */
+    @Query("SELECT * FROM alarm WHERE id = :id")
+    suspend fun findAlarmById(id: Long): AlarmEntity
+
+    /**
      * Insert a new [AlarmEntity].
      *
      * @param alarm [AlarmEntity] to be added
      * */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(vararg alarm: AlarmEntity)
+    suspend fun insert(alarm: AlarmEntity): Long
 
     /**
      * Update [AlarmEntity] passed on parameter.
@@ -46,7 +62,6 @@ interface AlarmDao {
      * */
     @Update
     suspend fun update(alarm: AlarmEntity)
-
     /**
      * Delete [AlarmEntity] passed on parameter.
      *

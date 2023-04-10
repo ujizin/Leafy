@@ -10,6 +10,7 @@ import android.net.Uri
  *  @param ringtoneUri the alarm's ringtone
  *  @param repeatIntervalInMillis the alarm's repeat interval timer
  *  @param hours the alarm's hours
+ *  @param enabled check if alarm is enabled or not
  *  @param minutes the alarm's minutes
  * */
 data class Alarm(
@@ -18,5 +19,6 @@ data class Alarm(
     val ringtoneUri: Uri,
     val repeatIntervalInMillis: Long,
     val hours: Int,
+    val enabled: Boolean,
     val minutes: Int,
 )

@@ -11,6 +11,10 @@ import androidx.room.PrimaryKey
  * @param id the alarm id
  * @param ringtoneUriString the ring's alarm
  * @param plantId the plant id linked to the alarm
+ * @param hours the alarm's hours
+ * @param minutes the alarm's minutes
+ * @param repeatIntervalTimeInMillis alarm's repeat mode
+ * @param enabled check if alarm is enabled or not
  * */
 @Entity(
     tableName = "alarm",
@@ -24,17 +28,19 @@ import androidx.room.PrimaryKey
     ],
 )
 data class AlarmEntity(
-    @ColumnInfo(name = "alarm_id")
+    @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    @ColumnInfo(name = "alarm_ringtone")
+    @ColumnInfo(name = "ringtone")
     val ringtoneUriString: String,
-    @ColumnInfo(name = "plant_id")
-    val plantId: Long,
+    @ColumnInfo(name = "enabled")
+    val enabled: Boolean,
     @ColumnInfo(name = "repeat_interval_in_millis")
     val repeatIntervalTimeInMillis: Long,
     @ColumnInfo(name = "hours")
     val hours: Int,
     @ColumnInfo(name = "minutes")
     val minutes: Int,
+    @ColumnInfo(name = "plant_id")
+    val plantId: Long,
 )

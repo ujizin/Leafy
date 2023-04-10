@@ -10,16 +10,22 @@ internal class AlarmLocalDataSource(
     private val mapper: AlarmMapper,
 ) : AlarmDataSource {
 
-    override suspend fun insertAlarm(alarm: Alarm) {
-        alarmDao.insert(mapper.toAlarmEntity(alarm))
-    }
+    override suspend fun insertAlarm(alarm: Alarm) = alarmDao.insert(mapper.toAlarmEntity(alarm))
 
     override suspend fun insertAlarms(alarms: List<Alarm>) {
         val alarmEntities = alarms.map { mapper.toAlarmEntity(it) }
-        alarmDao.insert(*alarmEntities.toTypedArray())
+        alarmEntities.forEach { alarmEntity ->
+            alarmDao.insert(alarmEntity)
+        }
     }
 
     override suspend fun getAlarms(): List<Alarm> = alarmDao.getAll().map(mapper::toAlarm)
+
+    override suspend fun getAlarmsByPlantId(
+        plantId: Long,
+    ) = alarmDao.getByPlantId(plantId).map(mapper::toAlarm)
+
+    override suspend fun getAlarmById(id: Long) = alarmDao.findAlarmById(id).let(mapper::toAlarm)
 
     override suspend fun updateAlarm(alarm: Alarm) {
         alarmDao.update(mapper.toAlarmEntity(alarm))

@@ -11,7 +11,7 @@ interface AlarmDataSource {
      *
      * @param alarm [Alarm] to be added
      * */
-    suspend fun insertAlarm(alarm: Alarm)
+    suspend fun insertAlarm(alarm: Alarm): Long
 
     /**
      * Insert a new list of [Alarm].
@@ -28,6 +28,13 @@ interface AlarmDataSource {
     suspend fun getAlarms(): List<Alarm>
 
     /**
+     * Get all [Alarm] from data source by plant id.
+     *
+     * @param plantId the plant's id
+     * */
+    suspend fun getAlarmsByPlantId(plantId: Long): List<Alarm>
+
+    /**
      * Update [Alarm] passed on parameter
      *
      * @param alarm [Alarm] to be updated
@@ -40,4 +47,11 @@ interface AlarmDataSource {
      * @param alarm [Alarm] to be deleted
      * */
     suspend fun deleteAlarm(alarm: Alarm)
+
+    /**
+     * Get alarm by id
+     *
+     * @param id the alarm's id
+     * */
+    suspend fun getAlarmById(id: Long): Alarm
 }

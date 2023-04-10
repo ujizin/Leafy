@@ -13,5 +13,5 @@ interface AddAlarm {
      *
      * @param alarm alarm to be added
      * */
-    operator fun invoke(alarm: Alarm): Flow<Unit>
+    operator fun invoke(alarm: Alarm): Flow<Long>
 }

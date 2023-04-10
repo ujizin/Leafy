@@ -9,10 +9,26 @@ import com.ujizin.leafy.core.repository.model.Alarm
 internal class AlarmMapper {
 
     fun toAlarmEntity(alarm: Alarm) = with(alarm) {
-        AlarmEntity(id, ringtoneUriString, plantId, repeatIntervalInMillis, hours, minutes)
+        AlarmEntity(
+            id = id,
+            ringtoneUriString = ringtoneUriString,
+            repeatIntervalTimeInMillis = repeatIntervalInMillis,
+            minutes = minutes,
+            hours = hours,
+            enabled = enabled,
+            plantId = plantId
+        )
     }
 
     fun toAlarm(alarm: AlarmEntity) = with(alarm) {
-        Alarm(id, plantId, ringtoneUriString, repeatIntervalTimeInMillis, hours, minutes)
+        Alarm(
+            id = id,
+            plantId = plantId,
+            ringtoneUriString = ringtoneUriString,
+            repeatIntervalInMillis = repeatIntervalTimeInMillis,
+            hours = hours,
+            enabled = enabled,
+            minutes = minutes
+        )
     }
 }
