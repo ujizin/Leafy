@@ -7,10 +7,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.android.material.color.DynamicColors
 import com.ujizin.leafy.core.ui.components.Section
 import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
 import com.ujizin.leafy.core.ui.components.image.Icons
@@ -60,6 +62,7 @@ internal fun PreferencesContent(
     onDynamicColorChanged: (Boolean) -> Unit,
 ) {
     Column(modifier) {
+        val isDynamicColorAvailable = remember { DynamicColors.isDynamicColorAvailable() }
         UserSelector(
             modifier = Modifier
                 .fillMaxWidth()
@@ -81,17 +84,20 @@ internal fun PreferencesContent(
             theme = user.settings.theme,
             onThemeChanged = onThemeChanged,
         )
-        Divider(
-            modifier = Modifier
-                .fillMaxWidth()
-                .paddingScreen(vertical = 16.dp)
-        )
-        DynamicColorRow(
-            modifier = Modifier
-                .fillMaxWidth()
-                .paddingScreen(),
-            dynamicColor = user.settings.dynamicColor,
-            onDynamicColorChanged = onDynamicColorChanged,
-        )
+
+        if (isDynamicColorAvailable) {
+            Divider(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .paddingScreen(vertical = 16.dp)
+            )
+            DynamicColorRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .paddingScreen(),
+                dynamicColor = user.settings.dynamicColor,
+                onDynamicColorChanged = onDynamicColorChanged,
+            )
+        }
     }
 }
