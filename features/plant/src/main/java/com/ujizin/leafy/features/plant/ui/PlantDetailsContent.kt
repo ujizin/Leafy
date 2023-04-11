@@ -34,12 +34,14 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
 import com.ujizin.leafy.core.ui.components.card.CardImage
 import com.ujizin.leafy.core.ui.components.image.Icons
 import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.core.ui.extensions.capitalize
+import com.ujizin.leafy.core.ui.extensions.dateFormatted
 import com.ujizin.leafy.core.ui.extensions.paddingScreen
 import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.model.Plant
@@ -178,8 +180,9 @@ fun AlarmRow(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "${alarm.hours}:${alarm.minutes}", // TODO format date
+                text = alarm.dateFormatted,
                 color = MaterialTheme.colorScheme.primary,
+                letterSpacing = 4.sp,
                 style = MaterialTheme.typography.titleMedium,
             )
             Switch(checked = checked, onCheckedChange = { enabled ->

@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ujizin.leafy.alarm.ui.components.AutoSizeText
 import com.ujizin.leafy.core.themes.LeafyTheme
+import com.ujizin.leafy.core.ui.extensions.toDecimalFormat
 import kotlin.math.floor
 
 /**
