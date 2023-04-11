@@ -12,6 +12,7 @@ dependencies {
     implementation platform(libs.compose.bom)
     implementation libs.bundles.compose
     implementation libs.hilt.compose
+    implementation libs.android.material
 
     debugImplementation libs.bundles.compose.debug
 

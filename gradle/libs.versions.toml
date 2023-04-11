@@ -7,6 +7,7 @@ compose-bom = "2023.04.00"
 compose-compiler = "1.4.3"
 androidx-lifecyle = "2.6.1"
 material3 = "1.1.0-beta01"
+material = "1.8.0"
 coroutines = "1.6.3"
 androidx-core = "1.8.0"
 splashscreen = "1.0.0-rc01"
@@ -41,6 +42,8 @@ androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmode
 androidx-core = { module = "androidx.core:core", version.ref = "androidx-core" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
 androidx-app-compat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+
+android-material = { module = "com.google.android.material:material", version.ref = "material" }
 
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
