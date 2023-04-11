@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -43,6 +44,7 @@ import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.core.ui.extensions.capitalize
 import com.ujizin.leafy.core.ui.extensions.dateFormatted
 import com.ujizin.leafy.core.ui.extensions.paddingScreen
+import com.ujizin.leafy.core.ui.extensions.share
 import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.features.plant.R
@@ -55,6 +57,7 @@ internal fun PlantDetailsContent(
     alarms: List<Alarm>,
     onAlarmChanged: (Alarm) -> Unit,
 ) {
+    val context = LocalContext.current
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -78,7 +81,7 @@ internal fun PlantDetailsContent(
                     AnimatedButtonIcon(
                         icon = Icons.Shared,
                         size = 24.dp,
-                        onClick = {},
+                        onClick = { plant.share(context) },
                     )
                 },
                 scrollBehavior = scrollBehavior,

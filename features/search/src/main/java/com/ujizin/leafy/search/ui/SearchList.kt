@@ -11,12 +11,16 @@ import com.ujizin.leafy.domain.model.Plant
 internal fun LazyStaggeredGridScope.searchItems(
     modifier: Modifier = Modifier,
     data: List<Plant>,
+    onSharedClick: (Plant) -> Unit,
 ) {
     items(key = { it.id }, items = data) { plant ->
         CardPlant(
             modifier = modifier,
             plant = plant,
             onClick = {},
+            onSharedClick = {
+                onSharedClick(plant)
+            }
         )
     }
 }

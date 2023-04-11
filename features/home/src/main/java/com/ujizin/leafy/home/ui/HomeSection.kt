@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.ujizin.leafy.core.ui.components.EmptySection
@@ -22,6 +23,7 @@ import com.ujizin.leafy.core.ui.components.card.CardPlant
 import com.ujizin.leafy.core.ui.components.image.Icons
 import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.core.ui.extensions.capitalize
+import com.ujizin.leafy.core.ui.extensions.share
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.features.home.R
 
@@ -34,6 +36,7 @@ internal fun HomeSection(
     onDrawerClick: OnClick,
     onPlantClick: (Long) -> Unit,
 ) {
+    val context = LocalContext.current
     NavLazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
@@ -68,7 +71,15 @@ internal fun HomeSection(
                 )
             }
 
-            else -> items(plants, key = { it.id }) { HomePlantCard(it, onPlantClick) }
+            else -> items(plants, key = { it.id }) {
+                HomePlantCard(
+                    plant = it,
+                    onPlantClick = onPlantClick,
+                    onSharedClick = { plant ->
+                        plant.share(context)
+                    }
+                )
+            }
         }
     }
 }
@@ -88,7 +99,11 @@ fun NavLazyColumn(
 
 @Composable
 @OptIn(ExperimentalFoundationApi::class)
-private fun LazyItemScope.HomePlantCard(plant: Plant, onPlantClick: (Long) -> Unit) {
+private fun LazyItemScope.HomePlantCard(
+    plant: Plant,
+    onPlantClick: (Long) -> Unit,
+    onSharedClick: (Plant) -> Unit,
+) {
     CardPlant(
         modifier = Modifier
             .animateItemPlacement()
@@ -97,5 +112,6 @@ private fun LazyItemScope.HomePlantCard(plant: Plant, onPlantClick: (Long) -> Un
             .padding(horizontal = 20.dp),
         plant = plant,
         onClick = { onPlantClick(plant.id) },
+        onSharedClick = { onSharedClick(plant) }
     )
 }

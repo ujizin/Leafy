@@ -25,6 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -39,6 +40,7 @@ import com.ujizin.leafy.core.ui.components.textfield.Placeholder
 import com.ujizin.leafy.core.ui.components.textfield.TextField
 import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.core.ui.extensions.capitalize
+import com.ujizin.leafy.core.ui.extensions.share
 import com.ujizin.leafy.core.ui.state.keyboardAsState
 import com.ujizin.leafy.features.search.R
 import com.ujizin.leafy.search.SearchUiState
@@ -53,6 +55,7 @@ fun SearchSection(
     onScroll: (Boolean) -> Unit,
     viewModel: SearchViewModel = hiltViewModel(),
 ) {
+    val context = LocalContext.current
     val isKeyboardOpen by keyboardAsState()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -131,6 +134,9 @@ fun SearchSection(
                     .fillMaxWidth()
                     .heightIn(min = CardSize.Small.height, max = CardSize.Large.height),
                 data = result.items,
+                onSharedClick = { plant ->
+                    plant.share(context)
+                }
             )
         }
 

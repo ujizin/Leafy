@@ -17,6 +17,7 @@ fun CardPlant(
     modifier: Modifier = Modifier,
     plant: Plant,
     onClick: OnClick,
+    onSharedClick: OnClick,
 ) {
     CardImage(
         modifier = modifier,
@@ -35,6 +36,7 @@ fun CardPlant(
                 icon = Icons.Shared,
                 tint = Color.White,
                 size = 24.dp,
+                onClick = onSharedClick
             )
         }
     }
