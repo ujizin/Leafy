@@ -16,7 +16,8 @@ internal class AlarmMapper {
             minutes = minutes,
             hours = hours,
             enabled = enabled,
-            plantId = plantId
+            plantId = plantId,
+            weekDays = weekDays,
         )
     }
 
@@ -28,7 +29,8 @@ internal class AlarmMapper {
             repeatIntervalInMillis = repeatIntervalTimeInMillis,
             hours = hours,
             enabled = enabled,
-            minutes = minutes
+            minutes = minutes,
+            weekDays = weekDays,
         )
     }
 }

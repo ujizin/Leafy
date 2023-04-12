@@ -2,6 +2,7 @@ package com.ujizin.leafy.core.repository.mapper
 
 import android.net.Uri
 import com.ujizin.leafy.domain.model.Alarm
+import com.ujizin.leafy.domain.model.WeekDay
 import com.ujizin.leafy.core.repository.model.Alarm as RepoAlarm
 
 /**
@@ -16,7 +17,8 @@ class AlarmMapper {
             repeatIntervalInMillis = repeatIntervalInMillis,
             hours = hours,
             minutes = minutes,
-            enabled = enabled
+            enabled = enabled,
+            weekDays = weekDays.map(WeekDay::name),
         )
     }
 
@@ -28,6 +30,7 @@ class AlarmMapper {
             hours = hours,
             minutes = minutes,
             enabled = enabled,
+            weekDays = weekDays.map(WeekDay::valueOf)
         )
     }
 }

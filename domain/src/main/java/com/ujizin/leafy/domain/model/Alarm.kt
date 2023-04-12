@@ -12,6 +12,7 @@ import android.net.Uri
  *  @param hours the alarm's hours
  *  @param enabled check if alarm is enabled or not
  *  @param minutes the alarm's minutes
+ *  @param weekDays day of the week for alarm
  * */
 data class Alarm(
     val id: Long = 0,
@@ -21,4 +22,5 @@ data class Alarm(
     val hours: Int,
     val enabled: Boolean,
     val minutes: Int,
+    val weekDays: List<WeekDay> = WeekDay.values().toList(),
 )
