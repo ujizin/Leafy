@@ -46,7 +46,7 @@ import com.ujizin.leafy.domain.model.orDefault
 import com.ujizin.leafy.features.alarm.R
 
 @Composable
-fun AlarmSection(
+fun AlarmRoute(
     onBackPressed: OnClick,
     viewModel: AlarmViewModel = hiltViewModel(),
     onSaved: () -> Unit,

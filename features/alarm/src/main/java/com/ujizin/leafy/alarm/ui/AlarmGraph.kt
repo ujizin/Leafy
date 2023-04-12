@@ -21,6 +21,6 @@ fun NavGraphBuilder.alarmGraph(
         enterTransition = enterTransition,
         exitTransition = exitTransition,
     ) {
-        AlarmSection(onBackPressed = onBackPressed, onSaved = onSaved)
+        AlarmRoute(onBackPressed = onBackPressed, onSaved = onSaved)
     }
 }
