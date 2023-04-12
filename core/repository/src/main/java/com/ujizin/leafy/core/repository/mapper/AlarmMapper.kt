@@ -14,7 +14,6 @@ class AlarmMapper {
         RepoAlarm(
             plantId = plantId,
             ringtoneUriString = ringtoneUri.toString(),
-            repeatIntervalInMillis = repeatIntervalInMillis,
             hours = hours,
             minutes = minutes,
             enabled = enabled,
@@ -26,7 +25,6 @@ class AlarmMapper {
         Alarm(
             plantId = plantId,
             ringtoneUri = Uri.parse(ringtoneUriString),
-            repeatIntervalInMillis = repeatIntervalInMillis,
             hours = hours,
             minutes = minutes,
             enabled = enabled,

@@ -13,7 +13,6 @@ import androidx.room.PrimaryKey
  * @param plantId the plant id linked to the alarm
  * @param hours the alarm's hours
  * @param minutes the alarm's minutes
- * @param repeatIntervalTimeInMillis alarm's repeat mode
  * @param enabled check if alarm is enabled or not
  * */
 @Entity(
@@ -35,8 +34,6 @@ data class AlarmEntity(
     val ringtoneUriString: String,
     @ColumnInfo(name = "enabled")
     val enabled: Boolean,
-    @ColumnInfo(name = "repeat_interval_in_millis")
-    val repeatIntervalTimeInMillis: Long,
     @ColumnInfo(name = "hours")
     val hours: Int,
     @ColumnInfo(name = "minutes")

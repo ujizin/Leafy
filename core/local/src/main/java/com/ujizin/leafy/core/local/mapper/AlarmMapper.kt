@@ -12,7 +12,6 @@ internal class AlarmMapper {
         AlarmEntity(
             id = id,
             ringtoneUriString = ringtoneUriString,
-            repeatIntervalTimeInMillis = repeatIntervalInMillis,
             minutes = minutes,
             hours = hours,
             enabled = enabled,
@@ -26,7 +25,6 @@ internal class AlarmMapper {
             id = id,
             plantId = plantId,
             ringtoneUriString = ringtoneUriString,
-            repeatIntervalInMillis = repeatIntervalTimeInMillis,
             hours = hours,
             enabled = enabled,
             minutes = minutes,
