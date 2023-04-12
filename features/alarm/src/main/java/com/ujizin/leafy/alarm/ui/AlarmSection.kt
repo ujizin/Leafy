@@ -62,8 +62,7 @@ fun AlarmRoute(
     }
     var repeatMode by remember { mutableStateOf<RepeatMode>(RepeatMode.Daily) }
     val repeatValues = remember(repeatMode) {
-        val custom = repeatMode as? RepeatMode.Custom
-        RepeatMode.getValues(custom?.customWeekDays.orEmpty())
+        RepeatMode.getValues(repeatMode.asCustom()?.customWeekDays.orEmpty())
     }
 
     var hours by remember { mutableStateOf(0) }
@@ -91,9 +90,9 @@ fun AlarmRoute(
         onSaveClicked = {
             viewModel.addPlantWithAlarm(
                 ringtone = ringtone,
-                repeatMode = repeatMode,
                 hours = hours,
                 minutes = minutes,
+                weekDays = repeatMode.weekDays,
                 onPlantPublished = onSaved,
             )
         },

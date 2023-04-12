@@ -6,13 +6,11 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.core.app.AlarmManagerCompat
 import com.ujizin.leafy.alarm.extensions.alarmManager
-import com.ujizin.leafy.alarm.model.RepeatMode
-import com.ujizin.leafy.alarm.model.RepeatMode.Companion.NO_REPEAT
 import com.ujizin.leafy.alarm.receiver.AlarmReceiver
 import java.util.Calendar
+import java.util.concurrent.TimeUnit
 
 class AlarmScheduler(private val context: Context) {
 
@@ -31,13 +29,10 @@ class AlarmScheduler(private val context: Context) {
         hours: Int,
         minutes: Int,
         ringtoneUri: Uri,
-        intervalInMillis: Long,
+        intervalInMillis: Long = TimeUnit.DAYS.toMillis(1L),
         bundle: Bundle = Bundle.EMPTY,
     ) {
-        when (intervalInMillis) {
-            RepeatMode.NO_REPEAT -> setOnceAlarm(type, hours, minutes, ringtoneUri, bundle)
-            else -> setRepeatAlarm(intervalInMillis, type, hours, minutes, ringtoneUri, bundle)
-        }
+        setRepeatAlarm(intervalInMillis, type, hours, minutes, ringtoneUri, bundle)
     }
 
     /**
@@ -81,7 +76,6 @@ class AlarmScheduler(private val context: Context) {
         ringtoneUri: Uri,
         bundle: Bundle,
     ) {
-        Log.d("Alarm scheduler", "Generated alarm at $hours:$minutes")
         AlarmManagerCompat.setExactAndAllowWhileIdle(
             context.alarmManager,
             type,
@@ -105,7 +99,6 @@ class AlarmScheduler(private val context: Context) {
         set(Calendar.HOUR_OF_DAY, hours)
         set(Calendar.MINUTE, minutes)
         if (timeInMillis <= System.currentTimeMillis()) {
-            Log.d("Alarm Scheduler", "Just tomorrow")
             add(Calendar.DATE, 1)
         }
 
@@ -119,7 +112,7 @@ class AlarmScheduler(private val context: Context) {
      * */
     private fun createPendingIntent(
         ringtoneUri: Uri,
-        intervalInMillis: Long = NO_REPEAT,
+        intervalInMillis: Long? = null,
         bundle: Bundle,
     ): PendingIntent = PendingIntent.getBroadcast(
         context,
@@ -127,7 +120,7 @@ class AlarmScheduler(private val context: Context) {
         Intent(context, AlarmReceiver::class.java).apply {
             action = AlarmReceiver.SCHEDULE_ALARM_ACTION
             putExtra(AlarmReceiver.RINGTONE_CONTENT_EXTRA, ringtoneUri.toString())
-            putExtra(AlarmReceiver.REPEAT_MODE, intervalInMillis)
+            intervalInMillis?.let { putExtra(AlarmReceiver.REPEAT_MODE, it) }
             putExtras(bundle)
         },
         PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE,

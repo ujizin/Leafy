@@ -4,11 +4,11 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ujizin.leafy.alarm.AlarmScheduler
-import com.ujizin.leafy.alarm.model.RepeatMode
 import com.ujizin.leafy.alarm.receiver.AlarmReceiver
 import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.model.Ringtone
-import com.ujizin.leafy.domain.result.Result
+import com.ujizin.leafy.domain.model.WeekDay
+import com.ujizin.leafy.domain.result.mapResult
 import com.ujizin.leafy.domain.usecase.alarm.AddAlarm
 import com.ujizin.leafy.domain.usecase.plant.AddPlant
 import com.ujizin.leafy.domain.usecase.plant.LoadDraftPlant
@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
@@ -49,27 +48,22 @@ class AlarmViewModel @Inject constructor(
     @OptIn(FlowPreview::class)
     fun addPlantWithAlarm(
         ringtone: Ringtone,
-        repeatMode: RepeatMode,
         hours: Int,
         minutes: Int,
+        weekDays: List<WeekDay>,
         onPlantPublished: () -> Unit,
     ) {
         loadDraftPlant()
-            .mapNotNull { result ->
-                when (result) {
-                    is Result.Error -> throw Exception(result.exception)
-                    is Result.Success -> result.data.copy(id = 0)
-                    else -> null
-                }
-            }.flatMapConcat { plant ->
+            .mapResult()
+            .flatMapConcat { plant ->
                 addPlant(plant).flatMapConcat { id ->
                     addAlarm(
                         Alarm(
                             plantId = id,
                             ringtoneUri = ringtone.uri,
-                            repeatIntervalInMillis = repeatMode.intervalTimeMillis,
                             minutes = minutes,
                             hours = hours,
+                            weekDays = weekDays,
                             enabled = true,
                         ),
                     ).onEach { alarmId ->
@@ -77,7 +71,6 @@ class AlarmViewModel @Inject constructor(
                             hours = hours,
                             minutes = minutes,
                             ringtoneUri = ringtone.uri,
-                            intervalInMillis = repeatMode.intervalTimeMillis,
                             bundle = bundleOf(AlarmReceiver.ALARM_ID_EXTRA to alarmId),
                         )
                     }
