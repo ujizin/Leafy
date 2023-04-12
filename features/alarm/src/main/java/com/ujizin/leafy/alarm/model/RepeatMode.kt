@@ -1,29 +1,29 @@
 package com.ujizin.leafy.alarm.model
 
-import android.content.Context
 import androidx.annotation.StringRes
+import com.ujizin.leafy.domain.model.WeekDay
 import com.ujizin.leafy.features.alarm.R
-import java.util.concurrent.TimeUnit
 
-enum class RepeatMode(@StringRes val display: Int) {
-    Once(R.string.once),
-    Daily(R.string.daily),
-    MonToFriday(R.string.mon_to_friday),
-    ;
+sealed class RepeatMode(
+    @StringRes val display: Int,
+    val weekDays: List<WeekDay>
+) {
+    object Daily : RepeatMode(R.string.daily, WeekDay.values().toList())
 
-    val intervalTimeMillis: Long
-        get() = when (this) {
-            Once -> NO_REPEAT
-            Daily -> TimeUnit.DAYS.toMillis(1)
-            MonToFriday -> REPEAT_MON_TO_FRIDAY
-        }
+    object MonToFriday : RepeatMode(
+        R.string.mon_to_friday,
+        WeekDay.values().filter { it != WeekDay.Saturday && it != WeekDay.Sunday },
+    )
+
+    data class Custom(val customWeekDays: List<WeekDay>) :
+        RepeatMode(R.string.custom, customWeekDays)
+
 
     companion object {
-        internal const val NO_REPEAT = -1L
-        internal const val REPEAT_MON_TO_FRIDAY = -2L
-
-        fun getByDisplayValue(context: Context, value: String) = values().first {
-            context.getString(it.display) == value
-        }
+        fun getValues(customWeekDays: List<WeekDay> = emptyList()): List<RepeatMode> = listOf(
+            Daily, MonToFriday, Custom(customWeekDays)
+        )
     }
 }
+
+fun RepeatMode.asCustom(): RepeatMode.Custom? = this as? RepeatMode.Custom

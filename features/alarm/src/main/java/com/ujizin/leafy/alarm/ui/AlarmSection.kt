@@ -22,21 +22,26 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ujizin.leafy.alarm.extensions.alarmManager
 import com.ujizin.leafy.alarm.extensions.hasAlarmPermission
+import com.ujizin.leafy.alarm.extensions.mapToModalValue
 import com.ujizin.leafy.alarm.extensions.startAlarmPermission
 import com.ujizin.leafy.alarm.model.RepeatMode
+import com.ujizin.leafy.alarm.model.asCustom
+import com.ujizin.leafy.alarm.ui.components.modal.ModalValue
+import com.ujizin.leafy.alarm.ui.components.modal.MultiModalSelector
 import com.ujizin.leafy.alarm.ui.components.timerbox.TimerBox
 import com.ujizin.leafy.core.ui.components.Section
 import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
 import com.ujizin.leafy.core.ui.components.button.Button
 import com.ujizin.leafy.core.ui.components.image.Icons
+import com.ujizin.leafy.core.ui.components.modal.ModalBottomSheet
 import com.ujizin.leafy.core.ui.components.selector.ModalSelector
-import com.ujizin.leafy.core.ui.components.selector.MultiModalSelector
 import com.ujizin.leafy.core.ui.components.selector.Selector
 import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.core.ui.extensions.paddingScreen
 import com.ujizin.leafy.core.ui.state.observeAsState
 import com.ujizin.leafy.domain.model.Ringtone
+import com.ujizin.leafy.domain.model.WeekDay
 import com.ujizin.leafy.domain.model.orDefault
 import com.ujizin.leafy.features.alarm.R
 
@@ -49,14 +54,17 @@ fun AlarmSection(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
 
-    val repeatValues = remember { RepeatMode.values().toList() }
     val ringtones by remember {
         derivedStateOf { (uiState as? AlarmUiState.Initialized)?.ringtones.orEmpty() }
     }
     var ringtone by remember(ringtones) {
         mutableStateOf(ringtones.firstOrNull().orDefault(context))
     }
-    var repeatMode by remember { mutableStateOf(repeatValues.first()) }
+    var repeatMode by remember { mutableStateOf<RepeatMode>(RepeatMode.Daily) }
+    val repeatValues = remember(repeatMode) {
+        val custom = repeatMode as? RepeatMode.Custom
+        RepeatMode.getValues(custom?.customWeekDays.orEmpty())
+    }
 
     var hours by remember { mutableStateOf(0) }
     var minutes by remember { mutableStateOf(0) }
@@ -132,15 +140,41 @@ fun AlarmScreen(
         repeatShowModal = repeatShowModal,
         ringtoneShowModal = ringtoneShowModal,
         repeatContent = {
-            MultiModalSelector(
+            var showCustomSelector by remember { mutableStateOf(false) }
+
+            com.ujizin.leafy.alarm.ui.components.modal.ModalSelector(
                 title = stringResource(R.string.repeat),
-                currentValue = stringResource(id = repeat.display),
-                values = repeatModeValues.map { stringResource(it.display) },
-                onValueChanged = { value ->
-                    onRepeatChanged(RepeatMode.getByDisplayValue(context, value))
+                currentValue = ModalValue(stringResource(id = repeat.display), repeat),
+                values = repeatModeValues.map { it ->
+                    ModalValue(stringResource(it.display), it)
+                },
+                onValueChanged = { (_, newRepeatMode) ->
+                    if (newRepeatMode is RepeatMode.Custom) {
+                        showCustomSelector = true
+                        return@ModalSelector
+                    }
+
+                    onRepeatChanged(newRepeatMode)
                     repeatShowModal = false
                 },
             )
+
+            ModalBottomSheet(
+                showModal = showCustomSelector,
+                skipPartiallyExpanded = true,
+                onModalStateChanged = { showCustomSelector = it }
+            ) {
+                MultiModalSelector(
+                    title = stringResource(id = R.string.custom),
+                    currentValues = repeat.asCustom()?.customWeekDays?.mapToModalValue().orEmpty(),
+                    values = WeekDay.values().toList().mapToModalValue(),
+                    onValuesSelected = { weekDays ->
+                        onRepeatChanged(RepeatMode.Custom(weekDays.map { it.value }))
+                        showCustomSelector = false
+                        repeatShowModal = false
+                    },
+                )
+            }
         },
         onRepeatModalStateChanged = { isVisible -> repeatShowModal = isVisible },
         onRingtoneModalStateChanged = { isVisible -> ringtoneShowModal = isVisible },
