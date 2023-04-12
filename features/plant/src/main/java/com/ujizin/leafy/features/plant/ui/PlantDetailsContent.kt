@@ -43,6 +43,7 @@ import com.ujizin.leafy.core.ui.components.image.Icons
 import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.core.ui.extensions.capitalize
 import com.ujizin.leafy.core.ui.extensions.dateFormatted
+import com.ujizin.leafy.core.ui.extensions.getDisplayName
 import com.ujizin.leafy.core.ui.extensions.paddingScreen
 import com.ujizin.leafy.core.ui.extensions.share
 import com.ujizin.leafy.domain.model.Alarm
@@ -172,6 +173,7 @@ fun AlarmRow(
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.surface),
         shape = MaterialTheme.shapes.medium
     ) {
+        val context = LocalContext.current
         var checked by remember(alarm.enabled) { mutableStateOf(alarm.enabled) }
         val alphaRow by animateFloatAsState(targetValue = if (checked) 1F else 0.5F)
         Row(
@@ -188,6 +190,7 @@ fun AlarmRow(
                 letterSpacing = 4.sp,
                 style = MaterialTheme.typography.titleMedium,
             )
+            Text(text = alarm.weekDays.getDisplayName(context))
             Switch(checked = checked, onCheckedChange = { enabled ->
                 checked = enabled
                 onCheckedChange(enabled)
@@ -196,7 +199,6 @@ fun AlarmRow(
     }
 
 }
-
 @Composable
 private fun PlantContent(
     modifier: Modifier = Modifier,
