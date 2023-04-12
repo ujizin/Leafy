@@ -22,26 +22,6 @@ import androidx.compose.ui.unit.dp
 import com.ujizin.leafy.core.ui.extensions.capitalize
 
 @Composable
-fun MultiModalSelector(
-    modifier: Modifier = Modifier,
-    title: String,
-    enabled: Boolean = true,
-    currentValue: String,
-    values: List<String>,
-    onValueChanged: (String) -> Unit,
-) {
-    // TODO add multi modal selector
-    ModalSelector(
-        modifier = modifier,
-        title = title,
-        enabled = enabled,
-        currentValue = currentValue,
-        values = values,
-        onValueChanged = onValueChanged,
-    )
-}
-
-@Composable
 fun ModalSelector(
     modifier: Modifier = Modifier,
     title: String,
