@@ -10,4 +10,13 @@
     <string name="edit_name">edit name</string>
     <string name="gallery">gallery</string>
     <string name="refresh">refresh</string>
+    <string name="sunday">sunday</string>
+    <string name="monday">monday</string>
+    <string name="tuesday">tuesday</string>
+    <string name="wednesday">wednesday</string>
+    <string name="thursday">thursday</string>
+    <string name="friday">friday</string>
+    <string name="saturday">saturday</string>
+    <string name="day_to_day">%s to %s</string>
+    <string name="daily">daily</string>
 </resources>

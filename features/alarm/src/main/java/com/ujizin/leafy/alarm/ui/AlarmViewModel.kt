@@ -56,14 +56,14 @@ class AlarmViewModel @Inject constructor(
         loadDraftPlant()
             .mapResult()
             .flatMapConcat { plant ->
-                addPlant(plant).flatMapConcat { id ->
+                addPlant(plant.copy(id = 0)).flatMapConcat { id ->
                     addAlarm(
                         Alarm(
                             plantId = id,
                             ringtoneUri = ringtone.uri,
                             minutes = minutes,
                             hours = hours,
-                            weekDays = weekDays,
+                            weekDays = weekDays.sorted(),
                             enabled = true,
                         ),
                     ).onEach { alarmId ->

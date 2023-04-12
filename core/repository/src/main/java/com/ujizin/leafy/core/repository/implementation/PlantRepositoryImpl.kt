@@ -45,10 +45,8 @@ internal class PlantRepositoryImpl(
     }.flowOn(dispatcher)
 
     override fun getDraftPlant() = flow {
-        emit(
-            dataSource.getDraftPlant()?.let(mapper::toDomain)
-                ?: Plant.createDraft(),
-        )
+        val plant = dataSource.getDraftPlant()?.let(mapper::toDomain) ?: Plant.createDraft()
+        emit(plant.copy(id = 0))
     }.flowOn(dispatcher)
 
     override fun updateDraftPlant(plant: Plant) = flow {

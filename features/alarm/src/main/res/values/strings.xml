@@ -8,11 +8,4 @@
     <string name="custom">custom</string>
     <string name="mon_to_friday">Mon to Fri</string>
     <string name="stop">stop</string>
-    <string name="sunday">sunday</string>
-    <string name="monday">monday</string>
-    <string name="tuesday">tuesday</string>
-    <string name="wednesday">wednesday</string>
-    <string name="thursday">thursday</string>
-    <string name="friday">friday</string>
-    <string name="saturday">saturday</string>
 </resources>

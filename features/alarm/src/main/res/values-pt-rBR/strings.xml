@@ -8,11 +8,4 @@
     <string name="custom">personalizar</string>
     <string name="mon_to_friday">Seg à Sex</string>
     <string name="stop">parar</string>
-    <string name="sunday">domingo</string>
-    <string name="monday">segunda-feira</string>
-    <string name="tuesday">terça-feira</string>
-    <string name="wednesday">quarta-feira</string>
-    <string name="thursday">quinta-feira</string>
-    <string name="friday">sexta-feira</string>
-    <string name="saturday">sábado</string>
 </resources>
