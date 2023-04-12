@@ -1,4 +1,4 @@
-package com.ujizin.leafy.preferences
+package com.ujizin.leafy.preferences.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

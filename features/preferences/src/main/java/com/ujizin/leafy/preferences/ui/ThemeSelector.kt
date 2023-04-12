@@ -1,6 +1,10 @@
-package com.ujizin.leafy.preferences
+package com.ujizin.leafy.preferences.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.ujizin.leafy.core.ui.components.selector.ModalSelector
@@ -15,10 +19,13 @@ fun ThemeSelector(
     theme: Theme,
     onThemeChanged: (Theme) -> Unit,
 ) {
+    var showModal by remember { mutableStateOf(false) }
     Selector(
         modifier = modifier,
         title = stringResource(R.string.app_theme).capitalize(),
         subTitle = theme.toString(),
+        showModal = showModal,
+        onModalStateChanged = { showModal = it }
     ) {
         ModalSelector(
             title = stringResource(R.string.app_theme).capitalize(),

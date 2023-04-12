@@ -5,6 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import com.ujizin.leafy.core.navigation.Destination
 import com.ujizin.leafy.core.navigation.composable
 import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.preferences.ui.Preferences
 
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.preferencesGraph(

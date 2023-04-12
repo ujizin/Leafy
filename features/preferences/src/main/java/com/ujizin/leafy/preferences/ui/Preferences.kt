@@ -1,4 +1,4 @@
-package com.ujizin.leafy.preferences
+package com.ujizin.leafy.preferences.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,6 +24,7 @@ import com.ujizin.leafy.domain.model.Theme
 import com.ujizin.leafy.domain.model.User
 import com.ujizin.leafy.domain.model.update
 import com.ujizin.leafy.features.preferences.R
+import com.ujizin.leafy.preferences.PreferencesViewModel
 
 @Composable
 internal fun Preferences(
@@ -62,7 +63,7 @@ internal fun PreferencesContent(
     onDynamicColorChanged: (Boolean) -> Unit,
 ) {
     Column(modifier) {
-        val isDynamicColorAvailable = remember { DynamicColors.isDynamicColorAvailable() }
+        val isDynamicColorAvailable = remember(DynamicColors::isDynamicColorAvailable)
         UserSelector(
             modifier = Modifier
                 .fillMaxWidth()
