@@ -17,5 +17,4 @@ interface LoadAlarm {
     operator fun invoke(
         id: Long,
     ): Flow<Result<Alarm>>
-
 }

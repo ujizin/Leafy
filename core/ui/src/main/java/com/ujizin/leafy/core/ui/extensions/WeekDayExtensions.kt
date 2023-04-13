@@ -18,7 +18,7 @@ val WeekDay.displayNameRes: Int
     }
 
 fun WeekDay.getShortDay(
-    context: Context
+    context: Context,
 ) = context.getString(displayNameRes).substring(0, 3)
 
 fun List<WeekDay>.getDisplayName(context: Context): String {
@@ -44,7 +44,7 @@ fun List<WeekDay>.getDisplayName(context: Context): String {
             shortName = context.getString(
                 R.string.day_to_day,
                 shortName,
-                context.getString(day.displayNameRes)
+                context.getString(day.displayNameRes),
             )
         }
 

@@ -6,7 +6,7 @@ import com.ujizin.leafy.features.alarm.R
 
 sealed class RepeatMode(
     @StringRes val display: Int,
-    val weekDays: List<WeekDay>
+    val weekDays: List<WeekDay>,
 ) {
     object Daily : RepeatMode(R.string.daily, WeekDay.values().toList())
 
@@ -18,10 +18,11 @@ sealed class RepeatMode(
     data class Custom(val customWeekDays: List<WeekDay>) :
         RepeatMode(R.string.custom, customWeekDays)
 
-
     companion object {
         fun getValues(customWeekDays: List<WeekDay> = emptyList()): List<RepeatMode> = listOf(
-            Daily, MonToFriday, Custom(customWeekDays)
+            Daily,
+            MonToFriday,
+            Custom(customWeekDays),
         )
     }
 }

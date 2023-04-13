@@ -28,7 +28,7 @@ class ShowAlarm(
     @OptIn(FlowPreview::class)
     operator fun invoke(
         context: Context,
-        intent: Intent
+        intent: Intent,
     ) = loadAlarm(intent.getLongExtra(AlarmReceiver.ALARM_ID_EXTRA, -1))
         .mapResult()
         .flatMapConcat { alarm ->
@@ -45,7 +45,7 @@ class ShowAlarm(
     private fun Alarm.checkDayOfTheWeek(): Boolean {
         val calendar = Calendar.getInstance()
         return weekDays.contains(
-            WeekDay.values()[calendar.get(Calendar.DAY_OF_WEEK)]
+            WeekDay.values()[calendar.get(Calendar.DAY_OF_WEEK)],
         )
     }
 

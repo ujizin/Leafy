@@ -24,7 +24,7 @@ fun PlantDetailsRoute(
     PlantDetails(
         onBackPressed = onBackPressed,
         uiState = uiState,
-        onAlarmChanged = viewModel::update
+        onAlarmChanged = viewModel::update,
     )
 }
 
@@ -41,7 +41,7 @@ private fun PlantDetails(
             onBackPressed = onBackPressed,
             plant = result.plant,
             alarms = result.alarms,
-            onAlarmChanged = onAlarmChanged
+            onAlarmChanged = onAlarmChanged,
         )
     }
 }
@@ -61,9 +61,9 @@ private fun PlantDetailsPreview() {
                         File("foo"),
                         false,
                     ),
-                    alarms = listOf()
+                    alarms = listOf(),
                 ),
-                onAlarmChanged = {}
+                onAlarmChanged = {},
             )
         }
     }

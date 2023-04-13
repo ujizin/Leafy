@@ -77,7 +77,7 @@ internal fun HomeSection(
                     onPlantClick = onPlantClick,
                     onSharedClick = { plant ->
                         plant.share(context)
-                    }
+                    },
                 )
             }
         }
@@ -112,6 +112,6 @@ private fun LazyItemScope.HomePlantCard(
             .padding(horizontal = 20.dp),
         plant = plant,
         onClick = { onPlantClick(plant.id) },
-        onSharedClick = { onSharedClick(plant) }
+        onSharedClick = { onSharedClick(plant) },
     )
 }

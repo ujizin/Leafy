@@ -50,6 +50,6 @@ fun User.update(
     settings = settings.copy(
         theme = theme ?: settings.theme,
         language = language ?: settings.language,
-        dynamicColor = dynamicColor ?: settings.dynamicColor
+        dynamicColor = dynamicColor ?: settings.dynamicColor,
     ),
 )

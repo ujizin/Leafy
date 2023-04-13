@@ -11,7 +11,7 @@ fun Plant.share(context: Context) {
         val uri = FileProvider.getUriForFile(
             context,
             "${context.packageName}.provider",
-            file
+            file,
         )
         setDataAndType(uri, "image/*")
         putExtra(Intent.EXTRA_STREAM, uri)

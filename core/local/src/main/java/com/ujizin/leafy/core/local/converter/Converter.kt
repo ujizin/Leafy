@@ -17,5 +17,4 @@ internal class Converter {
 
     @TypeConverter
     fun jsonToListString(value: String): List<String> = json.decodeFromString(value)
-
 }

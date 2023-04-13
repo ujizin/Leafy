@@ -28,7 +28,7 @@ class AlarmMapper {
             hours = hours,
             minutes = minutes,
             enabled = enabled,
-            weekDays = weekDays.map(WeekDay::valueOf)
+            weekDays = weekDays.map(WeekDay::valueOf),
         )
     }
 }

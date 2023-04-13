@@ -25,7 +25,7 @@ fun ThemeSelector(
         title = stringResource(R.string.app_theme).capitalize(),
         subTitle = theme.toString(),
         showModal = showModal,
-        onModalStateChanged = { showModal = it }
+        onModalStateChanged = { showModal = it },
     ) {
         ModalSelector(
             title = stringResource(R.string.app_theme).capitalize(),

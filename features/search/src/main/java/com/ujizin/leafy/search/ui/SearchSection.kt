@@ -136,7 +136,7 @@ fun SearchSection(
                 data = result.items,
                 onSharedClick = { plant ->
                     plant.share(context)
-                }
+                },
             )
         }
 

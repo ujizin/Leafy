@@ -41,5 +41,5 @@ data class AlarmEntity(
     @ColumnInfo(name = "plant_id")
     val plantId: Long,
     @ColumnInfo(name = "week_days")
-    val weekDays: List<String>
+    val weekDays: List<String>,
 )

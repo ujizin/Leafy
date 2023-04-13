@@ -17,7 +17,7 @@ fun ModalBottomSheet(
     showModal: Boolean,
     skipPartiallyExpanded: Boolean = false,
     onModalStateChanged: (Boolean) -> Unit,
-    content: @Composable ColumnScope.() -> Unit
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     val modalState = rememberModalBottomSheetState(
         skipPartiallyExpanded = skipPartiallyExpanded,

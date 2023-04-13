@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
@@ -25,7 +24,7 @@ class DetailPlantViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     loadPlant: LoadPlant,
     loadAlarms: LoadAlarms,
-    private val updateAlarm: UpdateAlarm
+    private val updateAlarm: UpdateAlarm,
 ) : ViewModel() {
 
     private val plantId: Long = checkNotNull(savedStateHandle[Args.PlantId])

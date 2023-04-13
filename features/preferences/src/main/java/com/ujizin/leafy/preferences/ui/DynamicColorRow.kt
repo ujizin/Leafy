@@ -16,7 +16,7 @@ import com.ujizin.leafy.features.preferences.R
 fun DynamicColorRow(
     modifier: Modifier = Modifier,
     dynamicColor: Boolean,
-    onDynamicColorChanged: (Boolean) -> Unit
+    onDynamicColorChanged: (Boolean) -> Unit,
 ) {
     Row(
         modifier = modifier,

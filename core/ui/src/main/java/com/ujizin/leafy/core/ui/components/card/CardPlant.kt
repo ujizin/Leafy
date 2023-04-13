@@ -36,7 +36,7 @@ fun CardPlant(
                 icon = Icons.Shared,
                 tint = Color.White,
                 size = 24.dp,
-                onClick = onSharedClick
+                onClick = onSharedClick,
             )
         }
     }

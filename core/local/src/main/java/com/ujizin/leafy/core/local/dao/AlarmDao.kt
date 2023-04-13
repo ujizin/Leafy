@@ -62,6 +62,7 @@ interface AlarmDao {
      * */
     @Update
     suspend fun update(alarm: AlarmEntity)
+
     /**
      * Delete [AlarmEntity] passed on parameter.
      *

@@ -20,7 +20,7 @@ internal fun LazyStaggeredGridScope.searchItems(
             onClick = {},
             onSharedClick = {
                 onSharedClick(plant)
-            }
+            },
         )
     }
 }

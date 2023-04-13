@@ -161,7 +161,7 @@ fun AlarmScreen(
             ModalBottomSheet(
                 showModal = showCustomSelector,
                 skipPartiallyExpanded = true,
-                onModalStateChanged = { showCustomSelector = it }
+                onModalStateChanged = { showCustomSelector = it },
             ) {
                 MultiModalSelector(
                     title = stringResource(id = R.string.custom),

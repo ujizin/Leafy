@@ -28,7 +28,7 @@ internal fun <T : Any> MultiModalSelector(
     title: String,
     currentValues: List<ModalValue<T>>,
     values: List<ModalValue<T>>,
-    onValuesSelected: (List<ModalValue<T>>) -> Unit
+    onValuesSelected: (List<ModalValue<T>>) -> Unit,
 ) {
     val selectedValues = remember(currentValues) {
         mutableStateListOf(*currentValues.toTypedArray())
@@ -55,7 +55,7 @@ internal fun <T : Any> MultiModalSelector(
                         with(selectedValues) {
                             if (contains(item)) remove(item) else add(item)
                         }
-                    }
+                    },
                 )
             }
         }
@@ -65,7 +65,7 @@ internal fun <T : Any> MultiModalSelector(
                 .paddingScreen(vertical = 16.dp),
             text = stringResource(R.string.save),
             enabled = selectedValues.isNotEmpty(),
-            onClick = { onValuesSelected(selectedValues) })
+            onClick = { onValuesSelected(selectedValues) },
+        )
     }
 }
-

@@ -116,7 +116,7 @@ internal fun PlantDetailsContent(
                     .fillMaxWidth()
                     .paddingScreen(vertical = 32.dp),
                 alarms = alarms,
-                onAlarmChanged = onAlarmChanged
+                onAlarmChanged = onAlarmChanged,
             )
         }
     }
@@ -135,7 +135,7 @@ private fun AlarmsContent(
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.alarms).capitalize(),
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleMedium,
         )
         alarms.forEach { alarm ->
             AlarmRow(
@@ -145,7 +145,7 @@ private fun AlarmsContent(
                 alarm = alarm,
                 onCheckedChange = { enabled ->
                     onAlarmChanged(alarm.copy(enabled = enabled))
-                }
+                },
             )
         }
 //        AnimatedButtonIcon( TODO add new alarm
@@ -171,7 +171,7 @@ fun AlarmRow(
         modifier = modifier,
         shadowElevation = 4.dp,
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.surface),
-        shape = MaterialTheme.shapes.medium
+        shape = MaterialTheme.shapes.medium,
     ) {
         val context = LocalContext.current
         var checked by remember(alarm.enabled) { mutableStateOf(alarm.enabled) }
@@ -197,8 +197,8 @@ fun AlarmRow(
             })
         }
     }
-
 }
+
 @Composable
 private fun PlantContent(
     modifier: Modifier = Modifier,

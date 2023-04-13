@@ -15,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import com.ujizin.leafy.core.ui.components.selector.ModalItemSelector
 import com.ujizin.leafy.core.ui.extensions.capitalize
 
-
 // TODO set on core:ui module
 @Composable
 fun <T : Any> ModalSelector(

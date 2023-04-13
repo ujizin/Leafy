@@ -39,7 +39,7 @@ fun Selector(
     ModalBottomSheet(
         showModal = showModal,
         onModalStateChanged = onModalStateChanged,
-        content = content
+        content = content,
     )
     Row(
         modifier = Modifier
