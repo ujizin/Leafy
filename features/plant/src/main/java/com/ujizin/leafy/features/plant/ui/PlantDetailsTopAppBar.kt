@@ -59,7 +59,7 @@ internal fun PlantDetailsTopAppBar(
             )
             AnimatedDropDownMenu(
                 isExpanded = isExpanded,
-                icon = Icons.Menu,
+                icon = Icons.Dropdown,
                 onExpandedChanged = { isExpanded = it },
             ) {
                 DropdownMenuItem(

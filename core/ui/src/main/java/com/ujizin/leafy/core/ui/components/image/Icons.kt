@@ -20,7 +20,7 @@ enum class Icons(
     Folder(R.drawable.folder, R.string.folder),
     Leaf(R.drawable.leaf, R.string.leaf),
     Others(R.drawable.others, R.string.others),
-    Menu(R.drawable.menu, R.string.menu),
+    Dropdown(R.drawable.dropdown, R.string.menu),
     Close(R.drawable.close, R.string.close),
     Gallery(R.drawable.gallery, R.string.gallery),
     Refresh(R.drawable.refresh, R.string.refresh),
