@@ -184,13 +184,18 @@ fun AlarmRow(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(
-                text = alarm.dateFormatted,
-                color = MaterialTheme.colorScheme.primary,
-                letterSpacing = 4.sp,
-                style = MaterialTheme.typography.titleMedium,
-            )
-            Text(text = alarm.weekDays.getDisplayName(context))
+            Column {
+                Text(
+                    text = alarm.dateFormatted,
+                    color = MaterialTheme.colorScheme.primary,
+                    letterSpacing = 4.sp,
+                    style = MaterialTheme.typography.titleMedium,
+                )
+                Text(
+                    text = alarm.weekDays.getDisplayName(context).capitalize(),
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
+                )
+            }
             Switch(checked = checked, onCheckedChange = { enabled ->
                 checked = enabled
                 onCheckedChange(enabled)

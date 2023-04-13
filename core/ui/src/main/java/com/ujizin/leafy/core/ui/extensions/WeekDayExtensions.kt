@@ -19,38 +19,30 @@ val WeekDay.displayNameRes: Int
 
 fun WeekDay.getShortDay(
     context: Context,
-) = context.getString(displayNameRes).substring(0, 3)
+    useCapitalize: Boolean = true,
+) = context.getString(displayNameRes).substring(0, 3).run {
+    if (useCapitalize) capitalize() else this
+}
 
-fun List<WeekDay>.getDisplayName(context: Context): String {
+fun List<WeekDay>.getDisplayName(
+    context: Context,
+    useCapitalize: Boolean = true,
+): String {
     if (isEmpty()) return String.Empty
 
     if (size == WeekDay.values().size) {
         return context.getString(R.string.daily)
     }
 
-    var shortName = context.getString(first().displayNameRes)
-    var longName = ""
+    val shortNames = map { it.getShortDay(context, useCapitalize) }
 
-    var useShortName = true
-    var nextOrdinal = first().ordinal
+    return when {
+        isOrdinalConsecutive() -> context.getString(
+            R.string.day_to_day,
+            shortNames.first(),
+            shortNames.last(),
+        )
 
-    forEachIndexed { index, day ->
-
-        if (nextOrdinal != day.ordinal) {
-            useShortName = false
-        }
-
-        if (index == lastIndex) {
-            shortName = context.getString(
-                R.string.day_to_day,
-                shortName,
-                context.getString(day.displayNameRes),
-            )
-        }
-
-        longName += "${if (index == 0) "" else ", "} ${day.getShortDay(context)}"
-        nextOrdinal += 1
+        else -> shortNames.joinToString(separator = ", ")
     }
-
-    return if (useShortName) shortName else longName
 }
