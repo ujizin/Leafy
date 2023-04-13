@@ -20,7 +20,6 @@ import com.ujizin.leafy.core.ui.state.keyboardAsState
 @Composable
 internal fun NavigationBar(
     navController: NavController,
-    showBottomNavigation: Boolean,
 ) {
     val navItem by navController.currentNavItemAsState<BottomNavItem>()
     val isKeyboardOpen by keyboardAsState()
@@ -33,7 +32,7 @@ internal fun NavigationBar(
 
     BottomNavigationBar(
         bottomNavItem = navItem,
-        showBottomNavigation = isBottomNavItem && !isKeyboardOpen && showBottomNavigation,
+        showBottomNavigation = isBottomNavItem && !isKeyboardOpen,
         bottomNavItems = remember { BottomNavItem.values().toList() },
         onNavItemClicked = { destination ->
             navController.navigateToItem(destination)

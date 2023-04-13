@@ -1,27 +1,24 @@
 package com.ujizin.leafy.search.ui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
-import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
-import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
-import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -30,100 +27,106 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ujizin.leafy.core.themes.LeafyTheme
+import com.ujizin.leafy.core.ui.annotation.ThemePreviews
 import com.ujizin.leafy.core.ui.components.Section
 import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
-import com.ujizin.leafy.core.ui.components.animated.AnimatedIcon
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
-import com.ujizin.leafy.core.ui.components.card.CardSize
 import com.ujizin.leafy.core.ui.components.image.Icons
-import com.ujizin.leafy.core.ui.components.textfield.Placeholder
 import com.ujizin.leafy.core.ui.components.textfield.TextField
 import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.core.ui.extensions.capitalize
+import com.ujizin.leafy.core.ui.extensions.paddingScreen
 import com.ujizin.leafy.core.ui.extensions.share
 import com.ujizin.leafy.core.ui.state.keyboardAsState
 import com.ujizin.leafy.features.search.R
 import com.ujizin.leafy.search.SearchUiState
 import com.ujizin.leafy.search.SearchViewModel
-import kotlinx.coroutines.delay
+import com.ujizin.leafy.search.ui.components.SearchPlaceholder
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun SearchSection(
+fun SearchRoute(
     onDrawerClick: OnClick,
     onTakePictureClick: OnClick,
-    onScroll: (Boolean) -> Unit,
+    onPlantClick: (Long) -> Unit,
     viewModel: SearchViewModel = hiltViewModel(),
 ) {
-    val context = LocalContext.current
     val isKeyboardOpen by keyboardAsState()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
     val focusRequester = remember { FocusRequester() }
-
-    val state = rememberLazyStaggeredGridState()
-    val isScrolling by remember {
-        derivedStateOf {
-            (state.canScrollBackward || state.canScrollForward) && state.isScrollInProgress
-        }
-    }
     var searchText by rememberSaveable { mutableStateOf("") }
 
     LaunchedEffect(viewModel, searchText) { viewModel.search(searchText) }
 
-    LaunchedEffect(isScrolling) {
-        if (!isScrolling) delay(500)
-        onScroll(!isScrolling)
-    }
+    Search(
+        uiState = uiState,
+        isKeyboardOpen = isKeyboardOpen,
+        onDrawerClick = onDrawerClick,
+        focusRequester = focusRequester,
+        searchText = searchText,
+        onPlantClick = onPlantClick,
+        onTakePictureClick = onTakePictureClick,
+        onSearchTextChanged = { searchText = it },
+    )
+}
 
-    LazyVerticalStaggeredGrid(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 20.dp),
-        state = state,
-        columns = StaggeredGridCells.Fixed(2),
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
-        verticalItemSpacing = 4.dp,
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+private fun Search(
+    uiState: SearchUiState,
+    isKeyboardOpen: Boolean,
+    onDrawerClick: OnClick,
+    onTakePictureClick: OnClick,
+    searchText: String,
+    focusRequester: FocusRequester,
+    onPlantClick: (Long) -> Unit,
+    onSearchTextChanged: (String) -> Unit,
+) {
+    val context = LocalContext.current
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        item(span = StaggeredGridItemSpan.FullLine) {
+        item {
             Section(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .paddingScreen(),
                 headerPaddingValues = PaddingValues(top = 32.dp),
                 leadingIcon = if (!isKeyboardOpen) leadingIcon(onDrawerClick) else null,
                 title = stringResource(R.string.search).capitalize(),
             )
         }
 
-        item(span = StaggeredGridItemSpan.FullLine) {
+        stickyHeader {
             TextField(
                 modifier = Modifier
+                    .background(MaterialTheme.colorScheme.surface)
                     .fillMaxWidth()
-                    .padding(vertical = 8.dp)
+                    .paddingScreen(vertical = 16.dp)
                     .focusRequester(focusRequester),
                 placeholder = { SearchPlaceholder() },
                 value = searchText,
-                onValueChange = { searchText = it },
+                onValueChange = onSearchTextChanged,
             )
         }
 
         when (val result: SearchUiState = uiState) {
             is SearchUiState.Initial -> item {
-                LaunchedEffect(result.autoFocus) {
-                    if (result.autoFocus) focusRequester.requestFocus()
-                }
-
                 SearchLoading(
-                    Modifier
+                    modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 16.dp),
+                    autoFocus = result.autoFocus,
+                    focusRequester = focusRequester,
                 )
             }
 
-            SearchUiState.Empty -> item(span = StaggeredGridItemSpan.FullLine) {
+            SearchUiState.Empty -> item {
                 SearchEmptyList(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(20.dp),
+                        .padding(20.dp)
+                        .fillMaxWidth(),
                     searchText = searchText,
                     onTakePictureClick = onTakePictureClick,
                 )
@@ -131,18 +134,17 @@ fun SearchSection(
 
             is SearchUiState.Loaded -> searchItems(
                 modifier = Modifier
+                    .paddingScreen(vertical = 8.dp)
                     .fillMaxWidth()
-                    .heightIn(min = CardSize.Small.height, max = CardSize.Large.height),
+                    .aspectRatio(1F),
                 data = result.items,
+                onPlantClick = onPlantClick,
                 onSharedClick = { plant ->
                     plant.share(context)
                 },
             )
         }
-
-        item(span = StaggeredGridItemSpan.FullLine) {
-            Spacer(Modifier.padding(64.dp))
-        }
+        item { Spacer(Modifier.padding(64.dp)) }
     }
 }
 
@@ -154,19 +156,21 @@ private fun leadingIcon(onDrawerClick: OnClick): @Composable () -> Unit = {
     )
 }
 
+@ThemePreviews
 @Composable
-private fun SearchPlaceholder(modifier: Modifier = Modifier) {
-    Placeholder(
-        modifier = modifier,
-        leadingIcon = {
-            AnimatedIcon(
-                modifier = Modifier
-                    .padding(end = 8.dp)
-                    .size(16.dp),
-                tint = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5F),
-                icon = Icons.Magnifier,
+private fun SearchPreview() {
+    LeafyTheme {
+        Surface {
+            Search(
+                uiState = SearchUiState.Empty,
+                isKeyboardOpen = false,
+                onDrawerClick = { },
+                onTakePictureClick = { },
+                searchText = "",
+                focusRequester = remember { FocusRequester() },
+                onSearchTextChanged = {},
+                onPlantClick = {},
             )
-        },
-        text = stringResource(id = R.string.search).capitalize(),
-    )
+        }
+    }
 }

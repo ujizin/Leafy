@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerState
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,13 +20,11 @@ import com.ujizin.leafy.core.ui.components.navigation.drawer.DrawerItem
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Scaffold(
     modifier: Modifier = Modifier,
     drawerState: DrawerState,
     navController: NavController,
-    showBottomNavigation: Boolean,
     content: @Composable BoxScope.() -> Unit,
 ) {
     val currentDrawerItem by navController.currentNavItemAsState<DrawerItem>()
@@ -54,7 +51,7 @@ fun Scaffold(
     ) {
         androidx.compose.material3.Scaffold(
             modifier = modifier,
-            bottomBar = { NavigationBar(navController, showBottomNavigation) },
+            bottomBar = { NavigationBar(navController) },
         ) { innerPadding ->
             Box(
                 modifier = Modifier.padding(top = innerPadding.calculateTopPadding()),

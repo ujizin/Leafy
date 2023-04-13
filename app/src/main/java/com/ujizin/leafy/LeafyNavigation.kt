@@ -7,11 +7,7 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.DrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -41,16 +37,12 @@ fun LeafyNavigation(
     onBackPressed: () -> Unit,
 ) {
     val scope = rememberCoroutineScope()
-
-    var showBottomNavigation by remember { mutableStateOf(true) }
-
     Scaffold(
         modifier = Modifier
             .imePadding()
             .navigationBarsPadding(),
         drawerState = drawerState,
         navController = navController,
-        showBottomNavigation = showBottomNavigation,
     ) {
         BackHandler(onBack = onBackPressed)
 
@@ -79,7 +71,11 @@ fun LeafyNavigation(
                 exitTransition = { navigationExitTransition(navController) },
                 onDrawerClick = { scope.launch { drawerState.open() } },
                 onTakePictureClick = { navController.navigate(Destination.Camera) },
-                onScroll = { showBottomNavigation = it },
+                onPlantClick = { plantId ->
+                    navController.navigate(
+                        Destination.PlantDetails.withArguments(Args.PlantId to plantId),
+                    )
+                },
             )
             tasksGraph(
                 enterTransition = { navigationEnterTransition(navController) },

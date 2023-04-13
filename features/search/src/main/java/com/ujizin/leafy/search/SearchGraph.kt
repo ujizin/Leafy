@@ -10,7 +10,7 @@ import com.ujizin.leafy.core.navigation.Args.SearchAutoFocus
 import com.ujizin.leafy.core.navigation.Destination
 import com.ujizin.leafy.core.navigation.composable
 import com.ujizin.leafy.core.ui.extensions.OnClick
-import com.ujizin.leafy.search.ui.SearchSection
+import com.ujizin.leafy.search.ui.SearchRoute
 
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.searchGraph(
@@ -18,7 +18,7 @@ fun NavGraphBuilder.searchGraph(
     exitTransition: AnimatedExitTransition,
     onDrawerClick: OnClick,
     onTakePictureClick: OnClick,
-    onScroll: (Boolean) -> Unit,
+    onPlantClick: (Long) -> Unit,
 ) {
     composable(
         destination = Destination.Search,
@@ -31,10 +31,10 @@ fun NavGraphBuilder.searchGraph(
             },
         ),
     ) {
-        SearchSection(
+        SearchRoute(
             onDrawerClick = onDrawerClick,
-            onScroll = onScroll,
             onTakePictureClick = onTakePictureClick,
+            onPlantClick = onPlantClick
         )
     }
 }
