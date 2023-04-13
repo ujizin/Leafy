@@ -31,7 +31,6 @@ import com.ujizin.leafy.home.homeGraph
 import com.ujizin.leafy.preferences.preferencesGraph
 import com.ujizin.leafy.publish.publishGraph
 import com.ujizin.leafy.search.searchGraph
-import com.ujizin.leafy.settings.settingsGraph
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -86,6 +85,11 @@ fun LeafyNavigation(
                 enterTransition = { navigationEnterTransition(navController) },
                 exitTransition = { navigationExitTransition(navController) },
             )
+            preferencesGraph(
+                enterTransition = { navigationEnterTransition(navController) },
+                exitTransition = { navigationExitTransition(navController) },
+                onBackPressed = navController::navigateUp,
+            )
             alarmGraph(
                 onBackPressed = navController::navigateUp,
                 onSaved = { navController.navigateUp(times = 3) },
@@ -96,17 +100,12 @@ fun LeafyNavigation(
                 onBackPressed = navController::navigateUp,
                 onSaveClicked = { navController.navigate(Destination.Publish) },
             )
-            settingsGraph(
-                enterTransition = { navigationEnterTransition(navController) },
-                exitTransition = { navigationExitTransition(navController) },
-            )
             publishGraph(
                 onBackPressed = navController::navigateUp,
                 onNextClick = { navController.navigate(Destination.Alarm) },
                 exitTransition = { slideOutOfContainer(AnimatedContentScope.SlideDirection.Start) },
             )
             aboutGraph(onBackPressed = navController::navigateUp)
-            preferencesGraph(onBackPressed = navController::navigateUp)
             plantGraph(onBackPressed = navController::navigateUp)
         }
     }

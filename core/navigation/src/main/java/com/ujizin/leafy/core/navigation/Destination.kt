@@ -7,12 +7,11 @@ enum class Destination(
     Search("search?auto_focus={${Args.SearchAutoFocus}}"),
     Camera("camera"),
     Tasks("tasks"),
-    Others("others"),
+    Preferences("preferences"),
     Publish("publish"),
     Alarm("alarm"),
     About("about"),
     Review("review"),
-    Preferences("preferences"),
     PlantDetails("plant/{${Args.PlantId}}"),
     ;
 
