@@ -2,4 +2,6 @@
 <resources>
     <string name="alarms">alarms</string>
     <string name="day_to_day">%s to %s</string>
+    <string name="edit">edit</string>
+    <string name="delete">delete</string>
 </resources>

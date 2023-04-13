@@ -5,7 +5,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,7 +18,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
@@ -36,10 +34,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
 import com.ujizin.leafy.core.ui.components.card.CardImage
-import com.ujizin.leafy.core.ui.components.image.Icons
 import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.core.ui.extensions.capitalize
 import com.ujizin.leafy.core.ui.extensions.dateFormatted
@@ -60,32 +56,17 @@ internal fun PlantDetailsContent(
 ) {
     val context = LocalContext.current
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            TopAppBar(
-                windowInsets = WindowInsets(0.dp),
-                navigationIcon = {
-                    AnimatedButtonIcon(
-                        icon = Icons.Back,
-                        size = 24.dp,
-                        onClick = onBackPressed,
-                    )
-                },
-                title = {
-                    Text(
-                        text = plant.title.capitalize(),
-                        style = MaterialTheme.typography.titleSmall,
-                    )
-                },
-                actions = {
-                    AnimatedButtonIcon(
-                        icon = Icons.Shared,
-                        size = 24.dp,
-                        onClick = { plant.share(context) },
-                    )
-                },
+            PlantDetailsTopAppBar(
+                onBackPressed = onBackPressed,
+                title = plant.title,
+                onSharedClick = { plant.share(context) },
                 scrollBehavior = scrollBehavior,
+                onEditClick = {},
+                onDeleteClick = {}
             )
         },
     ) { innerPadding ->
