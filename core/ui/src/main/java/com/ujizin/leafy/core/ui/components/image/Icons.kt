@@ -19,7 +19,7 @@ enum class Icons(
     Shared(R.drawable.shared, R.string.shared),
     Folder(R.drawable.folder, R.string.folder),
     Leaf(R.drawable.leaf, R.string.leaf),
-    Others(R.drawable.others, R.string.preferences),
+    Others(R.drawable.others, R.string.others),
     Close(R.drawable.close, R.string.close),
     Gallery(R.drawable.gallery, R.string.gallery),
     Refresh(R.drawable.refresh, R.string.refresh),
