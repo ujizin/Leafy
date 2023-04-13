@@ -88,7 +88,6 @@ fun LeafyNavigation(
             preferencesGraph(
                 enterTransition = { navigationEnterTransition(navController) },
                 exitTransition = { navigationExitTransition(navController) },
-                onBackPressed = navController::navigateUp,
             )
             alarmGraph(
                 onBackPressed = navController::navigateUp,

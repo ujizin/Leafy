@@ -14,9 +14,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.material.color.DynamicColors
 import com.ujizin.leafy.core.ui.components.Section
-import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
-import com.ujizin.leafy.core.ui.components.image.Icons
-import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.core.ui.extensions.paddingScreen
 import com.ujizin.leafy.core.ui.local.LocalUser
 import com.ujizin.leafy.domain.model.Language
@@ -28,15 +25,11 @@ import com.ujizin.leafy.preferences.PreferencesViewModel
 
 @Composable
 internal fun Preferences(
-    onBackPressed: OnClick,
     viewModel: PreferencesViewModel = hiltViewModel(),
 ) {
     Section(
         modifier = Modifier.fillMaxSize(),
         title = stringResource(R.string.preferences_title),
-        trailingIcon = {
-            AnimatedButtonIcon(icon = Icons.Back, onClick = onBackPressed)
-        },
     ) {
         val user = LocalUser.current
 
@@ -90,7 +83,7 @@ internal fun PreferencesContent(
             Divider(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .paddingScreen(vertical = 16.dp)
+                    .paddingScreen(vertical = 16.dp),
             )
             DynamicColorRow(
                 modifier = Modifier
