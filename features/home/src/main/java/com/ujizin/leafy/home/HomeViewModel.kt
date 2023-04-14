@@ -3,49 +3,35 @@ package com.ujizin.leafy.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ujizin.leafy.domain.model.Plant
-import com.ujizin.leafy.domain.result.ifAnyError
-import com.ujizin.leafy.domain.result.ifSuccess
+import com.ujizin.leafy.domain.result.mapResult
 import com.ujizin.leafy.domain.usecase.plant.LoadAllPlant
-import com.ujizin.leafy.domain.usecase.user.LoadUser
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    loadAllPlant: LoadAllPlant,
-    loadUser: LoadUser,
+    private val loadAllPlant: LoadAllPlant,
 ) : ViewModel() {
 
-    val homeState: StateFlow<HomeUIState> = combine(
-        loadAllPlant(),
-        loadUser(),
-    ) { plantResult, userResult ->
-
-        ifAnyError(userResult, plantResult) {
-            return@combine HomeUIState.Error(it.first())
-        }
-
-        ifSuccess(userResult, plantResult) { user, plants ->
-            return@combine HomeUIState.Success(user.nickname, plants)
-        }
-
-        return@combine HomeUIState.Loading
-    }.stateIn(
-        viewModelScope,
-        SharingStarted.WhileSubscribed(5_000),
-        initialValue = HomeUIState.Loading,
-    )
+    private val _uiState = MutableStateFlow<HomeUIState>(HomeUIState.Loading)
+     val uiState = _uiState.asStateFlow()
+    fun loadHome() {
+        loadAllPlant()
+            .mapResult()
+            .catch { throwable -> _uiState.update { HomeUIState.Error(throwable) } }
+            .onEach { plants -> _uiState.update { HomeUIState.Success(plants) } }
+            .launchIn(viewModelScope)
+    }
 }
 
 sealed interface HomeUIState {
-    data class Success(
-        val nickname: String,
-        val plants: List<Plant>,
-    ) : HomeUIState
+    data class Success(val plants: List<Plant>) : HomeUIState
 
     data class Error(val throwable: Throwable?) : HomeUIState
     object Loading : HomeUIState

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -12,6 +13,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ujizin.leafy.core.themes.LeafyTheme
 import com.ujizin.leafy.core.ui.annotation.ThemePreviews
 import com.ujizin.leafy.core.ui.extensions.OnClick
+import com.ujizin.leafy.core.ui.local.LocalUser
 import com.ujizin.leafy.home.HomeUIState
 import com.ujizin.leafy.home.HomeViewModel
 
@@ -23,10 +25,13 @@ fun HomeRoute(
     onSearchClick: OnClick,
     onPlantClick: (id: Long) -> Unit,
 ) {
-    val state by viewModel.homeState.collectAsStateWithLifecycle()
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(viewModel) { viewModel.loadHome() }
 
     Home(
         state = state,
+        nickname = LocalUser.current.nickname,
         onTakePictureClick = onTakePictureClick,
         onSearchClick = onSearchClick,
         onDrawerClick = onDrawerClick,
@@ -37,6 +42,7 @@ fun HomeRoute(
 @Composable
 private fun Home(
     state: HomeUIState,
+    nickname: String,
     onTakePictureClick: OnClick,
     onSearchClick: OnClick,
     onDrawerClick: OnClick,
@@ -49,7 +55,7 @@ private fun Home(
         when (val result: HomeUIState = state) {
             HomeUIState.Loading -> {}
             is HomeUIState.Success -> HomeSection(
-                nickname = result.nickname,
+                nickname = nickname,
                 plants = result.plants,
                 onEmptyPlantClick = onTakePictureClick,
                 onSearchClick = onSearchClick,
@@ -68,7 +74,8 @@ private fun HomePreview() {
     LeafyTheme {
         Surface {
             Home(
-                state = HomeUIState.Success("ujizin", listOf()),
+                state = HomeUIState.Success(listOf()),
+                nickname = "User",
                 onTakePictureClick = {},
                 onSearchClick = {},
                 onDrawerClick = {},
