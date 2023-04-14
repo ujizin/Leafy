@@ -101,7 +101,7 @@ private fun Search(
         stickyHeader {
             TextField(
                 modifier = Modifier
-                    .background(MaterialTheme.colorScheme.surface)
+                    .background(MaterialTheme.colorScheme.background)
                     .fillMaxWidth()
                     .paddingScreen(vertical = 16.dp)
                     .focusRequester(focusRequester),
