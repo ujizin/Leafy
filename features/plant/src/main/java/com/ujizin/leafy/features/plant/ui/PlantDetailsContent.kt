@@ -53,6 +53,7 @@ internal fun PlantDetailsContent(
     plant: Plant,
     alarms: List<Alarm>,
     onAlarmChanged: (Alarm) -> Unit,
+    onDeleteClick: (Plant) -> Unit,
 ) {
     val context = LocalContext.current
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
@@ -66,7 +67,7 @@ internal fun PlantDetailsContent(
                 onSharedClick = { plant.share(context) },
                 scrollBehavior = scrollBehavior,
                 onEditClick = {},
-                onDeleteClick = {}
+                onDeleteClick = { onDeleteClick(plant) },
             )
         },
     ) { innerPadding ->

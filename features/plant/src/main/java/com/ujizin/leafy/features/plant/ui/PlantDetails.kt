@@ -24,7 +24,10 @@ fun PlantDetailsRoute(
     PlantDetails(
         onBackPressed = onBackPressed,
         uiState = uiState,
-        onAlarmChanged = viewModel::update,
+        onAlarmChanged = viewModel::updateAlarm,
+        onDeleteClick = { plant ->
+            viewModel.deletePlant(plant, onBackPressed)
+        }
     )
 }
 
@@ -33,6 +36,7 @@ private fun PlantDetails(
     onBackPressed: OnClick,
     uiState: DetailPlantUiState,
     onAlarmChanged: (Alarm) -> Unit,
+    onDeleteClick: (Plant) -> Unit,
 ) {
     when (val result: DetailPlantUiState = uiState) {
         DetailPlantUiState.Initial -> PlantDetailsLoading()
@@ -42,6 +46,7 @@ private fun PlantDetails(
             plant = result.plant,
             alarms = result.alarms,
             onAlarmChanged = onAlarmChanged,
+            onDeleteClick = onDeleteClick,
         )
     }
 }
@@ -64,6 +69,7 @@ private fun PlantDetailsPreview() {
                     alarms = listOf(),
                 ),
                 onAlarmChanged = {},
+                onDeleteClick = {},
             )
         }
     }

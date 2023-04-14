@@ -4,4 +4,8 @@
     <string name="day_to_day">%s à %s</string>
     <string name="edit">editar</string>
     <string name="delete">deletar</string>
+    <string name="warning_delete_title">remover planta</string>
+    <string name="warning_delete_text">você tem certeza de que deseja remover esta planta? Essa ação não pode ser desfeita depois</string>
+    <string name="warning_delete_confirm">remover</string>
+    <string name="warning_delete_dismiss">cancelar</string>
 </resources>

@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
+import com.ujizin.leafy.core.ui.components.dropdown.DropdownWarningMenuItem
 import com.ujizin.leafy.core.ui.components.image.Icons
 import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.core.ui.extensions.capitalize
@@ -63,12 +64,16 @@ internal fun PlantDetailsTopAppBar(
                 onExpandedChanged = { isExpanded = it },
             ) {
                 DropdownMenuItem(
-                    text = { Text(stringResource(R.string.edit)) },
+                    text = { Text(stringResource(R.string.edit).capitalize()) },
                     onClick = onEditClick,
                 )
-                DropdownMenuItem(
-                    text = { Text(stringResource(R.string.delete)) },
-                    onClick = onDeleteClick,
+                DropdownWarningMenuItem(
+                    text = { Text(stringResource(R.string.delete).capitalize()) },
+                    warningTitle = stringResource(R.string.warning_delete_title),
+                    warningText = stringResource(R.string.warning_delete_text),
+                    warningConfirmText = stringResource(R.string.warning_delete_confirm),
+                    warningDismissText = stringResource(R.string.warning_delete_dismiss),
+                    onConfirmClick = onDeleteClick,
                 )
             }
         },

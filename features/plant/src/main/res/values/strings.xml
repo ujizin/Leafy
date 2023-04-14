@@ -4,4 +4,8 @@
     <string name="day_to_day">%s to %s</string>
     <string name="edit">edit</string>
     <string name="delete">delete</string>
+    <string name="warning_delete_title">remove plant</string>
+    <string name="warning_delete_text">are you certain about removing this plant? This action cannot be undone later</string>
+    <string name="warning_delete_confirm">delete</string>
+    <string name="warning_delete_dismiss">cancel</string>
 </resources>

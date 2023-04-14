@@ -7,15 +7,20 @@ import com.ujizin.leafy.core.navigation.Args
 import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.mapResult
+import com.ujizin.leafy.domain.usecase.alarm.DeleteAlarm
 import com.ujizin.leafy.domain.usecase.alarm.LoadAlarms
 import com.ujizin.leafy.domain.usecase.alarm.UpdateAlarm
+import com.ujizin.leafy.domain.usecase.plant.DeletePlant
 import com.ujizin.leafy.domain.usecase.plant.LoadPlant
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.flattenMerge
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
@@ -24,7 +29,9 @@ class DetailPlantViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     loadPlant: LoadPlant,
     loadAlarms: LoadAlarms,
-    private val updateAlarm: UpdateAlarm,
+    private val deletePlantUseCase: DeletePlant,
+    private val deleteAlarmUseCase: DeleteAlarm,
+    private val updateAlarmUseCase: UpdateAlarm,
 ) : ViewModel() {
 
     private val plantId: Long = checkNotNull(savedStateHandle[Args.PlantId])
@@ -44,8 +51,18 @@ class DetailPlantViewModel @Inject constructor(
             initialValue = DetailPlantUiState.Initial,
         )
 
-    fun update(alarm: Alarm) {
-        updateAlarm(alarm).launchIn(viewModelScope)
+    fun updateAlarm(alarm: Alarm) {
+        updateAlarmUseCase(alarm).launchIn(viewModelScope)
+    }
+
+    @OptIn(FlowPreview::class)
+    fun deletePlant(plant: Plant, onCompletion: () -> Unit) {
+        flowOf(
+            deleteAlarmUseCase(plantId),
+            deletePlantUseCase(plant)
+        ).flattenMerge().onCompletion {
+            onCompletion()
+        }.launchIn(viewModelScope)
     }
 }
 
