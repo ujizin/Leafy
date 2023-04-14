@@ -2,6 +2,7 @@ package com.ujizin.leafy.domain.usecase.alarm
 
 import com.ujizin.leafy.domain.repository.AlarmRepository
 import com.ujizin.leafy.domain.usecase.alarm.implementation.AddAlarmImpl
+import com.ujizin.leafy.domain.usecase.alarm.implementation.DeleteAlarmImpl
 import com.ujizin.leafy.domain.usecase.alarm.implementation.LoadAlarmImpl
 import com.ujizin.leafy.domain.usecase.alarm.implementation.LoadAlarmsImpl
 import com.ujizin.leafy.domain.usecase.alarm.implementation.UpdateAlarmImpl
@@ -38,4 +39,11 @@ object AlarmModule {
     fun provideUpdateAlarm(
         repository: AlarmRepository,
     ): UpdateAlarm = UpdateAlarmImpl(repository)
+
+    @Provides
+    @Singleton
+    fun provideDeleteAlarm(
+        repository: AlarmRepository,
+    ): DeleteAlarm = DeleteAlarmImpl(repository)
+
 }

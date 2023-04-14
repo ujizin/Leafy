@@ -70,4 +70,12 @@ interface AlarmDao {
      * */
     @Delete
     suspend fun delete(alarm: AlarmEntity)
+
+    /**
+     * Delete [AlarmEntity] by plant id.
+     *
+     * @param plantId the alarms plant's id to be deleted
+     * */
+    @Query("DELETE FROM alarm WHERE plant_id = :plantId")
+    suspend fun deleteAlarmByPlantId(plantId: Long)
 }

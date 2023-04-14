@@ -54,4 +54,11 @@ interface AlarmDataSource {
      * @param id the alarm's id
      * */
     suspend fun getAlarmById(id: Long): Alarm
+
+    /**
+     * Delete alarm by plant id.
+     *
+     * @param plantId the alarms plant's id to be deleted
+     * */
+    suspend fun deleteAlarmByPlantId(plantId: Long)
 }

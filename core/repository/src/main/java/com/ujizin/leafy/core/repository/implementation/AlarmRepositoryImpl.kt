@@ -34,4 +34,8 @@ class AlarmRepositoryImpl(
     override fun updateAlarm(alarm: Alarm) = flow {
         emit(dataSource.updateAlarm(mapper.toRepo(alarm)))
     }.flowOn(dispatcher)
+
+    override fun deleteAlarmByPlantId(plantId: Long) = flow {
+        emit(dataSource.deleteAlarmByPlantId(plantId))
+    }.flowOn(dispatcher)
 }

@@ -40,4 +40,11 @@ interface AlarmRepository {
      * @param alarm alarm to be updated
      * */
     fun updateAlarm(alarm: Alarm): Flow<Unit>
+
+    /**
+     * Delete alarms on data source by plant id.
+     *
+     * @param plantId the alarms plant's id to be deleted
+     * */
+    fun deleteAlarmByPlantId(plantId: Long): Flow<Unit>
 }

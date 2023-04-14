@@ -34,4 +34,8 @@ internal class AlarmLocalDataSource(
     override suspend fun deleteAlarm(alarm: Alarm) {
         alarmDao.delete(mapper.toAlarmEntity(alarm))
     }
+
+    override suspend fun deleteAlarmByPlantId(plantId: Long) {
+        alarmDao.deleteAlarmByPlantId(plantId)
+    }
 }
