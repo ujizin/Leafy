@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ujizin.leafy.core.ui.annotation.ThemePreviews
@@ -25,7 +26,7 @@ private fun Tasks(
     uiState: TasksUiState,
 ) {
     Box(Modifier.fillMaxSize()) {
-        Section(title = "Alarm")
+        Section(title = stringResource(id = R.string.task_title))
     }
 }
 
