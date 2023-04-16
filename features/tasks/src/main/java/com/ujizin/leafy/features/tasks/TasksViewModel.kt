@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import java.util.Date
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,15 +28,18 @@ class TasksViewModel @Inject constructor(
         loadAllAlarms()
             .mapResult()
             .onEach { alarms ->
-                Date()
+                /**
+                 * TODO sort day by current day & add plant data on task.
+                 * */
                 val tasks = WeekDay.values().map { weekDay ->
                     val alarmList = alarms.filter { it.weekDays.contains(weekDay) }
-                    Task(weekDay = weekDay, alarms = alarmList,)
+                    Task(weekDay = weekDay, alarms = alarmList)
                 }
+
+                _uiState.update { TasksUiState.Success(tasks) }
             }
             .launchIn(viewModelScope)
     }
-
 }
 
 data class Task(
