@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import com.ujizin.leafy.alarm.receiver.AlarmReceiver
 import com.ujizin.leafy.core.components.R
+import com.ujizin.leafy.core.ui.extensions.currentDay
 import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.model.WeekDay
@@ -43,10 +44,7 @@ class ShowAlarm(
         }
 
     private fun Alarm.checkDayOfTheWeek(): Boolean {
-        val calendar = Calendar.getInstance()
-        return weekDays.contains(
-            WeekDay.values()[calendar.get(Calendar.DAY_OF_WEEK)],
-        )
+        return weekDays.contains(currentDay)
     }
 
     private fun getAlarmServiceIntent(

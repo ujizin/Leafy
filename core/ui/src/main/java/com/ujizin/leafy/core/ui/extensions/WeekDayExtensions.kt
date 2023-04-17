@@ -4,6 +4,10 @@ import android.content.Context
 import androidx.annotation.StringRes
 import com.ujizin.leafy.core.components.R
 import com.ujizin.leafy.domain.model.WeekDay
+import java.util.Calendar
+
+val currentDay: WeekDay
+    get() = WeekDay.values()[Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1]
 
 val WeekDay.displayNameRes: Int
     @StringRes

@@ -11,6 +11,8 @@ android {
 }
 
 dependencies {
+    implementation projects.domain
+
     implementation projects.core.navigation
     implementation projects.core.ui
 }
