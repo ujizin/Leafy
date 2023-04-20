@@ -50,3 +50,8 @@ fun List<WeekDay>.getDisplayName(
         else -> shortNames.joinToString(separator = ", ")
     }
 }
+
+fun Array<WeekDay>.reorderByCurrentDay(): List<WeekDay> = toList()
+    .drop(currentDay.ordinal)
+    .plus(take(currentDay.ordinal))
+

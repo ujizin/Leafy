@@ -2,14 +2,17 @@ package com.ujizin.leafy.features.tasks
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ujizin.leafy.domain.model.Alarm
+import com.ujizin.leafy.core.ui.extensions.reorderByCurrentDay
 import com.ujizin.leafy.domain.model.WeekDay
 import com.ujizin.leafy.domain.result.mapResult
 import com.ujizin.leafy.domain.usecase.alarm.LoadAlarms
 import com.ujizin.leafy.domain.usecase.plant.LoadPlant
+import com.ujizin.leafy.features.tasks.model.Task
+import com.ujizin.leafy.features.tasks.model.TaskWeek
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
@@ -28,27 +31,27 @@ class TasksViewModel @Inject constructor(
         loadAllAlarms()
             .mapResult()
             .onEach { alarms ->
-                /**
-                 * TODO sort day by current day & add plant data on task.
-                 * */
-                val tasks = WeekDay.values().map { weekDay ->
-                    val alarmList = alarms.filter { it.weekDays.contains(weekDay) }
-                    Task(weekDay = weekDay, alarms = alarmList)
+                val tasks = WeekDay.values().reorderByCurrentDay().map { weekDay ->
+                    TaskWeek(
+                        weekDay = weekDay,
+                        tasks = alarms.filter {
+                            it.weekDays.contains(weekDay)
+                        }.map { alarm ->
+                            Task(
+                                plant = loadPlant(alarm.plantId).mapResult().first(),
+                                alarm = alarm,
+                            )
+                        })
                 }
-
                 _uiState.update { TasksUiState.Success(tasks) }
             }
             .launchIn(viewModelScope)
     }
 }
 
-data class Task(
-    val weekDay: WeekDay,
-    val alarms: List<Alarm>,
-)
 
 sealed interface TasksUiState {
     object Initial : TasksUiState
 
-    data class Success(val tasks: List<Task>) : TasksUiState
+    data class Success(val tasks: List<TaskWeek>) : TasksUiState
 }
