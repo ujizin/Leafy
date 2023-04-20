@@ -1,9 +1,14 @@
 package com.ujizin.leafy.features.tasks
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -15,6 +20,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ujizin.leafy.core.ui.annotation.ThemePreviews
 import com.ujizin.leafy.core.ui.components.Section
 import com.ujizin.leafy.domain.model.WeekDay
+import com.ujizin.leafy.features.tasks.model.Task
 
 @Composable
 fun TasksRoute(
@@ -41,10 +47,28 @@ private fun Tasks(
 
         when (uiState) {
             TasksUiState.Initial -> Unit
-            is TasksUiState.Success -> uiState.tasks.forEach { (weekDay, alarms) ->
+            is TasksUiState.Success -> uiState.tasks.forEach { (weekDay, tasks) ->
                 stickyHeader { HeaderWeekDay(weekDay) }
-                items(alarms) { }
+                items(tasks) { task ->
+                    TaskItems(
+                        modifier = Modifier.fillMaxWidth(),
+                        task = task,
+                    )
+                }
             }
+        }
+    }
+}
+
+@Composable
+fun TaskItems(modifier: Modifier, task: Task) {
+    Card(
+        modifier = modifier,
+        shape = MaterialTheme.shapes.large,
+    ) {
+        Row {
+            Column {}
+
         }
     }
 }
