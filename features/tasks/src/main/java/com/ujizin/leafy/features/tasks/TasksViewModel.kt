@@ -37,7 +37,7 @@ class TasksViewModel @Inject constructor(
                         TaskWeek(
                             weekDay = weekDay,
                             tasks = alarms.filter {
-                                it.weekDays.contains(weekDay)
+                                it.enabled && it.weekDays.contains(weekDay)
                             }.map { alarm ->
                                 Task(
                                     plant = loadPlant(alarm.plantId).mapResult().first(),
