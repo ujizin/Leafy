@@ -32,7 +32,7 @@ class TasksViewModel @Inject constructor(
             .mapResult()
             .onEach { alarms ->
                 val tasks = WeekDay.values().reorderByCurrentDay().mapNotNull { weekDay ->
-                    val alarmHasWeekDay = alarms.any { it.weekDays.contains(weekDay) }
+                    val alarmHasWeekDay = alarms.any { it.weekDays.contains(weekDay) && it.enabled }
                     if (alarmHasWeekDay) {
                         TaskWeek(
                             weekDay = weekDay,
