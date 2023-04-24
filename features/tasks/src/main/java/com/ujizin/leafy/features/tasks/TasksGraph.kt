@@ -6,17 +6,23 @@ import com.ujizin.leafy.core.navigation.AnimatedEnterTransition
 import com.ujizin.leafy.core.navigation.AnimatedExitTransition
 import com.ujizin.leafy.core.navigation.Destination
 import com.ujizin.leafy.core.navigation.composable
+import com.ujizin.leafy.core.ui.extensions.OnClick
 
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.tasksGraph(
     enterTransition: AnimatedEnterTransition,
     exitTransition: AnimatedExitTransition,
+    onPlantClick: (Long) -> Unit,
+    onTakePictureClick: OnClick,
 ) {
     composable(
         destination = Destination.Tasks,
         enterTransition = enterTransition,
         exitTransition = exitTransition,
     ) {
-        TasksRoute()
+        TasksRoute(
+            onPlantClick = onPlantClick,
+            onTakePictureClick = onTakePictureClick,
+        )
     }
 }

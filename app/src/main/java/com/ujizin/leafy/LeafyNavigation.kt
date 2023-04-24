@@ -80,6 +80,12 @@ fun LeafyNavigation(
             tasksGraph(
                 enterTransition = { navigationEnterTransition(navController) },
                 exitTransition = { navigationExitTransition(navController) },
+                onPlantClick = { plantId ->
+                    navController.navigate(
+                        Destination.PlantDetails.withArguments(Args.PlantId to plantId),
+                    )
+                },
+                onTakePictureClick = { navController.navigate(Destination.Camera) }
             )
             preferencesGraph(
                 enterTransition = { navigationEnterTransition(navController) },

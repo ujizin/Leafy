@@ -31,19 +31,25 @@ class TasksViewModel @Inject constructor(
         loadAllAlarms()
             .mapResult()
             .onEach { alarms ->
-                val tasks = WeekDay.values().reorderByCurrentDay().map { weekDay ->
-                    TaskWeek(
-                        weekDay = weekDay,
-                        tasks = alarms.filter {
-                            it.weekDays.contains(weekDay)
-                        }.map { alarm ->
-                            Task(
-                                plant = loadPlant(alarm.plantId).mapResult().first(),
-                                alarm = alarm,
-                            )
-                        })
+                val tasks = WeekDay.values().reorderByCurrentDay().mapNotNull { weekDay ->
+                    val alarmHasWeekDay = alarms.any { it.weekDays.contains(weekDay) }
+                    if (alarmHasWeekDay) {
+                        TaskWeek(
+                            weekDay = weekDay,
+                            tasks = alarms.filter {
+                                it.weekDays.contains(weekDay)
+                            }.map { alarm ->
+                                Task(
+                                    plant = loadPlant(alarm.plantId).mapResult().first(),
+                                    alarm = alarm,
+                                )
+                            })
+                    } else null
                 }
-                _uiState.update { TasksUiState.Success(tasks) }
+
+                _uiState.update {
+                    if (tasks.isEmpty()) TasksUiState.Empty else TasksUiState.Success(tasks)
+                }
             }
             .launchIn(viewModelScope)
     }
@@ -52,6 +58,8 @@ class TasksViewModel @Inject constructor(
 
 sealed interface TasksUiState {
     object Initial : TasksUiState
+
+    object Empty : TasksUiState
 
     data class Success(val tasks: List<TaskWeek>) : TasksUiState
 }
