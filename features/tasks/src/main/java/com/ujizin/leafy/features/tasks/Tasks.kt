@@ -25,11 +25,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ujizin.leafy.core.ui.annotation.ThemePreviews
 import com.ujizin.leafy.core.ui.components.EmptySection
 import com.ujizin.leafy.core.ui.components.Section
+import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
+import com.ujizin.leafy.core.ui.components.image.Icons
 import com.ujizin.leafy.core.ui.components.image.Image
 import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.core.ui.extensions.capitalize
@@ -45,6 +48,7 @@ fun TasksRoute(
     viewModel: TasksViewModel = hiltViewModel(),
     onPlantClick: (Long) -> Unit,
     onTakePictureClick: OnClick,
+    onDrawerClick: OnClick,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -54,6 +58,7 @@ fun TasksRoute(
         uiState = uiState,
         onPlantClick = onPlantClick,
         onTakePictureClick = onTakePictureClick,
+        onDrawerClick = onDrawerClick
     )
 }
 
@@ -63,12 +68,19 @@ private fun Tasks(
     uiState: TasksUiState,
     onTakePictureClick: OnClick,
     onPlantClick: (Long) -> Unit,
+    onDrawerClick: OnClick,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
     ) {
         item {
-            Section(title = stringResource(id = R.string.task_title))
+            Section(
+                modifier = Modifier.padding(bottom = 16.dp),
+                leadingIcon = {
+                    AnimatedButtonIcon(icon = Icons.Hamburger, onClick = onDrawerClick)
+                },
+                title = stringResource(id = R.string.task_title),
+            )
         }
 
         when (uiState) {
@@ -120,11 +132,6 @@ fun TaskItems(
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             PlantItem(task = task)
-            Text(
-                text = task.alarm.dateFormatted,
-                color = MaterialTheme.colorScheme.primary,
-                style = MaterialTheme.typography.titleLarge,
-            )
         }
     }
 }
@@ -147,8 +154,22 @@ private fun PlantItem(
             contentDescription = task.plant.title
         )
         Column(modifier = Modifier.padding(start = 8.dp)) {
-            Text(text = task.plant.title, style = MaterialTheme.typography.titleMedium)
-            Text(text = task.alarm.weekDays.getDisplayName(context))
+            Text(
+                text = task.plant.title.capitalize(),
+                style = MaterialTheme.typography.titleMedium,
+                maxLines = 1,
+            )
+            Text(
+                text = task.alarm.weekDays.getDisplayName(context).capitalize(),
+                maxLines = 1,
+            )
+            Text(
+                text = task.alarm.dateFormatted,
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.primary,
+                letterSpacing = 1.sp,
+                maxLines = 1,
+            )
         }
     }
 }

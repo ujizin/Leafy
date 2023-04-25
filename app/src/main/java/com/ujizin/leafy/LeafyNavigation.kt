@@ -85,7 +85,8 @@ fun LeafyNavigation(
                         Destination.PlantDetails.withArguments(Args.PlantId to plantId),
                     )
                 },
-                onTakePictureClick = { navController.navigate(Destination.Camera) }
+                onTakePictureClick = { navController.navigate(Destination.Camera) },
+                onDrawerClick = { scope.launch { drawerState.open() } }
             )
             preferencesGraph(
                 enterTransition = { navigationEnterTransition(navController) },
