@@ -12,6 +12,7 @@ class AlarmMapper {
 
     fun toRepo(alarm: Alarm) = with(alarm) {
         RepoAlarm(
+            id = id,
             plantId = plantId,
             ringtoneUriString = ringtoneUri.toString(),
             hours = hours,
@@ -23,6 +24,7 @@ class AlarmMapper {
 
     fun toDomain(alarm: RepoAlarm) = with(alarm) {
         Alarm(
+            id = id,
             plantId = plantId,
             ringtoneUri = Uri.parse(ringtoneUriString),
             hours = hours,
