@@ -1,4 +1,4 @@
-package com.ujizin.leafy.features.plant.ui
+package com.ujizin.leafy.features.plant.detail.ui
 
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -10,8 +10,8 @@ import com.ujizin.leafy.core.ui.annotation.ThemePreviews
 import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.model.Plant
-import com.ujizin.leafy.features.plant.DetailPlantUiState
-import com.ujizin.leafy.features.plant.DetailPlantViewModel
+import com.ujizin.leafy.features.plant.detail.DetailPlantUiState
+import com.ujizin.leafy.features.plant.detail.DetailPlantViewModel
 import java.io.File
 
 @Composable

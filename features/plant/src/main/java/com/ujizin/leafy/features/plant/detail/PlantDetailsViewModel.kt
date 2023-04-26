@@ -1,4 +1,4 @@
-package com.ujizin.leafy.features.plant
+package com.ujizin.leafy.features.plant.detail
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel

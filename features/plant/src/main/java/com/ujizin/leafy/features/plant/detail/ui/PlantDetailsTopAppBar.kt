@@ -1,4 +1,4 @@
-package com.ujizin.leafy.features.plant.ui
+package com.ujizin.leafy.features.plant.detail.ui
 
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.WindowInsets

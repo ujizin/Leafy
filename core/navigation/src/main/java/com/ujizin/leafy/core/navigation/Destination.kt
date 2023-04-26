@@ -13,6 +13,7 @@ enum class Destination(
     About("about"),
     Review("review"),
     PlantDetails("plant/{${Args.PlantId}}"),
+    PlantEdit("plant/${Args.PlantId}"),
     ;
 
     val route: String get() = "$HOST/$destinationName"
