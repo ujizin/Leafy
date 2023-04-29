@@ -74,6 +74,7 @@ fun PublishContent(
                 .aspectRatio(1.75F)
                 .padding(top = 16.dp, start = 20.dp, end = 20.dp),
             placeholder = { Placeholder(text = stringResource(R.string.description)) },
+            singleLine = false,
             value = description,
             onValueChange = { description = it },
         )
