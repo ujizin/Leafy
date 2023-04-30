@@ -25,7 +25,6 @@ kotlinx-serialization = "1.5.0"
 ktlint = "0.43.1"
 detekt = "1.22.0"
 coil = "2.3.0"
-camerax = "1.1.0"
 accompanist = "0.30.1"
 test-runner = "1.4.0"
 test-core-ktx = "1.4.0"
@@ -69,11 +68,6 @@ datastore = { module = "androidx.datastore:datastore", version.ref = "datastore"
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
-
-camerax-core = { module = "androidx.camera:camera-core", version.ref = "camerax" }
-camerax-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camerax" }
-camerax-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camerax" }
-camerax-view = { module = "androidx.camera:camera-view", version.ref = "camerax" }
 
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
 
@@ -136,13 +130,6 @@ compose-debug = [
 datastore = [
     "datastore",
     "datastore-preferences"
-]
-
-camerax = [
-    "camerax-core",
-    "camerax-camera2",
-    "camerax-lifecycle",
-    "camerax-view"
 ]
 
 [plugins]
