@@ -2,8 +2,8 @@
 
 kotlin = "1.8.20"
 gradle = "7.4.1"
-compose = "1.4.0"
-compose-bom = "2023.04.00"
+compose = "1.4.3"
+compose-bom = "2023.05.01"
 compose-compiler = "1.4.5"
 androidx-lifecyle = "2.6.1"
 material3 = "1.1.0-beta01"
