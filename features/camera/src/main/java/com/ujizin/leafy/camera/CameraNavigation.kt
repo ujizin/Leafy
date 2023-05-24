@@ -1,7 +1,6 @@
 package com.ujizin.leafy.camera
 
-import androidx.compose.animation.AnimatedContentScope
-import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.Spring.DampingRatioNoBouncy
 import androidx.compose.animation.core.Spring.StiffnessLow
 import androidx.compose.animation.core.Spring.StiffnessMediumLow
@@ -12,7 +11,6 @@ import com.ujizin.leafy.core.navigation.Destination
 import com.ujizin.leafy.core.navigation.composable
 import com.ujizin.leafy.core.ui.extensions.OnClick
 
-@OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.cameraGraph(
     onBackPressed: OnClick,
     onSaveClicked: () -> Unit,
@@ -21,14 +19,14 @@ fun NavGraphBuilder.cameraGraph(
         Destination.Camera,
         enterTransition = {
             slideIntoContainer(
-                AnimatedContentScope.SlideDirection.Up,
+                AnimatedContentTransitionScope.SlideDirection.Up,
                 animationSpec = spring(DampingRatioNoBouncy, StiffnessLow),
                 initialOffset = { it * 2 },
             )
         },
         exitTransition = {
             slideOutOfContainer(
-                AnimatedContentScope.SlideDirection.Down,
+                AnimatedContentTransitionScope.SlideDirection.Down,
                 animationSpec = spring(DampingRatioNoBouncy, StiffnessMediumLow),
                 targetOffset = { -it },
             )

@@ -1,6 +1,6 @@
 package com.ujizin.leafy.core.navigation
 
-import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
@@ -16,23 +16,17 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptionsBuilder
 import com.google.accompanist.navigation.animation.composable
 
-@OptIn(ExperimentalAnimationApi::class)
-typealias AnimatedEnterTransition = (AnimatedContentScope<NavBackStackEntry>.() -> EnterTransition?)
+typealias AnimatedEnterTransition = (AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition?)
 
-@OptIn(ExperimentalAnimationApi::class)
-typealias AnimatedExitTransition = (AnimatedContentScope<NavBackStackEntry>.() -> ExitTransition?)?
+typealias AnimatedExitTransition = (AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition?)
 
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.composable(
     destination: Destination,
     enterTransition: AnimatedEnterTransition = { fadeIn() },
     exitTransition: AnimatedExitTransition = { fadeOut() },
-    popEnterTransition: (
-        AnimatedContentScope<NavBackStackEntry>.() -> EnterTransition?
-    )? = enterTransition,
-    popExitTransition: (
-        AnimatedContentScope<NavBackStackEntry>.() -> ExitTransition?
-    )? = exitTransition,
+    popEnterTransition: AnimatedEnterTransition? = enterTransition,
+    popExitTransition: AnimatedExitTransition? = exitTransition,
     arguments: List<NamedNavArgument> = emptyList(),
     deepLinks: List<NavDeepLink> = emptyList(),
     content: @Composable AnimatedVisibilityScope.(NavBackStackEntry) -> Unit,

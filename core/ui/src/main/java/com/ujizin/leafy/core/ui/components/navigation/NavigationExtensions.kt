@@ -1,9 +1,8 @@
 package com.ujizin.leafy.core.ui.components.navigation
 
-import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.runtime.Composable
@@ -43,13 +42,12 @@ private fun navDirection(navController: NavController): NavDirection {
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
-fun AnimatedContentScope<*>.navigationEnterTransition(
+fun AnimatedContentTransitionScope<*>.navigationEnterTransition(
     navController: NavController,
 ): EnterTransition? {
     val direction = when (navDirection(navController)) {
-        NavDirection.Start -> AnimatedContentScope.SlideDirection.Start
-        NavDirection.End -> AnimatedContentScope.SlideDirection.End
+        NavDirection.Start -> AnimatedContentTransitionScope.SlideDirection.Start
+        NavDirection.End -> AnimatedContentTransitionScope.SlideDirection.End
         NavDirection.None -> null
     } ?: return null
 
@@ -62,13 +60,12 @@ fun AnimatedContentScope<*>.navigationEnterTransition(
     )
 }
 
-@OptIn(ExperimentalAnimationApi::class)
-fun AnimatedContentScope<*>.navigationExitTransition(
+fun AnimatedContentTransitionScope<*>.navigationExitTransition(
     navController: NavController,
 ): ExitTransition? {
     val direction = when (navDirection(navController)) {
-        NavDirection.Start -> AnimatedContentScope.SlideDirection.Start
-        NavDirection.End -> AnimatedContentScope.SlideDirection.End
+        NavDirection.Start -> AnimatedContentTransitionScope.SlideDirection.Start
+        NavDirection.End -> AnimatedContentTransitionScope.SlideDirection.End
         NavDirection.None -> null
     } ?: return null
 

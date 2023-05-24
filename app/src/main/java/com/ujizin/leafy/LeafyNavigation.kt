@@ -1,7 +1,7 @@
 package com.ujizin.leafy
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -95,8 +95,8 @@ fun LeafyNavigation(
             alarmGraph(
                 onBackPressed = navController::navigateUp,
                 onSaved = { navController.navigateUp(times = 3) },
-                enterTransition = { slideIntoContainer(AnimatedContentScope.SlideDirection.Start) },
-                exitTransition = { slideOutOfContainer(AnimatedContentScope.SlideDirection.Start) },
+                enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
+                exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
             )
             cameraGraph(
                 onBackPressed = navController::navigateUp,
@@ -105,7 +105,7 @@ fun LeafyNavigation(
             publishGraph(
                 onBackPressed = navController::navigateUp,
                 onNextClick = { navController.navigate(Destination.Alarm) },
-                exitTransition = { slideOutOfContainer(AnimatedContentScope.SlideDirection.Start) },
+                exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
             )
             aboutGraph(onBackPressed = navController::navigateUp)
             plantGraph(onBackPressed = navController::navigateUp)
