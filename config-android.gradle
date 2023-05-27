@@ -30,6 +30,8 @@ android {
 dependencies {
     implementation libs.hilt
     implementation platform(libs.firebase.bom)
+    implementation libs.firebase.crashlytics.ktx
+    implementation libs.firebase.analytics.ktx
 
     kapt libs.hilt.compiler
 

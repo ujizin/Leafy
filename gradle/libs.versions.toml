@@ -32,7 +32,8 @@ mockk = "1.12.3"
 camposer = "0.2.1"
 spotless = "6.17.0"
 google-services = "4.3.15"
-firebase = "32.1.0"
+firebase-bom = "32.1.0"
+firebase-crashlytics = "2.9.5"
 
 [libraries]
 
@@ -77,8 +78,13 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 camposer = { module = "io.github.ujizin:camposer", version.ref = "camposer" }
 
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-crashlytics-ktx = { module = "com.google.firebase:firebase-crashlytics-ktx" }
+firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx" }
+
+# Classpath
 google-services = { module = "com.google.gms:google-services", version.ref = "google-services" }
-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebase-crashlytics" }
 
 # Debug Implementations
 
