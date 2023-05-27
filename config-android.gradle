@@ -29,6 +29,8 @@ android {
 
 dependencies {
     implementation libs.hilt
+    implementation platform(libs.firebase.bom)
+
     kapt libs.hilt.compiler
 
     testImplementation libs.junit

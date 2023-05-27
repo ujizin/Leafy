@@ -31,6 +31,8 @@ test-core-ktx = "1.5.0"
 mockk = "1.12.3"
 camposer = "0.2.1"
 spotless = "6.17.0"
+google-services = "4.3.15"
+firebase = "32.1.0"
 
 [libraries]
 
@@ -74,6 +76,9 @@ accompanist-permissions = { module = "com.google.accompanist:accompanist-permiss
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 camposer = { module = "io.github.ujizin:camposer", version.ref = "camposer" }
+
+google-services = { module = "com.google.gms:google-services", version.ref = "google-services" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
 
 # Debug Implementations
 
