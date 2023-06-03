@@ -16,8 +16,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flatMapConcat
-import kotlinx.coroutines.flow.flattenMerge
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onCompletion
@@ -57,12 +55,10 @@ class DetailPlantViewModel @Inject constructor(
 
     @OptIn(FlowPreview::class)
     fun deletePlant(plant: Plant, onCompletion: () -> Unit) {
-        flowOf(
-            deleteAlarmUseCase(plantId),
-            deletePlantUseCase(plant)
-        ).flattenMerge().onCompletion {
-            onCompletion()
-        }.launchIn(viewModelScope)
+        deleteAlarmUseCase(plantId)
+            .flatMapConcat { deletePlantUseCase(plant) }
+            .onCompletion { onCompletion() }
+            .launchIn(viewModelScope)
     }
 }
 
