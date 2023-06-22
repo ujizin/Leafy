@@ -21,7 +21,6 @@ class AlarmScheduler(private val context: Context) {
      * @param hours the alarm's hours
      * @param minutes the alarm's minutes
      * @param ringtoneUri the alarm's ringtone uri
-     * @param intervalInMillis interval timer to alarm repeats
      * @param bundle bundle for pending intent
      * */
     fun scheduleAlarm(
@@ -29,36 +28,9 @@ class AlarmScheduler(private val context: Context) {
         hours: Int,
         minutes: Int,
         ringtoneUri: Uri,
-        intervalInMillis: Long = TimeUnit.DAYS.toMillis(1L),
         bundle: Bundle = Bundle.EMPTY,
     ) {
-        setRepeatAlarm(intervalInMillis, type, hours, minutes, ringtoneUri, bundle)
-    }
-
-    /**
-     * Set alarm in repeat mode.
-     *
-     * @param intervalInMillis interval timer to alarm repeats
-     * @param type alarm manager's type, default is rtc wakeup
-     * @param hours the alarm's hours
-     * @param minutes the alarm's minutes
-     * @param ringtoneUri the alarm's ringtone uri
-     * @param bundle bundle for pending intent
-     * */
-    private fun setRepeatAlarm(
-        intervalInMillis: Long,
-        type: Int,
-        hours: Int,
-        minutes: Int,
-        ringtoneUri: Uri,
-        bundle: Bundle,
-    ) {
-        context.alarmManager.setRepeating(
-            type,
-            getTimeInMillis(hours, minutes),
-            intervalInMillis,
-            createPendingIntent(ringtoneUri, intervalInMillis, bundle),
-        )
+        setAlarm(type, hours, minutes, ringtoneUri, bundle)
     }
 
     /**
@@ -69,7 +41,7 @@ class AlarmScheduler(private val context: Context) {
      * @param minutes the alarm's minutes
      * @param ringtoneUri the alarm's ringtone uri
      * */
-    private fun setOnceAlarm(
+    private fun setAlarm(
         type: Int,
         hours: Int,
         minutes: Int,
@@ -112,7 +84,6 @@ class AlarmScheduler(private val context: Context) {
      * */
     private fun createPendingIntent(
         ringtoneUri: Uri,
-        intervalInMillis: Long? = null,
         bundle: Bundle,
     ): PendingIntent = PendingIntent.getBroadcast(
         context,
@@ -120,7 +91,6 @@ class AlarmScheduler(private val context: Context) {
         Intent(context, AlarmReceiver::class.java).apply {
             action = AlarmReceiver.SCHEDULE_ALARM_ACTION
             putExtra(AlarmReceiver.RINGTONE_CONTENT_EXTRA, ringtoneUri.toString())
-            intervalInMillis?.let { putExtra(AlarmReceiver.REPEAT_MODE, it) }
             putExtras(bundle)
         },
         PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE,

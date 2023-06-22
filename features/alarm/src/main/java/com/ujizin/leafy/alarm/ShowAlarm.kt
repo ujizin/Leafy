@@ -3,12 +3,12 @@ package com.ujizin.leafy.alarm
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import com.ujizin.leafy.alarm.receiver.AlarmReceiver
 import com.ujizin.leafy.core.components.R
 import com.ujizin.leafy.core.ui.extensions.currentDay
 import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.model.Plant
-import com.ujizin.leafy.domain.model.WeekDay
 import com.ujizin.leafy.domain.result.mapResult
 import com.ujizin.leafy.domain.usecase.alarm.LoadAlarm
 import com.ujizin.leafy.domain.usecase.plant.LoadPlant
@@ -16,7 +16,7 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.map
-import java.util.Calendar
+import kotlinx.coroutines.flow.onEach
 
 /**
  * Show alarm use case
@@ -24,6 +24,7 @@ import java.util.Calendar
 class ShowAlarm(
     private val loadPlant: LoadPlant,
     private val loadAlarm: LoadAlarm,
+    private val alarmScheduler: AlarmScheduler,
 ) {
 
     @OptIn(FlowPreview::class)
@@ -32,8 +33,9 @@ class ShowAlarm(
         intent: Intent,
     ) = loadAlarm(intent.getLongExtra(AlarmReceiver.ALARM_ID_EXTRA, -1))
         .mapResult()
+        .onEach { rescheduleAlarm(it, intent) }
         .flatMapConcat { alarm ->
-            if (!alarm.enabled && !alarm.checkDayOfTheWeek()) return@flatMapConcat emptyFlow()
+            if (!alarm.enabled || !alarm.checkDayOfTheWeek()) return@flatMapConcat emptyFlow()
 
             loadPlant(alarm.plantId).mapResult().map { plant ->
                 val ringtone = intent.getStringExtra(AlarmReceiver.RINGTONE_CONTENT_EXTRA)
@@ -42,6 +44,15 @@ class ShowAlarm(
                 startAlarmService(context, serviceIntent)
             }
         }
+
+    private fun rescheduleAlarm(alarm: Alarm, intent: Intent) {
+        alarmScheduler.scheduleAlarm(
+            hours = alarm.hours,
+            minutes = alarm.minutes,
+            ringtoneUri = alarm.ringtoneUri,
+            bundle = intent.extras ?: Bundle.EMPTY,
+        )
+    }
 
     private fun Alarm.checkDayOfTheWeek(): Boolean {
         return weekDays.contains(currentDay)

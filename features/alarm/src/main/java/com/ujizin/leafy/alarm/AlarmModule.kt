@@ -23,5 +23,6 @@ object AlarmModule {
     fun provideShowAlarm(
         loadPlant: LoadPlant,
         loadAlarm: LoadAlarm,
-    ) = ShowAlarm(loadPlant, loadAlarm)
+        alarmScheduler: AlarmScheduler,
+    ) = ShowAlarm(loadPlant, loadAlarm, alarmScheduler)
 }
