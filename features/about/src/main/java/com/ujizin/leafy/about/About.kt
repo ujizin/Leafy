@@ -6,10 +6,13 @@ import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,12 +34,14 @@ import com.ujizin.leafy.core.components.R as CR
 @Composable
 fun About(onBackPressed: OnClick) {
     Section(
+        modifier = Modifier.verticalScroll(rememberScrollState()),
+        headerPaddingValues = PaddingValues(start = 20.dp, top = 16.dp),
         trailingIcon = {
             AnimatedButtonIcon(icon = Icons.Back, onClick = onBackPressed)
         },
         title = stringResource(id = R.string.about),
     ) {
-        AboutSection(Modifier.weight(1F))
+        AboutSection()
     }
 }
 
@@ -46,7 +51,7 @@ private fun AboutSection(modifier: Modifier = Modifier) {
         val context = LocalContext.current
         Image(
             modifier = Modifier
-                .padding(top = 32.dp)
+                .padding(top = 24.dp)
                 .background(MaterialTheme.colorScheme.secondaryContainer)
                 .aspectRatio(2F),
             contentScale = ContentScale.Fit,
@@ -54,7 +59,7 @@ private fun AboutSection(modifier: Modifier = Modifier) {
             contentDescription = null,
         )
 
-        AboutContent(Modifier.padding(vertical = 24.dp, horizontal = 20.dp))
+        AboutContent(Modifier.padding(vertical = 16.dp, horizontal = 20.dp))
 
         Spacer(modifier = Modifier.weight(1F))
         Button(
