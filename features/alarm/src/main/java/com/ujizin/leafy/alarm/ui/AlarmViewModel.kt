@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ujizin.leafy.alarm.AlarmScheduler
 import com.ujizin.leafy.alarm.receiver.AlarmReceiver
+import com.ujizin.leafy.core.ui.extensions.copyAndDelete
 import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.model.Ringtone
 import com.ujizin.leafy.domain.model.WeekDay
@@ -20,9 +21,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -47,6 +50,7 @@ class AlarmViewModel @Inject constructor(
 
     @OptIn(FlowPreview::class)
     fun addPlantWithAlarm(
+        plantsDir: File,
         ringtone: Ringtone,
         hours: Int,
         minutes: Int,
@@ -55,6 +59,7 @@ class AlarmViewModel @Inject constructor(
     ) {
         loadDraftPlant()
             .mapResult()
+            .map { it.copy(file = it.file.copyAndDelete(File(plantsDir, it.file.name))) }
             .flatMapConcat { plant ->
                 addPlant(plant.copy(id = 0)).flatMapConcat { id ->
                     addAlarm(

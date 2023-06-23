@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import java.io.File
 
 fun Context.startSettingsPermission() {
     val intent = Intent(
@@ -14,3 +15,5 @@ fun Context.startSettingsPermission() {
     )
     startActivity(intent)
 }
+
+val Context.plantsDir get() = File(filesDir, "plants").apply { mkdirs() }

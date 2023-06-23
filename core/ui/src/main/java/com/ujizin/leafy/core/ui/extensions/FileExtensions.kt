@@ -7,6 +7,7 @@ import android.media.ExifInterface
 import android.os.Build
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+import java.io.File
 
 fun ByteArrayOutputStream.decodeToBitmapWithRotation(): Bitmap? {
     val byteArray = toByteArray()
@@ -29,4 +30,10 @@ fun ByteArrayOutputStream.decodeToBitmapWithRotation(): Bitmap? {
     val matrix = Matrix().apply { postRotate(degrees) }
 
     return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+}
+
+fun File.copyAndDelete(destFile: File): File {
+    val copiedFile = copyTo(destFile)
+    delete()
+    return copiedFile
 }

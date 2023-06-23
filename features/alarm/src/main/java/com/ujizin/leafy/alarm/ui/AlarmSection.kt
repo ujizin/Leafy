@@ -39,6 +39,7 @@ import com.ujizin.leafy.core.ui.components.selector.ModalSelector
 import com.ujizin.leafy.core.ui.components.selector.Selector
 import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.core.ui.extensions.paddingScreen
+import com.ujizin.leafy.core.ui.extensions.plantsDir
 import com.ujizin.leafy.core.ui.state.observeAsState
 import com.ujizin.leafy.domain.model.Ringtone
 import com.ujizin.leafy.domain.model.WeekDay
@@ -89,6 +90,7 @@ fun AlarmRoute(
         },
         onSaveClicked = {
             viewModel.addPlantWithAlarm(
+                plantsDir = context.plantsDir,
                 ringtone = ringtone,
                 hours = hours,
                 minutes = minutes,
