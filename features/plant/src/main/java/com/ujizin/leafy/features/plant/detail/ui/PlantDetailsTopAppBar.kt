@@ -3,6 +3,7 @@ package com.ujizin.leafy.features.plant.detail.ui
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -19,10 +20,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
-import com.ujizin.leafy.core.ui.components.dropdown.DropdownWarningMenuItem
+import com.ujizin.leafy.core.ui.components.dropdown.WarningContent
 import com.ujizin.leafy.core.ui.components.image.Icons
+import com.ujizin.leafy.core.ui.components.modal.ModalBottomSheet
 import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.core.ui.extensions.capitalize
+import com.ujizin.leafy.core.ui.extensions.paddingScreen
 import com.ujizin.leafy.features.plant.R
 
 @Composable
@@ -52,7 +55,7 @@ internal fun PlantDetailsTopAppBar(
         },
         actions = {
             var isExpanded by remember { mutableStateOf(false) }
-
+            var showDeleteModal by remember { mutableStateOf(false) }
             AnimatedButtonIcon(
                 icon = Icons.Shared,
                 size = 24.dp,
@@ -64,18 +67,33 @@ internal fun PlantDetailsTopAppBar(
                 onExpandedChanged = { isExpanded = it },
             ) {
                 DropdownMenuItem(
-                    text = { Text(stringResource(R.string.edit).capitalize()) },
-                    onClick = onEditClick,
-                )
-                DropdownWarningMenuItem(
-                    text = { Text(stringResource(R.string.delete).capitalize()) },
-                    warningTitle = stringResource(R.string.warning_delete_title),
-                    warningText = stringResource(R.string.warning_delete_text),
-                    warningConfirmText = stringResource(R.string.warning_delete_confirm),
-                    warningDismissText = stringResource(R.string.warning_delete_dismiss),
-                    onConfirmClick = onDeleteClick,
+                    text = {
+                        Text(stringResource(R.string.delete).capitalize())
+                    },
+                    onClick = {
+                        isExpanded = false
+                        showDeleteModal = true
+                    },
                 )
             }
+
+            ModalBottomSheet(
+                showModal = showDeleteModal,
+                onModalStateChanged = { showDeleteModal = it },
+                content = {
+                    WarningContent(
+                        modifier = Modifier
+                            .paddingScreen()
+                            .padding(bottom = 24.dp),
+                        title = stringResource(R.string.warning_delete_title),
+                        text = stringResource(R.string.warning_delete_text),
+                        onDismissText = stringResource(R.string.warning_delete_dismiss),
+                        onConfirmText = stringResource(R.string.warning_delete_confirm),
+                        onDismiss = { showDeleteModal = false },
+                        onConfirm = onDeleteClick
+                    )
+                }
+            )
         },
         scrollBehavior = scrollBehavior,
     )
