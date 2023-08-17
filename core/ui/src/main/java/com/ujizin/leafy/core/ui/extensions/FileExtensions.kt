@@ -21,13 +21,26 @@ fun ByteArrayOutputStream.decodeToBitmapWithRotation(): Bitmap? {
     )
 
     val degrees = when (orientation) {
-        ExifInterface.ORIENTATION_ROTATE_90 -> 90F
-        ExifInterface.ORIENTATION_ROTATE_180 -> 180F
+        ExifInterface.ORIENTATION_ROTATE_90, ExifInterface.ORIENTATION_TRANSPOSE -> 90F
+        ExifInterface.ORIENTATION_ROTATE_180, ExifInterface.ORIENTATION_FLIP_VERTICAL -> 180F
         ExifInterface.ORIENTATION_ROTATE_270 -> 270F
+        ExifInterface.ORIENTATION_TRANSVERSE -> -90F
         else -> 0F
     }
 
-    val matrix = Matrix().apply { postRotate(degrees) }
+    val scale = when (orientation) {
+        ExifInterface.ORIENTATION_FLIP_HORIZONTAL,
+        ExifInterface.ORIENTATION_FLIP_VERTICAL,
+        ExifInterface.ORIENTATION_TRANSPOSE,
+        ExifInterface.ORIENTATION_TRANSVERSE -> -1F to 1F
+
+        else -> 1F to 1F
+    }
+
+    val matrix = Matrix().apply {
+        postRotate(degrees)
+        postScale(scale.first, scale.second)
+    }
 
     return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
 }

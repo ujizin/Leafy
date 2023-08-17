@@ -21,7 +21,7 @@ internal fun SearchPlaceholder(modifier: Modifier = Modifier) {
             AnimatedIcon(
                 modifier = Modifier
                     .padding(end = 8.dp)
-                    .size(16.dp),
+                    .size(24.dp),
                 tint = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5F),
                 icon = Icons.Magnifier,
             )

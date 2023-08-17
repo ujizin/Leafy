@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.ujizin.leafy.core.ui.components.selector.ModalSelector
+import com.ujizin.leafy.core.ui.components.selector.ModalValue
 import com.ujizin.leafy.core.ui.components.selector.Selector
 import com.ujizin.leafy.domain.model.Language
 import com.ujizin.leafy.features.preferences.R
@@ -30,18 +31,21 @@ fun LanguageSelector(
         subTitle = stringResource(language.displayResId),
     ) {
         val context = LocalContext.current
-        val languages = remember(language) { getLanguages(context) }
-        val currentLanguage = remember(language) {
-            context.getString(language.displayResId)
+        val languages = remember(language) {
+            getLanguages(context).map {
+                ModalValue(it.displayName, it.language)
+            }
         }
+        val currentLanguage = remember(language) {
+            ModalValue(context.getString(language.displayResId), language)
+        }
+
         ModalSelector(
             title = stringResource(R.string.language),
             currentValue = currentLanguage,
-            values = remember(language) { languages.map { it.displayName } },
-            onValueChanged = { displayName ->
-                val lang = languages.first { it.displayName == displayName }.language
-                onLanguageChanged(lang)
-                showModal = false
+            values = languages,
+            onValueChanged = { language ->
+                onLanguageChanged(language.value)
             },
         )
     }

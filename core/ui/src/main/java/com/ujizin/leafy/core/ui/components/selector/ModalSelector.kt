@@ -22,13 +22,13 @@ import androidx.compose.ui.unit.dp
 import com.ujizin.leafy.core.ui.extensions.capitalize
 
 @Composable
-fun ModalSelector(
+fun <T : Any> ModalSelector(
     modifier: Modifier = Modifier,
     title: String,
     enabled: Boolean = true,
-    currentValue: String,
-    values: List<String>,
-    onValueChanged: (String) -> Unit,
+    currentValue: ModalValue<T>,
+    values: List<ModalValue<T>>,
+    onValueChanged: (ModalValue<T>) -> Unit,
 ) {
     Column(modifier) {
         Text(
@@ -38,21 +38,22 @@ fun ModalSelector(
         )
         Spacer(modifier = Modifier.height(16.dp))
         LazyColumn {
-            items(values) { text ->
+            items(values) { value ->
                 ModalItemSelector(
                     Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 20.dp, vertical = 16.dp),
-                    text = text.capitalize(),
+                    text = value.name.capitalize(),
                     enabled = enabled,
-                    selected = currentValue == text,
+                    selected = currentValue == value,
                 ) {
-                    onValueChanged(text)
+                    onValueChanged(value)
                 }
             }
         }
     }
 }
+
 
 @Composable
 fun ModalItemSelector(

@@ -8,6 +8,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.ujizin.leafy.core.ui.components.selector.ModalSelector
+import com.ujizin.leafy.core.ui.components.selector.ModalValue
 import com.ujizin.leafy.core.ui.components.selector.Selector
 import com.ujizin.leafy.core.ui.extensions.capitalize
 import com.ujizin.leafy.domain.model.Theme
@@ -20,6 +21,8 @@ fun ThemeSelector(
     onThemeChanged: (Theme) -> Unit,
 ) {
     var showModal by remember { mutableStateOf(false) }
+    val themes = remember { Theme.values().map { ModalValue(it.name, it) } }
+    val currentTheme = remember(theme) { ModalValue(theme.name, theme) }
     Selector(
         modifier = modifier,
         title = stringResource(R.string.app_theme).capitalize(),
@@ -29,9 +32,9 @@ fun ThemeSelector(
     ) {
         ModalSelector(
             title = stringResource(R.string.app_theme).capitalize(),
-            currentValue = theme.toString(),
-            values = Theme.values().map(Theme::toString),
-            onValueChanged = { onThemeChanged(Theme.valueOf(it)) },
+            currentValue = currentTheme,
+            values = themes,
+            onValueChanged = { onThemeChanged(it.value) },
         )
     }
 }

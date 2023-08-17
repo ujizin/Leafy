@@ -1,7 +1,5 @@
 package com.ujizin.leafy.domain.model
 
-import android.content.Context
-import android.media.RingtoneManager
 import android.net.Uri
 
 /**
@@ -16,9 +14,3 @@ data class Ringtone(
     val title: String,
     val uri: Uri,
 )
-
-fun Ringtone?.orDefault(context: Context) = this ?: run {
-    val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
-    val ringtone = RingtoneManager.getRingtone(context, uri)
-    Ringtone("0", ringtone.getTitle(context), uri)
-}
