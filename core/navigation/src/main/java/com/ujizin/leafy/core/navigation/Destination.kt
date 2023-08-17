@@ -11,7 +11,6 @@ enum class Destination(
     Publish("publish"),
     Alarm("alarm"),
     About("about"),
-    Review("review"),
     PlantDetails("plant/{${Args.PlantId}}"),
     PlantEdit("plant/${Args.PlantId}"),
     ;
