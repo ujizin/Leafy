@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
@@ -40,7 +40,7 @@ internal fun DrawerContent(
                 title = LocalUser.current.nickname,
                 subTitle = stringResource(R.string.edit_name).capitalize(),
             )
-            Divider(Modifier.padding(vertical = 16.dp))
+            HorizontalDivider(Modifier.padding(vertical = 16.dp))
             DrawerItems(
                 drawerItems = remember { DrawerItem.values().toList() },
                 drawerItem = drawerItem,
