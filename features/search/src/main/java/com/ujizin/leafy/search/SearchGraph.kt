@@ -1,6 +1,5 @@
 package com.ujizin.leafy.search
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
@@ -12,7 +11,6 @@ import com.ujizin.leafy.core.navigation.composable
 import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.search.ui.SearchRoute
 
-@OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.searchGraph(
     enterTransition: AnimatedEnterTransition,
     exitTransition: AnimatedExitTransition,

@@ -34,7 +34,9 @@ import com.ujizin.leafy.core.components.R as CR
 @Composable
 fun About(onBackPressed: OnClick) {
     Section(
-        modifier = Modifier.verticalScroll(rememberScrollState()),
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .background(MaterialTheme.colorScheme.background),
         headerPaddingValues = PaddingValues(start = 20.dp, top = 16.dp),
         trailingIcon = {
             AnimatedButtonIcon(icon = Icons.Back, onClick = onBackPressed)

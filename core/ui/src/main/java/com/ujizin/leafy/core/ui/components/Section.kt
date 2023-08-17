@@ -60,6 +60,7 @@ private fun HeaderSection(
 ) {
     val paddingTop by animateDpAsState(
         targetValue = if (trailingIcon != null || leadingIcon != null) 24.dp else 0.dp,
+        label = "header-padding",
     )
     Column(modifier) {
         Toolbar(trailingIcon = trailingIcon, leadingIcon = leadingIcon)
