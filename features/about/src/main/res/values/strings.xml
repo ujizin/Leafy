@@ -3,5 +3,5 @@
     <string name="about">about</string>
     <string name="about_button">visit project on GitHub</string>
     <string name="about_project_url" translatable="false">https://github.com/ujizin/CameraReminder</string>
-    <string name="about_description">The project was created to stay updated on Android development while pursuing my new hobby of plants. If you are an Android developer, please feel free to access or contribute to the open-source project!</string>
+    <string name="about_description">The project was created to stay updated on Android development. If you are an Android developer, please feel free to access or contribute to the open-source project!</string>
 </resources>
