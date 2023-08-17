@@ -13,7 +13,7 @@ fun NavGraphBuilder.aboutGraph(
     composable(
         destination = Destination.About,
         enterTransition = { fullSlideInVertically() },
-        exitTransition = { fullSlideOutVertically() }
+        exitTransition = { fullSlideOutVertically() },
     ) {
         About(onBackPressed = onBackPressed)
     }

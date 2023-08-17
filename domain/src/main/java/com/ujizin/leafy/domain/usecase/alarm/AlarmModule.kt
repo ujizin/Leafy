@@ -45,5 +45,4 @@ object AlarmModule {
     fun provideDeleteAlarm(
         repository: AlarmRepository,
     ): DeleteAlarm = DeleteAlarmImpl(repository)
-
 }

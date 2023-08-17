@@ -58,7 +58,7 @@ fun TasksRoute(
         uiState = uiState,
         onPlantClick = onPlantClick,
         onTakePictureClick = onTakePictureClick,
-        onDrawerClick = onDrawerClick
+        onDrawerClick = onDrawerClick,
     )
 }
 
@@ -88,7 +88,7 @@ private fun Tasks(
             TasksUiState.Empty -> item {
                 EmptySection(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = onTakePictureClick
+                    onClick = onTakePictureClick,
                 )
             }
 
@@ -151,7 +151,7 @@ private fun PlantItem(
                 .size(80.dp)
                 .clip(MaterialTheme.shapes.small),
             model = task.plant.file,
-            contentDescription = task.plant.title
+            contentDescription = task.plant.title,
         )
         Column(modifier = Modifier.padding(start = 8.dp)) {
             Text(

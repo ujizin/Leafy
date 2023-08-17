@@ -1,7 +1,6 @@
 package com.ujizin.leafy.user
 
 import android.app.LocaleManager
-import android.content.Context
 import android.os.Build
 import android.os.LocaleList
 import androidx.appcompat.app.AppCompatActivity

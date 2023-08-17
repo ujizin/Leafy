@@ -10,7 +10,6 @@ import androidx.core.app.AlarmManagerCompat
 import com.ujizin.leafy.alarm.extensions.alarmManager
 import com.ujizin.leafy.alarm.receiver.AlarmReceiver
 import java.util.Calendar
-import java.util.concurrent.TimeUnit
 
 class AlarmScheduler(private val context: Context) {
 

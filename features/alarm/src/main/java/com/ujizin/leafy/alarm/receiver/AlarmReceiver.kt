@@ -23,7 +23,8 @@ class AlarmReceiver : BroadcastReceiver() {
             SCHEDULE_ALARM_ACTION -> showAlarm(context, intent).launchIn(GlobalScope)
             Intent.ACTION_BOOT_COMPLETED,
             Intent.ACTION_MY_PACKAGE_REPLACED,
-            AlarmManager.ACTION_SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED -> {
+            AlarmManager.ACTION_SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED,
+            -> {
                 // reschedule the alarms
             }
         }

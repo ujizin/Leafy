@@ -54,7 +54,6 @@ fun <T : Any> ModalSelector(
     }
 }
 
-
 @Composable
 fun ModalItemSelector(
     modifier: Modifier = Modifier,

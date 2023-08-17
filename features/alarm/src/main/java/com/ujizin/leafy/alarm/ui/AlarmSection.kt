@@ -67,7 +67,7 @@ fun AlarmRoute(
     }
     var repeatMode: ModalValue<RepeatMode> by remember {
         mutableStateOf(
-            ModalValue(context.getString(RepeatMode.Daily.display), RepeatMode.Daily)
+            ModalValue(context.getString(RepeatMode.Daily.display), RepeatMode.Daily),
         )
     }
     val repeatValues = remember(repeatMode) {
@@ -183,8 +183,8 @@ fun AlarmScreen(
                         onRepeatChanged(
                             ModalValue(
                                 context.getString(repeatMode.display),
-                                repeatMode
-                            )
+                                repeatMode,
+                            ),
                         )
                         showCustomSelector = false
                         repeatShowModal = false

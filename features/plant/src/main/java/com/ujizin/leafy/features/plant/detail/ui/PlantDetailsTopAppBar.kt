@@ -90,9 +90,9 @@ internal fun PlantDetailsTopAppBar(
                         onDismissText = stringResource(R.string.warning_delete_dismiss),
                         onConfirmText = stringResource(R.string.warning_delete_confirm),
                         onDismiss = { showDeleteModal = false },
-                        onConfirm = onDeleteClick
+                        onConfirm = onDeleteClick,
                     )
-                }
+                },
             )
         },
         scrollBehavior = scrollBehavior,
@@ -111,12 +111,12 @@ private fun AnimatedDropDownMenu(
         modifier = modifier,
         icon = icon,
         size = 24.dp,
-        onClick = { onExpandedChanged(true) }
+        onClick = { onExpandedChanged(true) },
     )
     DropdownMenu(
         modifier = Modifier.fillMaxWidth(0.5F),
         expanded = isExpanded,
         onDismissRequest = { onExpandedChanged(false) },
-        content = content
+        content = content,
     )
 }

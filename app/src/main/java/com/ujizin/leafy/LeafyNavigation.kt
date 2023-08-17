@@ -86,7 +86,7 @@ fun LeafyNavigation(
                     )
                 },
                 onTakePictureClick = { navController.navigate(Destination.Camera) },
-                onDrawerClick = { scope.launch { drawerState.open() } }
+                onDrawerClick = { scope.launch { drawerState.open() } },
             )
             preferencesGraph(
                 enterTransition = { navigationEnterTransition(navController) },
@@ -95,8 +95,12 @@ fun LeafyNavigation(
             alarmGraph(
                 onBackPressed = navController::navigateUp,
                 onSaved = { navController.navigateUp(times = 3) },
-                enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
-                exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
+                enterTransition = {
+                    slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start)
+                },
+                exitTransition = {
+                    slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start)
+                },
             )
             cameraGraph(
                 onBackPressed = navController::navigateUp,
@@ -105,7 +109,9 @@ fun LeafyNavigation(
             publishGraph(
                 onBackPressed = navController::navigateUp,
                 onNextClick = { navController.navigate(Destination.Alarm) },
-                exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
+                exitTransition = {
+                    slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start)
+                },
             )
             aboutGraph(onBackPressed = navController::navigateUp)
             plantGraph(onBackPressed = navController::navigateUp)

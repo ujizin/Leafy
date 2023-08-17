@@ -3,7 +3,6 @@ package com.ujizin.leafy.core.repository.implementation
 import com.ujizin.leafy.core.repository.datasource.AlarmDataSource
 import com.ujizin.leafy.core.repository.mapper.AlarmMapper
 import com.ujizin.leafy.domain.model.Alarm
-import com.ujizin.leafy.domain.model.WeekDay
 import com.ujizin.leafy.domain.repository.AlarmRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

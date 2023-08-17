@@ -20,7 +20,7 @@ fun PlantEditRoute(
 
     PlantEdit(
         uiState = uiState,
-        onBackPressed = onBackPressed
+        onBackPressed = onBackPressed,
     )
 }
 
@@ -29,5 +29,4 @@ private fun PlantEdit(
     uiState: PlantEditUiState,
     onBackPressed: OnClick,
 ) {
-
 }

@@ -12,7 +12,7 @@ fun NavGraphBuilder.tasksGraph(
     exitTransition: AnimatedExitTransition,
     onPlantClick: (Long) -> Unit,
     onTakePictureClick: OnClick,
-    onDrawerClick: OnClick
+    onDrawerClick: OnClick,
 ) {
     composable(
         destination = Destination.Tasks,

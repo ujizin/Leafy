@@ -14,9 +14,8 @@ import androidx.compose.ui.unit.dp
 internal fun SearchLoading(
     autoFocus: Boolean,
     focusRequester: FocusRequester,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-
     LaunchedEffect(autoFocus) {
         if (autoFocus) focusRequester.requestFocus()
     }

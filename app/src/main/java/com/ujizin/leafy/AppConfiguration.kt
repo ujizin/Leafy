@@ -41,5 +41,4 @@ fun AppCompatActivity.AppConfiguration(
 
         MainUiState.Loading -> Unit
     }
-
 }

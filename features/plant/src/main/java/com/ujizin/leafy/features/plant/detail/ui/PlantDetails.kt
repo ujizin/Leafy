@@ -27,7 +27,7 @@ fun PlantDetailsRoute(
         onAlarmChanged = viewModel::updateAlarm,
         onDeleteClick = { plant ->
             viewModel.deletePlant(plant, onBackPressed)
-        }
+        },
     )
 }
 

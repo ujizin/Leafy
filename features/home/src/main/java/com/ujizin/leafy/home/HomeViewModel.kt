@@ -20,7 +20,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<HomeUIState>(HomeUIState.Loading)
-     val uiState = _uiState.asStateFlow()
+    val uiState = _uiState.asStateFlow()
     fun loadHome() {
         loadAllPlant()
             .mapResult()

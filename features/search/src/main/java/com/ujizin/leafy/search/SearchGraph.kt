@@ -32,7 +32,7 @@ fun NavGraphBuilder.searchGraph(
         SearchRoute(
             onDrawerClick = onDrawerClick,
             onTakePictureClick = onTakePictureClick,
-            onPlantClick = onPlantClick
+            onPlantClick = onPlantClick,
         )
     }
 }

@@ -23,7 +23,7 @@ fun WarningContent(
     onDismissText: String,
     onConfirmText: String,
     onDismiss: () -> Unit,
-    onConfirm: () -> Unit
+    onConfirm: () -> Unit,
 ) {
     Column(modifier) {
         Text(

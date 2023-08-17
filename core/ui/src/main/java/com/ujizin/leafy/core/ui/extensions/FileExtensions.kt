@@ -32,7 +32,8 @@ fun ByteArrayOutputStream.decodeToBitmapWithRotation(): Bitmap? {
         ExifInterface.ORIENTATION_FLIP_HORIZONTAL,
         ExifInterface.ORIENTATION_FLIP_VERTICAL,
         ExifInterface.ORIENTATION_TRANSPOSE,
-        ExifInterface.ORIENTATION_TRANSVERSE -> -1F to 1F
+        ExifInterface.ORIENTATION_TRANSVERSE,
+        -> -1F to 1F
 
         else -> 1F to 1F
     }

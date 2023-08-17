@@ -47,23 +47,23 @@ fun About(onBackPressed: OnClick) {
                     AnimatedButtonIcon(
                         icon = Icons.Back,
                         size = 24.dp,
-                        onClick = onBackPressed
+                        onClick = onBackPressed,
                     )
                 },
                 title = {
                     Text(
                         text = stringResource(id = R.string.about).capitalize(),
-                        style = MaterialTheme.typography.titleSmall
+                        style = MaterialTheme.typography.titleSmall,
                     )
-                }
+                },
             )
-        }
+        },
     ) {
         AboutSection(
             modifier = Modifier
                 .padding(it)
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(rememberScrollState()),
         )
     }
 }
