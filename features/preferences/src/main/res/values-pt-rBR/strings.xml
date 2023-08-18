@@ -8,4 +8,6 @@
     <string name="update">atualizar</string>
     <string name="portuguese">português</string>
     <string name="english">inglês</string>
+    <string name="rate_app">avalie o Leafy</string>
+    <string name="version">versão %s</string>
 </resources>

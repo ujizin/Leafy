@@ -79,6 +79,12 @@ internal fun PreferencesContent(
             onThemeChanged = onThemeChanged,
         )
 
+        RateAppSelector(
+            modifier = Modifier
+                .fillMaxWidth()
+                .paddingScreen(vertical = 16.dp),
+        )
+
         if (isDynamicColorAvailable) {
             HorizontalDivider(
                 modifier = Modifier

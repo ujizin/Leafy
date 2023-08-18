@@ -8,4 +8,6 @@
     <string name="update">update</string>
     <string name="portuguese">portuguese</string>
     <string name="english">english</string>
+    <string name="rate_app">rate Leafy</string>
+    <string name="version">version: %s</string>
 </resources>
