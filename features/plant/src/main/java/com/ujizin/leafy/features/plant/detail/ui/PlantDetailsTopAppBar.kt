@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
 import com.ujizin.leafy.core.ui.components.dropdown.WarningContent
@@ -35,7 +36,6 @@ internal fun PlantDetailsTopAppBar(
     title: String,
     scrollBehavior: TopAppBarScrollBehavior,
     onSharedClick: OnClick,
-    onEditClick: OnClick,
     onDeleteClick: OnClick,
 ) {
     TopAppBar(
@@ -50,6 +50,8 @@ internal fun PlantDetailsTopAppBar(
         title = {
             Text(
                 text = title.capitalize(),
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1,
                 style = MaterialTheme.typography.titleSmall,
             )
         },

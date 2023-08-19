@@ -5,6 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.ujizin.leafy.core.themes.LeafyTheme
 import com.ujizin.leafy.core.ui.components.animated.AnimatedText
@@ -21,11 +22,19 @@ fun HeaderTitle(
     subTitleStyle: TextStyle = MaterialTheme.typography.bodyMedium,
 ) {
     Column(modifier) {
-        AnimatedText(animation = animation, text = title, style = titleStyle)
+        AnimatedText(
+            animation = animation,
+            text = title,
+            style = titleStyle,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+        )
         if (subTitle != String.Empty) {
             AnimatedText(
                 animation = animation.copy(delayMillis = animation.durationMillis),
                 text = subTitle,
+                maxLines = 3,
+                overflow = TextOverflow.Ellipsis,
                 style = subTitleStyle,
             )
         }

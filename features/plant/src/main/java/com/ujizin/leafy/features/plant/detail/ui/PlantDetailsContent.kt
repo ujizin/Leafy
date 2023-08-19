@@ -66,7 +66,6 @@ internal fun PlantDetailsContent(
                 title = plant.title,
                 onSharedClick = { plant.share(context) },
                 scrollBehavior = scrollBehavior,
-                onEditClick = {},
                 onDeleteClick = { onDeleteClick(plant) },
             )
         },
@@ -90,6 +89,7 @@ internal fun PlantDetailsContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .paddingScreen(vertical = 32.dp),
+                title = plant.title.capitalize(),
                 description = plant.description.capitalize(),
             )
             HorizontalDivider(modifier = Modifier.paddingScreen())
@@ -189,9 +189,17 @@ fun AlarmRow(
 @Composable
 private fun PlantContent(
     modifier: Modifier = Modifier,
+    title: String,
     description: String,
 ) {
     Column(modifier) {
-        Text(text = description)
+        Text(
+            text = title,
+            style = MaterialTheme.typography.titleMedium
+        )
+        Text(
+            modifier = Modifier.padding(top = 16.dp),
+            text = description,
+        )
     }
 }
