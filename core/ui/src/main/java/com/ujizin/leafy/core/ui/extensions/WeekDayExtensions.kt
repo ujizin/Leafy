@@ -37,6 +37,7 @@ fun List<WeekDay>.getDisplayName(
     if (size == WeekDay.values().size) {
         return context.getString(R.string.daily)
     }
+    if (size == 1) return context.getString(first().displayNameRes)
 
     val shortNames = map { it.getShortDay(context, useCapitalize) }
 
