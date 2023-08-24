@@ -12,7 +12,7 @@ import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.mapResult
 import com.ujizin.leafy.domain.usecase.alarm.LoadAlarm
 import com.ujizin.leafy.domain.usecase.plant.LoadPlant
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.map
@@ -27,7 +27,7 @@ class ShowAlarm(
     private val alarmScheduler: AlarmScheduler,
 ) {
 
-    @OptIn(FlowPreview::class)
+    @OptIn(ExperimentalCoroutinesApi::class)
     operator fun invoke(
         context: Context,
         intent: Intent,

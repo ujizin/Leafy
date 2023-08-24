@@ -13,7 +13,7 @@ import com.ujizin.leafy.domain.usecase.alarm.UpdateAlarm
 import com.ujizin.leafy.domain.usecase.plant.DeletePlant
 import com.ujizin.leafy.domain.usecase.plant.LoadPlant
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.launchIn
@@ -34,7 +34,7 @@ class DetailPlantViewModel @Inject constructor(
 
     private val plantId: Long = checkNotNull(savedStateHandle[Args.PlantId])
 
-    @OptIn(FlowPreview::class)
+    @OptIn(ExperimentalCoroutinesApi::class)
     val uiState = loadPlant(plantId)
         .mapResult()
         .flatMapConcat { plant ->
@@ -53,7 +53,7 @@ class DetailPlantViewModel @Inject constructor(
         updateAlarmUseCase(alarm).launchIn(viewModelScope)
     }
 
-    @OptIn(FlowPreview::class)
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun deletePlant(plant: Plant, onCompletion: () -> Unit) {
         deleteAlarmUseCase(plantId)
             .flatMapConcat { deletePlantUseCase(plant) }

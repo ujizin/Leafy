@@ -15,7 +15,7 @@ import com.ujizin.leafy.domain.usecase.plant.AddPlant
 import com.ujizin.leafy.domain.usecase.plant.LoadDraftPlant
 import com.ujizin.leafy.domain.usecase.ringtone.LoadRingtones
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -48,7 +48,7 @@ class AlarmViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    @OptIn(FlowPreview::class)
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun addPlantWithAlarm(
         plantsDir: File,
         ringtone: Ringtone,
