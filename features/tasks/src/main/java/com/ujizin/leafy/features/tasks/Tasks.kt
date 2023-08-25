@@ -87,6 +87,7 @@ private fun Tasks(
             TasksUiState.Initial -> Unit
             TasksUiState.Empty -> item {
                 EmptySection(
+                    description = stringResource(id = R.string.task_empty_description),
                     modifier = Modifier.fillMaxWidth(),
                     onClick = onTakePictureClick,
                 )

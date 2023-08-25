@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="task_title">tasks</string>
+    <string name="task_empty_description">oh, it looks like that you have no task yet</string>
 </resources>
