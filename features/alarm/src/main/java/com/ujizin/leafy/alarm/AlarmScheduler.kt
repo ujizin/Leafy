@@ -7,8 +7,10 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.core.app.AlarmManagerCompat
+import androidx.core.os.bundleOf
 import com.ujizin.leafy.alarm.extensions.alarmManager
 import com.ujizin.leafy.alarm.receiver.AlarmReceiver
+import com.ujizin.leafy.domain.model.Alarm
 import java.util.Calendar
 
 class AlarmScheduler(private val context: Context) {
@@ -95,3 +97,12 @@ class AlarmScheduler(private val context: Context) {
         PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE,
     )
 }
+
+fun AlarmScheduler.scheduleAlarm(
+    alarm: Alarm
+) = scheduleAlarm(
+    hours = alarm.hours,
+    minutes = alarm.minutes,
+    ringtoneUri = alarm.ringtoneUri,
+    bundle = bundleOf(AlarmReceiver.ALARM_ID_EXTRA to alarm.id)
+)
