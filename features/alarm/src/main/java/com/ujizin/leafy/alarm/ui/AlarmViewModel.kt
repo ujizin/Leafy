@@ -3,7 +3,7 @@ package com.ujizin.leafy.alarm.ui
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ujizin.leafy.alarm.AlarmScheduler
+import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
 import com.ujizin.leafy.alarm.receiver.AlarmReceiver
 import com.ujizin.leafy.core.ui.extensions.copyAndDelete
 import com.ujizin.leafy.domain.model.Alarm
@@ -57,6 +57,7 @@ class AlarmViewModel @Inject constructor(
         weekDays: List<WeekDay>,
         onPlantPublished: () -> Unit,
     ) {
+        val ringtoneContent = ringtone.uri.toString()
         loadDraftPlant()
             .mapResult()
             .map { it.copy(file = it.file.copyAndDelete(File(plantsDir, it.file.name))) }
@@ -65,7 +66,7 @@ class AlarmViewModel @Inject constructor(
                     addAlarm(
                         Alarm(
                             plantId = id,
-                            ringtoneUri = ringtone.uri,
+                            ringtoneUriContent = ringtoneContent,
                             minutes = minutes,
                             hours = hours,
                             weekDays = weekDays.sorted(),
@@ -75,7 +76,7 @@ class AlarmViewModel @Inject constructor(
                         alarmScheduler.scheduleAlarm(
                             hours = hours,
                             minutes = minutes,
-                            ringtoneUri = ringtone.uri,
+                            ringtoneUri = ringtoneContent,
                             bundle = bundleOf(AlarmReceiver.ALARM_ID_EXTRA to alarmId),
                         )
                     }

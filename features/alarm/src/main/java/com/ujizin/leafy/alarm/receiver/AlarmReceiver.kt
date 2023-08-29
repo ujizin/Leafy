@@ -4,9 +4,12 @@ import android.app.AlarmManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.ujizin.leafy.alarm.AlarmScheduler
-import com.ujizin.leafy.alarm.ShowAlarm
-import com.ujizin.leafy.alarm.scheduleAlarm
+import android.os.Build
+import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
+import com.ujizin.leafy.alarm.AlarmService
+import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarm
+import com.ujizin.leafy.core.components.R
+import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.mapResult
 import com.ujizin.leafy.domain.usecase.alarm.LoadAlarms
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +23,7 @@ import javax.inject.Inject
 class AlarmReceiver : BroadcastReceiver() {
 
     @Inject
-    lateinit var showAlarm: ShowAlarm
+    lateinit var schedulePlantAlarm: SchedulePlantAlarm
 
     @Inject
     lateinit var loadAlarms: LoadAlarms
@@ -28,16 +31,44 @@ class AlarmReceiver : BroadcastReceiver() {
     @Inject
     lateinit var alarmScheduler: AlarmScheduler
 
+    private val Intent.alarmId get() = getLongExtra(ALARM_ID_EXTRA, -1)
+
+    private val Intent.ringtoneStringify get() = getStringExtra(RINGTONE_CONTENT_EXTRA)
+
     @OptIn(DelicateCoroutinesApi::class)
     override fun onReceive(context: Context, intent: Intent) {
         when (intent.action) {
-            SCHEDULE_ALARM_ACTION -> showAlarm(context, intent).launchIn(GlobalScope)
+            SCHEDULE_ALARM_ACTION -> schedulePlantAlarm(alarmId = intent.alarmId).onEach { plant ->
+                context.ringPlantAlarm(intent, plant)
+            }.launchIn(GlobalScope)
+
             Intent.ACTION_BOOT_COMPLETED,
             Intent.ACTION_MY_PACKAGE_REPLACED,
             AlarmManager.ACTION_SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED -> loadAlarms()
                 .mapResult()
                 .onEach { alarms -> alarms.forEach(alarmScheduler::scheduleAlarm) }
                 .launchIn(GlobalScope)
+        }
+    }
+
+    private fun Context.ringPlantAlarm(intent: Intent, plant: Plant) = startAlarmService(
+        serviceIntent = getAlarmServiceIntent(plant, intent.ringtoneStringify)
+    )
+
+    private fun Context.getAlarmServiceIntent(
+        plant: Plant,
+        ringtone: String?,
+    ) = Intent(this, AlarmService::class.java).apply {
+        putExtra(AlarmService.TITLE_ARG, getString(R.string.app_name))
+        putExtra(AlarmService.DESCRIPTION_ARG, plant.title)
+        putExtra(AlarmService.RINGTONE_URI_STRINGIFY_ARG, ringtone)
+    }
+
+    private fun Context.startAlarmService(serviceIntent: Intent) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(serviceIntent)
+        } else {
+            startService(serviceIntent)
         }
     }
 

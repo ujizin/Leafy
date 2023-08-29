@@ -1,6 +1,5 @@
 package com.ujizin.leafy.core.repository.mapper
 
-import android.net.Uri
 import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.model.WeekDay
 import com.ujizin.leafy.core.repository.model.Alarm as RepoAlarm
@@ -14,7 +13,7 @@ class AlarmMapper {
         RepoAlarm(
             id = id,
             plantId = plantId,
-            ringtoneUriString = ringtoneUri.toString(),
+            ringtoneUriString = ringtoneUriContent,
             hours = hours,
             minutes = minutes,
             enabled = enabled,
@@ -26,7 +25,7 @@ class AlarmMapper {
         Alarm(
             id = id,
             plantId = plantId,
-            ringtoneUri = Uri.parse(ringtoneUriString),
+            ringtoneUriContent = ringtoneUriString,
             hours = hours,
             minutes = minutes,
             enabled = enabled,

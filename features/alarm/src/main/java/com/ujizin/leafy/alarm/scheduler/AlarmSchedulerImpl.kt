@@ -1,37 +1,26 @@
-package com.ujizin.leafy.alarm
+package com.ujizin.leafy.alarm.scheduler
 
-import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.core.app.AlarmManagerCompat
-import androidx.core.os.bundleOf
+import androidx.core.net.toUri
 import com.ujizin.leafy.alarm.extensions.alarmManager
 import com.ujizin.leafy.alarm.receiver.AlarmReceiver
-import com.ujizin.leafy.domain.model.Alarm
 import java.util.Calendar
 
-class AlarmScheduler(private val context: Context) {
+internal class AlarmSchedulerImpl(private val context: Context) : AlarmScheduler {
 
-    /**
-     * Schedule alarm on Android System.
-     *
-     * @param type alarm manager's type, default is rtc wakeup
-     * @param hours the alarm's hours
-     * @param minutes the alarm's minutes
-     * @param ringtoneUri the alarm's ringtone uri
-     * @param bundle bundle for pending intent
-     * */
-    fun scheduleAlarm(
-        type: Int = AlarmManager.RTC_WAKEUP,
+    override fun scheduleAlarm(
+        type: Int,
         hours: Int,
         minutes: Int,
-        ringtoneUri: Uri,
-        bundle: Bundle = Bundle.EMPTY,
+        ringtoneUri: String,
+        bundle: Bundle
     ) {
-        setAlarm(type, hours, minutes, ringtoneUri, bundle)
+        setAlarm(type, hours, minutes, ringtoneUri.toUri(), bundle)
     }
 
     /**
@@ -71,7 +60,7 @@ class AlarmScheduler(private val context: Context) {
         timeInMillis = currentTimeInMillis
         set(Calendar.HOUR_OF_DAY, hours)
         set(Calendar.MINUTE, minutes)
-        if (timeInMillis <= System.currentTimeMillis()) {
+        if (timeInMillis <= currentTimeInMillis) {
             add(Calendar.DATE, 1)
         }
 
@@ -97,12 +86,3 @@ class AlarmScheduler(private val context: Context) {
         PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE,
     )
 }
-
-fun AlarmScheduler.scheduleAlarm(
-    alarm: Alarm
-) = scheduleAlarm(
-    hours = alarm.hours,
-    minutes = alarm.minutes,
-    ringtoneUri = alarm.ringtoneUri,
-    bundle = bundleOf(AlarmReceiver.ALARM_ID_EXTRA to alarm.id)
-)

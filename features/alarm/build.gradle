@@ -8,6 +8,10 @@ apply from: "$rootDir/config-android.gradle"
 
 android {
     namespace 'com.ujizin.leafy.features.alarm'
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -16,4 +20,8 @@ dependencies {
 
     implementation projects.core.themes
     implementation projects.domain
+
+    testImplementation libs.bundles.test
+    testImplementation projects.core.test
+    testImplementation libs.coroutines.test
 }

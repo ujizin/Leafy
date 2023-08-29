@@ -1,6 +1,9 @@
 package com.ujizin.leafy.alarm
 
 import android.content.Context
+import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
+import com.ujizin.leafy.alarm.scheduler.AlarmSchedulerImpl
+import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarm
 import com.ujizin.leafy.domain.usecase.alarm.LoadAlarm
 import com.ujizin.leafy.domain.usecase.plant.LoadPlant
 import dagger.Module
@@ -16,7 +19,7 @@ object AlarmModule {
 
     @Provides
     @Singleton
-    fun provideAlarmScheduler(@ApplicationContext context: Context) = AlarmScheduler(context)
+    fun provideAlarmScheduler(@ApplicationContext context: Context): AlarmScheduler = AlarmSchedulerImpl(context)
 
     @Provides
     @Singleton
@@ -24,5 +27,5 @@ object AlarmModule {
         loadPlant: LoadPlant,
         loadAlarm: LoadAlarm,
         alarmScheduler: AlarmScheduler,
-    ) = ShowAlarm(loadPlant, loadAlarm, alarmScheduler)
+    ) = SchedulePlantAlarm(loadPlant, loadAlarm, alarmScheduler)
 }
