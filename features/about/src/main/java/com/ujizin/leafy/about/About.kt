@@ -74,7 +74,7 @@ private fun AboutSection(modifier: Modifier = Modifier) {
         val context = LocalContext.current
         Image(
             modifier = Modifier
-                .background(MaterialTheme.colorScheme.secondaryContainer)
+                .background(MaterialTheme.colorScheme.onSecondaryContainer)
                 .aspectRatio(2F),
             contentScale = ContentScale.Fit,
             painter = painterResource(id = CR.drawable.ic_launcher_foreground),
