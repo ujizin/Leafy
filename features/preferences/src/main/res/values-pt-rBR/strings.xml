@@ -10,4 +10,8 @@
     <string name="english">inglês</string>
     <string name="rate_app">avalie o Leafy</string>
     <string name="version">versão %s</string>
+    <string name="system">sistema</string>
+    <string name="dark">escuro</string>
+    <string name="light">claro</string>
+
 </resources>

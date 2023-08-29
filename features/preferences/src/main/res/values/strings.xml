@@ -10,4 +10,7 @@
     <string name="english">english</string>
     <string name="rate_app">rate Leafy</string>
     <string name="version">version: %s</string>
+    <string name="system">system</string>
+    <string name="dark">dark</string>
+    <string name="light">light</string>
 </resources>
