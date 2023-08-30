@@ -19,3 +19,4 @@ local.properties
 /**/build/
 
 app/google-services.json
+app/**/google-services.json

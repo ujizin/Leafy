@@ -17,6 +17,23 @@ android {
         versionCode 1
         versionName "0.1.0"
     }
+
+    buildTypes {
+
+        release {
+            minifyEnabled true
+            consumerProguardFiles 'proguard-rules.pro'
+            resValue "string", "app_name", "Leafy"
+        }
+
+        debug {
+            minifyEnabled false
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+            consumerProguardFiles 'proguard-rules.pro'
+            resValue "string", "app_name", "Leafy Dev"
+        }
+    }
 }
 
 dependencies {
