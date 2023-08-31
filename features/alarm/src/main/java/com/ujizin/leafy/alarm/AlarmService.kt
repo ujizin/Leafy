@@ -8,6 +8,7 @@ import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.media.RingtoneManager
 import android.net.Uri
+import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.ujizin.leafy.core.ui.props.RequestCode
@@ -21,11 +22,21 @@ class AlarmService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
-            STOP_ACTION -> stopSelf()
+            STOP_ACTION -> stopService()
             else -> startAlarm(intent)
         }
 
         return START_NOT_STICKY
+    }
+
+    private fun stopService() {
+        stopForeground()
+        stopSelf()
+    }
+
+    private fun stopForeground() = when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.N -> stopForeground(STOP_FOREGROUND_DETACH)
+        else -> stopForeground(true)
     }
 
     private fun startAlarm(intent: Intent?) {
