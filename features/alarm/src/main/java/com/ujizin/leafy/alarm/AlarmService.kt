@@ -11,14 +11,21 @@ import android.net.Uri
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import com.ujizin.leafy.alarm.notificator.AlarmNotificator
 import com.ujizin.leafy.core.ui.props.RequestCode
 import com.ujizin.leafy.features.alarm.R
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
+import javax.inject.Inject
 import com.ujizin.leafy.core.components.R as CR
 
+@AndroidEntryPoint
 class AlarmService : Service() {
 
     private var mediaPlayer: MediaPlayer? = null
+
+    @Inject
+    lateinit var alarmNotificator: AlarmNotificator
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
@@ -42,7 +49,7 @@ class AlarmService : Service() {
     private fun startAlarm(intent: Intent?) {
         playRingtone(getRingtoneUri(intent))
         val notification = getNotification(intent)
-        startForeground(1, notification)
+        startForeground(NOTIFICATION_ID, notification)
     }
 
     private fun getRingtoneUri(
@@ -57,8 +64,7 @@ class AlarmService : Service() {
         val contentIntent = launcherAppIntent()
         val stopIntent = alarmIntent(action = STOP_ACTION)
 
-        return AlarmNotificator.getNotification(
-            context = this,
+        return alarmNotificator.getNotification(
             title = title,
             description = description,
             contentIntent = contentIntent,
@@ -108,12 +114,14 @@ class AlarmService : Service() {
         super.onDestroy()
         mediaPlayer?.stop()
         mediaPlayer?.release()
+        alarmNotificator.cancelNotification(NOTIFICATION_ID)
         mediaPlayer = null
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
 
     companion object {
+        private const val NOTIFICATION_ID = 1
         internal const val TITLE_ARG = "alarm_title"
         internal const val DESCRIPTION_ARG = "alarm_description"
         internal const val RINGTONE_URI_STRINGIFY_ARG = "alarm_ringtone_uri_stringify"

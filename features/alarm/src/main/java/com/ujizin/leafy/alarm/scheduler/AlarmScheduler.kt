@@ -6,6 +6,9 @@ import androidx.core.os.bundleOf
 import com.ujizin.leafy.alarm.receiver.AlarmReceiver
 import com.ujizin.leafy.domain.model.Alarm
 
+/**
+ * Create alarm scheduler for Android Alarm Manager system.
+ * */
 interface AlarmScheduler {
 
     /**

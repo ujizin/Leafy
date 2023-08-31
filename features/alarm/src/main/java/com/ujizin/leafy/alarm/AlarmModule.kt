@@ -1,6 +1,8 @@
 package com.ujizin.leafy.alarm
 
 import android.content.Context
+import com.ujizin.leafy.alarm.notificator.AlarmNotificator
+import com.ujizin.leafy.alarm.notificator.AlarmNotificatorImpl
 import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
 import com.ujizin.leafy.alarm.scheduler.AlarmSchedulerImpl
 import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarm
@@ -19,7 +21,9 @@ object AlarmModule {
 
     @Provides
     @Singleton
-    fun provideAlarmScheduler(@ApplicationContext context: Context): AlarmScheduler = AlarmSchedulerImpl(context)
+    fun provideAlarmScheduler(
+        @ApplicationContext context: Context
+    ): AlarmScheduler = AlarmSchedulerImpl(context)
 
     @Provides
     @Singleton
@@ -28,4 +32,10 @@ object AlarmModule {
         loadAlarm: LoadAlarm,
         alarmScheduler: AlarmScheduler,
     ) = SchedulePlantAlarm(loadPlant, loadAlarm, alarmScheduler)
+
+    @Provides
+    @Singleton
+    fun provideAlarmNotificator(
+        @ApplicationContext context: Context
+    ): AlarmNotificator = AlarmNotificatorImpl(context)
 }
