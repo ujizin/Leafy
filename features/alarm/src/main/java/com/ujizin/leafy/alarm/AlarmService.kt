@@ -6,11 +6,12 @@ import android.app.Service
 import android.content.Intent
 import android.media.AudioAttributes
 import android.media.MediaPlayer
-import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import com.ujizin.leafy.alarm.extensions.plantId
+import com.ujizin.leafy.alarm.extensions.ringtoneUri
 import com.ujizin.leafy.alarm.notificator.AlarmNotificator
 import com.ujizin.leafy.core.ui.props.RequestCode
 import com.ujizin.leafy.features.alarm.R
@@ -30,7 +31,7 @@ class AlarmService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
             STOP_ACTION -> stopService()
-            else -> startAlarm(intent)
+            else -> intent?.let(::startAlarm)
         }
 
         return START_NOT_STICKY
@@ -46,22 +47,15 @@ class AlarmService : Service() {
         else -> stopForeground(true)
     }
 
-    private fun startAlarm(intent: Intent?) {
-        playRingtone(getRingtoneUri(intent))
-        val notification = getNotification(intent)
-        startForeground(NOTIFICATION_ID, notification)
+    private fun startAlarm(intent: Intent) {
+        intent.ringtoneUri.play()
+        startForeground(NOTIFICATION_ID, intent.getNotification())
     }
 
-    private fun getRingtoneUri(
-        intent: Intent?,
-    ): Uri = intent?.getStringExtra(RINGTONE_URI_STRINGIFY_ARG)
-        ?.let(Uri::parse)
-        .orDefaultRingtone()
-
-    private fun getNotification(intent: Intent?): Notification {
-        val title = intent?.getStringExtra(TITLE_ARG) ?: getString(CR.string.app_name)
-        val description = intent?.getStringExtra(DESCRIPTION_ARG) ?: getString(CR.string.alarm)
-        val contentIntent = launcherAppIntent()
+    private fun Intent.getNotification(): Notification {
+        val title = getStringExtra(TITLE_ARG) ?: getString(CR.string.app_name)
+        val description = getStringExtra(DESCRIPTION_ARG) ?: getString(CR.string.alarm)
+        val contentIntent = getPendingIntent(plantId)
         val stopIntent = alarmIntent(action = STOP_ACTION)
 
         return alarmNotificator.getNotification(
@@ -83,16 +77,17 @@ class AlarmService : Service() {
         PendingIntent.FLAG_IMMUTABLE,
     )
 
-    private fun launcherAppIntent() = PendingIntent.getActivity(
+    private fun getPendingIntent(plantId: Long) = PendingIntent.getActivity(
         this,
         RequestCode.ALARM,
         packageManager.getLaunchIntentForPackage(packageName)?.apply {
             action = STOP_ACTION
+            putExtra(PLANT_ID, plantId)
         },
         PendingIntent.FLAG_IMMUTABLE,
     )
 
-    private fun playRingtone(uri: Uri) {
+    private fun Uri.play() {
         try {
             val audioAttributes = AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ALARM)
@@ -100,7 +95,7 @@ class AlarmService : Service() {
                 .build()
 
             mediaPlayer = MediaPlayer().apply {
-                setDataSource(this@AlarmService, uri)
+                setDataSource(this@AlarmService, this@play)
                 setAudioAttributes(audioAttributes)
                 isLooping = true
                 prepareAsync()
@@ -125,9 +120,7 @@ class AlarmService : Service() {
         internal const val TITLE_ARG = "alarm_title"
         internal const val DESCRIPTION_ARG = "alarm_description"
         internal const val RINGTONE_URI_STRINGIFY_ARG = "alarm_ringtone_uri_stringify"
+        const val PLANT_ID = "alarm_plant_id"
         const val STOP_ACTION = "alarm_service_stop"
     }
 }
-
-private fun Uri?.orDefaultRingtone(): Uri =
-    this ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)

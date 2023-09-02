@@ -8,12 +8,18 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.rememberDrawerState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.ujizin.leafy.alarm.AlarmService
+import com.ujizin.leafy.alarm.extensions.plantId
+import com.ujizin.leafy.core.navigation.Args
+import com.ujizin.leafy.core.navigation.Destination
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -22,11 +28,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        if (intent.action == AlarmService.STOP_ACTION) {
-            stopService(Intent(this, AlarmService::class.java))
-        }
-
         WindowCompat.setDecorFitsSystemWindows(window, false)
         installSplashScreen()
         setupContent()
@@ -40,11 +41,29 @@ class MainActivity : AppCompatActivity() {
                 val drawerState = rememberDrawerState(DrawerValue.Closed)
                 val scope = rememberCoroutineScope()
 
+                LaunchPlantDetail(navController)
+
                 LeafyNavigation(
                     navController = navController,
                     drawerState = drawerState,
                     onBackPressed = { scope.launch { navController.navigateUp(drawerState) } },
                 )
+            }
+        }
+    }
+
+    @Composable
+    private fun LaunchPlantDetail(navController: NavHostController) {
+        LaunchedEffect(intent.plantId) {
+            if (intent.plantId != -1L) {
+                if (intent.action == AlarmService.STOP_ACTION) {
+                    stopService(Intent(this@MainActivity, AlarmService::class.java))
+                }
+
+                val plantDetailDestination = Destination.PlantDetails.withArguments(
+                    Args.PlantId to intent.plantId
+                )
+                navController.navigate(plantDetailDestination)
             }
         }
     }

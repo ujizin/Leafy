@@ -7,6 +7,8 @@ import android.content.Intent
 import android.os.Build
 import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
 import com.ujizin.leafy.alarm.AlarmService
+import com.ujizin.leafy.alarm.extensions.alarmId
+import com.ujizin.leafy.alarm.extensions.ringtoneStringify
 import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarm
 import com.ujizin.leafy.core.components.R
 import com.ujizin.leafy.domain.model.Plant
@@ -30,10 +32,6 @@ class AlarmReceiver : BroadcastReceiver() {
 
     @Inject
     lateinit var alarmScheduler: AlarmScheduler
-
-    private val Intent.alarmId get() = getLongExtra(ALARM_ID_EXTRA, -1)
-
-    private val Intent.ringtoneStringify get() = getStringExtra(RINGTONE_CONTENT_EXTRA)
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onReceive(context: Context, intent: Intent) {
@@ -59,6 +57,7 @@ class AlarmReceiver : BroadcastReceiver() {
         plant: Plant,
         ringtone: String?,
     ) = Intent(this, AlarmService::class.java).apply {
+        putExtra(AlarmService.PLANT_ID, plant.id)
         putExtra(AlarmService.TITLE_ARG, getString(R.string.app_name))
         putExtra(AlarmService.DESCRIPTION_ARG, plant.title)
         putExtra(AlarmService.RINGTONE_URI_STRINGIFY_ARG, ringtone)
