@@ -1,5 +1,6 @@
 package com.ujizin.leafy.alarm.ui
 
+import android.media.AudioAttributes
 import android.media.RingtoneManager
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
@@ -276,7 +277,13 @@ fun RingtoneEffect(ringtonePlayer: android.media.Ringtone, isModalVisible: Boole
     }
 
     LaunchedEffect(ringtonePlayer) {
-        if (isModalVisible && !ringtonePlayer.isPlaying) ringtonePlayer.play()
+        if (isModalVisible && !ringtonePlayer.isPlaying) {
+            ringtonePlayer.audioAttributes = AudioAttributes
+                .Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build()
+            ringtonePlayer.play()
+        }
     }
 
     LaunchedEffect(isModalVisible) {
