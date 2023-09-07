@@ -92,7 +92,10 @@ internal fun PlantDetailsTopAppBar(
                         onDismissText = stringResource(R.string.warning_delete_dismiss),
                         onConfirmText = stringResource(R.string.warning_delete_confirm),
                         onDismiss = { showDeleteModal = false },
-                        onConfirm = onDeleteClick,
+                        onConfirm = {
+                            showDeleteModal = false
+                            onDeleteClick()
+                        },
                     )
                 },
             )

@@ -5,6 +5,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import kotlinx.coroutines.launch
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -14,15 +19,18 @@ fun ModalBottomSheet(
     onModalStateChanged: (Boolean) -> Unit,
     content: @Composable ColumnScope.() -> Unit,
 ) {
+    var isAnimating by remember(Unit) { mutableStateOf(showModal) }
     val modalState = rememberModalBottomSheetState(
         skipPartiallyExpanded = skipPartiallyExpanded,
     )
 
     LaunchedEffect(showModal) {
-        if (showModal) modalState.show() else modalState.hide()
+        launch {
+            if (showModal) modalState.show() else modalState.hide()
+        }.invokeOnCompletion { isAnimating = showModal }
     }
 
-    if (showModal) {
+    if (showModal || isAnimating) {
         androidx.compose.material3.ModalBottomSheet(
             sheetState = modalState,
             onDismissRequest = { onModalStateChanged(false) },
