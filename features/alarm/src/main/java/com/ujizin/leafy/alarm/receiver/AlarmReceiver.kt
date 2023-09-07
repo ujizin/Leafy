@@ -5,24 +5,33 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
+import android.os.PowerManager
 import com.ujizin.leafy.alarm.AlarmService
 import com.ujizin.leafy.alarm.extensions.alarmId
 import com.ujizin.leafy.alarm.extensions.ringtoneStringify
+import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
 import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarm
 import com.ujizin.leafy.core.components.R
+import com.ujizin.leafy.core.ui.extensions.createWakeLock
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.mapResult
 import com.ujizin.leafy.domain.usecase.alarm.LoadAlarms
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
+import kotlin.time.Duration.Companion.minutes
 
 @AndroidEntryPoint
 class AlarmReceiver : BroadcastReceiver() {
+
+    private val tag = javaClass.canonicalName ?: javaClass.name
+
+    private lateinit var wakeLock: PowerManager.WakeLock
 
     @Inject
     lateinit var schedulePlantAlarm: SchedulePlantAlarm
@@ -35,18 +44,25 @@ class AlarmReceiver : BroadcastReceiver() {
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onReceive(context: Context, intent: Intent) {
+        wakeLock = context.createWakeLock(tag).apply {
+            acquire(10.minutes.inWholeMicroseconds)
+        }
+
         when (intent.action) {
             SCHEDULE_ALARM_ACTION -> schedulePlantAlarm(alarmId = intent.alarmId).onEach { plant ->
                 context.ringPlantAlarm(intent, plant)
-            }.launchIn(GlobalScope)
+            }
 
             Intent.ACTION_BOOT_COMPLETED,
             Intent.ACTION_MY_PACKAGE_REPLACED,
             AlarmManager.ACTION_SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED -> loadAlarms()
                 .mapResult()
                 .onEach { alarms -> alarms.forEach(alarmScheduler::scheduleAlarm) }
-                .launchIn(GlobalScope)
-        }
+
+            else -> emptyFlow()
+        }.onCompletion {
+            wakeLock.release()
+        }.launchIn(GlobalScope)
     }
 
     private fun Context.ringPlantAlarm(intent: Intent, plant: Plant) = startAlarmService(
