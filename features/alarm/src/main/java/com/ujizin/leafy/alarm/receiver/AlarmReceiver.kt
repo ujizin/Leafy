@@ -29,7 +29,9 @@ import kotlin.time.Duration.Companion.minutes
 @AndroidEntryPoint
 class AlarmReceiver : BroadcastReceiver() {
 
-    private val tag = javaClass.canonicalName ?: javaClass.name
+    private val tag by lazy {
+        "tag-${javaClass.canonicalName ?: javaClass.name}"
+    }
 
     private lateinit var wakeLock: PowerManager.WakeLock
 
