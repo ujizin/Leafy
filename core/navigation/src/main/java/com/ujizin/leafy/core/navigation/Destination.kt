@@ -28,7 +28,7 @@ enum class Destination(
     companion object {
         private const val HOST = "app://leafy"
 
-        fun findByName(destinationName: String?) = values().find {
+        fun findByName(destinationName: String?) = entries.find {
             it.route == destinationName
         }
     }

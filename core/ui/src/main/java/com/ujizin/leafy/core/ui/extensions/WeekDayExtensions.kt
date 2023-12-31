@@ -7,7 +7,7 @@ import com.ujizin.leafy.domain.model.WeekDay
 import java.util.Calendar
 
 val currentDay: WeekDay
-    get() = WeekDay.values()[Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1]
+    get() = WeekDay.entries[Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1]
 
 val WeekDay.displayNameRes: Int
     @StringRes
@@ -34,7 +34,7 @@ fun List<WeekDay>.getDisplayName(
 ): String {
     if (isEmpty()) return String.Empty
 
-    if (size == WeekDay.values().size) {
+    if (size == WeekDay.entries.size) {
         return context.getString(R.string.daily)
     }
     if (size == 1) return context.getString(first().displayNameRes)
@@ -52,6 +52,6 @@ fun List<WeekDay>.getDisplayName(
     }
 }
 
-fun Array<WeekDay>.reorderByCurrentDay(): List<WeekDay> = toList()
+fun List<WeekDay>.reorderByCurrentDay(): List<WeekDay> = toList()
     .drop(currentDay.ordinal)
     .plus(take(currentDay.ordinal))

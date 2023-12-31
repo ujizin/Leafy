@@ -178,7 +178,7 @@ fun AlarmScreen(
                     title = stringResource(id = R.string.custom),
                     currentValues = repeat.value.asCustom()?.customWeekDays?.mapToModalValue()
                         .orEmpty(),
-                    values = WeekDay.values().toList().mapToModalValue(),
+                    values = WeekDay.entries.toList().mapToModalValue(),
                     onValuesSelected = { weekDays ->
                         val repeatMode = RepeatMode.Custom(weekDays.map { it.value })
                         onRepeatChanged(

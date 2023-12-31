@@ -1,5 +1,6 @@
 package com.ujizin.leafy.home
 
+import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ujizin.leafy.domain.model.Plant
@@ -31,8 +32,12 @@ class HomeViewModel @Inject constructor(
 }
 
 sealed interface HomeUIState {
+    @Immutable
     data class Success(val plants: List<Plant>) : HomeUIState
 
+    @Immutable
     data class Error(val throwable: Throwable?) : HomeUIState
-    object Loading : HomeUIState
+
+    @Immutable
+    data object Loading : HomeUIState
 }

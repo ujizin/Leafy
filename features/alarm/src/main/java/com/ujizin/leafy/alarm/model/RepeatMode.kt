@@ -8,11 +8,11 @@ sealed class RepeatMode(
     @StringRes val display: Int,
     val weekDays: List<WeekDay>,
 ) {
-    object Daily : RepeatMode(R.string.daily, WeekDay.values().toList())
+    data object Daily : RepeatMode(R.string.daily, WeekDay.entries)
 
-    object MonToFriday : RepeatMode(
+    data object MonToFriday : RepeatMode(
         R.string.mon_to_friday,
-        WeekDay.values().filter { it != WeekDay.Saturday && it != WeekDay.Sunday },
+        WeekDay.entries.filter { it != WeekDay.Saturday && it != WeekDay.Sunday },
     )
 
     data class Custom(val customWeekDays: List<WeekDay>) :

@@ -42,7 +42,7 @@ internal fun DrawerContent(
             )
             HorizontalDivider(Modifier.padding(vertical = 16.dp))
             DrawerItems(
-                drawerItems = remember { DrawerItem.values().toList() },
+                drawerItems = remember { DrawerItem.entries.toList() },
                 drawerItem = drawerItem,
                 onDrawerClicked = onDrawerClicked,
                 onCloseDrawer = onCloseDrawer,

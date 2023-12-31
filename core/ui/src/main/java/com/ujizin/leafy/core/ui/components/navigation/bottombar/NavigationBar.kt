@@ -24,7 +24,7 @@ internal fun NavigationBar(
     val navItem by navController.currentNavItemAsState<BottomNavItem>()
     val isKeyboardOpen by keyboardAsState()
     val isBottomNavItem = remember(navItem) {
-        BottomNavItem.values().any { bottomNavItem ->
+        BottomNavItem.entries.any { bottomNavItem ->
             bottomNavItem.destination != Destination.Camera &&
                 bottomNavItem.destination == navItem?.destination
         }
@@ -33,7 +33,7 @@ internal fun NavigationBar(
     BottomNavigationBar(
         bottomNavItem = navItem,
         showBottomNavigation = isBottomNavItem && !isKeyboardOpen,
-        bottomNavItems = remember { BottomNavItem.values().toList() },
+        bottomNavItems = remember { BottomNavItem.entries.toList() },
         onNavItemClicked = { destination ->
             navController.navigateToItem(destination)
         },

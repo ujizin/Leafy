@@ -25,7 +25,7 @@ fun ThemeSelector(
     val context = LocalContext.current
     var showModal by remember { mutableStateOf(false) }
     val themes = remember {
-        Theme.values().map { ModalValue(context.getString(it.displayResId), it) }
+        Theme.entries.map { ModalValue(context.getString(it.displayResId), it) }
     }
     val currentTheme = remember(theme) {
         ModalValue(context.getString(theme.displayResId), theme)

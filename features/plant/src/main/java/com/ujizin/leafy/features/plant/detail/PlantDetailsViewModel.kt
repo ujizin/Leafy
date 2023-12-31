@@ -64,12 +64,12 @@ class DetailPlantViewModel @Inject constructor(
 
 sealed interface DetailPlantUiState {
 
-    object Initial : DetailPlantUiState
+    data object Initial : DetailPlantUiState
 
     data class Loaded(
         val plant: Plant,
         val alarms: List<Alarm>,
     ) : DetailPlantUiState
 
-    object NotFound : DetailPlantUiState
+    data object NotFound : DetailPlantUiState
 }

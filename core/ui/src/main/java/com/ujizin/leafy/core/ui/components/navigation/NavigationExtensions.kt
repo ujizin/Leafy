@@ -26,11 +26,11 @@ private fun navDirection(navController: NavController): NavDirection {
     val previousDestination = previousBackStackEntry.destination.route
     val currentDestination = navController.currentBackStackEntry?.destination?.route
 
-    val previousBottomNavItem = BottomNavItem.values().firstOrNull {
+    val previousBottomNavItem = BottomNavItem.entries.firstOrNull {
         it.destination.route == previousDestination
     } ?: return NavDirection.None
 
-    val currentBottomNavItem = BottomNavItem.values().firstOrNull {
+    val currentBottomNavItem = BottomNavItem.entries.firstOrNull {
         it.destination.route == currentDestination
     } ?: return NavDirection.None
 

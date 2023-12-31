@@ -18,5 +18,5 @@ data class Alarm(
     val hours: Int,
     val enabled: Boolean,
     val minutes: Int,
-    val weekDays: List<WeekDay> = WeekDay.values().toList(),
+    val weekDays: List<WeekDay> = WeekDay.entries.toList(),
 )

@@ -2,8 +2,10 @@ package com.ujizin.leafy.core.ui.components.image
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.runtime.Immutable
 import com.ujizin.leafy.core.components.R
 
+@Immutable
 enum class Icons(
     @DrawableRes internal val idRes: Int,
     @StringRes internal val descriptionRes: Int,

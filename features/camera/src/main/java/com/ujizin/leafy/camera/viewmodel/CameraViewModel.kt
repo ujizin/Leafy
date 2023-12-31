@@ -77,7 +77,7 @@ class CameraViewModel @Inject constructor(
 }
 
 sealed interface CameraUiState {
-    object Initial : CameraUiState
-    class Preview(val bitmap: Bitmap) : CameraUiState
+    data object Initial : CameraUiState
+    data class Preview(val bitmap: Bitmap) : CameraUiState
     data class Error(val message: String) : CameraUiState
 }

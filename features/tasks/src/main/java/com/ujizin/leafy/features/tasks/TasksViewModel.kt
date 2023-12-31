@@ -1,5 +1,6 @@
 package com.ujizin.leafy.features.tasks
 
+import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ujizin.leafy.core.ui.extensions.reorderByCurrentDay
@@ -31,7 +32,7 @@ class TasksViewModel @Inject constructor(
         loadAllAlarms()
             .mapResult()
             .onEach { alarms ->
-                val tasks = WeekDay.values().reorderByCurrentDay().mapNotNull { weekDay ->
+                val tasks = WeekDay.entries.reorderByCurrentDay().mapNotNull { weekDay ->
                     val alarmHasWeekDay = alarms.any { it.weekDays.contains(weekDay) && it.enabled }
                     when {
                         alarmHasWeekDay -> TaskWeek(
@@ -59,9 +60,12 @@ class TasksViewModel @Inject constructor(
 }
 
 sealed interface TasksUiState {
-    object Initial : TasksUiState
+    @Immutable
+    data object Initial : TasksUiState
 
-    object Empty : TasksUiState
+    @Immutable
+    data object Empty : TasksUiState
 
+    @Immutable
     data class Success(val tasks: List<TaskWeek>) : TasksUiState
 }

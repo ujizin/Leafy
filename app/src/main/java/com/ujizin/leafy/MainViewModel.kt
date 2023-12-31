@@ -24,6 +24,6 @@ class MainViewModel @Inject constructor(
 }
 
 sealed interface MainUiState {
-    object Loading : MainUiState
+    data object Loading : MainUiState
     data class Initialized(val user: User) : MainUiState
 }

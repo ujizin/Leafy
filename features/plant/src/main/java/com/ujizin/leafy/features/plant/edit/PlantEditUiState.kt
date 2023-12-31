@@ -37,7 +37,7 @@ class PlantEditViewModel @Inject constructor(
 }
 
 sealed interface PlantEditUiState {
-    object Initial : PlantEditUiState
+    data object Initial : PlantEditUiState
 
     data class Success(val plant: Plant) : PlantEditUiState
 }

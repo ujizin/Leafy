@@ -90,7 +90,7 @@ class AlarmViewModel @Inject constructor(
 }
 
 sealed interface AlarmUiState {
-    object Initial : AlarmUiState
+    data object Initial : AlarmUiState
 
     data class Initialized(val ringtones: List<Ringtone>) : AlarmUiState
 }

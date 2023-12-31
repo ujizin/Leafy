@@ -1,5 +1,6 @@
 package com.ujizin.leafy.search
 
+import androidx.compose.runtime.Immutable
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -54,9 +55,12 @@ class SearchViewModel @Inject constructor(
 }
 
 sealed class SearchUiState(val items: List<Plant>) {
+    @Immutable
     data class Initial(val autoFocus: Boolean = false) : SearchUiState(emptyList())
 
-    object Empty : SearchUiState(emptyList())
+    @Immutable
+    data object Empty : SearchUiState(emptyList())
 
+    @Immutable
     data class Loaded(private val data: List<Plant>) : SearchUiState(data)
 }
