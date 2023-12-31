@@ -13,9 +13,7 @@ dependencies {
     implementation libs.bundles.compose
     implementation libs.hilt.compose
     implementation libs.android.material
-
-    debugImplementation libs.bundles.compose.debug
-
+    implementation libs.bundles.compose.debug
     implementation libs.bundles.androidx
     androidTestImplementation libs.compose.android.test
 }

@@ -17,6 +17,7 @@ local.properties
 /.idea/*
 /.idea
 /**/build/
+*/**/*.keystore
 
 app/google-services.json
 app/**/google-services.json

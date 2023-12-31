@@ -18,19 +18,26 @@ android {
         versionName "0.1.0"
     }
 
-    buildTypes {
-
+    signingConfigs {
         release {
-            minifyEnabled true
-            consumerProguardFiles 'proguard-rules.pro'
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
             resValue "string", "app_name", "Leafy"
+            signingConfig signingConfigs.release
         }
 
         debug {
             minifyEnabled false
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
-            consumerProguardFiles 'proguard-rules.pro'
             resValue "string", "app_name", "Leafy Dev"
         }
     }
