@@ -5,14 +5,10 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.os.PowerManager
 import com.ujizin.leafy.alarm.AlarmService
-import com.ujizin.leafy.alarm.extensions.alarmId
-import com.ujizin.leafy.alarm.extensions.ringtoneStringify
 import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
 import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarm
 import com.ujizin.leafy.core.components.R
-import com.ujizin.leafy.core.ui.extensions.createWakeLock
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.mapResult
 import com.ujizin.leafy.domain.usecase.alarm.LoadAlarms
@@ -21,19 +17,11 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
-import kotlin.time.Duration.Companion.minutes
 
 @AndroidEntryPoint
 class AlarmReceiver : BroadcastReceiver() {
-
-    private val tag by lazy {
-        "tag-${javaClass.canonicalName ?: javaClass.name}"
-    }
-
-    private lateinit var wakeLock: PowerManager.WakeLock
 
     @Inject
     lateinit var schedulePlantAlarm: SchedulePlantAlarm
@@ -44,12 +32,12 @@ class AlarmReceiver : BroadcastReceiver() {
     @Inject
     lateinit var alarmScheduler: AlarmScheduler
 
+    private val Intent.alarmId get() = getLongExtra(ALARM_ID_EXTRA, -1)
+
+    private val Intent.ringtoneStringify get() = getStringExtra(RINGTONE_CONTENT_EXTRA)
+
     @OptIn(DelicateCoroutinesApi::class)
     override fun onReceive(context: Context, intent: Intent) {
-        wakeLock = context.createWakeLock(tag).apply {
-            acquire(10.minutes.inWholeMicroseconds)
-        }
-
         when (intent.action) {
             SCHEDULE_ALARM_ACTION -> schedulePlantAlarm(alarmId = intent.alarmId).onEach { plant ->
                 context.ringPlantAlarm(intent, plant)
@@ -62,8 +50,6 @@ class AlarmReceiver : BroadcastReceiver() {
                 .onEach { alarms -> alarms.forEach(alarmScheduler::scheduleAlarm) }
 
             else -> emptyFlow()
-        }.onCompletion {
-            wakeLock.release()
         }.launchIn(GlobalScope)
     }
 
@@ -90,6 +76,7 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     internal companion object {
+
         const val RINGTONE_CONTENT_EXTRA = "ringtone_content"
 
         const val ALARM_ID_EXTRA = "alarm_id"

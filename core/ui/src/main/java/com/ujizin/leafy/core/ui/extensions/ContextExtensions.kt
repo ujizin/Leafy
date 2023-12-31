@@ -1,11 +1,9 @@
 package com.ujizin.leafy.core.ui.extensions
 
-import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.PowerManager
 import android.provider.Settings
 import java.io.File
 
@@ -36,8 +34,3 @@ fun Context.openAppInPlayStore() {
         ),
     )
 }
-
-fun Context.createWakeLock(tag: String): PowerManager.WakeLock =
-    (getSystemService(Service.POWER_SERVICE) as PowerManager).run {
-        newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, tag)
-    }

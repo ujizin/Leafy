@@ -2,7 +2,6 @@ package com.ujizin.leafy
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.DrawerState
@@ -10,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import com.google.accompanist.navigation.animation.AnimatedNavHost
+import androidx.navigation.compose.NavHost
 import com.ujizin.leafy.about.aboutGraph
 import com.ujizin.leafy.alarm.ui.alarmGraph
 import com.ujizin.leafy.camera.cameraGraph
@@ -29,7 +28,6 @@ import com.ujizin.leafy.publish.publishGraph
 import com.ujizin.leafy.search.searchGraph
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun LeafyNavigation(
     navController: NavHostController,
@@ -46,7 +44,7 @@ fun LeafyNavigation(
     ) {
         BackHandler(onBack = onBackPressed)
 
-        AnimatedNavHost(
+        NavHost(
             navController = navController,
             startDestination = Destination.Home.route,
         ) {

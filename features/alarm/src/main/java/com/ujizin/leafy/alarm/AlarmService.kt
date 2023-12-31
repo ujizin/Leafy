@@ -10,8 +10,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import com.ujizin.leafy.alarm.extensions.plantId
-import com.ujizin.leafy.alarm.extensions.ringtoneUri
+import com.ujizin.leafy.alarm.extensions.orDefaultRingtone
 import com.ujizin.leafy.alarm.notificator.AlarmNotificator
 import com.ujizin.leafy.core.ui.props.RequestCode
 import com.ujizin.leafy.features.alarm.R
@@ -28,13 +27,18 @@ class AlarmService : Service() {
     @Inject
     lateinit var alarmNotificator: AlarmNotificator
 
+    private val Intent.plantId get() = getLongExtra(PLANT_ID, -1)
+
+    private val Intent.ringtoneUri
+        get() = getStringExtra(RINGTONE_URI_STRINGIFY_ARG)?.let(Uri::parse).orDefaultRingtone()
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
             STOP_ACTION -> stopService()
             else -> intent?.let(::startAlarm)
         }
 
-        return START_NOT_STICKY
+        return START_STICKY
     }
 
     private fun stopService() {
