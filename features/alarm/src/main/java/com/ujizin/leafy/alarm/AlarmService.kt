@@ -38,7 +38,7 @@ class AlarmService : Service() {
             else -> intent?.let(::startAlarm)
         }
 
-        return START_STICKY
+        return super.onStartCommand(intent, flags, startId)
     }
 
     private fun stopService() {

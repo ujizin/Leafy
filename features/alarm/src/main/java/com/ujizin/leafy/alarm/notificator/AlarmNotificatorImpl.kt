@@ -9,7 +9,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.ujizin.leafy.core.components.R
 
-internal class AlarmNotificatorImpl(val context: Context) : AlarmNotificator {
+internal class AlarmNotificatorImpl(private val context: Context) : AlarmNotificator {
 
     private val vibrateValues = longArrayOf(800, 500, 600, 300)
 
