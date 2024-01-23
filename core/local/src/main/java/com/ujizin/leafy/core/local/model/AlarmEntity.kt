@@ -38,7 +38,7 @@ data class AlarmEntity(
     val hours: Int,
     @ColumnInfo(name = "minutes")
     val minutes: Int,
-    @ColumnInfo(name = "plant_id")
+    @ColumnInfo(name = "plant_id", index = true)
     val plantId: Long,
     @ColumnInfo(name = "week_days")
     val weekDays: List<String>,

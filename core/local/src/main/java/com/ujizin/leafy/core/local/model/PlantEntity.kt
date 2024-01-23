@@ -37,6 +37,6 @@ data class PlantEntity(
     val description: String,
     @ColumnInfo(name = "plant_favorite")
     val favorite: Boolean,
-    @ColumnInfo(name = "album_id")
+    @ColumnInfo(name = "album_id", index = true)
     val albumId: Long? = null,
 )

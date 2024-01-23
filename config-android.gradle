@@ -3,8 +3,8 @@
  * https://issuetracker.google.com/179057202
  * */
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'com.google.devtools.ksp'
 
 android {
     compileSdk 34
@@ -33,15 +33,10 @@ dependencies {
     implementation libs.firebase.crashlytics.ktx
     implementation libs.firebase.analytics.ktx
 
-    kapt libs.hilt.compiler
+    ksp libs.hilt.compiler
 
     testImplementation libs.junit
     testImplementation libs.mockk
-    androidTestImplementation libs.bundles.androidx.test
-}
-
-kapt {
-    correctErrorTypes true
 }
 
 apply from: "$rootDir/ktlint.gradle"
