@@ -3,17 +3,20 @@ package com.ujizin.leafy.core.repository.implementation
 import android.content.Context
 import android.media.RingtoneManager
 import android.net.Uri
+import com.ujizin.leafy.domain.dispatcher.IoDispatcher
 import com.ujizin.leafy.domain.model.Ringtone
 import com.ujizin.leafy.domain.repository.RingtoneRepository
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
 
-internal class RingtoneRepositoryImpl(
-    private val context: Context,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
+internal class RingtoneRepositoryImpl @Inject constructor(
+    @ApplicationContext private val context: Context,
+    @IoDispatcher private val dispatcher: CoroutineDispatcher,
 ) : RingtoneRepository {
 
     override fun getRingtones(): Flow<List<Ringtone>> = flow {

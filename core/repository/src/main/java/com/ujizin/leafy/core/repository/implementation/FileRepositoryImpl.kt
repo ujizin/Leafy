@@ -1,13 +1,16 @@
 package com.ujizin.leafy.core.repository.implementation
 
 import android.graphics.Bitmap
+import com.ujizin.leafy.domain.dispatcher.IoDispatcher
 import com.ujizin.leafy.domain.repository.FileRepository
+import kotlinx.coroutines.CoroutineDispatcher
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.util.UUID
+import javax.inject.Inject
 
-internal class FileRepositoryImpl : FileRepository {
+internal class FileRepositoryImpl @Inject constructor() : FileRepository {
 
     private fun createUniqueName(extension: String) =
         "${UUID.randomUUID()}-${System.currentTimeMillis()}.$extension"

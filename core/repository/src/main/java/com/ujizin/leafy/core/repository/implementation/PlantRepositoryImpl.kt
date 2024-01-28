@@ -2,6 +2,7 @@ package com.ujizin.leafy.core.repository.implementation
 
 import com.ujizin.leafy.core.repository.datasource.PlantDataSource
 import com.ujizin.leafy.core.repository.mapper.PlantMapper
+import com.ujizin.leafy.domain.dispatcher.IoDispatcher
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.repository.PlantRepository
 import kotlinx.coroutines.CoroutineDispatcher
@@ -9,11 +10,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
 
-internal class PlantRepositoryImpl(
+internal class PlantRepositoryImpl @Inject constructor(
     private val dataSource: PlantDataSource,
     private val mapper: PlantMapper,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    @IoDispatcher private val dispatcher: CoroutineDispatcher,
 ) : PlantRepository {
 
     override fun getPlants(): Flow<List<Plant>> = flow {

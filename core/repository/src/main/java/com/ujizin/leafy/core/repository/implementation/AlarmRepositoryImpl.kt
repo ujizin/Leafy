@@ -2,17 +2,18 @@ package com.ujizin.leafy.core.repository.implementation
 
 import com.ujizin.leafy.core.repository.datasource.AlarmDataSource
 import com.ujizin.leafy.core.repository.mapper.AlarmMapper
+import com.ujizin.leafy.domain.dispatcher.IoDispatcher
 import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.repository.AlarmRepository
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
 
-class AlarmRepositoryImpl(
+internal class AlarmRepositoryImpl @Inject constructor(
     private val dataSource: AlarmDataSource,
     private val mapper: AlarmMapper,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    @IoDispatcher val dispatcher: CoroutineDispatcher,
 ) : AlarmRepository {
 
     override fun insertAlarm(alarm: Alarm) = flow {
