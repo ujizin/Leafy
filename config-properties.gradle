@@ -10,8 +10,8 @@ if (secretPropsFile.exists()) {
     new FileInputStream(secretPropsFile).withCloseable { is -> p.load(is) }
     p.each { name, value -> ext[name] = value }
 } else {
-    ext["release.store.file"] = System.getenv('RELEASE_STORE_FILE')
-    ext["release.store.password"] = System.getenv('RELEASE_STORE_PASSWORD')
-    ext["release.key.alias"] = System.getenv('RELEASE_KEY_ALIAS')
-    ext["release.key.password"] = System.getenv('RELEASE_KEY_PASSWORD')
+    ext["RELEASE_STORE_FILE"] = System.getenv('RELEASE_STORE_FILE')
+    ext["RELEASE_STORE_PASSWORD"] = System.getenv('RELEASE_STORE_PASSWORD')
+    ext["RELEASE_KEY_ALIAS"] = System.getenv('RELEASE_KEY_ALIAS')
+    ext["RELEASE_KEY_PASSWORD"] = System.getenv('RELEASE_KEY_PASSWORD')
 }
