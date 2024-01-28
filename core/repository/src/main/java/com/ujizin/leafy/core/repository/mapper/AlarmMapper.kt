@@ -7,7 +7,7 @@ import com.ujizin.leafy.core.repository.model.Alarm as RepoAlarm
 /**
  * Alarm mapper between domain and data modules.
  * */
-class AlarmMapper {
+internal class AlarmMapper {
 
     fun toRepo(alarm: Alarm) = with(alarm) {
         RepoAlarm(

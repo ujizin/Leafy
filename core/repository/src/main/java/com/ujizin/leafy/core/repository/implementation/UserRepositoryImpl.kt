@@ -2,6 +2,7 @@ package com.ujizin.leafy.core.repository.implementation
 
 import com.ujizin.leafy.core.repository.datasource.UserDataSource
 import com.ujizin.leafy.core.repository.mapper.UserMapper
+import com.ujizin.leafy.domain.dispatcher.IoDispatcher
 import com.ujizin.leafy.domain.model.User
 import com.ujizin.leafy.domain.repository.UserRepository
 import kotlinx.coroutines.CoroutineDispatcher
@@ -10,11 +11,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-internal class UserRepositoryImpl(
+internal class UserRepositoryImpl @Inject constructor(
     private val dataSource: UserDataSource,
     private val userMapper: UserMapper,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    @IoDispatcher private val dispatcher: CoroutineDispatcher,
 ) : UserRepository {
 
     override fun getUser(): Flow<User> = dataSource.getUser()
