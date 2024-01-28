@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 val plantDetailDestination = Destination.PlantDetails.withArguments(
-                    Args.PlantId to plantId
+                    Args.PlantId to plantId,
                 )
                 navController.navigate(plantDetailDestination)
             }

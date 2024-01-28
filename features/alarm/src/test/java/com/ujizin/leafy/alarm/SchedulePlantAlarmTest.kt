@@ -43,7 +43,7 @@ class SchedulePlantAlarmTest {
     )
 
     @Test
-    fun `GIVEN valid days alarms WHEN alarm is scheduled THEN alarm will ring in exact time whether enabled`() =
+    fun `test alarm is scheduled will ring in exact time whether enabled`() =
         runTest {
             var isFlowCollected = false
             mockkStatic(Calendar::class)
