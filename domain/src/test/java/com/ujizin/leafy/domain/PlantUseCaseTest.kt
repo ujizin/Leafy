@@ -56,12 +56,12 @@ class PlantUseCaseTest {
     }
 
     @Test
-    fun `when add plant then expect call insert plants on repository`() = runTest {
-        every { plantRepository.insertPlants(any()) } returns flowOf(Unit)
+    fun `when add plant then expect call insert plant on repository`() = runTest {
+        every { plantRepository.insertPlant(any()) } returns flowOf(0L)
 
         addPlantUseCase(fakePlant).collect {
-            verify { plantRepository.insertPlants(listOf(fakePlant)) }
-            verify(exactly = 0) { plantRepository.insertPlant(fakePlant) }
+            verify { plantRepository.insertPlant(fakePlant) }
+            verify(exactly = 0) { plantRepository.insertPlants(listOf(fakePlant)) }
         }
     }
 

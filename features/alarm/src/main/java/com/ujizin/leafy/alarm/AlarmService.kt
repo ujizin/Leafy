@@ -46,6 +46,7 @@ class AlarmService : Service() {
         stopSelf()
     }
 
+    @Suppress("DEPRECATION")
     private fun stopForeground() = when {
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.N -> stopForeground(STOP_FOREGROUND_DETACH)
         else -> stopForeground(true)
