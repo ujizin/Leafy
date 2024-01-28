@@ -9,7 +9,6 @@ plugins {
 
 apply from: "$rootDir/config-android.gradle"
 apply from: "$rootDir/config-compose.gradle"
-apply from: "$rootDir/config-properties.gradle"
 
 android {
     namespace 'com.ujizin.leafy'
