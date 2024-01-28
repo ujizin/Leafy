@@ -40,3 +40,5 @@ tasks.withType(Detekt).configureEach {
         sarif.required.set(true)
     }
 }
+
+apply from: "config-properties.gradle"
