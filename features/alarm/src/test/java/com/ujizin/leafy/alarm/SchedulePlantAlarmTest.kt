@@ -57,8 +57,8 @@ class SchedulePlantAlarmTest {
                     .collect {
                         isFlowCollected = true
 
-                        val alarmScheduled = alarmScheduler.alarms.find { alarmScheduled ->
-                            alarmScheduled.hours == alarm.hours && alarmScheduled.minutes == alarm.minutes
+                        val alarmScheduled = alarmScheduler.alarms.find { scheduled ->
+                            scheduled.hours == alarm.hours && scheduled.minutes == alarm.minutes
                         }
 
                         assertNotNull(alarmScheduled)

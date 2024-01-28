@@ -37,6 +37,6 @@ interface AlarmScheduler {
         hours = alarm.hours,
         minutes = alarm.minutes,
         ringtoneUri = alarm.ringtoneUriContent,
-        bundle = bundleOf(AlarmReceiver.ALARM_ID_EXTRA to alarm.id)
+        bundle = bundleOf(AlarmReceiver.ALARM_ID_EXTRA to alarm.id),
     )
 }

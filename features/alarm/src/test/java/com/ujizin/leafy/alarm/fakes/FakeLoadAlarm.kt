@@ -8,9 +8,10 @@ import kotlinx.coroutines.flow.flow
 
 class FakeLoadAlarm(
     private val until: Int = 10,
-    val alarms: MutableList<Alarm> = (0..until).map { createAlarm(id = it + 1L, plantId = it + 1L) }.toMutableList()
+    val alarms: MutableList<Alarm> = (0..until).map {
+        createAlarm(id = it + 1L, plantId = it + 1L)
+    }.toMutableList(),
 ) : LoadAlarm {
-
 
     override fun invoke(id: Long) = flow {
         val result = alarms.find { it.id == id }?.let {
@@ -20,4 +21,3 @@ class FakeLoadAlarm(
         emit(result)
     }
 }
-

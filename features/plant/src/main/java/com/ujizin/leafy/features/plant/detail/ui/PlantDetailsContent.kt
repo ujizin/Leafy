@@ -195,7 +195,7 @@ private fun PlantContent(
     Column(modifier) {
         Text(
             text = title,
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleMedium,
         )
         Text(
             modifier = Modifier.padding(top = 16.dp),

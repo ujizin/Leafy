@@ -8,7 +8,7 @@ import java.io.File
 
 class FakeLoadPlant(
     private val until: Int = 10,
-    private val plants: List<Plant> = (0..until).map { createPlant(id = it + 1L) }
+    private val plants: List<Plant> = (0..until).map { createPlant(id = it + 1L) },
 ) : LoadPlant {
 
     override fun invoke(id: Long) = flow<Result<Plant?>> {
