@@ -45,7 +45,8 @@ class AlarmReceiver : BroadcastReceiver() {
 
             Intent.ACTION_BOOT_COMPLETED,
             Intent.ACTION_MY_PACKAGE_REPLACED,
-            AlarmManager.ACTION_SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED -> loadAlarms()
+            AlarmManager.ACTION_SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED,
+            -> loadAlarms()
                 .mapResult()
                 .onEach { alarms -> alarms.forEach(alarmScheduler::scheduleAlarm) }
 
@@ -54,7 +55,7 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     private fun Context.ringPlantAlarm(intent: Intent, plant: Plant) = startAlarmService(
-        serviceIntent = getAlarmServiceIntent(plant, intent.ringtoneStringify)
+        serviceIntent = getAlarmServiceIntent(plant, intent.ringtoneStringify),
     )
 
     private fun Context.getAlarmServiceIntent(

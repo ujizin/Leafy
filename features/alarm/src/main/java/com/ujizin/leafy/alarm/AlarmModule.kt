@@ -22,7 +22,7 @@ object AlarmModule {
     @Provides
     @Singleton
     fun provideAlarmScheduler(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): AlarmScheduler = AlarmSchedulerImpl(context)
 
     @Provides
@@ -36,6 +36,6 @@ object AlarmModule {
     @Provides
     @Singleton
     fun provideAlarmNotificator(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): AlarmNotificator = AlarmNotificatorImpl(context)
 }

@@ -10,7 +10,7 @@ class FakeAlarmScheduler : AlarmScheduler {
         val hours: Int,
         val minutes: Int,
         val ringtoneUri: String,
-        val bundle: Bundle
+        val bundle: Bundle,
     )
 
     private val _alarms = mutableListOf<FakeAlarm>()
@@ -21,7 +21,7 @@ class FakeAlarmScheduler : AlarmScheduler {
         hours: Int,
         minutes: Int,
         ringtoneUri: String,
-        bundle: Bundle
+        bundle: Bundle,
     ) {
         _alarms += FakeAlarm(
             type = type,

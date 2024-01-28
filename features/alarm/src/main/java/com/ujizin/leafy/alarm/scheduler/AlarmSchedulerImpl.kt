@@ -18,7 +18,7 @@ internal class AlarmSchedulerImpl(private val context: Context) : AlarmScheduler
         hours: Int,
         minutes: Int,
         ringtoneUri: String,
-        bundle: Bundle
+        bundle: Bundle,
     ) {
         setAlarm(type, hours, minutes, ringtoneUri.toUri(), bundle)
     }
