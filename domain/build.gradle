@@ -10,6 +10,7 @@ android {
 
 dependencies {
     testImplementation libs.mockk
+    testImplementation libs.coroutines.test
     testImplementation libs.bundles.test
     testImplementation projects.core.test
 }

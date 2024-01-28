@@ -30,11 +30,9 @@ class SchedulePlantAlarmTest {
 
     private val alarmScheduler = FakeAlarmScheduler()
 
-    private val counter = 100
+    private val loadPlant = FakeLoadPlant(until = COUNTER)
 
-    private val loadPlant = FakeLoadPlant(until = counter)
-
-    private val loadAlarm = FakeLoadAlarm(until = counter)
+    private val loadAlarm = FakeLoadAlarm(until = COUNTER)
 
     val schedulePlantAlarm = SchedulePlantAlarm(
         loadPlant = loadPlant,
@@ -43,31 +41,34 @@ class SchedulePlantAlarmTest {
     )
 
     @Test
-    fun `test alarm is scheduled will ring in exact time whether enabled`() =
-        runTest {
-            var isFlowCollected = false
-            mockkStatic(Calendar::class)
+    fun `test alarm is scheduled will ring in exact time whether enabled`() = runTest {
+        var isFlowCollected = false
+        mockkStatic(Calendar::class)
 
-            loadAlarm.alarms.forEach { alarm ->
-                (1..7).forEach { dayOfTheWeek ->
-                    every { Calendar.getInstance().get(DAY_OF_WEEK) } returns dayOfTheWeek
+        loadAlarm.alarms.forEach { alarm ->
+            (1..7).forEach { dayOfTheWeek ->
+                every { Calendar.getInstance().get(DAY_OF_WEEK) } returns dayOfTheWeek
 
-                    schedulePlantAlarm(alarm.id)
-                        .onStart { isFlowCollected = false }
-                        .onCompletion {
-                            assertEquals(alarm.weekDays.contains(currentDay), isFlowCollected)
+                schedulePlantAlarm(alarm.id)
+                    .onStart { isFlowCollected = false }
+                    .onCompletion {
+                        assertEquals(alarm.weekDays.contains(currentDay), isFlowCollected)
+                    }
+                    .collect {
+                        isFlowCollected = true
+
+                        val alarmScheduled = alarmScheduler.alarms.find { alarmScheduled ->
+                            alarmScheduled.hours == alarm.hours && alarmScheduled.minutes == alarm.minutes
                         }
-                        .collect {
-                            isFlowCollected = true
 
-                            val alarmScheduled = alarmScheduler.alarms.find { alarmScheduled ->
-                                alarmScheduled.hours == alarm.hours && alarmScheduled.minutes == alarm.minutes
-                            }
-
-                            assertNotNull(alarmScheduled)
-                            assertEquals(alarm.plantId, it.id)
-                        }
-                }
+                        assertNotNull(alarmScheduled)
+                        assertEquals(alarm.plantId, it.id)
+                    }
             }
         }
+    }
+
+    companion object {
+        private const val COUNTER = 100
+    }
 }
