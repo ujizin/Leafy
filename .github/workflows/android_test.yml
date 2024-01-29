@@ -45,5 +45,11 @@ jobs:
       - name: Run unit test
         run: ./gradlew clean test
 
-      - name: Run instrumented test
-        run: ./gradlew connectedAndroidTest
+      - name: run android tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 33
+          disable-animations: true
+          force-avd-creation: false
+          emulator-options: -no-snapshot -no-window -no-boot-anim -no-audio -camera-back none -camera-front none
+          script: ./gradlew connectedAndroidTest
