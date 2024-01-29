@@ -24,26 +24,26 @@ internal interface RepositoryModule {
 
     @Binds
     fun providePlantRepository(
-        plantRepositoryImpl: PlantRepositoryImpl
+        plantRepositoryImpl: PlantRepositoryImpl,
     ): PlantRepository
 
     @Binds
     fun provideAlarmRepository(
-        alarmRepositoryImpl: AlarmRepositoryImpl
+        alarmRepositoryImpl: AlarmRepositoryImpl,
     ): AlarmRepository
 
     @Binds
     fun provideUserRepository(
-        userRepositoryImpl: UserRepositoryImpl
+        userRepositoryImpl: UserRepositoryImpl,
     ): UserRepository
 
     @Binds
     fun provideFileRepository(
-        fileRepositoryImpl: FileRepositoryImpl
+        fileRepositoryImpl: FileRepositoryImpl,
     ): FileRepository
 
     @Binds
     fun provideRingtoneRepository(
-        ringtoneRepositoryImpl: RingtoneRepositoryImpl
+        ringtoneRepositoryImpl: RingtoneRepositoryImpl,
     ): RingtoneRepository
 }
