@@ -1,9 +1,7 @@
 package com.ujizin.leafy.core.repository.implementation
 
 import android.graphics.Bitmap
-import com.ujizin.leafy.domain.dispatcher.IoDispatcher
 import com.ujizin.leafy.domain.repository.FileRepository
-import kotlinx.coroutines.CoroutineDispatcher
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
