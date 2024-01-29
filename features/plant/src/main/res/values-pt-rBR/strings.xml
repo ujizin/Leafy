@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="alarms">alarmes</string>
-    <string name="day_to_day">%s à %s</string>
+    <string name="day_to_day">%1$s à %2$s</string>
     <string name="edit">editar</string>
     <string name="delete">deletar</string>
     <string name="warning_delete_title">remover planta</string>
