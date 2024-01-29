@@ -14,6 +14,6 @@
     <string name="thursday">quinta-feira</string>
     <string name="friday">sexta-feira</string>
     <string name="saturday">sábado</string>
-    <string name="day_to_day">%s to %s</string>
+    <string name="day_to_day">%1$s à %2$s</string>
     <string name="daily">daily</string>
 </resources>

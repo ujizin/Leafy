@@ -17,6 +17,6 @@
     <string name="thursday">thursday</string>
     <string name="friday">friday</string>
     <string name="saturday">saturday</string>
-    <string name="day_to_day">%s to %s</string>
+    <string name="day_to_day">%1$s to %2$s</string>
     <string name="daily">daily</string>
 </resources>
