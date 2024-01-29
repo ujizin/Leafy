@@ -10,6 +10,10 @@ apply from: '../../config-android.gradle'
 android {
     namespace 'com.ujizin.leafy.data.local'
 
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
     testOptions {
         unitTests.returnDefaultValues = true
     }

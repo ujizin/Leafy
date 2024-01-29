@@ -62,4 +62,7 @@ dependencies {
     implementation projects.core.ui
     implementation projects.core.themes
     implementation projects.core.navigation
+
+    androidTestImplementation libs.bundles.test
+    androidTestImplementation libs.bundles.androidx.test
 }
