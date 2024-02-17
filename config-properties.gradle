@@ -1,5 +1,5 @@
 // Create variables with empty default values
-ext["RELEASE_STORE_FILE"] = ""
+ext["RELEASE_STORE_FILE"] = "/"
 ext["RELEASE_STORE_PASSWORD"] = ""
 ext["RELEASE_KEY_ALIAS"] = ""
 ext["RELEASE_KEY_PASSWORD"] = ""
