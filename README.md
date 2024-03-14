@@ -1,4 +1,5 @@
-![Build Unit Tests](https://github.com/devlucasyuji/camerareminder/actions/workflows/workflow.yml/badge.svg)
+![Build](https://github.com/devlucasyuji/camerareminder/actions/workflows/android_build.yml/badge.svg)
+![Test](https://github.com/devlucasyuji/camerareminder/actions/workflows/android_test.yml/badge.svg)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 <img src="assets/background-leafy.png" width="100%"/>

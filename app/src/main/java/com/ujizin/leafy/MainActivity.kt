@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     @Composable
     private fun BackHandler(
         navController: NavHostController,
-        drawerState: DrawerState
+        drawerState: DrawerState,
     ) {
         val scope = rememberCoroutineScope()
         val isDrawerOpen by rememberUpdatedState(drawerState.isOpen)

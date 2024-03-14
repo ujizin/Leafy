@@ -7,7 +7,6 @@ import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.material3.Scaffold as MaterialScaffold
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
@@ -18,6 +17,7 @@ import com.ujizin.leafy.core.ui.components.navigation.currentNavItemAsState
 import com.ujizin.leafy.core.ui.components.navigation.drawer.DrawerContent
 import com.ujizin.leafy.core.ui.components.navigation.drawer.DrawerItem
 import kotlinx.coroutines.launch
+import androidx.compose.material3.Scaffold as MaterialScaffold
 
 @Composable
 fun Scaffold(

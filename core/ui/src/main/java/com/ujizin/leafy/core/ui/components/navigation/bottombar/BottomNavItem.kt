@@ -15,7 +15,8 @@ internal enum class BottomNavItem(
     Search(R.drawable.magnifier, R.string.search, Destination.Search),
     Camera(destination = Destination.Camera),
     Alarm(R.drawable.alarm, R.string.tasks, Destination.Tasks),
-    Others(R.drawable.others, R.string.others, Destination.Preferences);
+    Others(R.drawable.others, R.string.others, Destination.Preferences),
+    ;
 
     companion object {
         internal var previousRoute: String? = null

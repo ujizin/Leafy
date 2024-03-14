@@ -47,7 +47,7 @@ fun TextField(
                 cursorColor = MaterialTheme.colorScheme.primary,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
-            )
+            ),
         )
     }
 }
