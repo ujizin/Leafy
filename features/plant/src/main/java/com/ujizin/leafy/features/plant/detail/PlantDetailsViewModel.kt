@@ -7,11 +7,11 @@ import com.ujizin.leafy.core.navigation.Args
 import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.mapResult
-import com.ujizin.leafy.domain.usecase.alarm.DeleteAlarm
-import com.ujizin.leafy.domain.usecase.alarm.LoadAlarms
-import com.ujizin.leafy.domain.usecase.alarm.UpdateAlarm
-import com.ujizin.leafy.domain.usecase.plant.DeletePlant
-import com.ujizin.leafy.domain.usecase.plant.LoadPlant
+import com.ujizin.leafy.domain.usecase.alarm.delete.DeleteAlarmUseCase
+import com.ujizin.leafy.domain.usecase.alarm.load.LoadAlarmsUseCase
+import com.ujizin.leafy.domain.usecase.alarm.update.UpdateAlarmUseCase
+import com.ujizin.leafy.domain.usecase.plant.delete.DeletePlantUseCase
+import com.ujizin.leafy.domain.usecase.plant.load.LoadPlantUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharingStarted
@@ -25,11 +25,11 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailPlantViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    loadPlant: LoadPlant,
-    loadAlarms: LoadAlarms,
-    private val deletePlantUseCase: DeletePlant,
-    private val deleteAlarmUseCase: DeleteAlarm,
-    private val updateAlarmUseCase: UpdateAlarm,
+    loadPlant: LoadPlantUseCase,
+    loadAlarms: LoadAlarmsUseCase,
+    private val deletePlantUseCase: DeletePlantUseCase,
+    private val deleteAlarmUseCase: DeleteAlarmUseCase,
+    private val updateAlarmUseCase: UpdateAlarmUseCase,
 ) : ViewModel() {
 
     private val plantId: Long = checkNotNull(savedStateHandle[Args.PlantId])

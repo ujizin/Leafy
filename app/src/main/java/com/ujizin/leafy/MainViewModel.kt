@@ -3,7 +3,7 @@ package com.ujizin.leafy
 import androidx.lifecycle.ViewModel
 import com.ujizin.leafy.domain.model.User
 import com.ujizin.leafy.domain.result.Result
-import com.ujizin.leafy.domain.usecase.user.LoadUser
+import com.ujizin.leafy.domain.usecase.user.load.LoadUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val loadUser: LoadUser,
+    private val loadUser: LoadUserUseCase,
 ) : ViewModel() {
 
     fun load(): Flow<MainUiState> = loadUser()

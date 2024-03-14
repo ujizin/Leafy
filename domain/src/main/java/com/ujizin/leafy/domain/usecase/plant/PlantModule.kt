@@ -1,14 +1,22 @@
 package com.ujizin.leafy.domain.usecase.plant
 
 import com.ujizin.leafy.domain.repository.PlantRepository
-import com.ujizin.leafy.domain.usecase.plant.implementation.AddDraftPlantImpl
-import com.ujizin.leafy.domain.usecase.plant.implementation.AddPlantImpl
-import com.ujizin.leafy.domain.usecase.plant.implementation.DeletePlantImpl
-import com.ujizin.leafy.domain.usecase.plant.implementation.FindPlantImpl
-import com.ujizin.leafy.domain.usecase.plant.implementation.LoadAllPlantImpl
-import com.ujizin.leafy.domain.usecase.plant.implementation.LoadDraftPlantImpl
-import com.ujizin.leafy.domain.usecase.plant.implementation.LoadPlantImpl
-import com.ujizin.leafy.domain.usecase.plant.implementation.UpdatePlantImpl
+import com.ujizin.leafy.domain.usecase.plant.add.AddDraftPlantUseCase
+import com.ujizin.leafy.domain.usecase.plant.add.AddPlantUseCase
+import com.ujizin.leafy.domain.usecase.plant.delete.DeletePlantUseCase
+import com.ujizin.leafy.domain.usecase.plant.find.FindPlantUseCase
+import com.ujizin.leafy.domain.usecase.plant.add.AddDraftPlantUseCaseImpl
+import com.ujizin.leafy.domain.usecase.plant.add.AddPlantUseCaseImpl
+import com.ujizin.leafy.domain.usecase.plant.delete.DeletePlantUseCaseImpl
+import com.ujizin.leafy.domain.usecase.plant.find.FindPlantUseCaseImpl
+import com.ujizin.leafy.domain.usecase.plant.load.LoadAllPlantUseCaseImpl
+import com.ujizin.leafy.domain.usecase.plant.load.LoadDraftPlantUseCaseImpl
+import com.ujizin.leafy.domain.usecase.plant.load.LoadPlantUseCaseImpl
+import com.ujizin.leafy.domain.usecase.plant.update.UpdatePlantImpl
+import com.ujizin.leafy.domain.usecase.plant.load.LoadAllPlantUseCase
+import com.ujizin.leafy.domain.usecase.plant.load.LoadDraftPlantUseCase
+import com.ujizin.leafy.domain.usecase.plant.load.LoadPlantUseCase
+import com.ujizin.leafy.domain.usecase.plant.update.UpdatePlant
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,25 +31,25 @@ object PlantModule {
     @Singleton
     fun provideLoadAllPlants(
         repository: PlantRepository,
-    ): LoadAllPlant = LoadAllPlantImpl(repository)
+    ): LoadAllPlantUseCase = LoadAllPlantUseCaseImpl(repository)
 
     @Provides
     @Singleton
     fun provideLoadPlant(
         repository: PlantRepository,
-    ): LoadPlant = LoadPlantImpl(repository)
+    ): LoadPlantUseCase = LoadPlantUseCaseImpl(repository)
 
     @Provides
     @Singleton
     fun provideAddPlant(
         repository: PlantRepository,
-    ): AddPlant = AddPlantImpl(repository)
+    ): AddPlantUseCase = AddPlantUseCaseImpl(repository)
 
     @Provides
     @Singleton
     fun provideFindPlant(
         repository: PlantRepository,
-    ): FindPlant = FindPlantImpl(repository)
+    ): FindPlantUseCase = FindPlantUseCaseImpl(repository)
 
     @Provides
     @Singleton
@@ -53,17 +61,17 @@ object PlantModule {
     @Singleton
     fun provideDeletePlant(
         repository: PlantRepository,
-    ): DeletePlant = DeletePlantImpl(repository)
+    ): DeletePlantUseCase = DeletePlantUseCaseImpl(repository)
 
     @Provides
     @Singleton
     fun provideAddDraftPlant(
         repository: PlantRepository,
-    ): AddDraftPlant = AddDraftPlantImpl(repository)
+    ): AddDraftPlantUseCase = AddDraftPlantUseCaseImpl(repository)
 
     @Provides
     @Singleton
     fun provideLoadDraftPlant(
         repository: PlantRepository,
-    ): LoadDraftPlant = LoadDraftPlantImpl(repository)
+    ): LoadDraftPlantUseCase = LoadDraftPlantUseCaseImpl(repository)
 }

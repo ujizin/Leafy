@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.mapResult
-import com.ujizin.leafy.domain.usecase.plant.LoadAllPlant
+import com.ujizin.leafy.domain.usecase.plant.load.LoadAllPlantUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val loadAllPlant: LoadAllPlant,
+    private val loadAllPlant: LoadAllPlantUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<HomeUIState>(HomeUIState.Loading)

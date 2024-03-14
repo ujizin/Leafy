@@ -1,8 +1,10 @@
 package com.ujizin.leafy.domain.usecase.user
 
 import com.ujizin.leafy.domain.repository.UserRepository
-import com.ujizin.leafy.domain.usecase.user.implementation.LoadUserImpl
-import com.ujizin.leafy.domain.usecase.user.implementation.UpdateUserImpl
+import com.ujizin.leafy.domain.usecase.user.load.LoadUserUseCase
+import com.ujizin.leafy.domain.usecase.user.load.LoadUserUseCaseImpl
+import com.ujizin.leafy.domain.usecase.user.update.UpdateUserUseCase
+import com.ujizin.leafy.domain.usecase.user.update.UpdateUserUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,11 +19,11 @@ object UserModule {
     @Singleton
     fun provideLoadUser(
         repository: UserRepository,
-    ): LoadUser = LoadUserImpl(repository)
+    ): LoadUserUseCase = LoadUserUseCaseImpl(repository)
 
     @Provides
     @Singleton
     fun provideUpdateUser(
         repository: UserRepository,
-    ): UpdateUser = UpdateUserImpl(repository)
+    ): UpdateUserUseCase = UpdateUserUseCaseImpl(repository)
 }

@@ -1,11 +1,16 @@
 package com.ujizin.leafy.domain.usecase.alarm
 
 import com.ujizin.leafy.domain.repository.AlarmRepository
-import com.ujizin.leafy.domain.usecase.alarm.implementation.AddAlarmImpl
-import com.ujizin.leafy.domain.usecase.alarm.implementation.DeleteAlarmImpl
-import com.ujizin.leafy.domain.usecase.alarm.implementation.LoadAlarmImpl
-import com.ujizin.leafy.domain.usecase.alarm.implementation.LoadAlarmsImpl
-import com.ujizin.leafy.domain.usecase.alarm.implementation.UpdateAlarmImpl
+import com.ujizin.leafy.domain.usecase.alarm.add.AddAlarmUseCase
+import com.ujizin.leafy.domain.usecase.alarm.add.AddAlarmUseCaseImpl
+import com.ujizin.leafy.domain.usecase.alarm.delete.DeleteAlarmUseCase
+import com.ujizin.leafy.domain.usecase.alarm.delete.DeleteAlarmUseCaseImpl
+import com.ujizin.leafy.domain.usecase.alarm.load.LoadAlarmUseCase
+import com.ujizin.leafy.domain.usecase.alarm.load.LoadAlarmUseCaseImpl
+import com.ujizin.leafy.domain.usecase.alarm.load.LoadAlarmsUseCase
+import com.ujizin.leafy.domain.usecase.alarm.load.LoadAlarmsUseCaseImpl
+import com.ujizin.leafy.domain.usecase.alarm.update.UpdateAlarmUseCase
+import com.ujizin.leafy.domain.usecase.alarm.update.UpdateAlarmUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,29 +25,29 @@ object AlarmModule {
     @Singleton
     fun provideAddAlarm(
         repository: AlarmRepository,
-    ): AddAlarm = AddAlarmImpl(repository)
+    ): AddAlarmUseCase = AddAlarmUseCaseImpl(repository)
 
     @Provides
     @Singleton
     fun provideLoadAlarm(
         repository: AlarmRepository,
-    ): LoadAlarm = LoadAlarmImpl(repository)
+    ): LoadAlarmUseCase = LoadAlarmUseCaseImpl(repository)
 
     @Provides
     @Singleton
     fun provideLoadAlarms(
         repository: AlarmRepository,
-    ): LoadAlarms = LoadAlarmsImpl(repository)
+    ): LoadAlarmsUseCase = LoadAlarmsUseCaseImpl(repository)
 
     @Provides
     @Singleton
     fun provideUpdateAlarm(
         repository: AlarmRepository,
-    ): UpdateAlarm = UpdateAlarmImpl(repository)
+    ): UpdateAlarmUseCase = UpdateAlarmUseCaseImpl(repository)
 
     @Provides
     @Singleton
     fun provideDeleteAlarm(
         repository: AlarmRepository,
-    ): DeleteAlarm = DeleteAlarmImpl(repository)
+    ): DeleteAlarmUseCase = DeleteAlarmUseCaseImpl(repository)
 }

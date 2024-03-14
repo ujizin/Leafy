@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.ujizin.leafy.core.ui.extensions.reorderByCurrentDay
 import com.ujizin.leafy.domain.model.WeekDay
 import com.ujizin.leafy.domain.result.mapResult
-import com.ujizin.leafy.domain.usecase.alarm.LoadAlarms
-import com.ujizin.leafy.domain.usecase.plant.LoadPlant
+import com.ujizin.leafy.domain.usecase.alarm.load.LoadAlarmsUseCase
+import com.ujizin.leafy.domain.usecase.plant.load.LoadPlantUseCase
 import com.ujizin.leafy.features.tasks.model.Task
 import com.ujizin.leafy.features.tasks.model.TaskWeek
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,8 +21,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TasksViewModel @Inject constructor(
-    private val loadAllAlarms: LoadAlarms,
-    private val loadPlant: LoadPlant,
+    private val loadAllAlarms: LoadAlarmsUseCase,
+    private val loadPlant: LoadPlantUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<TasksUiState>(TasksUiState.Initial)

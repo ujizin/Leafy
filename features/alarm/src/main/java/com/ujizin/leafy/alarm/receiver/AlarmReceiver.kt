@@ -11,7 +11,7 @@ import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarm
 import com.ujizin.leafy.core.components.R
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.mapResult
-import com.ujizin.leafy.domain.usecase.alarm.LoadAlarms
+import com.ujizin.leafy.domain.usecase.alarm.load.LoadAlarmsUseCase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -27,7 +27,7 @@ class AlarmReceiver : BroadcastReceiver() {
     lateinit var schedulePlantAlarm: SchedulePlantAlarm
 
     @Inject
-    lateinit var loadAlarms: LoadAlarms
+    lateinit var loadAlarms: LoadAlarmsUseCase
 
     @Inject
     lateinit var alarmScheduler: AlarmScheduler

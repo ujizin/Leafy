@@ -1,7 +1,7 @@
 package com.ujizin.leafy.alarm
 
 import com.ujizin.leafy.alarm.fakes.FakeAlarmScheduler
-import com.ujizin.leafy.alarm.fakes.FakeLoadAlarm
+import com.ujizin.leafy.alarm.fakes.FakeLoadAlarmUseCase
 import com.ujizin.leafy.alarm.fakes.FakeLoadPlant
 import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarm
 import com.ujizin.leafy.core.test.TestDispatcherRule
@@ -32,7 +32,7 @@ class SchedulePlantAlarmTest {
 
     private val loadPlant = FakeLoadPlant(until = COUNTER)
 
-    private val loadAlarm = FakeLoadAlarm(until = COUNTER)
+    private val loadAlarm = FakeLoadAlarmUseCase(until = COUNTER)
 
     val schedulePlantAlarm = SchedulePlantAlarm(
         loadPlant = loadPlant,

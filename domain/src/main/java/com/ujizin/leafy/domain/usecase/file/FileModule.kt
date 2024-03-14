@@ -1,7 +1,8 @@
 package com.ujizin.leafy.domain.usecase.file
 
 import com.ujizin.leafy.domain.repository.FileRepository
-import com.ujizin.leafy.domain.usecase.file.implementation.SaveFileImpl
+import com.ujizin.leafy.domain.usecase.file.save.SaveFileUseCase
+import com.ujizin.leafy.domain.usecase.file.save.SaveFileUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,5 +17,5 @@ object FileModule {
     @Singleton
     fun provideSaveFile(
         repository: FileRepository,
-    ): SaveFile = SaveFileImpl(repository)
+    ): SaveFileUseCase = SaveFileUseCaseImpl(repository)
 }

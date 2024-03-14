@@ -12,8 +12,8 @@ import com.ujizin.camposer.extensions.takePicture
 import com.ujizin.camposer.state.CameraState
 import com.ujizin.leafy.core.ui.extensions.decodeToBitmapWithRotation
 import com.ujizin.leafy.core.ui.extensions.launchCatching
-import com.ujizin.leafy.domain.usecase.file.SaveFile
-import com.ujizin.leafy.domain.usecase.plant.AddDraftPlant
+import com.ujizin.leafy.domain.usecase.file.save.SaveFileUseCase
+import com.ujizin.leafy.domain.usecase.plant.add.AddDraftPlantUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,8 +25,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CameraViewModel @Inject constructor(
-    private val saveFile: SaveFile,
-    private val addDraftPlant: AddDraftPlant,
+    private val saveFile: SaveFileUseCase,
+    private val addDraftPlant: AddDraftPlantUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<CameraUiState>(CameraUiState.Initial)

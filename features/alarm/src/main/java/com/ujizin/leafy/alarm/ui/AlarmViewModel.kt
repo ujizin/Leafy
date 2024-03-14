@@ -10,10 +10,10 @@ import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.model.Ringtone
 import com.ujizin.leafy.domain.model.WeekDay
 import com.ujizin.leafy.domain.result.mapResult
-import com.ujizin.leafy.domain.usecase.alarm.AddAlarm
-import com.ujizin.leafy.domain.usecase.plant.AddPlant
-import com.ujizin.leafy.domain.usecase.plant.LoadDraftPlant
-import com.ujizin.leafy.domain.usecase.ringtone.LoadRingtones
+import com.ujizin.leafy.domain.usecase.alarm.add.AddAlarmUseCase
+import com.ujizin.leafy.domain.usecase.plant.add.AddPlantUseCase
+import com.ujizin.leafy.domain.usecase.plant.load.LoadDraftPlantUseCase
+import com.ujizin.leafy.domain.usecase.ringtone.load.LoadRingtonesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,11 +30,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AlarmViewModel @Inject constructor(
-    private val loadDraftPlant: LoadDraftPlant,
-    private val addPlant: AddPlant,
-    private val addAlarm: AddAlarm,
+    private val loadDraftPlant: LoadDraftPlantUseCase,
+    private val addPlant: AddPlantUseCase,
+    private val addAlarm: AddAlarmUseCase,
     private val alarmScheduler: AlarmScheduler,
-    private val getRingtones: LoadRingtones,
+    private val getRingtones: LoadRingtonesUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<AlarmUiState>(AlarmUiState.Initial)

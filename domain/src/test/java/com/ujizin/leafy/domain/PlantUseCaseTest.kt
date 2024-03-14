@@ -4,14 +4,14 @@ import com.ujizin.leafy.core.test.TestDispatcherRule
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.repository.PlantRepository
 import com.ujizin.leafy.domain.result.Result
-import com.ujizin.leafy.domain.usecase.plant.AddPlant
-import com.ujizin.leafy.domain.usecase.plant.DeletePlant
-import com.ujizin.leafy.domain.usecase.plant.LoadAllPlant
-import com.ujizin.leafy.domain.usecase.plant.UpdatePlant
-import com.ujizin.leafy.domain.usecase.plant.implementation.AddPlantImpl
-import com.ujizin.leafy.domain.usecase.plant.implementation.DeletePlantImpl
-import com.ujizin.leafy.domain.usecase.plant.implementation.LoadAllPlantImpl
-import com.ujizin.leafy.domain.usecase.plant.implementation.UpdatePlantImpl
+import com.ujizin.leafy.domain.usecase.plant.add.AddPlantUseCase
+import com.ujizin.leafy.domain.usecase.plant.delete.DeletePlantUseCase
+import com.ujizin.leafy.domain.usecase.plant.load.LoadAllPlantUseCase
+import com.ujizin.leafy.domain.usecase.plant.update.UpdatePlant
+import com.ujizin.leafy.domain.usecase.plant.add.AddPlantUseCaseImpl
+import com.ujizin.leafy.domain.usecase.plant.delete.DeletePlantUseCaseImpl
+import com.ujizin.leafy.domain.usecase.plant.load.LoadAllPlantUseCaseImpl
+import com.ujizin.leafy.domain.usecase.plant.update.UpdatePlantImpl
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
@@ -37,22 +37,22 @@ class PlantUseCaseTest {
     @MockK
     private lateinit var fakePlant: Plant
 
-    private lateinit var addPlantUseCase: AddPlant
+    private lateinit var addPlantUseCase: AddPlantUseCase
 
-    private lateinit var loadPlantUseCase: LoadAllPlant
+    private lateinit var loadPlantUseCase: LoadAllPlantUseCase
 
     private lateinit var updatePlantUseCase: UpdatePlant
 
-    private lateinit var deletePlantUseCase: DeletePlant
+    private lateinit var deletePlantUseCase: DeletePlantUseCase
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
 
-        addPlantUseCase = AddPlantImpl(plantRepository)
-        loadPlantUseCase = LoadAllPlantImpl(plantRepository)
+        addPlantUseCase = AddPlantUseCaseImpl(plantRepository)
+        loadPlantUseCase = LoadAllPlantUseCaseImpl(plantRepository)
         updatePlantUseCase = UpdatePlantImpl(plantRepository)
-        deletePlantUseCase = DeletePlantImpl(plantRepository)
+        deletePlantUseCase = DeletePlantUseCaseImpl(plantRepository)
     }
 
     @Test

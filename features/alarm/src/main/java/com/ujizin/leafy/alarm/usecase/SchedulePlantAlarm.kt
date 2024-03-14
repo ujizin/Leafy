@@ -4,8 +4,8 @@ import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
 import com.ujizin.leafy.core.ui.extensions.currentDay
 import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.result.mapResult
-import com.ujizin.leafy.domain.usecase.alarm.LoadAlarm
-import com.ujizin.leafy.domain.usecase.plant.LoadPlant
+import com.ujizin.leafy.domain.usecase.alarm.load.LoadAlarmUseCase
+import com.ujizin.leafy.domain.usecase.plant.load.LoadPlantUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapConcat
@@ -15,8 +15,8 @@ import kotlinx.coroutines.flow.onEach
  * Schedule plant alarm use case
  * */
 class SchedulePlantAlarm(
-    private val loadPlant: LoadPlant,
-    private val loadAlarm: LoadAlarm,
+    private val loadPlant: LoadPlantUseCase,
+    private val loadAlarm: LoadAlarmUseCase,
     private val alarmScheduler: AlarmScheduler,
 ) {
 

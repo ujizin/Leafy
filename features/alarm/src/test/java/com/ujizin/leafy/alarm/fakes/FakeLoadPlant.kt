@@ -2,14 +2,14 @@ package com.ujizin.leafy.alarm.fakes
 
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.Result
-import com.ujizin.leafy.domain.usecase.plant.LoadPlant
+import com.ujizin.leafy.domain.usecase.plant.load.LoadPlantUseCase
 import kotlinx.coroutines.flow.flow
 import java.io.File
 
 class FakeLoadPlant(
     private val until: Int = 10,
     private val plants: List<Plant> = (0..until).map { createPlant(id = it + 1L) },
-) : LoadPlant {
+) : LoadPlantUseCase {
 
     override fun invoke(id: Long) = flow<Result<Plant?>> {
         val result = plants.find { it.id == id }?.let {

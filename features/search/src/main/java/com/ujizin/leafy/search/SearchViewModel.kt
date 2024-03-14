@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.ujizin.leafy.core.navigation.Args
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.Result
-import com.ujizin.leafy.domain.usecase.plant.FindPlant
-import com.ujizin.leafy.domain.usecase.plant.LoadAllPlant
+import com.ujizin.leafy.domain.usecase.plant.find.FindPlantUseCase
+import com.ujizin.leafy.domain.usecase.plant.load.LoadAllPlantUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,8 +21,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val loadPlants: LoadAllPlant,
-    private val findPlant: FindPlant,
+    private val loadPlants: LoadAllPlantUseCase,
+    private val findPlant: FindPlantUseCase,
 ) : ViewModel() {
 
     private val initAutoFocus: Boolean = checkNotNull(savedStateHandle[Args.SearchAutoFocus])
