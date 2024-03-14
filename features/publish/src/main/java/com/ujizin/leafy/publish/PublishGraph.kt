@@ -20,7 +20,7 @@ fun NavGraphBuilder.publishGraph(
         enterTransition = enterTransition,
         exitTransition = exitTransition,
     ) {
-        PublishSection(
+        PublishRoute(
             onBackPressed = onBackPressed,
             onFinishPublish = onNextClick,
         )

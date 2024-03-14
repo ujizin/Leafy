@@ -15,6 +15,6 @@ fun NavGraphBuilder.aboutGraph(
         enterTransition = { fullSlideInVertically() },
         exitTransition = { fullSlideOutVertically() },
     ) {
-        About(onBackPressed = onBackPressed)
+        AboutRoute(onBackPressed = onBackPressed)
     }
 }

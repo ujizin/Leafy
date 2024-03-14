@@ -32,7 +32,6 @@ import kotlinx.coroutines.launch
 fun LeafyNavigation(
     navController: NavHostController,
     drawerState: DrawerState,
-    onBackPressed: () -> Unit,
 ) {
     val scope = rememberCoroutineScope()
     Scaffold(
@@ -42,8 +41,6 @@ fun LeafyNavigation(
         drawerState = drawerState,
         navController = navController,
     ) {
-        BackHandler(onBack = onBackPressed)
-
         NavHost(
             navController = navController,
             startDestination = Destination.Home.route,

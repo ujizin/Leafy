@@ -54,7 +54,7 @@ fun TasksRoute(
 
     LaunchedEffect(viewModel) { viewModel.loadAlarms() }
 
-    Tasks(
+    TasksContent(
         uiState = uiState,
         onPlantClick = onPlantClick,
         onTakePictureClick = onTakePictureClick,
@@ -64,7 +64,7 @@ fun TasksRoute(
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun Tasks(
+private fun TasksContent(
     uiState: TasksUiState,
     onTakePictureClick: OnClick,
     onPlantClick: (Long) -> Unit,

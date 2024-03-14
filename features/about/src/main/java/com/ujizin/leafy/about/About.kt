@@ -37,7 +37,7 @@ import com.ujizin.leafy.core.components.R as CR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun About(onBackPressed: OnClick) {
+fun AboutRoute(onBackPressed: OnClick) {
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
@@ -59,7 +59,7 @@ fun About(onBackPressed: OnClick) {
             )
         },
     ) {
-        AboutSection(
+        AboutContent(
             modifier = Modifier
                 .padding(it)
                 .fillMaxSize()
@@ -69,7 +69,7 @@ fun About(onBackPressed: OnClick) {
 }
 
 @Composable
-private fun AboutSection(modifier: Modifier = Modifier) {
+private fun AboutContent(modifier: Modifier = Modifier) {
     Column(modifier) {
         val context = LocalContext.current
         Image(
@@ -81,7 +81,7 @@ private fun AboutSection(modifier: Modifier = Modifier) {
             contentDescription = null,
         )
 
-        AboutContent(Modifier.padding(vertical = 16.dp, horizontal = 20.dp))
+        AboutSection(Modifier.padding(vertical = 16.dp, horizontal = 20.dp))
 
         Spacer(modifier = Modifier.weight(1F))
         Button(
@@ -95,7 +95,7 @@ private fun AboutSection(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun AboutContent(modifier: Modifier = Modifier) {
+private fun AboutSection(modifier: Modifier = Modifier) {
     Column(modifier) {
         Text(
             text = stringResource(id = CR.string.app_name),

@@ -29,7 +29,7 @@ import com.ujizin.leafy.features.publish.R
 import com.ujizin.leafy.publish.viewmodel.PublishViewModel
 
 @Composable
-fun PublishSection(
+fun PublishRoute(
     onBackPressed: OnClick,
     onFinishPublish: OnClick,
     viewModel: PublishViewModel = hiltViewModel(),

@@ -58,7 +58,7 @@ fun SearchRoute(
 
     LaunchedEffect(viewModel, searchText) { viewModel.search(searchText) }
 
-    Search(
+    SearchContent(
         uiState = uiState,
         isKeyboardOpen = isKeyboardOpen,
         onDrawerClick = onDrawerClick,
@@ -72,7 +72,7 @@ fun SearchRoute(
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun Search(
+private fun SearchContent(
     uiState: SearchUiState,
     isKeyboardOpen: Boolean,
     onDrawerClick: OnClick,
@@ -161,7 +161,7 @@ private fun leadingIcon(onDrawerClick: OnClick): @Composable () -> Unit = {
 private fun SearchPreview() {
     LeafyTheme {
         Surface {
-            Search(
+            SearchContent(
                 uiState = SearchUiState.Empty,
                 isKeyboardOpen = false,
                 onDrawerClick = { },

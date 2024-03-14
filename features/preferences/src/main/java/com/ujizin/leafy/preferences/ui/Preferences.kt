@@ -24,7 +24,7 @@ import com.ujizin.leafy.features.preferences.R
 import com.ujizin.leafy.preferences.PreferencesViewModel
 
 @Composable
-internal fun Preferences(
+internal fun PreferencesRoute(
     viewModel: PreferencesViewModel = hiltViewModel(),
 ) {
     Section(

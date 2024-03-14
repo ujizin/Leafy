@@ -41,6 +41,10 @@ fun NavGraphBuilder.composable(
     )
 }
 
+fun NavController.navigate(destination: Destination) {
+    navigate(destination.route)
+}
+
 fun NavController.navigate(destination: Destination, builder: NavOptionsBuilder.() -> Unit = {}) {
     navigate(destination.route, builder)
 }

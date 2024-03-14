@@ -5,7 +5,7 @@ import com.ujizin.leafy.core.navigation.AnimatedEnterTransition
 import com.ujizin.leafy.core.navigation.AnimatedExitTransition
 import com.ujizin.leafy.core.navigation.Destination
 import com.ujizin.leafy.core.navigation.composable
-import com.ujizin.leafy.preferences.ui.Preferences
+import com.ujizin.leafy.preferences.ui.PreferencesRoute
 
 fun NavGraphBuilder.preferencesGraph(
     enterTransition: AnimatedEnterTransition,
@@ -16,6 +16,6 @@ fun NavGraphBuilder.preferencesGraph(
         exitTransition = exitTransition,
         destination = Destination.Preferences,
     ) {
-        Preferences()
+        PreferencesRoute()
     }
 }

@@ -29,7 +29,7 @@ fun HomeRoute(
 
     LaunchedEffect(viewModel) { viewModel.loadHome() }
 
-    Home(
+    HomeContent(
         state = state,
         nickname = LocalUser.current.nickname,
         onTakePictureClick = onTakePictureClick,
@@ -40,7 +40,7 @@ fun HomeRoute(
 }
 
 @Composable
-private fun Home(
+private fun HomeContent(
     state: HomeUIState,
     nickname: String,
     onTakePictureClick: OnClick,
@@ -70,10 +70,10 @@ private fun Home(
 
 @ThemePreviews
 @Composable
-private fun HomePreview() {
+private fun HomeContentPreview() {
     LeafyTheme {
         Surface {
-            Home(
+            HomeContent(
                 state = HomeUIState.Success(listOf()),
                 nickname = "User",
                 onTakePictureClick = {},

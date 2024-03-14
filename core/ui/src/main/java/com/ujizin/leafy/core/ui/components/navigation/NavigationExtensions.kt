@@ -1,10 +1,13 @@
 package com.ujizin.leafy.core.ui.components.navigation
 
+import android.util.Log
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.State
@@ -18,12 +21,12 @@ private enum class NavDirection {
     Start, End, None,
 }
 
-private fun navDirection(navController: NavController): NavDirection {
-    val previousBackStackEntry = navController.previousBackStackEntry ?: return run {
-        return@run NavDirection.End
-    }
+private fun navDirection(
+    navController: NavController,
+    previousDestination: String? = BottomNavItem.previousRoute,
+): NavDirection {
+    previousDestination ?: return NavDirection.End
 
-    val previousDestination = previousBackStackEntry.destination.route
     val currentDestination = navController.currentBackStackEntry?.destination?.route
 
     val previousBottomNavItem = BottomNavItem.entries.firstOrNull {
@@ -37,7 +40,7 @@ private fun navDirection(navController: NavController): NavDirection {
     if (currentBottomNavItem == BottomNavItem.Camera) return NavDirection.None
 
     return when {
-        currentBottomNavItem.ordinal > previousBottomNavItem.ordinal -> NavDirection.Start
+        currentBottomNavItem.ordinal >= previousBottomNavItem.ordinal -> NavDirection.Start
         else -> NavDirection.End
     }
 }
@@ -72,8 +75,8 @@ fun AnimatedContentTransitionScope<*>.navigationExitTransition(
     return slideOutOfContainer(
         direction,
         animationSpec = spring(
-            Spring.DampingRatioLowBouncy,
-            Spring.StiffnessMediumLow,
+            Spring.DampingRatioNoBouncy,
+            Spring.StiffnessMedium,
         ),
     )
 }

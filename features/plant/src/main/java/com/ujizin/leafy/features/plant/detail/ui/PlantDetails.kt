@@ -21,7 +21,7 @@ fun PlantDetailsRoute(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    PlantDetails(
+    PlantDetailsContent(
         onBackPressed = onBackPressed,
         uiState = uiState,
         onAlarmChanged = viewModel::updateAlarm,
@@ -32,7 +32,7 @@ fun PlantDetailsRoute(
 }
 
 @Composable
-private fun PlantDetails(
+private fun PlantDetailsContent(
     onBackPressed: OnClick,
     uiState: DetailPlantUiState,
     onAlarmChanged: (Alarm) -> Unit,
@@ -56,7 +56,7 @@ private fun PlantDetails(
 private fun PlantDetailsPreview() {
     LeafyTheme {
         Surface {
-            PlantDetails(
+            PlantDetailsContent(
                 onBackPressed = {},
                 uiState = DetailPlantUiState.Loaded(
                     Plant(

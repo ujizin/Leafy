@@ -2,6 +2,7 @@ package com.ujizin.leafy
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.DrawerState
@@ -9,11 +10,12 @@ import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.ujizin.leafy.alarm.AlarmService
@@ -37,16 +39,29 @@ class MainActivity : AppCompatActivity() {
             AppConfiguration {
                 val navController = rememberNavController()
                 val drawerState = rememberDrawerState(DrawerValue.Closed)
-                val scope = rememberCoroutineScope()
-
                 LaunchPlantDetail(navController)
+
+                BackHandler(navController, drawerState)
 
                 LeafyNavigation(
                     navController = navController,
                     drawerState = drawerState,
-                    onBackPressed = { scope.launch { navController.navigateUp(drawerState) } },
                 )
             }
+        }
+    }
+
+    @Composable
+    private fun BackHandler(
+        navController: NavHostController,
+        drawerState: DrawerState
+    ) {
+        val scope = rememberCoroutineScope()
+        val isDrawerOpen by rememberUpdatedState(drawerState.isOpen)
+
+        when {
+            isDrawerOpen -> BackHandler { scope.launch { drawerState.close() } }
+            else -> BackHandler { if (!navController.navigateUp()) finish() }
         }
     }
 
@@ -65,14 +80,5 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(plantDetailDestination)
             }
         }
-    }
-
-    private suspend fun NavController.navigateUp(drawerState: DrawerState) {
-        if (drawerState.isOpen) {
-            drawerState.close()
-            return
-        }
-
-        if (!navigateUp()) finish()
     }
 }
