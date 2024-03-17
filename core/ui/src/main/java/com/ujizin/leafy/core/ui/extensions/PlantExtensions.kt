@@ -21,7 +21,7 @@ fun Plant.share(context: Context) {
     context.startActivity(
         Intent.createChooser(
             intent,
-            context.getString(R.string.plant_share_title).capitalize()
-        )
+            context.getString(R.string.plant_share_title).capitalize(),
+        ),
     )
 }
