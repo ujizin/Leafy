@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 import androidx.compose.material3.Scaffold as MaterialScaffold
 
 @Composable
-fun Scaffold(
+fun ScaffoldWithDrawer(
     modifier: Modifier = Modifier,
     drawerState: DrawerState,
     navController: NavController,

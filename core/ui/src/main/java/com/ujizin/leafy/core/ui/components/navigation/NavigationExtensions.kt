@@ -83,7 +83,6 @@ internal inline fun <reified T : NavItem> NavController.currentNavItemAsState(
     initialNavItem: T? = null,
 ): State<T?> {
     val selectedItem = remember { mutableStateOf(initialNavItem) }
-
     DisposableEffect(this) {
         val listener = NavController.OnDestinationChangedListener { _, destination, _ ->
             val currentDestination = Destination.findByName(destination.route)

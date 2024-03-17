@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.ujizin.leafy.core.components.R
 import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
-import com.ujizin.leafy.core.ui.components.animated.animation.Animation
 import com.ujizin.leafy.core.ui.components.button.Button
 import com.ujizin.leafy.core.ui.components.image.Icons
 import com.ujizin.leafy.core.ui.extensions.OnClick
@@ -35,7 +34,6 @@ internal fun CameraPreviewSection(
         AnimatedButtonIcon(
             modifier = Modifier.padding(16.dp),
             icon = Icons.Back,
-            animation = Animation.SlideToBottom,
             onClick = onBackPressed,
         )
         Button(

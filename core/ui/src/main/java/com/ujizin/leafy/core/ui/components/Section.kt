@@ -22,7 +22,7 @@ import com.ujizin.leafy.core.ui.extensions.Content
 fun Section(
     modifier: Modifier = Modifier,
     headerPaddingValues: PaddingValues = PaddingValues(
-        top = 32.dp,
+        top = 24.dp,
         start = 20.dp,
         end = 20.dp,
     ),
@@ -59,7 +59,7 @@ private fun HeaderSection(
     headerAnimation: Animation,
 ) {
     val paddingTop by animateDpAsState(
-        targetValue = if (trailingIcon != null || leadingIcon != null) 24.dp else 0.dp,
+        targetValue = if (trailingIcon != null || leadingIcon != null) 12.dp else 0.dp,
         label = "header-padding",
     )
     Column(modifier) {

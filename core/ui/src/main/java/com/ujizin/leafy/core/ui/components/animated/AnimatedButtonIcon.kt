@@ -1,11 +1,18 @@
 package com.ujizin.leafy.core.ui.components.animated
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.IconButton
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,14 +29,20 @@ fun AnimatedButtonIcon(
     modifier: Modifier = Modifier,
     icon: Icons,
     animation: Animation = Animation.None,
-    size: Dp = Dp.Unspecified,
+    size: Dp = 24.dp,
     tint: Color? = null,
+    background: Color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5F),
+    innerPaddingValues: PaddingValues = PaddingValues(12.dp),
+    shape: Shape = RoundedCornerShape(8.dp),
     onClick: OnClick = {},
 ) {
     Animated(animation = animation) {
-        IconButton(
-            modifier = modifier,
-            onClick = onClick,
+        Box(
+            modifier = modifier
+                .clip(shape)
+                .clickable(onClick = onClick)
+                .background(background, shape)
+                .padding(innerPaddingValues),
         ) {
             androidx.compose.material3.Icon(
                 modifier = Modifier.size(size.takeOrElse { 32.dp }),

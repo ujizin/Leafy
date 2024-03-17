@@ -16,7 +16,7 @@ import com.ujizin.leafy.core.navigation.Args
 import com.ujizin.leafy.core.navigation.Destination
 import com.ujizin.leafy.core.navigation.navigate
 import com.ujizin.leafy.core.navigation.navigateUp
-import com.ujizin.leafy.core.ui.components.Scaffold
+import com.ujizin.leafy.core.ui.components.ScaffoldWithDrawer
 import com.ujizin.leafy.core.ui.components.navigation.navigationEnterTransition
 import com.ujizin.leafy.core.ui.components.navigation.navigationExitTransition
 import com.ujizin.leafy.features.plant.plantGraph
@@ -33,7 +33,7 @@ fun LeafyNavigation(
     drawerState: DrawerState,
 ) {
     val scope = rememberCoroutineScope()
-    Scaffold(
+    ScaffoldWithDrawer(
         modifier = Modifier
             .imePadding()
             .navigationBarsPadding(),

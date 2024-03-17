@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -34,7 +34,7 @@ internal fun Camera(
         ErrorPopUp(uiState.message)
     }
 
-    var zoomRatio by remember { mutableStateOf(cameraState.minZoom) }
+    var zoomRatio by remember { mutableFloatStateOf(cameraState.minZoom) }
     var camSelector by rememberCamSelector()
 
     CameraPreview(
