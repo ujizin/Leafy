@@ -83,7 +83,10 @@ private fun PlantAlarmRow(
     ) {
         val context = LocalContext.current
         var checked by remember(alarm.enabled) { mutableStateOf(alarm.enabled) }
-        val alphaRow by animateFloatAsState(targetValue = if (checked) 1F else 0.5F)
+        val alphaRow by animateFloatAsState(
+            targetValue = if (checked) 1F else 0.5F,
+            label = "PlantAlarmRow"
+        )
         Row(
             modifier = Modifier
                 .fillMaxSize()

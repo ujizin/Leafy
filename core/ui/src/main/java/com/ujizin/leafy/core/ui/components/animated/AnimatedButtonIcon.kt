@@ -1,16 +1,13 @@
 package com.ujizin.leafy.core.ui.components.animated
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
@@ -31,21 +28,24 @@ fun AnimatedButtonIcon(
     animation: Animation = Animation.None,
     size: Dp = 24.dp,
     tint: Color? = null,
-    background: Color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.25F),
+    background: Color = MaterialTheme.colorScheme.surface,
     innerPaddingValues: PaddingValues = PaddingValues(12.dp),
     shape: Shape = RoundedCornerShape(8.dp),
     onClick: OnClick = {},
 ) {
     Animated(animation = animation) {
-        Box(
-            modifier = modifier
-                .clip(shape)
-                .clickable(onClick = onClick)
-                .background(background, shape)
-                .padding(innerPaddingValues),
+        Surface(
+            modifier = modifier,
+            color = background,
+            shape = shape,
+            shadowElevation = 8.dp,
+            tonalElevation = 8.dp,
+            onClick = onClick,
         ) {
             androidx.compose.material3.Icon(
-                modifier = Modifier.size(size.takeOrElse { 32.dp }),
+                modifier = Modifier
+                    .padding(innerPaddingValues)
+                    .size(size.takeOrElse { 32.dp }),
                 painter = painterResource(icon.idRes),
                 tint = tint ?: MaterialTheme.colorScheme.onBackground,
                 contentDescription = stringResource(icon.descriptionRes),
