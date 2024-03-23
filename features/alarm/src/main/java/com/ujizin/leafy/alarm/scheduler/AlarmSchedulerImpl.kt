@@ -83,6 +83,6 @@ internal class AlarmSchedulerImpl(private val context: Context) : AlarmScheduler
             putExtra(AlarmReceiver.RINGTONE_CONTENT_EXTRA, ringtoneUri.toString())
             putExtras(bundle)
         },
-        PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+        PendingIntent.FLAG_IMMUTABLE,
     )
 }
