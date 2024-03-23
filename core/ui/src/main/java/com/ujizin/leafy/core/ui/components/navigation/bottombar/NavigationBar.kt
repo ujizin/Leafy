@@ -84,6 +84,7 @@ private fun NavController.navigateToItem(item: BottomNavItem) {
 
     navigate(item.destination) {
         graph.startDestinationRoute?.let { route ->
+            if (item.destination.route == graph.startDestinationRoute) return@let
             popUpTo(route) {
                 saveState = true
             }

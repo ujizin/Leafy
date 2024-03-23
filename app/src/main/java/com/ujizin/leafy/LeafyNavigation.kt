@@ -50,13 +50,15 @@ fun LeafyNavigation(
                 onTakePictureClick = { navController.navigate(Destination.Camera) },
                 onSearchClick = {
                     navController.navigate(
-                        Destination.Search.withArguments(Args.SearchAutoFocus to true),
+                        destination = Destination.Search,
+                        Args.SearchAutoFocus to true,
                     )
                 },
                 onDrawerClick = { scope.launch { drawerState.open() } },
                 onPlantClick = { plantId ->
                     navController.navigate(
-                        Destination.PlantDetails.withArguments(Args.PlantId to plantId),
+                        Destination.PlantDetails,
+                        Args.PlantId to plantId,
                     )
                 },
             )
@@ -67,7 +69,8 @@ fun LeafyNavigation(
                 onTakePictureClick = { navController.navigate(Destination.Camera) },
                 onPlantClick = { plantId ->
                     navController.navigate(
-                        Destination.PlantDetails.withArguments(Args.PlantId to plantId),
+                        Destination.PlantDetails,
+                        Args.PlantId to plantId,
                     )
                 },
             )
@@ -76,7 +79,8 @@ fun LeafyNavigation(
                 exitTransition = { navigationExitTransition(navController) },
                 onPlantClick = { plantId ->
                     navController.navigate(
-                        Destination.PlantDetails.withArguments(Args.PlantId to plantId),
+                        Destination.PlantDetails,
+                        Args.PlantId to plantId,
                     )
                 },
                 onTakePictureClick = { navController.navigate(Destination.Camera) },

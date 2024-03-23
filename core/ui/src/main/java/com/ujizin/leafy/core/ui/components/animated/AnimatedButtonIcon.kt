@@ -31,7 +31,7 @@ fun AnimatedButtonIcon(
     animation: Animation = Animation.None,
     size: Dp = 24.dp,
     tint: Color? = null,
-    background: Color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5F),
+    background: Color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.25F),
     innerPaddingValues: PaddingValues = PaddingValues(12.dp),
     shape: Shape = RoundedCornerShape(8.dp),
     onClick: OnClick = {},

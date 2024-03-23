@@ -41,12 +41,19 @@ fun NavGraphBuilder.composable(
     )
 }
 
-fun NavController.navigate(destination: Destination) {
-    navigate(destination.route)
+fun NavController.navigate(destination: Destination, vararg arguments: Pair<String, Any>) {
+    navigate(destination.withArguments(*arguments)) {
+        launchSingleTop = true
+        restoreState = true
+    }
 }
 
-fun NavController.navigate(destination: Destination, builder: NavOptionsBuilder.() -> Unit = {}) {
-    navigate(destination.route, builder)
+fun NavController.navigate(
+    destination: Destination,
+    vararg arguments: Pair<String, Any>,
+    builder: NavOptionsBuilder.() -> Unit,
+) {
+    navigate(destination.withArguments(*arguments), builder)
 }
 
 fun NavController.navigateUp(times: Int) {

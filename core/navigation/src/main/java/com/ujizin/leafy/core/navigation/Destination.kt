@@ -17,7 +17,7 @@ enum class Destination(
 
     val route: String get() = "$HOST/$destinationName"
 
-    fun withArguments(vararg arguments: Pair<String, Any>): String {
+    internal fun withArguments(vararg arguments: Pair<String, Any>): String {
         var destinationName = this.destinationName
         arguments.forEach { (key, value) ->
             destinationName = destinationName.replace("{$key}", "$value")
