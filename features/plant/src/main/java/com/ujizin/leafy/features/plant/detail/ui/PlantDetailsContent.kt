@@ -93,7 +93,7 @@ fun PlantColumn(
     alarms: List<Alarm>,
     onAlarmChanged: (Alarm) -> Unit,
     onSharedClick: (Plant) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
         PlantContent(

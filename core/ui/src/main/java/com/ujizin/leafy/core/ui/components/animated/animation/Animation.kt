@@ -1,12 +1,5 @@
 package com.ujizin.leafy.core.ui.components.animated.animation
 
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.FiniteAnimationSpec
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
-import androidx.compose.ui.unit.IntOffset
-
 data class Animation internal constructor(
     val direction: Animate.Direction,
     val delayMillis: Int = 0,

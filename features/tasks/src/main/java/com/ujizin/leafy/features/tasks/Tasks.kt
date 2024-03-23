@@ -124,7 +124,7 @@ fun TaskItems(
         shape = MaterialTheme.shapes.medium,
         elevation = CardDefaults.cardElevation(
             pressedElevation = 16.dp,
-            defaultElevation = 8.dp
+            defaultElevation = 8.dp,
         ),
         onClick = onClick,
     ) {

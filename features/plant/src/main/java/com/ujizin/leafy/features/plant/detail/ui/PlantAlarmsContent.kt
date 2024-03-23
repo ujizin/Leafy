@@ -85,7 +85,7 @@ private fun PlantAlarmRow(
         var checked by remember(alarm.enabled) { mutableStateOf(alarm.enabled) }
         val alphaRow by animateFloatAsState(
             targetValue = if (checked) 1F else 0.5F,
-            label = "PlantAlarmRow"
+            label = "PlantAlarmRow",
         )
         Row(
             modifier = Modifier
