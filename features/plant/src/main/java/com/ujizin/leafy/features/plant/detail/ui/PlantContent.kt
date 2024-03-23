@@ -1,8 +1,9 @@
 package com.ujizin.leafy.features.plant.detail.ui
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -23,10 +24,8 @@ fun PlantContent(
     onSharedClick: () -> Unit,
 ) {
     Column(modifier) {
-        Row(
+        Box(
             modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
                 modifier = Modifier.padding(end = 16.dp),
@@ -34,7 +33,10 @@ fun PlantContent(
                 style = MaterialTheme.typography.titleMedium,
             )
             PlantActions(
-                modifier = Modifier.align(Alignment.Top),
+                modifier = Modifier
+                    .absoluteOffset(y = -(48.dp))
+                    .padding(end = 8.dp)
+                    .align(Alignment.TopEnd),
                 onSharedClick = onSharedClick,
             )
         }

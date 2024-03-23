@@ -26,8 +26,8 @@ import com.ujizin.leafy.core.ui.extensions.OnClick
 @Composable
 internal fun CameraButton(
     modifier: Modifier = Modifier,
-    animation: Animation = Animation.SlideToBottom.copy(delayMillis = Animation.MediumDelay),
-    iconAnimation: Animation = Animation.SlideToTop.copy(delayMillis = Animation.LargeDelay),
+    animation: Animation = Animation.SlideToBottom.copy(delayMillis = Animation.MEDIUM_DELAY),
+    iconAnimation: Animation = Animation.SlideToTop.copy(delayMillis = Animation.LARGE_DELAY),
     onClick: OnClick,
 ) {
     Box(

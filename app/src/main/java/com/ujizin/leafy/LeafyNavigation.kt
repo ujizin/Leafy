@@ -19,6 +19,7 @@ import com.ujizin.leafy.core.navigation.navigateUp
 import com.ujizin.leafy.core.ui.components.ScaffoldWithDrawer
 import com.ujizin.leafy.core.ui.components.navigation.navigationEnterTransition
 import com.ujizin.leafy.core.ui.components.navigation.navigationExitTransition
+import com.ujizin.leafy.core.ui.components.navigation.orNone
 import com.ujizin.leafy.features.plant.plantGraph
 import com.ujizin.leafy.features.tasks.tasksGraph
 import com.ujizin.leafy.home.homeGraph
@@ -46,7 +47,9 @@ fun LeafyNavigation(
         ) {
             homeGraph(
                 enterTransition = { navigationEnterTransition(navController) },
-                exitTransition = { navigationExitTransition(navController) },
+                exitTransition = {
+                    navigationExitTransition(navController).orNone
+                },
                 onTakePictureClick = { navController.navigate(Destination.Camera) },
                 onSearchClick = {
                     navController.navigate(

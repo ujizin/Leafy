@@ -28,9 +28,7 @@ fun BoxImage(
 ) {
     Box(modifier) {
         Image(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.secondaryContainer),
+            modifier = Modifier.fillMaxSize(),
             painter = painter,
             contentScale = contentScale,
             contentDescription = contentDescription,

@@ -78,6 +78,8 @@ fun AnimatedContentTransitionScope<*>.navigationExitTransition(
     )
 }
 
+val ExitTransition?.orNone get() = this ?: ExitTransition.None
+
 @Composable
 internal inline fun <reified T : NavItem> NavController.currentNavItemAsState(
     initialNavItem: T? = null,

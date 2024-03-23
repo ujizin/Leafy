@@ -53,7 +53,7 @@ private fun BottomNavigationBar(
         Animated(
             visibleTarget = showBottomNavigation,
             animation = Animation.SlideToTop.copy(
-                durationMillis = Animation.SmallDuration,
+                durationMillis = Animation.SMALL_DURATION,
             ),
         ) {
             androidx.compose.material3.NavigationBar {

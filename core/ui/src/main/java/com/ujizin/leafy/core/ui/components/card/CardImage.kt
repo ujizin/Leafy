@@ -26,7 +26,6 @@ import com.ujizin.leafy.core.ui.components.image.BoxImage
 import com.ujizin.leafy.core.ui.extensions.Content
 import com.ujizin.leafy.core.ui.extensions.OnClick
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CardImage(
     modifier: Modifier = Modifier,
