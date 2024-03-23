@@ -22,7 +22,7 @@ import com.ujizin.leafy.core.ui.state.keyboardAsState
 internal fun NavigationBar(
     navController: NavController,
 ) {
-    val navItem by navController.currentNavItemAsState<BottomNavItem>()
+    val navItem by navController.currentNavItemAsState<BottomNavItem>(BottomNavItem.Home)
     val isKeyboardOpen by keyboardAsState()
     val isBottomNavItem = remember(navItem) {
         BottomNavItem.entries.any { bottomNavItem ->
@@ -82,9 +82,13 @@ private fun NavController.navigateToItem(item: BottomNavItem) {
     // for animation transition
     previousRoute = route
 
+    if (item.destination.route == graph.startDestinationRoute) {
+        popBackStack()
+        return
+    }
+
     navigate(item.destination) {
         graph.startDestinationRoute?.let { route ->
-            if (item.destination.route == graph.startDestinationRoute) return@let
             popUpTo(route) {
                 saveState = true
             }

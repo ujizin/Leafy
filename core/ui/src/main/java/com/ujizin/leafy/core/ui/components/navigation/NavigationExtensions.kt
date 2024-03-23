@@ -14,6 +14,8 @@ import androidx.navigation.NavController
 import com.ujizin.leafy.core.navigation.Destination
 import com.ujizin.leafy.core.ui.components.navigation.bottombar.BottomNavItem
 
+val ExitTransition?.orNone get() = this ?: ExitTransition.None
+
 private enum class NavDirection {
     Start, End, None,
 }
@@ -78,13 +80,11 @@ fun AnimatedContentTransitionScope<*>.navigationExitTransition(
     )
 }
 
-val ExitTransition?.orNone get() = this ?: ExitTransition.None
-
 @Composable
 internal inline fun <reified T : NavItem> NavController.currentNavItemAsState(
     initialNavItem: T? = null,
 ): State<T?> {
-    val selectedItem = remember { mutableStateOf(initialNavItem) }
+    val selectedItem = remember(initialNavItem) { mutableStateOf(initialNavItem) }
     DisposableEffect(this) {
         val listener = NavController.OnDestinationChangedListener { _, destination, _ ->
             val currentDestination = Destination.findByName(destination.route)

@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -66,11 +67,14 @@ fun ButtonSwitchCamera(
     onClick: OnClick,
 ) {
     var rotate by remember { mutableStateOf(false) }
-    val rotateAnimation by animateFloatAsState(targetValue = if (rotate) 0F else 180F)
+    val rotateAnimation by animateFloatAsState(
+        targetValue = if (rotate) 0F else 180F,
+        label = "camera-button-switch",
+    )
     ButtonPulse(
         modifier = Modifier
             .background(
-                MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.25F),
+                MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5F),
                 CircleShape,
             )
             .padding(12.dp)
@@ -87,6 +91,7 @@ fun ButtonSwitchCamera(
                 .align(Alignment.Center)
                 .rotate(rotateAnimation),
             icon = Icons.Refresh,
+            tint = Color.White,
         )
     }
 }
@@ -99,7 +104,7 @@ fun ButtonGallery(
     ButtonPulse(
         modifier = Modifier
             .background(
-                MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.25F),
+                MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5F),
                 CircleShape,
             )
             .padding(12.dp)
@@ -112,6 +117,7 @@ fun ButtonGallery(
                 .size(24.dp)
                 .align(Alignment.Center),
             icon = Icons.Gallery,
+            tint = Color.White,
         )
     }
 }
@@ -137,11 +143,17 @@ fun ButtonPulse(
     modifier: Modifier = Modifier,
     shape: Shape = RectangleShape,
     onClick: OnClick,
+    onPressChange: (Boolean) -> Unit = {},
     content: @Composable BoxScope.() -> Unit = {},
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val buttonPressed by interactionSource.collectIsPressedAsState()
-    val scaleAnimated by animateFloatAsState(targetValue = if (buttonPressed) 1.05F else 1F)
+    val scaleAnimated by animateFloatAsState(
+        targetValue = if (buttonPressed) 1.10F else 1F,
+        label = "button-pulse-scale",
+    )
+
+    LaunchedEffect(buttonPressed) { onPressChange(buttonPressed) }
 
     Box(
         modifier = Modifier
