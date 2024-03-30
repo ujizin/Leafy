@@ -31,11 +31,9 @@ class GoogleReviewState(
         when {
             redirectToPlayStore -> context.openAppInPlayStore()
             else -> reviewInfo?.let {
-                reviewManager.launchReviewFlow(activity, reviewInfo)
-                    .addOnCompleteListener {
-                        redirectToPlayStore = true
-                        context.openAppInPlayStore()
-                    }
+                val reviewFlow = reviewManager.launchReviewFlow(activity, reviewInfo)
+                if (reviewFlow.isComplete) context.openAppInPlayStore()
+                reviewFlow.addOnCompleteListener { redirectToPlayStore = true }
             }
         }
     }
