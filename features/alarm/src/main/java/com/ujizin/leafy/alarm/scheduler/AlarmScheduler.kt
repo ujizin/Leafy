@@ -25,6 +25,7 @@ interface AlarmScheduler {
         hours: Int,
         minutes: Int,
         ringtoneUri: String,
+        requestCode: Int = 0,
         bundle: Bundle = Bundle.EMPTY,
     )
 
@@ -37,6 +38,7 @@ interface AlarmScheduler {
         hours = alarm.hours,
         minutes = alarm.minutes,
         ringtoneUri = alarm.ringtoneUriContent,
+        requestCode = alarm.id.toInt(),
         bundle = bundleOf(AlarmReceiver.ALARM_ID_EXTRA to alarm.id),
     )
 }

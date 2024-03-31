@@ -42,13 +42,20 @@ class AlarmService : Service() {
     }
 
     private fun stopService() {
+        stopAlarm()
         stopForeground()
-        stopSelf()
+    }
+
+    private fun stopAlarm() {
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        alarmNotificator.cancelNotification(NOTIFICATION_ID)
+        mediaPlayer = null
     }
 
     @Suppress("DEPRECATION")
     private fun stopForeground() = when {
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.N -> stopForeground(STOP_FOREGROUND_DETACH)
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.N -> stopForeground(STOP_FOREGROUND_REMOVE)
         else -> stopForeground(true)
     }
 
@@ -112,10 +119,7 @@ class AlarmService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mediaPlayer?.stop()
-        mediaPlayer?.release()
-        alarmNotificator.cancelNotification(NOTIFICATION_ID)
-        mediaPlayer = null
+        stopAlarm()
     }
 
     override fun onBind(intent: Intent?): IBinder? = null

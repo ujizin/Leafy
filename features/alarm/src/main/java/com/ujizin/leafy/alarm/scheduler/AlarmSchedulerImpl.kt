@@ -18,9 +18,10 @@ internal class AlarmSchedulerImpl(private val context: Context) : AlarmScheduler
         hours: Int,
         minutes: Int,
         ringtoneUri: String,
+        requestCode: Int,
         bundle: Bundle,
     ) {
-        setAlarm(type, hours, minutes, ringtoneUri.toUri(), bundle)
+        setAlarm(type, hours, minutes, ringtoneUri.toUri(), requestCode, bundle)
     }
 
     /**
@@ -36,13 +37,14 @@ internal class AlarmSchedulerImpl(private val context: Context) : AlarmScheduler
         hours: Int,
         minutes: Int,
         ringtoneUri: Uri,
+        requestCode: Int = 0,
         bundle: Bundle,
     ) {
         AlarmManagerCompat.setExactAndAllowWhileIdle(
             context.alarmManager,
             type,
             getTimeInMillis(hours, minutes),
-            createPendingIntent(ringtoneUri, bundle = bundle),
+            createPendingIntent(ringtoneUri, requestCode, bundle),
         )
     }
 
@@ -74,15 +76,16 @@ internal class AlarmSchedulerImpl(private val context: Context) : AlarmScheduler
      * */
     private fun createPendingIntent(
         ringtoneUri: Uri,
+        requestCode: Int = 0,
         bundle: Bundle,
     ): PendingIntent = PendingIntent.getBroadcast(
         context,
-        0,
+        requestCode,
         Intent(context, AlarmReceiver::class.java).apply {
             action = AlarmReceiver.SCHEDULE_ALARM_ACTION
             putExtra(AlarmReceiver.RINGTONE_CONTENT_EXTRA, ringtoneUri.toString())
             putExtras(bundle)
         },
-        PendingIntent.FLAG_IMMUTABLE,
+        PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
     )
 }

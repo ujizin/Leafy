@@ -77,6 +77,7 @@ class AlarmViewModel @Inject constructor(
                             hours = hours,
                             minutes = minutes,
                             ringtoneUri = ringtoneContent,
+                            requestCode = alarmId.toInt(),
                             bundle = bundleOf(AlarmReceiver.ALARM_ID_EXTRA to alarmId),
                         )
                     }
