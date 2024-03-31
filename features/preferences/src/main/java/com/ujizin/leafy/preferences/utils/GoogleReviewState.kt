@@ -2,8 +2,6 @@ package com.ujizin.leafy.preferences.utils
 
 import android.content.Context
 import android.content.ContextWrapper
-import android.content.Intent
-import android.net.Uri
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -76,18 +74,6 @@ fun rememberGoogleReview(): GoogleReviewState {
     }
 
     return googleReviewState
-}
-
-/***
- * Open play store in your app (package name).
- * */
-fun Context.openAppInPlayStore() {
-    startActivity(
-        Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse("https://play.google.com/store/apps/details?id=$packageName"),
-        ),
-    )
 }
 
 /**
