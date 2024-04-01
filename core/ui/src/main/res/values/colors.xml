@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#50D488</color>
+    <color name="primary">#1E856F</color>
     <color name="launcher_background_color">#EDF6FE</color>
     <color name="launcher_foreground_color">@color/primary</color>
 </resources>

@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.Color
 object Color {
     val Black900 = Color(0xFF161616)
     val Black800 = Color(0xFF1B1B1B)
-    val Green800 = Color(0xFF50D488)
+    val Green800 = Color(0xFF1E856F)
     val Green200 = Color(0xFFAEEDC9)
     val Gray900 = Color(0xFF2C3333)
     val Gray800 = Color(0xFF3F4549)
