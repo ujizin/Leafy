@@ -21,6 +21,7 @@ class FakeAlarmScheduler : AlarmScheduler {
         hours: Int,
         minutes: Int,
         ringtoneUri: String,
+        requestCode: Int,
         bundle: Bundle,
     ) {
         _alarms += FakeAlarm(
