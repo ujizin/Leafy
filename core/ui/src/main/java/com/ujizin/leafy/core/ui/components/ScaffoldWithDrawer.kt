@@ -13,6 +13,7 @@ import androidx.navigation.NavController
 import com.ujizin.leafy.core.navigation.Destination
 import com.ujizin.leafy.core.navigation.navigate
 import com.ujizin.leafy.core.ui.components.navigation.bottombar.NavigationBar
+import com.ujizin.leafy.core.ui.components.navigation.bottombar.navigateToItem
 import com.ujizin.leafy.core.ui.components.navigation.currentNavItemAsState
 import com.ujizin.leafy.core.ui.components.navigation.drawer.DrawerContent
 import com.ujizin.leafy.core.ui.components.navigation.drawer.DrawerItem
@@ -40,7 +41,7 @@ fun ScaffoldWithDrawer(
                 },
                 onDrawerClicked = { drawerItem ->
                     scope.launch { drawerState.close() }
-                    navController.navigate(drawerItem.destination)
+                    navController.navigateToItem(drawerItem)
                 },
                 onCloseDrawer = {
                     scope.launch { drawerState.close() }

@@ -22,19 +22,17 @@ private enum class NavDirection {
 
 private fun navDirection(
     navController: NavController,
-    previousDestination: String? = BottomNavItem.previousRoute,
 ): NavDirection {
-    previousDestination ?: return NavDirection.End
-
+    val previousDestination = navController.previousBackStackEntry?.destination?.route
     val currentDestination = navController.currentBackStackEntry?.destination?.route
 
     val previousBottomNavItem = BottomNavItem.entries.firstOrNull {
         it.destination.route == previousDestination
-    } ?: return NavDirection.None
+    } ?: return NavDirection.End
 
     val currentBottomNavItem = BottomNavItem.entries.firstOrNull {
         it.destination.route == currentDestination
-    } ?: return NavDirection.None
+    } ?: return NavDirection.End
 
     if (currentBottomNavItem == BottomNavItem.Camera) return NavDirection.None
 

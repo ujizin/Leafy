@@ -14,7 +14,7 @@ import com.ujizin.leafy.core.navigation.navigate
 import com.ujizin.leafy.core.ui.components.animated.animation.Animate.Animated
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
 import com.ujizin.leafy.core.ui.components.button.CameraButton
-import com.ujizin.leafy.core.ui.components.navigation.bottombar.BottomNavItem.Companion.previousRoute
+import com.ujizin.leafy.core.ui.components.navigation.NavItem
 import com.ujizin.leafy.core.ui.components.navigation.currentNavItemAsState
 import com.ujizin.leafy.core.ui.state.keyboardAsState
 
@@ -75,12 +75,9 @@ private fun BottomNavigationBar(
     }
 }
 
-private fun NavController.navigateToItem(item: BottomNavItem) {
+fun NavController.navigateToItem(item: NavItem) {
     val route = currentBackStackEntry?.destination?.route
     if (route == item.destination.route) return
-
-    // for animation transition
-    previousRoute = route
 
     if (item.destination.route == graph.startDestinationRoute) {
         popBackStack()
