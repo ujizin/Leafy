@@ -21,10 +21,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
@@ -46,7 +48,10 @@ fun AboutRoute(onBackPressed: OnClick) {
                 navigationIcon = {
                     AnimatedButtonIcon(
                         icon = Icons.Back,
+                        background = Color.Transparent,
                         size = 24.dp,
+                        shadowElevation = Dp.Unspecified,
+                        tonalElevation = Dp.Unspecified,
                         onClick = onBackPressed,
                     )
                 },

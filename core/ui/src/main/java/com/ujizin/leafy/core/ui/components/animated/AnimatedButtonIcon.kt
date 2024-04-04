@@ -31,6 +31,8 @@ fun AnimatedButtonIcon(
     background: Color = MaterialTheme.colorScheme.surface,
     innerPaddingValues: PaddingValues = PaddingValues(12.dp),
     shape: Shape = RoundedCornerShape(8.dp),
+    shadowElevation: Dp = 8.dp,
+    tonalElevation: Dp = 8.dp,
     onClick: OnClick = {},
 ) {
     Animated(animation = animation) {
@@ -38,8 +40,8 @@ fun AnimatedButtonIcon(
             modifier = modifier,
             color = background,
             shape = shape,
-            shadowElevation = 8.dp,
-            tonalElevation = 8.dp,
+            shadowElevation = shadowElevation,
+            tonalElevation = tonalElevation,
             onClick = onClick,
         ) {
             androidx.compose.material3.Icon(
