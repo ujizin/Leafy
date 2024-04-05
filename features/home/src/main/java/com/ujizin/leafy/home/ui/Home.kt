@@ -30,6 +30,7 @@ fun HomeRoute(
     LaunchedEffect(viewModel) { viewModel.loadHome() }
 
     HomeContent(
+        modifier = Modifier.fillMaxSize(),
         state = state,
         nickname = LocalUser.current.nickname,
         onTakePictureClick = onTakePictureClick,
@@ -46,10 +47,11 @@ private fun HomeContent(
     onTakePictureClick: OnClick,
     onSearchClick: OnClick,
     onDrawerClick: OnClick,
+    modifier: Modifier = Modifier,
     onPlantClick: (Long) -> Unit,
 ) {
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier,
         contentAlignment = Alignment.TopCenter,
     ) {
         when (val result: HomeUIState = state) {

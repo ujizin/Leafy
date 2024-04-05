@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -91,6 +92,7 @@ fun NavLazyColumn(
 ) {
     LazyColumn(
         verticalArrangement = verticalArrangement,
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         content()
         item { Spacer(Modifier.padding(64.dp)) }
