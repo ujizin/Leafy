@@ -67,7 +67,10 @@ internal fun CameraRoute(
             }
         }
 
-        is PermissionStatus.Denied -> CameraDenied(status.shouldShowRationale) {
+        is PermissionStatus.Denied -> CameraDenied(
+            shouldShowRationale = status.shouldShowRationale,
+            onBackPressed = onCloseClicked
+        ) {
             if (status.shouldShowRationale) {
                 cameraPermissionState.launchPermissionRequest()
             } else {
