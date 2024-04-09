@@ -7,7 +7,7 @@ import android.content.Intent
 import android.os.Build
 import com.ujizin.leafy.alarm.AlarmService
 import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
-import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarm
+import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarmUseCase
 import com.ujizin.leafy.core.components.R
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.mapResult
@@ -24,7 +24,7 @@ import javax.inject.Inject
 class AlarmReceiver : BroadcastReceiver() {
 
     @Inject
-    lateinit var schedulePlantAlarm: SchedulePlantAlarm
+    lateinit var schedulePlantAlarm: SchedulePlantAlarmUseCase
 
     @Inject
     lateinit var loadAlarms: LoadAlarmsUseCase

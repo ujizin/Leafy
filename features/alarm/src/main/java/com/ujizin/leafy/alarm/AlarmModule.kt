@@ -5,7 +5,7 @@ import com.ujizin.leafy.alarm.notificator.AlarmNotificator
 import com.ujizin.leafy.alarm.notificator.AlarmNotificatorImpl
 import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
 import com.ujizin.leafy.alarm.scheduler.AlarmSchedulerImpl
-import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarm
+import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarmUseCase
 import com.ujizin.leafy.domain.usecase.alarm.load.LoadAlarmUseCase
 import com.ujizin.leafy.domain.usecase.plant.load.LoadPlantUseCase
 import dagger.Module
@@ -31,7 +31,7 @@ object AlarmModule {
         loadPlant: LoadPlantUseCase,
         loadAlarm: LoadAlarmUseCase,
         alarmScheduler: AlarmScheduler,
-    ) = SchedulePlantAlarm(loadPlant, loadAlarm, alarmScheduler)
+    ) = SchedulePlantAlarmUseCase(loadPlant, loadAlarm, alarmScheduler)
 
     @Provides
     @Singleton

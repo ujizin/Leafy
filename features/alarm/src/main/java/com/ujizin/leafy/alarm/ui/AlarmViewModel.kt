@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.ujizin.leafy.alarm.receiver.AlarmReceiver
 import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
 import com.ujizin.leafy.core.ui.extensions.copyAndDelete
+import com.ujizin.leafy.core.ui.extensions.getNearestDay
 import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.model.Ringtone
 import com.ujizin.leafy.domain.model.WeekDay
@@ -74,6 +75,7 @@ class AlarmViewModel @Inject constructor(
                         ),
                     ).onEach { alarmId ->
                         alarmScheduler.scheduleAlarm(
+                            dayOfWeek = weekDays.getNearestDay(hours, minutes).ordinal - 1,
                             hours = hours,
                             minutes = minutes,
                             ringtoneUri = ringtoneContent,

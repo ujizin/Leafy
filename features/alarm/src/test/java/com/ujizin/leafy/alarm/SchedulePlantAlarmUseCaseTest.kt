@@ -3,7 +3,7 @@ package com.ujizin.leafy.alarm
 import com.ujizin.leafy.alarm.fakes.FakeAlarmScheduler
 import com.ujizin.leafy.alarm.fakes.FakeLoadAlarmUseCase
 import com.ujizin.leafy.alarm.fakes.FakeLoadPlant
-import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarm
+import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarmUseCase
 import com.ujizin.leafy.core.test.TestDispatcherRule
 import com.ujizin.leafy.core.ui.extensions.currentDay
 import io.mockk.every
@@ -22,7 +22,7 @@ import java.util.Calendar
 import java.util.Calendar.DAY_OF_WEEK
 
 @RunWith(JUnit4::class)
-class SchedulePlantAlarmTest {
+class SchedulePlantAlarmUseCaseTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @get:Rule
@@ -34,7 +34,7 @@ class SchedulePlantAlarmTest {
 
     private val loadAlarm = FakeLoadAlarmUseCase(until = COUNTER)
 
-    val schedulePlantAlarm = SchedulePlantAlarm(
+    val schedulePlantAlarm = SchedulePlantAlarmUseCase(
         loadPlant = loadPlant,
         loadAlarm = loadAlarm,
         alarmScheduler = alarmScheduler,

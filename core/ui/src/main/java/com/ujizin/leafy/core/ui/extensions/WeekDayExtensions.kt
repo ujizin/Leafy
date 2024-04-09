@@ -52,6 +52,25 @@ fun List<WeekDay>.getDisplayName(
     }
 }
 
-fun List<WeekDay>.reorderByCurrentDay(): List<WeekDay> = toList()
-    .drop(currentDay.ordinal)
-    .plus(take(currentDay.ordinal))
+fun List<WeekDay>.reorderByCurrentDay(day: WeekDay = currentDay): List<WeekDay> {
+    val index = sortedBy { it.ordinal }.indexOfFirst { it.ordinal >= day.ordinal }
+    return toList()
+        .drop(index)
+        .plus(take(index))
+}
+
+fun List<WeekDay>.getNearestDay(
+    hours: Int,
+    minutes: Int,
+    day: WeekDay = currentDay,
+) = reorderByCurrentDay(day).first {
+    day != it || !isTimeAlreadyPassed(hours, minutes)
+}
+
+private fun isTimeAlreadyPassed(hours: Int, minutes: Int): Boolean {
+    val calendar = Calendar.getInstance()
+    val currentTimeInMillis = calendar.timeInMillis
+    calendar.set(Calendar.HOUR, hours)
+    calendar.set(Calendar.MINUTE, minutes)
+    return currentTimeInMillis > calendar.timeInMillis
+}

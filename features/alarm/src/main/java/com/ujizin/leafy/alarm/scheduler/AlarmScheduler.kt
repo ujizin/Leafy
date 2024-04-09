@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import com.ujizin.leafy.alarm.receiver.AlarmReceiver
+import com.ujizin.leafy.core.ui.extensions.getNearestDay
 import com.ujizin.leafy.domain.model.Alarm
 
 /**
@@ -15,6 +16,7 @@ interface AlarmScheduler {
      * Schedule alarm on Android System.
      *
      * @param type alarm manager's type, default is rtc wakeup
+     * @param dayOfWeek the alarm's day of the week
      * @param hours the alarm's hours
      * @param minutes the alarm's minutes
      * @param ringtoneUri the alarm's ringtone uri
@@ -22,6 +24,7 @@ interface AlarmScheduler {
      * */
     fun scheduleAlarm(
         type: Int = AlarmManager.RTC_WAKEUP,
+        dayOfWeek: Int,
         hours: Int,
         minutes: Int,
         ringtoneUri: String,
@@ -35,6 +38,7 @@ interface AlarmScheduler {
      * @param alarm alarm to be scheduled.
      * */
     fun scheduleAlarm(alarm: Alarm) = scheduleAlarm(
+        dayOfWeek = alarm.weekDays.getNearestDay(alarm.hours, alarm.minutes).ordinal - 1,
         hours = alarm.hours,
         minutes = alarm.minutes,
         ringtoneUri = alarm.ringtoneUriContent,

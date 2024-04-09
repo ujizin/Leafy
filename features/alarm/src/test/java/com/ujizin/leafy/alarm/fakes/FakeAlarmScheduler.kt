@@ -18,6 +18,7 @@ class FakeAlarmScheduler : AlarmScheduler {
 
     override fun scheduleAlarm(
         type: Int,
+        dayOfWeek: Int,
         hours: Int,
         minutes: Int,
         ringtoneUri: String,

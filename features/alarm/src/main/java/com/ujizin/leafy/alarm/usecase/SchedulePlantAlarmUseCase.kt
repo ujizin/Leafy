@@ -7,14 +7,14 @@ import com.ujizin.leafy.domain.result.mapResult
 import com.ujizin.leafy.domain.usecase.alarm.load.LoadAlarmUseCase
 import com.ujizin.leafy.domain.usecase.plant.load.LoadPlantUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.onEach
 
 /**
  * Schedule plant alarm use case
  * */
-class SchedulePlantAlarm(
+class SchedulePlantAlarmUseCase(
     private val loadPlant: LoadPlantUseCase,
     private val loadAlarm: LoadAlarmUseCase,
     private val alarmScheduler: AlarmScheduler,
@@ -24,10 +24,8 @@ class SchedulePlantAlarm(
     operator fun invoke(alarmId: Long) = loadAlarm(alarmId)
         .mapResult()
         .onEach { alarmScheduler.scheduleAlarm(it) }
-        .flatMapConcat { alarm ->
-            if (!alarm.enabled || !alarm.checkDayOfTheWeek()) return@flatMapConcat emptyFlow()
-            loadPlant(alarm.plantId).mapResult()
-        }
+        .filter { alarm -> alarm.enabled && alarm.checkDayOfTheWeek() }
+        .flatMapConcat { alarm -> loadPlant(alarm.plantId).mapResult() }
 
     private fun Alarm.checkDayOfTheWeek(): Boolean {
         return weekDays.contains(currentDay)
