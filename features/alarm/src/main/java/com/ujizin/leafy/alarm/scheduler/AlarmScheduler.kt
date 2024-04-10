@@ -20,6 +20,7 @@ interface AlarmScheduler {
      * @param hours the alarm's hours
      * @param minutes the alarm's minutes
      * @param ringtoneUri the alarm's ringtone uri
+     * @param requestCode alarm's request code
      * @param bundle bundle for pending intent
      * */
     fun scheduleAlarm(
@@ -31,6 +32,13 @@ interface AlarmScheduler {
         requestCode: Int = 0,
         bundle: Bundle = Bundle.EMPTY,
     )
+
+    /**
+     * Cancel alarm scheduled on Android System.
+     *
+     * @param requestCode alarm's request code
+     * */
+    fun cancelAlarm(requestCode: Int = 0)
 
     /**
      * Schedule alarm on Android System.

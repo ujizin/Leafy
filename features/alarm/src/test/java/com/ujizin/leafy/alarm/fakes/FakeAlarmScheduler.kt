@@ -6,6 +6,7 @@ import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
 class FakeAlarmScheduler : AlarmScheduler {
 
     data class FakeAlarm(
+        val id: Int,
         val type: Int,
         val hours: Int,
         val minutes: Int,
@@ -31,6 +32,12 @@ class FakeAlarmScheduler : AlarmScheduler {
             minutes = minutes,
             ringtoneUri = ringtoneUri,
             bundle = bundle,
+            id = requestCode,
         )
+    }
+
+    override fun cancelAlarm(requestCode: Int) {
+        val alarm = _alarms.first { it.id == requestCode }
+        _alarms -= alarm
     }
 }

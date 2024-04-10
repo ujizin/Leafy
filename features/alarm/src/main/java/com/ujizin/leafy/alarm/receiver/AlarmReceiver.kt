@@ -42,7 +42,7 @@ class AlarmReceiver : BroadcastReceiver() {
             SCHEDULE_ALARM_ACTION -> schedulePlantAlarm(alarmId = intent.alarmId).onEach { plant ->
                 context.ringPlantAlarm(intent, plant)
             }
-
+            Intent.ACTION_TIME_CHANGED,
             Intent.ACTION_BOOT_COMPLETED,
             AlarmManager.ACTION_SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED,
             -> loadAlarms()

@@ -70,15 +70,20 @@ internal class AlarmSchedulerImpl(private val context: Context) : AlarmScheduler
         return@with timeInMillis
     }
 
+    override fun cancelAlarm(requestCode: Int) {
+        val pendingIntent = createPendingIntent(requestCode = requestCode)
+        context.alarmManager.cancel(pendingIntent)
+    }
+
     /**
      * Create pending intent for alarm
      *
      * @param ringtoneUri the alarm's ringtone
      * */
     private fun createPendingIntent(
-        ringtoneUri: Uri,
+        ringtoneUri: Uri = Uri.EMPTY,
         requestCode: Int = 0,
-        bundle: Bundle,
+        bundle: Bundle = Bundle.EMPTY,
     ): PendingIntent = PendingIntent.getBroadcast(
         context,
         requestCode,

@@ -32,6 +32,13 @@ class AlarmService : Service() {
     private val Intent.ringtoneUri
         get() = getStringExtra(RINGTONE_URI_STRINGIFY_ARG)?.let(Uri::parse).orDefaultRingtone()
 
+//    private val wakeLock: PowerManager.WakeLock =
+//        (ContextCompat.getSystemService(POWER_SERVICE) as PowerManager).run {
+//            newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MyApp::MyWakelockTag").apply {
+//                acquire(5.minutes)
+//            }
+//        }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
             STOP_ACTION -> stopService()
@@ -47,6 +54,7 @@ class AlarmService : Service() {
     }
 
     private fun stopAlarm() {
+//        wakeLock.release()
         mediaPlayer?.stop()
         mediaPlayer?.release()
         alarmNotificator.cancelNotification(NOTIFICATION_ID)
