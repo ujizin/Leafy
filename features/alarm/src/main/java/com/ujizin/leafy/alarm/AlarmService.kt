@@ -9,6 +9,7 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
 import android.os.IBinder
+import android.os.PowerManager
 import androidx.core.app.NotificationCompat
 import com.ujizin.leafy.alarm.extensions.orDefaultRingtone
 import com.ujizin.leafy.alarm.notificator.AlarmNotificator
@@ -17,6 +18,7 @@ import com.ujizin.leafy.features.alarm.R
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 import javax.inject.Inject
+import kotlin.time.Duration.Companion.minutes
 import com.ujizin.leafy.core.components.R as CR
 
 @AndroidEntryPoint
@@ -32,12 +34,11 @@ class AlarmService : Service() {
     private val Intent.ringtoneUri
         get() = getStringExtra(RINGTONE_URI_STRINGIFY_ARG)?.let(Uri::parse).orDefaultRingtone()
 
-//    private val wakeLock: PowerManager.WakeLock =
-//        (ContextCompat.getSystemService(POWER_SERVICE) as PowerManager).run {
-//            newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MyApp::MyWakelockTag").apply {
-//                acquire(5.minutes)
-//            }
-//        }
+    private val wakeLock: PowerManager.WakeLock by lazy {
+        (getSystemService(POWER_SERVICE) as PowerManager).run {
+            newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, ALARM_WAKE_LOCK_TAG)
+        }
+    }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
@@ -54,7 +55,7 @@ class AlarmService : Service() {
     }
 
     private fun stopAlarm() {
-//        wakeLock.release()
+        wakeLock.release()
         mediaPlayer?.stop()
         mediaPlayer?.release()
         alarmNotificator.cancelNotification(NOTIFICATION_ID)
@@ -68,6 +69,7 @@ class AlarmService : Service() {
     }
 
     private fun startAlarm(intent: Intent) {
+        wakeLock.acquire(1.minutes.inWholeMilliseconds)
         intent.ringtoneUri.play()
         startForeground(NOTIFICATION_ID, intent.getNotification())
     }
@@ -117,7 +119,7 @@ class AlarmService : Service() {
             mediaPlayer = MediaPlayer().apply {
                 setDataSource(this@AlarmService, this@play)
                 setAudioAttributes(audioAttributes)
-                isLooping = true
+//                isLooping = true
                 prepareAsync()
                 setOnPreparedListener { start() }
             }
@@ -133,6 +135,7 @@ class AlarmService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     companion object {
+        private const val ALARM_WAKE_LOCK_TAG = "leafy:alarm_wake_lock"
         private const val NOTIFICATION_ID = 1
         internal const val TITLE_ARG = "alarm_title"
         internal const val DESCRIPTION_ARG = "alarm_description"
