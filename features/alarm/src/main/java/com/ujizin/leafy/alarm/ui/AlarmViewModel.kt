@@ -75,7 +75,7 @@ class AlarmViewModel @Inject constructor(
                         ),
                     ).onEach { alarmId ->
                         alarmScheduler.scheduleAlarm(
-                            dayOfWeek = weekDays.getNearestDay(hours, minutes).ordinal - 1,
+                            dayOfWeek = weekDays.getNearestDay(hours, minutes).ordinal + 1,
                             hours = hours,
                             minutes = minutes,
                             ringtoneUri = ringtoneContent,

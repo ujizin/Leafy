@@ -61,8 +61,6 @@ internal class AlarmSchedulerImpl(private val context: Context) : AlarmScheduler
         hours: Int,
         minutes: Int,
     ): Long = with(Calendar.getInstance()) {
-        val currentTimeInMillis = System.currentTimeMillis()
-        timeInMillis = currentTimeInMillis
         set(Calendar.HOUR_OF_DAY, hours)
         set(Calendar.MINUTE, minutes)
         set(Calendar.DAY_OF_WEEK, dayOfWeek)

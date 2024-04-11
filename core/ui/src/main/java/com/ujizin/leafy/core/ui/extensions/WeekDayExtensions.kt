@@ -67,6 +67,11 @@ fun List<WeekDay>.getNearestDay(
     day != it || !isTimeAlreadyPassed(hours, minutes)
 }
 
+operator fun WeekDay.plus(other: Int): WeekDay {
+    val index = (ordinal + other) % WeekDay.entries.size
+    return WeekDay.entries[index]
+}
+
 private fun isTimeAlreadyPassed(hours: Int, minutes: Int): Boolean {
     val calendar = Calendar.getInstance()
     val currentTimeInMillis = calendar.timeInMillis

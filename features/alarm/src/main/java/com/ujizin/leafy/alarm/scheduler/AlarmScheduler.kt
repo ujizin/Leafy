@@ -4,8 +4,10 @@ import android.app.AlarmManager
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import com.ujizin.leafy.alarm.receiver.AlarmReceiver
+import com.ujizin.leafy.core.ui.extensions.currentDay
 import com.ujizin.leafy.core.ui.extensions.getNearestDay
 import com.ujizin.leafy.domain.model.Alarm
+import com.ujizin.leafy.domain.model.WeekDay
 
 /**
  * Create alarm scheduler for Android Alarm Manager system.
@@ -45,8 +47,8 @@ interface AlarmScheduler {
      *
      * @param alarm alarm to be scheduled.
      * */
-    fun scheduleAlarm(alarm: Alarm) = scheduleAlarm(
-        dayOfWeek = alarm.weekDays.getNearestDay(alarm.hours, alarm.minutes).ordinal - 1,
+    fun scheduleAlarm(alarm: Alarm, day: WeekDay = currentDay) = scheduleAlarm(
+        dayOfWeek = alarm.weekDays.getNearestDay(alarm.hours, alarm.minutes, day).ordinal + 1,
         hours = alarm.hours,
         minutes = alarm.minutes,
         ringtoneUri = alarm.ringtoneUriContent,

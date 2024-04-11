@@ -9,6 +9,8 @@ import com.ujizin.leafy.alarm.AlarmService
 import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
 import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarmUseCase
 import com.ujizin.leafy.core.components.R
+import com.ujizin.leafy.core.ui.extensions.currentDay
+import com.ujizin.leafy.core.ui.extensions.plus
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.mapResult
 import com.ujizin.leafy.domain.usecase.alarm.load.LoadAlarmsUseCase
@@ -39,7 +41,10 @@ class AlarmReceiver : BroadcastReceiver() {
     @OptIn(DelicateCoroutinesApi::class)
     override fun onReceive(context: Context, intent: Intent) {
         when (intent.action) {
-            SCHEDULE_ALARM_ACTION -> schedulePlantAlarm(alarmId = intent.alarmId).onEach { plant ->
+            SCHEDULE_ALARM_ACTION -> schedulePlantAlarm(
+                alarmId = intent.alarmId,
+                actualDay = currentDay + 1
+            ).onEach { plant ->
                 context.ringPlantAlarm(intent, plant)
             }
             Intent.ACTION_TIME_CHANGED,
