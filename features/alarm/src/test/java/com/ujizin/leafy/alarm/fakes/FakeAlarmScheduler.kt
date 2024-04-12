@@ -8,6 +8,7 @@ class FakeAlarmScheduler : AlarmScheduler {
     data class FakeAlarm(
         val id: Int,
         val type: Int,
+        val dayOfWeek: Int,
         val hours: Int,
         val minutes: Int,
         val ringtoneUri: String,
@@ -27,12 +28,13 @@ class FakeAlarmScheduler : AlarmScheduler {
         bundle: Bundle,
     ) {
         _alarms += FakeAlarm(
+            id = requestCode,
+            dayOfWeek = dayOfWeek,
             type = type,
             hours = hours,
             minutes = minutes,
             ringtoneUri = ringtoneUri,
             bundle = bundle,
-            id = requestCode,
         )
     }
 
