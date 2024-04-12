@@ -8,6 +8,7 @@ import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
+import android.os.CountDownTimer
 import android.os.IBinder
 import android.os.PowerManager
 import androidx.core.app.NotificationCompat
@@ -34,6 +35,16 @@ class AlarmService : Service() {
     private val Intent.ringtoneUri
         get() = getStringExtra(RINGTONE_URI_STRINGIFY_ARG)?.let(Uri::parse).orDefaultRingtone()
 
+    private val countDownTimer = object : CountDownTimer(
+        TIME_OUT_IN_MILLISECONDS,
+        TICK_IN_MILLISECONDS
+    ) {
+        override fun onTick(millisUntilFinished: Long) = Unit /* no-op */
+        override fun onFinish() {
+            mediaPlayer?.pause()
+        }
+    }
+
     private val wakeLock: PowerManager.WakeLock by lazy {
         (getSystemService(POWER_SERVICE) as PowerManager).run {
             newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, ALARM_WAKE_LOCK_TAG)
@@ -52,10 +63,12 @@ class AlarmService : Service() {
     private fun stopService() {
         stopAlarm()
         stopForeground()
+        stopSelf()
     }
 
     private fun stopAlarm() {
         wakeLock.release()
+        countDownTimer.cancel()
         mediaPlayer?.stop()
         mediaPlayer?.release()
         alarmNotificator.cancelNotification(NOTIFICATION_ID)
@@ -71,6 +84,7 @@ class AlarmService : Service() {
     private fun startAlarm(intent: Intent) {
         wakeLock.acquire(1.minutes.inWholeMilliseconds)
         intent.ringtoneUri.play()
+        countDownTimer.start()
         startForeground(NOTIFICATION_ID, intent.getNotification())
     }
 
@@ -135,6 +149,8 @@ class AlarmService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     companion object {
+        private const val TIME_OUT_IN_MILLISECONDS = 60000L
+        private const val TICK_IN_MILLISECONDS = 1000L
         private const val ALARM_WAKE_LOCK_TAG = "leafy:alarm_wake_lock"
         private const val NOTIFICATION_ID = 1
         internal const val TITLE_ARG = "alarm_title"
