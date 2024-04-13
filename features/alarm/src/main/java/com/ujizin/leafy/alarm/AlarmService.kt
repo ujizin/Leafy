@@ -37,7 +37,7 @@ class AlarmService : Service() {
 
     private val countDownTimer = object : CountDownTimer(
         TIME_OUT_IN_MILLISECONDS,
-        TICK_IN_MILLISECONDS
+        TICK_IN_MILLISECONDS,
     ) {
         override fun onTick(millisUntilFinished: Long) = Unit /* no-op */
         override fun onFinish() {
