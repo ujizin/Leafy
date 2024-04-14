@@ -43,7 +43,7 @@ class AlarmReceiver : BroadcastReceiver() {
         when (intent.action) {
             SCHEDULE_ALARM_ACTION -> schedulePlantAlarm(
                 alarmId = intent.alarmId,
-                actualDay = currentDay + 1
+                actualDay = currentDay + 1,
             ).onEach { plant ->
                 context.ringPlantAlarm(intent, plant)
             }
