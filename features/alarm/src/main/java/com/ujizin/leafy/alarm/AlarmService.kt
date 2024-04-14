@@ -61,18 +61,8 @@ class AlarmService : Service() {
     }
 
     private fun stopService() {
-        stopAlarm()
         stopForeground()
         stopSelf()
-    }
-
-    private fun stopAlarm() {
-        wakeLock.release()
-        countDownTimer.cancel()
-        mediaPlayer?.stop()
-        mediaPlayer?.release()
-        alarmNotificator.cancelNotification(NOTIFICATION_ID)
-        mediaPlayer = null
     }
 
     @Suppress("DEPRECATION")
@@ -133,7 +123,6 @@ class AlarmService : Service() {
             mediaPlayer = MediaPlayer().apply {
                 setDataSource(this@AlarmService, this@play)
                 setAudioAttributes(audioAttributes)
-//                isLooping = true
                 prepareAsync()
                 setOnPreparedListener { start() }
             }
@@ -143,7 +132,12 @@ class AlarmService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        stopAlarm()
+        wakeLock.release()
+        countDownTimer.cancel()
+        alarmNotificator.cancelNotification(NOTIFICATION_ID)
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
