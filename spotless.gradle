@@ -14,7 +14,7 @@ spotless {
 
     kotlin {
         target '**/*.kt'
-        ktlint()
+        ktlint(libs.versions.ktlint.get())
         trimTrailingWhitespace()
         indentWithSpaces()
         endWithNewline()
