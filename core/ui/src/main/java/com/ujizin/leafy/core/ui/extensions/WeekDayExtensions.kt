@@ -2,7 +2,6 @@ package com.ujizin.leafy.core.ui.extensions
 
 import android.content.Context
 import androidx.annotation.StringRes
-import androidx.annotation.VisibleForTesting
 import com.ujizin.leafy.core.components.R
 import com.ujizin.leafy.domain.model.WeekDay
 import java.util.Calendar
@@ -54,13 +53,12 @@ fun List<WeekDay>.getDisplayName(
 }
 
 fun List<WeekDay>.reorderByCurrentDay(day: WeekDay = currentDay): List<WeekDay> {
-    val index = sortedBy { it.ordinal }.indexOfFirst {
+    val sortedList = sortedBy(WeekDay::ordinal)
+    val index = sortedList.indexOfFirst {
         it.ordinal >= day.ordinal
     }.coerceAtLeast(0)
 
-    return toList()
-        .drop(index)
-        .plus(take(index))
+    return sortedList.drop(index) + sortedList.take(index)
 }
 
 fun List<WeekDay>.getNearestDay(
@@ -71,7 +69,7 @@ fun List<WeekDay>.getNearestDay(
     check(isNotEmpty()) { "List must no be null" }
     if (size == 1) return first()
     return reorderByCurrentDay(day).first {
-        day != it || !isTimeAlreadyPassed(hours, minutes)
+        day != it || !day.isDayAlreadyPassed(hours, minutes)
     }
 }
 
@@ -80,11 +78,16 @@ operator fun WeekDay.plus(other: Int): WeekDay {
     return WeekDay.entries[index]
 }
 
-@VisibleForTesting
-fun isTimeAlreadyPassed(hours: Int, minutes: Int): Boolean {
-    val calendar = Calendar.getInstance()
-    val currentTimeInMillis = calendar.timeInMillis
-    calendar.set(Calendar.HOUR, hours)
-    calendar.set(Calendar.MINUTE, minutes)
-    return currentTimeInMillis > calendar.timeInMillis
+fun WeekDay.isDayAlreadyPassed(hours: Int, minutes: Int): Boolean {
+    if (currentDay > this) return true
+    if (currentDay < this) return false
+
+    return with(Calendar.getInstance()) {
+        val currentTimeInMillis = timeInMillis
+        set(Calendar.HOUR_OF_DAY, hours)
+        set(Calendar.MINUTE, minutes)
+        set(Calendar.SECOND, 0)
+
+        currentTimeInMillis > timeInMillis
+    }
 }
