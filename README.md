@@ -2,19 +2,19 @@
 ![Test](https://github.com/devlucasyuji/camerareminder/actions/workflows/android_test.yml/badge.svg)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-<img src="assets/background-leafy.png" width="100%"/>
+<img src="assets/background-leafy.jpg" width="100%"/>
 
 # Leafy
 
 Leafy is a free app for plant lovers that helps you save photos of your plants and set reminders to
 feed them. It's open-source and a great resource for developers to learn about the latest Android
-features. Try it out today! 🌱📱
+features.
 
 ## 🏗️ Built with
 
+- 100% Kotlin
 - Jetpack Compose
 - Navigation Compose
-- 100% Kotlin
 - Kotlin Coroutines + Flow
 - Hilt
 - Room
