@@ -8,6 +8,7 @@ import com.ujizin.leafy.core.test.TestDispatcherRule
 import com.ujizin.leafy.core.ui.extensions.currentDay
 import com.ujizin.leafy.core.ui.extensions.isTimeAlreadyPassed
 import io.mockk.every
+import io.mockk.mockkConstructor
 import io.mockk.mockkStatic
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull
@@ -44,12 +45,16 @@ class SchedulePlantAlarmUseCaseTest {
     @Test
     fun `test alarm is scheduled will ring in exact time whether enabled`() = runTest {
         var isFlowCollected = false
-        mockkStatic(Calendar::class)
+        mockkConstructor(Calendar::class)
         mockkStatic(::isTimeAlreadyPassed)
+
+        every { anyConstructed<Calendar>().set(any(), any()) } returns Unit
+        every { anyConstructed<Calendar>().timeInMillis = any() } returns Unit
+
         every { isTimeAlreadyPassed(any(), any()) } returns false
         loadAlarm.alarms.forEach { alarm ->
             (1..7).forEach { dayOfTheWeek ->
-                every { Calendar.getInstance().get(DAY_OF_WEEK) } returns dayOfTheWeek
+                every { anyConstructed<Calendar>().get(DAY_OF_WEEK) } returns dayOfTheWeek
 
                 schedulePlantAlarm(alarm.id)
                     .onStart { isFlowCollected = false }
