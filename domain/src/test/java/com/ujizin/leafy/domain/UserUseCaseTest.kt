@@ -1,11 +1,11 @@
 package com.ujizin.leafy.domain
 
+import com.ujizin.leafy.core.test.TestDispatcherRule
 import com.ujizin.leafy.domain.model.Language
 import com.ujizin.leafy.domain.model.Theme
 import com.ujizin.leafy.domain.model.User
 import com.ujizin.leafy.domain.repository.UserRepository
 import com.ujizin.leafy.domain.result.Result
-import com.ujizin.leafy.domain.rules.MainDispatcherRule
 import com.ujizin.leafy.domain.usecase.user.load.LoadUserUseCase
 import com.ujizin.leafy.domain.usecase.user.load.LoadUserUseCaseImpl
 import com.ujizin.leafy.domain.usecase.user.update.UpdateUserUseCase
@@ -25,7 +25,7 @@ import org.junit.Test
 class UserUseCaseTest {
 
     @get:Rule
-    var mainDispatcherRule = MainDispatcherRule()
+    var mainDispatcherRule = TestDispatcherRule()
 
     @MockK
     lateinit var userRepository: UserRepository

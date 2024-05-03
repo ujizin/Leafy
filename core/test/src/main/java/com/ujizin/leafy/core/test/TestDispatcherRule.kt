@@ -12,7 +12,7 @@ import org.junit.runner.Description
 /**
  * Watcher dispatcher rule to use on tests
  * */
-@ExperimentalCoroutinesApi
+@OptIn(ExperimentalCoroutinesApi::class)
 class TestDispatcherRule(
     val testDispatcher: TestDispatcher = UnconfinedTestDispatcher(),
 ) : TestWatcher() {

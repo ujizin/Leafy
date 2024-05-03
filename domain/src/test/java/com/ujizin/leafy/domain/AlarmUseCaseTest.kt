@@ -1,9 +1,9 @@
 package com.ujizin.leafy.domain
 
+import com.ujizin.leafy.core.test.TestDispatcherRule
 import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.repository.AlarmRepository
 import com.ujizin.leafy.domain.result.Result
-import com.ujizin.leafy.domain.rules.MainDispatcherRule
 import com.ujizin.leafy.domain.usecase.alarm.add.AddAlarmUseCase
 import com.ujizin.leafy.domain.usecase.alarm.add.AddAlarmUseCaseImpl
 import com.ujizin.leafy.domain.usecase.alarm.delete.DeleteAlarmUseCase
@@ -29,7 +29,7 @@ import org.junit.Test
 class AlarmUseCaseTest {
 
     @get:Rule
-    var mainCoroutineRule = MainDispatcherRule()
+    var mainCoroutineRule = TestDispatcherRule()
 
     @MockK
     private lateinit var alarmRepository: AlarmRepository

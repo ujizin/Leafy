@@ -1,8 +1,8 @@
 package com.ujizin.leafy.domain
 
+import com.ujizin.leafy.core.test.TestDispatcherRule
 import com.ujizin.leafy.domain.model.Ringtone
 import com.ujizin.leafy.domain.repository.RingtoneRepository
-import com.ujizin.leafy.domain.rules.MainDispatcherRule
 import com.ujizin.leafy.domain.usecase.ringtone.load.LoadRingtonesUseCase
 import com.ujizin.leafy.domain.usecase.ringtone.load.LoadRingtonesUseCaseImpl
 import io.mockk.MockKAnnotations
@@ -21,7 +21,7 @@ class RingtoneUseCaseTest {
     // TODO add unit test - #11
 
     @get:Rule
-    var mainDispatcherRule = MainDispatcherRule()
+    var mainDispatcherRule = TestDispatcherRule()
 
     @MockK
     private lateinit var ringtoneRepository: RingtoneRepository
