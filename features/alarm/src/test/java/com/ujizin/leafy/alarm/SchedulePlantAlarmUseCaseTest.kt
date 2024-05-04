@@ -13,6 +13,7 @@ import io.mockk.mockkConstructor
 import io.mockk.mockkStatic
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.test.runTest
@@ -56,6 +57,7 @@ class SchedulePlantAlarmUseCaseTest {
                 every { anyConstructed<Calendar>().get(DAY_OF_WEEK) } returns dayOfTheWeek
 
                 schedulePlantAlarm(alarm.id)
+                    .flowOn(mainDispatcherRule.testDispatcher)
                     .onStart { isFlowCollected = false }
                     .onCompletion {
                         assertEquals(alarm.weekDays.contains(currentDay), isFlowCollected)
