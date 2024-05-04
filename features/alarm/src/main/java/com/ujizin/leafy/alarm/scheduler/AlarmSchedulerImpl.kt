@@ -9,6 +9,8 @@ import androidx.core.app.AlarmManagerCompat
 import androidx.core.net.toUri
 import com.ujizin.leafy.alarm.extensions.alarmManager
 import com.ujizin.leafy.alarm.receiver.AlarmReceiver
+import com.ujizin.leafy.core.ui.extensions.isDayAlreadyPassed
+import com.ujizin.leafy.domain.model.WeekDay
 import java.util.Calendar
 
 internal class AlarmSchedulerImpl(private val context: Context) : AlarmScheduler {
@@ -61,12 +63,22 @@ internal class AlarmSchedulerImpl(private val context: Context) : AlarmScheduler
         hours: Int,
         minutes: Int,
     ): Long = with(Calendar.getInstance()) {
-        timeInMillis = System.currentTimeMillis()
         set(Calendar.HOUR_OF_DAY, hours)
         set(Calendar.MINUTE, minutes)
-        set(Calendar.DAY_OF_WEEK, dayOfWeek)
+        setDay(dayOfWeek, hours, minutes)
 
         return@with timeInMillis
+    }
+
+    private fun Calendar.setDay(dayOfWeek: Int, hours: Int, minutes: Int) {
+        val currentDayOfWeek = get(Calendar.DAY_OF_WEEK)
+        val weekDay = WeekDay.entries[currentDayOfWeek - 1]
+        if (weekDay.isDayAlreadyPassed(hours, minutes)) {
+            val daysUntilNextWeek = WeekDay.entries.size - currentDayOfWeek + dayOfWeek
+            add(Calendar.DATE, daysUntilNextWeek)
+        } else {
+            set(Calendar.DAY_OF_WEEK, dayOfWeek)
+        }
     }
 
     override fun cancelAlarm(requestCode: Int) {

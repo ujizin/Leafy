@@ -131,13 +131,13 @@ class AlarmService : Service() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         wakeLock.release()
         countDownTimer.cancel()
         alarmNotificator.cancelNotification(NOTIFICATION_ID)
         mediaPlayer?.stop()
         mediaPlayer?.release()
         mediaPlayer = null
+        super.onDestroy()
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
