@@ -13,7 +13,6 @@ import io.mockk.mockkConstructor
 import io.mockk.mockkStatic
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.test.runTest
@@ -27,7 +26,6 @@ import java.util.Calendar.DAY_OF_WEEK
 @RunWith(JUnit4::class)
 class SchedulePlantAlarmUseCaseTest {
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @get:Rule
     val mainDispatcherRule = TestDispatcherRule()
 
