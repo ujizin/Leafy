@@ -2,10 +2,10 @@ import io.gitlab.arturbosch.detekt.Detekt
 
 buildscript {
     dependencies {
-        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${libs.versions.detekt}"
-        classpath "org.jetbrains.kotlin:kotlin-serialization:${libs.versions.kotlin}"
-        classpath libs.google.services
-        classpath libs.firebase.crashlytics
+        classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${libs.versions.detekt}")
+        classpath("org.jetbrains.kotlin:kotlin-serialization:${libs.versions.kotlin}")
+        classpath(libs.google.services)
+        classpath(libs.firebase.crashlytics)
     }
 }
 
@@ -21,18 +21,17 @@ plugins {
 }
 
 subprojects {
-    apply plugin: libs.plugins.spotless.get().pluginId
-
-    apply from: "$project.rootDir/spotless.gradle"
+    apply(plugin = rootProject.libs.plugins.spotless.get().pluginId)
+    apply(from = "${project.rootDir}/spotless.gradle")
 }
 
 detekt {
-    toolVersion = libs.versions.detekt
+    toolVersion = rootProject.libs.versions.detekt.toString()
     config = files("config/detekt.yml")
     buildUponDefaultConfig = true
 }
 
-tasks.withType(Detekt).configureEach {
+tasks.withType<Detekt>().configureEach {
     reports {
         xml.required.set(true)
         html.required.set(true)
@@ -41,4 +40,4 @@ tasks.withType(Detekt).configureEach {
     }
 }
 
-apply from: "config-properties.gradle"
+apply(from = "config-properties.gradle")
