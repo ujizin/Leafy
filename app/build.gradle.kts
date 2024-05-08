@@ -1,10 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    // FIXME there's no way possible for using plugin w/o version on version catalogs (groovy)
-    //  https://github.com/gradle/gradle/issues/17968
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
+    id(libs.plugins.google.services.get().pluginId)
+    id(libs.plugins.google.crashlytics.get().pluginId)
 }
 
 apply(from = "$rootDir/config-android.gradle")
