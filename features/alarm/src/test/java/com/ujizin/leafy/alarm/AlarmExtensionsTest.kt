@@ -11,7 +11,7 @@ class AlarmExtensionsTest {
     fun `when get the nearest day then should schedule in nearest day`() {
         // When
         val weekDays = listOf(WeekDay.Monday, WeekDay.Tuesday, WeekDay.Friday, WeekDay.Saturday)
-        val currentDay = WeekDay.Tuesday
+        val currentDay = WeekDay.Wednesday
 
         // When
         val nearestDay = weekDays.getNearestDay(-1, -1, currentDay)
