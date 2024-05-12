@@ -40,4 +40,4 @@ tasks.withType<Detekt>().configureEach {
     }
 }
 
-apply(from = "config-properties.gradle")
+apply(from = "config-properties.gradle.kts")
