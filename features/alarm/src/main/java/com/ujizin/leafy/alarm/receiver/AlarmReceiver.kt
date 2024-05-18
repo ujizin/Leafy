@@ -73,11 +73,7 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     private fun Context.startAlarmService(serviceIntent: Intent) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(serviceIntent)
-        } else {
-            startService(serviceIntent)
-        }
+        startService(serviceIntent)
     }
 
     internal companion object {
