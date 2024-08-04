@@ -4,7 +4,6 @@ import android.app.AlarmManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import com.ujizin.leafy.alarm.AlarmService
 import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
 import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarmUseCase
