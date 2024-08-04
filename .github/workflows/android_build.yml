@@ -13,7 +13,7 @@ env:
   RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
 
 jobs:
-  Test:
+  Build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
