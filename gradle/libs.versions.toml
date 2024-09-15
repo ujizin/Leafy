@@ -22,6 +22,7 @@ ksp = "1.9.23-1.0.20"
 navigation-compose = "2.7.7"
 datastore = "1.1.1"
 kotlinx-serialization = "1.5.1"
+kover = "0.8.3"
 ktlint = "0.48.2"
 detekt = "1.22.0"
 coil = "2.5.0"
@@ -153,5 +154,6 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 google-services = { id = "com.google.gms.google-services" }
 google-crashlytics = { id = "com.google.firebase.crashlytics" }

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kover)
     id(libs.plugins.google.services.get().pluginId)
     id(libs.plugins.google.crashlytics.get().pluginId)
 }
@@ -53,6 +54,17 @@ dependencies {
     implementation(projects.features.preferences)
     implementation(projects.features.tasks)
     implementation(projects.features.plant)
+
+    // TODO add plugins in each module
+    kover(projects.features.home)
+    kover(projects.features.search)
+    kover(projects.features.alarm)
+    kover(projects.features.camera)
+    kover(projects.features.publish)
+    kover(projects.features.about)
+    kover(projects.features.preferences)
+    kover(projects.features.tasks)
+    kover(projects.features.plant)
 
     implementation(projects.domain)
     implementation(projects.core.local)
