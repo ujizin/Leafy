@@ -5,32 +5,32 @@ import kotlinx.serialization.Serializable
 sealed interface Destination {
 
     @Serializable
-    data object Home: Destination
+    data object Home : Destination
 
     @Serializable
-    data class Search(val autoFocus: Boolean = false): Destination
+    data class Search(val autoFocus: Boolean = false) : Destination
 
     @Serializable
-    data object Camera: Destination
+    data object Camera : Destination
 
     @Serializable
-    data object Tasks: Destination
+    data object Tasks : Destination
 
     @Serializable
-    data object Preferences: Destination
+    data object Preferences : Destination
 
     @Serializable
-    data object Publish: Destination
+    data object Publish : Destination
 
     @Serializable
-    data object Alarm: Destination
+    data object Alarm : Destination
 
     @Serializable
-    data object About: Destination
+    data object About : Destination
 
     @Serializable
-    data class PlantDetails(val plantId: Long): Destination
+    data class PlantDetails(val plantId: Long) : Destination
 
     @Serializable
-    data class PlantEdit(val plantId: Long): Destination
+    data class PlantEdit(val plantId: Long) : Destination
 }

@@ -41,8 +41,7 @@ fun LeafyNavigation(
     ) {
         NavHost(
             navController = navController,
-            startDestination = Destination.Home
-            ,
+            startDestination = Destination.Home,
         ) {
             homeGraph(
                 enterTransition = { navigationEnterTransition(navController) },
