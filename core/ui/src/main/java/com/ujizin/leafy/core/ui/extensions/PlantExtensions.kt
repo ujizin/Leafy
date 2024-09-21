@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.core.content.FileProvider
 import com.ujizin.leafy.core.components.R
 import com.ujizin.leafy.domain.model.Plant
+import java.io.File
 
 fun Plant.share(context: Context) {
     val intent = Intent().apply {
@@ -12,7 +13,7 @@ fun Plant.share(context: Context) {
         val uri = FileProvider.getUriForFile(
             context,
             "${context.packageName}.provider",
-            file,
+            File(filePath),
         )
         setDataAndType(uri, "image/*")
         putExtra(Intent.EXTRA_STREAM, uri)

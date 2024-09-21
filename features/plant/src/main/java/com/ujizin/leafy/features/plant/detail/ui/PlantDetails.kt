@@ -14,7 +14,6 @@ import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.features.plant.detail.DetailPlantUiState
 import com.ujizin.leafy.features.plant.detail.DetailPlantViewModel
-import java.io.File
 
 @Composable
 fun PlantDetailsRoute(
@@ -69,7 +68,7 @@ private fun PlantDetailsPreview() {
                         1,
                         "Plant foo",
                         "Description",
-                        File("foo"),
+                        "foo",
                         false,
                     ),
                     alarms = listOf(),

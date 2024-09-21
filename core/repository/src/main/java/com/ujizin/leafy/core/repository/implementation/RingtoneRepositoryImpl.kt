@@ -2,7 +2,6 @@ package com.ujizin.leafy.core.repository.implementation
 
 import android.content.Context
 import android.media.RingtoneManager
-import android.net.Uri
 import com.ujizin.leafy.domain.dispatcher.IoDispatcher
 import com.ujizin.leafy.domain.model.Ringtone
 import com.ujizin.leafy.domain.repository.RingtoneRepository
@@ -32,7 +31,7 @@ internal class RingtoneRepositoryImpl @Inject constructor(
                 val uri = cursor.getString(RingtoneManager.URI_COLUMN_INDEX)
                 val id = cursor.getString(RingtoneManager.ID_COLUMN_INDEX)
 
-                ringtoneList.add(Ringtone(id, title, Uri.parse("$uri/$id")))
+                ringtoneList.add(Ringtone(id, title, "$uri/$id"))
             } while (cursor.moveToNext())
         }
 

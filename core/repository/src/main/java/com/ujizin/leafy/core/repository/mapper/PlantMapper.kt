@@ -1,7 +1,6 @@
 package com.ujizin.leafy.core.repository.mapper
 
 import com.ujizin.leafy.domain.model.Plant
-import java.io.File
 import com.ujizin.leafy.core.repository.model.Plant as DataPlant
 
 /**
@@ -16,7 +15,7 @@ internal class PlantMapper {
             id,
             title,
             description,
-            File(filePath),
+            filePath,
             favorite,
             albumId,
         )
@@ -25,6 +24,6 @@ internal class PlantMapper {
     fun toRepo(plants: List<Plant>) = plants.map { toRepo(it) }
 
     fun toRepo(plant: Plant) = with(plant) {
-        DataPlant(id, title, file.absolutePath, description, favorite, albumId)
+        DataPlant(id, title, filePath, description, favorite, albumId)
     }
 }

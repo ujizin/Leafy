@@ -23,18 +23,6 @@ data class User(
         val language: Language,
         val dynamicColor: Boolean,
     )
-
-    companion object {
-        val default: User
-            get() = User(
-                nickname = "User",
-                settings = Settings(
-                    theme = Theme.System,
-                    language = Language.systemLanguage,
-                    dynamicColor = true,
-                ),
-            )
-    }
 }
 
 /**

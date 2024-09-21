@@ -154,7 +154,7 @@ private fun PlantItem(
             modifier = Modifier
                 .size(80.dp)
                 .clip(MaterialTheme.shapes.small),
-            model = task.plant.file,
+            model = task.plant.filePath,
             contentDescription = task.plant.title,
         )
         Column(modifier = Modifier.padding(start = 8.dp)) {

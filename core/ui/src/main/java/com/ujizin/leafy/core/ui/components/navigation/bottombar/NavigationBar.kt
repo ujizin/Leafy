@@ -75,14 +75,6 @@ private fun BottomNavigationBar(
 }
 
 fun NavController.navigateToItem(item: NavItem) {
-    val route = currentBackStackEntry?.destination?.route
-//    if (route == item.destination.route) return
-//
-//    if (item.destination.route == graph.startDestinationRoute) {
-//        popBackStack()
-//        return
-//    }
-
     navigate(item.destination) {
         graph.startDestinationRoute?.let { route ->
             popUpTo(route) {

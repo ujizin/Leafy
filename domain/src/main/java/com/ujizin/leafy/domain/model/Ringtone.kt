@@ -1,7 +1,5 @@
 package com.ujizin.leafy.domain.model
 
-import android.net.Uri
-
 /**
  * Ringtone model
  *
@@ -12,5 +10,5 @@ import android.net.Uri
 data class Ringtone(
     val id: String,
     val title: String,
-    val uri: Uri,
+    val uriContent: String,
 )

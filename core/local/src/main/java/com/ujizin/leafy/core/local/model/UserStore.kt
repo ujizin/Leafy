@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 data class UserStore(
     val nickname: String,
     val theme: String? = null,
-    val language: String? = null,
+    val language: String,
     val dynamicColor: Boolean,
     val createdAt: String? = null,
 ) {
@@ -14,11 +14,10 @@ data class UserStore(
     companion object {
         private const val DEFAULT_NICKNAME = "User"
 
-        // TODO get a new Date library to use on created at
         fun default() = UserStore(
             nickname = DEFAULT_NICKNAME,
             theme = null,
-            language = null,
+            language = "EN",
             dynamicColor = true,
             createdAt = " ",
         )
