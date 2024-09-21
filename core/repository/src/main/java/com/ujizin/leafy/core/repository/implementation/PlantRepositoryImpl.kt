@@ -2,6 +2,7 @@ package com.ujizin.leafy.core.repository.implementation
 
 import com.ujizin.leafy.core.repository.datasource.PlantDataSource
 import com.ujizin.leafy.core.repository.mapper.PlantMapper
+import com.ujizin.leafy.core.repository.utils.createDraft
 import com.ujizin.leafy.domain.dispatcher.IoDispatcher
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.repository.PlantRepository
@@ -46,7 +47,7 @@ internal class PlantRepositoryImpl @Inject constructor(
     }.flowOn(dispatcher)
 
     override fun getDraftPlant() = flow {
-        emit(dataSource.getDraftPlant()?.let(mapper::toDomain) ?: Plant.createDraft())
+        emit(dataSource.getDraftPlant()?.let(mapper::toDomain) ?: createDraft())
     }.flowOn(dispatcher)
 
     override fun updateDraftPlant(plant: Plant) = flow {

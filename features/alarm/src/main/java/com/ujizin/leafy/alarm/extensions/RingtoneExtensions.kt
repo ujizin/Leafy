@@ -13,5 +13,5 @@ fun ModalValue<Ringtone>?.orDefault(context: Context) = this ?: run {
 fun getDefaultRingtone(context: Context): Ringtone {
     val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
     val ringtone = RingtoneManager.getRingtone(context, uri)
-    return Ringtone("0", ringtone.getTitle(context), uri)
+    return Ringtone("0", ringtone.getTitle(context), uri.toString())
 }

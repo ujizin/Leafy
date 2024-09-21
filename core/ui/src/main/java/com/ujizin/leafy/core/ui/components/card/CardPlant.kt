@@ -21,7 +21,7 @@ fun CardPlant(
 ) {
     CardImage(
         modifier = modifier,
-        data = plant.file,
+        data = plant.filePath,
         contentDescription = plant.title,
         onClick = onClick,
     ) {

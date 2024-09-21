@@ -1,28 +1,28 @@
 package com.ujizin.leafy.domain.usecase.plant.add
 
 import com.ujizin.leafy.domain.repository.PlantRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.map
 import java.io.File
 
 internal class AddDraftPlantUseCaseImpl(
     private val plantRepository: PlantRepository,
 ) : AddDraftPlantUseCase {
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun invoke(
         title: String?,
         file: File?,
         description: String?,
-    ): Flow<Unit> = flow {
-        val plant = plantRepository.getDraftPlant().first().let { plant ->
-            plant.copy(
-                title = title ?: plant.title,
-                description = description ?: plant.description,
-                file = file ?: plant.file,
-            )
-        }
-
-        emit(plantRepository.updateDraftPlant(plant).first())
+    ): Flow<Unit> = plantRepository.getDraftPlant().map { plant ->
+        plant.copy(
+            title = title ?: plant.title,
+            description = description ?: plant.description,
+            filePath = file?.path ?: plant.filePath,
+        )
+    }.flatMapConcat { plant ->
+        plantRepository.updateDraftPlant(plant)
     }
 }

@@ -66,7 +66,7 @@ internal fun PlantDetailsContent(
                     .fillMaxWidth()
                     .aspectRatio(1F),
                 animation = Animation.SlideToTop,
-                data = plant.file,
+                data = plant.filePath,
                 elevation = 0.dp,
                 shape = RectangleShape,
                 contentDescription = plant.title,

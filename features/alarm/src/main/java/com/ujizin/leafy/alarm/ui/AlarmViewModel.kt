@@ -58,10 +58,14 @@ class AlarmViewModel @Inject constructor(
         weekDays: List<WeekDay>,
         onPlantPublished: () -> Unit,
     ) {
-        val ringtoneContent = ringtone.uri.toString()
+        val ringtoneContent = ringtone.uriContent
         loadDraftPlant()
             .mapResult()
-            .map { it.copy(file = it.file.copyAndDelete(File(plantsDir, it.file.name))) }
+            .map {
+                val draftFile = File(it.filePath)
+                val plantFile = File(plantsDir, draftFile.name)
+                it.copy(filePath = draftFile.copyAndDelete(plantFile).absolutePath)
+            }
             .flatMapConcat { plant ->
                 addPlant(plant.copy(id = 0)).flatMapConcat { id ->
                     addAlarm(

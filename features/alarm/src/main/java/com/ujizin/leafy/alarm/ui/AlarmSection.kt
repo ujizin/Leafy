@@ -19,6 +19,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -127,7 +128,7 @@ fun AlarmScreen(
 ) {
     val context = LocalContext.current
     val ringtonePlayer = remember(ringtone) {
-        RingtoneManager.getRingtone(context, ringtone.value.uri)
+        RingtoneManager.getRingtone(context, ringtone.value.uriContent.toUri())
     }
     var ringtoneShowModal by remember { mutableStateOf(false) }
     var repeatShowModal by remember { mutableStateOf(false) }
