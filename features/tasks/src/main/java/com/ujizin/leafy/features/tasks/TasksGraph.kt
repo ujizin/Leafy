@@ -1,10 +1,10 @@
 package com.ujizin.leafy.features.tasks
 
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
 import com.ujizin.leafy.core.navigation.AnimatedEnterTransition
 import com.ujizin.leafy.core.navigation.AnimatedExitTransition
 import com.ujizin.leafy.core.navigation.Destination
-import com.ujizin.leafy.core.navigation.composable
 import com.ujizin.leafy.core.ui.extensions.OnClick
 
 fun NavGraphBuilder.tasksGraph(
@@ -14,8 +14,7 @@ fun NavGraphBuilder.tasksGraph(
     onTakePictureClick: OnClick,
     onDrawerClick: OnClick,
 ) {
-    composable(
-        destination = Destination.Tasks,
+    composable<Destination.Tasks>(
         enterTransition = enterTransition,
         exitTransition = exitTransition,
     ) {

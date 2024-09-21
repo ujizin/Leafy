@@ -1,10 +1,10 @@
 package com.ujizin.leafy.home
 
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
 import com.ujizin.leafy.core.navigation.AnimatedEnterTransition
 import com.ujizin.leafy.core.navigation.AnimatedExitTransition
 import com.ujizin.leafy.core.navigation.Destination
-import com.ujizin.leafy.core.navigation.composable
 import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.home.ui.HomeRoute
 
@@ -16,8 +16,7 @@ fun NavGraphBuilder.homeGraph(
     onDrawerClick: OnClick,
     onPlantClick: (Long) -> Unit,
 ) {
-    composable(
-        destination = Destination.Home,
+    composable<Destination.Home>(
         enterTransition = enterTransition,
         exitTransition = exitTransition,
     ) {

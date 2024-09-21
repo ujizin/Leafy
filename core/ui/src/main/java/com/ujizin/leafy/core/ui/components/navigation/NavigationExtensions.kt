@@ -5,13 +5,15 @@ import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.navigation.NavController
-import com.ujizin.leafy.core.navigation.Destination
+import com.ujizin.leafy.core.navigation.qualifiedRoute
 import com.ujizin.leafy.core.ui.components.navigation.bottombar.BottomNavItem
 
 val ExitTransition?.orNone get() = this ?: ExitTransition.None
@@ -23,15 +25,15 @@ private enum class NavDirection {
 private fun navDirection(
     navController: NavController,
 ): NavDirection {
-    val previousDestination = navController.previousBackStackEntry?.destination?.route
-    val currentDestination = navController.currentBackStackEntry?.destination?.route
+    val previousDestination = navController.previousBackStackEntry?.destination?.qualifiedRoute
+    val currentDestination = navController.currentBackStackEntry?.destination?.qualifiedRoute
 
     val previousBottomNavItem = BottomNavItem.entries.firstOrNull {
-        it.destination.route == previousDestination
+        it.destination::class.qualifiedName == previousDestination
     } ?: return NavDirection.End
 
     val currentBottomNavItem = BottomNavItem.entries.firstOrNull {
-        it.destination.route == currentDestination
+        it.destination::class.qualifiedName == currentDestination
     } ?: return NavDirection.End
 
     if (currentBottomNavItem == BottomNavItem.Camera) return NavDirection.None
@@ -57,7 +59,7 @@ fun AnimatedContentTransitionScope<*>.navigationEnterTransition(
             Spring.DampingRatioLowBouncy,
             Spring.StiffnessMediumLow,
         ),
-    )
+    ) + fadeIn()
 }
 
 fun AnimatedContentTransitionScope<*>.navigationExitTransition(
@@ -75,7 +77,7 @@ fun AnimatedContentTransitionScope<*>.navigationExitTransition(
             Spring.DampingRatioNoBouncy,
             Spring.StiffnessMedium,
         ),
-    )
+    ) + fadeOut()
 }
 
 @Composable
@@ -85,9 +87,9 @@ internal inline fun <reified T : NavItem> NavController.currentNavItemAsState(
     val selectedItem = remember(initialNavItem) { mutableStateOf(initialNavItem) }
     DisposableEffect(this) {
         val listener = NavController.OnDestinationChangedListener { _, destination, _ ->
-            val currentDestination = Destination.findByName(destination.route)
+            val currentDestination = destination.qualifiedRoute
             val value = T::class.java.enumConstants?.firstOrNull {
-                it.destination == currentDestination
+                it.destination::class.qualifiedName == currentDestination
             }
             selectedItem.value = value
         }

@@ -12,7 +12,7 @@ enum class DrawerItem(
     override val destination: Destination,
 ) : NavItem {
     Home(R.drawable.home, R.string.home, Destination.Home),
-    Search(R.drawable.magnifier, R.string.search, Destination.Search),
+    Search(R.drawable.magnifier, R.string.search, Destination.Search()),
     Alarms(R.drawable.alarm, R.string.tasks, Destination.Tasks),
     About(R.drawable.info, R.string.about, Destination.About),
     Settings(R.drawable.others, R.string.others, Destination.Preferences),

@@ -4,7 +4,8 @@ import androidx.compose.runtime.Immutable
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ujizin.leafy.core.navigation.Args
+import androidx.navigation.toRoute
+import com.ujizin.leafy.core.navigation.Destination
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.Result
 import com.ujizin.leafy.domain.usecase.plant.find.FindPlantUseCase
@@ -25,7 +26,7 @@ class SearchViewModel @Inject constructor(
     private val findPlant: FindPlantUseCase,
 ) : ViewModel() {
 
-    private val initAutoFocus: Boolean = checkNotNull(savedStateHandle[Args.SearchAutoFocus])
+    private val initAutoFocus: Boolean = savedStateHandle.toRoute<Destination.Search>().autoFocus
 
     private val _uiState = MutableStateFlow<SearchUiState>(SearchUiState.Initial(initAutoFocus))
     val uiState = _uiState.asStateFlow()

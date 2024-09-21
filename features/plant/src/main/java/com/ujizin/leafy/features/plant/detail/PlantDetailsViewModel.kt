@@ -3,7 +3,8 @@ package com.ujizin.leafy.features.plant.detail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ujizin.leafy.core.navigation.Args
+import androidx.navigation.toRoute
+import com.ujizin.leafy.core.navigation.Destination
 import com.ujizin.leafy.domain.model.Alarm
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.mapResult
@@ -32,7 +33,7 @@ class DetailPlantViewModel @Inject constructor(
     private val updateAlarmUseCase: UpdateAlarmUseCase,
 ) : ViewModel() {
 
-    private val plantId: Long = checkNotNull(savedStateHandle[Args.PlantId])
+    private val plantId: Long = savedStateHandle.toRoute<Destination.PlantDetails>().plantId
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val uiState = loadPlant(plantId)

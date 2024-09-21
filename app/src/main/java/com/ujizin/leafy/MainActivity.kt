@@ -19,9 +19,7 @@ import androidx.core.view.WindowCompat
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.ujizin.leafy.alarm.AlarmService
-import com.ujizin.leafy.core.navigation.Args
 import com.ujizin.leafy.core.navigation.Destination
-import com.ujizin.leafy.core.navigation.navigate
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -75,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                     stopService(Intent(this@MainActivity, AlarmService::class.java))
                 }
 
-                navController.navigate(Destination.PlantDetails, Args.PlantId to plantId)
+                navController.navigate(Destination.PlantDetails(plantId))
             }
         }
     }
