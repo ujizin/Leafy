@@ -18,7 +18,7 @@ typealias AnimatedEnterTransition = (TransitionScope<NavBackStackEntry>.() -> En
 
 typealias AnimatedExitTransition = (TransitionScope<NavBackStackEntry>.() -> ExitTransition?)
 
-inline fun <reified T: Destination, A> NavGraphBuilder.composable(
+inline fun <reified T : Destination, A> NavGraphBuilder.composable(
     noinline enterTransition: AnimatedEnterTransition = { fadeIn() },
     noinline exitTransition: AnimatedExitTransition = { fadeOut() },
     noinline popEnterTransition: AnimatedEnterTransition? = enterTransition,
