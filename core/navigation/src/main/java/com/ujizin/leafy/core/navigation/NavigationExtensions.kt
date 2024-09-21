@@ -6,12 +6,11 @@ import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
-import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavDeepLink
+import androidx.navigation.NavDestination
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.compose.composable
 import androidx.compose.animation.AnimatedContentTransitionScope as TransitionScope
 
@@ -19,19 +18,15 @@ typealias AnimatedEnterTransition = (TransitionScope<NavBackStackEntry>.() -> En
 
 typealias AnimatedExitTransition = (TransitionScope<NavBackStackEntry>.() -> ExitTransition?)
 
-fun NavGraphBuilder.composable(
-    destination: Destination,
-    enterTransition: AnimatedEnterTransition = { fadeIn() },
-    exitTransition: AnimatedExitTransition = { fadeOut() },
-    popEnterTransition: AnimatedEnterTransition? = enterTransition,
-    popExitTransition: AnimatedExitTransition? = exitTransition,
-    arguments: List<NamedNavArgument> = emptyList(),
+inline fun <reified T: Destination, A> NavGraphBuilder.composable(
+    noinline enterTransition: AnimatedEnterTransition = { fadeIn() },
+    noinline exitTransition: AnimatedExitTransition = { fadeOut() },
+    noinline popEnterTransition: AnimatedEnterTransition? = enterTransition,
+    noinline popExitTransition: AnimatedExitTransition? = exitTransition,
     deepLinks: List<NavDeepLink> = emptyList(),
-    content: @Composable AnimatedVisibilityScope.(NavBackStackEntry) -> Unit,
+    noinline content: @Composable AnimatedVisibilityScope.(NavBackStackEntry) -> Unit,
 ) {
-    composable(
-        route = destination.route,
-        arguments = arguments,
+    composable<T>(
         deepLinks = deepLinks,
         enterTransition = enterTransition,
         exitTransition = exitTransition,
@@ -41,21 +36,11 @@ fun NavGraphBuilder.composable(
     )
 }
 
-fun NavController.navigate(destination: Destination, vararg arguments: Pair<String, Any>) {
-    navigate(destination.withArguments(*arguments)) {
-        launchSingleTop = true
-        restoreState = true
-    }
-}
-
-fun NavController.navigate(
-    destination: Destination,
-    vararg arguments: Pair<String, Any>,
-    builder: NavOptionsBuilder.() -> Unit,
-) {
-    navigate(destination.withArguments(*arguments), builder)
-}
-
 fun NavController.navigateUp(times: Int) {
     repeat(times) { navigateUp() }
 }
+
+val NavDestination.qualifiedRoute: String?
+    get() = route
+        ?.split("?") // Remove queries parameter
+        ?.firstOrNull()

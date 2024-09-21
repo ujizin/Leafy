@@ -1,35 +1,36 @@
 package com.ujizin.leafy.core.navigation
 
-enum class Destination(
-    private val destinationName: String,
-) {
-    Home("home"),
-    Search("search?auto_focus={${Args.SearchAutoFocus}}"),
-    Camera("camera"),
-    Tasks("tasks"),
-    Preferences("preferences"),
-    Publish("publish"),
-    Alarm("alarm"),
-    About("about"),
-    PlantDetails("plant/{${Args.PlantId}}"),
-    PlantEdit("plant/${Args.PlantId}"),
-    ;
+import kotlinx.serialization.Serializable
 
-    val route: String get() = "$HOST/$destinationName"
+sealed interface Destination {
 
-    internal fun withArguments(vararg arguments: Pair<String, Any>): String {
-        var destinationName = this.destinationName
-        arguments.forEach { (key, value) ->
-            destinationName = destinationName.replace("{$key}", "$value")
-        }
-        return "$HOST/$destinationName"
-    }
+    @Serializable
+    data object Home: Destination
 
-    companion object {
-        private const val HOST = "app://leafy"
+    @Serializable
+    data class Search(val autoFocus: Boolean = false): Destination
 
-        fun findByName(destinationName: String?) = entries.find {
-            it.route == destinationName
-        }
-    }
+    @Serializable
+    data object Camera: Destination
+
+    @Serializable
+    data object Tasks: Destination
+
+    @Serializable
+    data object Preferences: Destination
+
+    @Serializable
+    data object Publish: Destination
+
+    @Serializable
+    data object Alarm: Destination
+
+    @Serializable
+    data object About: Destination
+
+    @Serializable
+    data class PlantDetails(val plantId: Long): Destination
+
+    @Serializable
+    data class PlantEdit(val plantId: Long): Destination
 }

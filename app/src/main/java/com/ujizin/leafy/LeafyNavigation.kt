@@ -12,9 +12,7 @@ import androidx.navigation.compose.NavHost
 import com.ujizin.leafy.about.aboutGraph
 import com.ujizin.leafy.alarm.ui.alarmGraph
 import com.ujizin.leafy.camera.cameraGraph
-import com.ujizin.leafy.core.navigation.Args
 import com.ujizin.leafy.core.navigation.Destination
-import com.ujizin.leafy.core.navigation.navigate
 import com.ujizin.leafy.core.navigation.navigateUp
 import com.ujizin.leafy.core.ui.components.ScaffoldWithDrawer
 import com.ujizin.leafy.core.ui.components.navigation.navigationEnterTransition
@@ -43,7 +41,8 @@ fun LeafyNavigation(
     ) {
         NavHost(
             navController = navController,
-            startDestination = Destination.Home.route,
+            startDestination = Destination.Home
+            ,
         ) {
             homeGraph(
                 enterTransition = { navigationEnterTransition(navController) },
@@ -52,17 +51,11 @@ fun LeafyNavigation(
                 },
                 onTakePictureClick = { navController.navigate(Destination.Camera) },
                 onSearchClick = {
-                    navController.navigate(
-                        destination = Destination.Search,
-                        Args.SearchAutoFocus to true,
-                    )
+                    navController.navigate(Destination.Search(true))
                 },
                 onDrawerClick = { scope.launch { drawerState.open() } },
                 onPlantClick = { plantId ->
-                    navController.navigate(
-                        Destination.PlantDetails,
-                        Args.PlantId to plantId,
-                    )
+                    navController.navigate(Destination.PlantDetails(plantId))
                 },
             )
             searchGraph(
@@ -71,20 +64,14 @@ fun LeafyNavigation(
                 onDrawerClick = { scope.launch { drawerState.open() } },
                 onTakePictureClick = { navController.navigate(Destination.Camera) },
                 onPlantClick = { plantId ->
-                    navController.navigate(
-                        Destination.PlantDetails,
-                        Args.PlantId to plantId,
-                    )
+                    navController.navigate(Destination.PlantDetails(plantId))
                 },
             )
             tasksGraph(
                 enterTransition = { navigationEnterTransition(navController) },
                 exitTransition = { navigationExitTransition(navController) },
                 onPlantClick = { plantId ->
-                    navController.navigate(
-                        Destination.PlantDetails,
-                        Args.PlantId to plantId,
-                    )
+                    navController.navigate(Destination.PlantDetails(plantId))
                 },
                 onTakePictureClick = { navController.navigate(Destination.Camera) },
                 onDrawerClick = { scope.launch { drawerState.open() } },

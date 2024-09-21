@@ -1,13 +1,10 @@
 package com.ujizin.leafy.features.plant
 
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavType
-import androidx.navigation.navArgument
+import androidx.navigation.compose.composable
 import com.ujizin.leafy.core.navigation.AnimatedEnterTransition
 import com.ujizin.leafy.core.navigation.AnimatedExitTransition
-import com.ujizin.leafy.core.navigation.Args
 import com.ujizin.leafy.core.navigation.Destination
-import com.ujizin.leafy.core.navigation.composable
 import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.core.ui.extensions.fullSlideInHorizontally
 import com.ujizin.leafy.core.ui.extensions.fullSlideOutHorizontally
@@ -19,25 +16,17 @@ fun NavGraphBuilder.plantGraph(
     enterTransition: AnimatedEnterTransition = { fullSlideInHorizontally() },
     exitTransition: AnimatedExitTransition = { fullSlideOutHorizontally() },
 ) {
-    composable(
-        destination = Destination.PlantDetails,
+    composable<Destination.PlantDetails>(
         enterTransition = enterTransition,
         exitTransition = exitTransition,
-        arguments = listOf(
-            navArgument(Args.PlantId) { type = NavType.LongType },
-        ),
     ) {
         PlantDetailsRoute(
             onBackPressed = onBackPressed,
         )
     }
-    composable(
-        destination = Destination.PlantEdit,
+    composable<Destination.PlantEdit>(
         enterTransition = enterTransition,
         exitTransition = exitTransition,
-        arguments = listOf(
-            navArgument(Args.PlantId) { type = NavType.LongType },
-        ),
     ) {
         PlantEditRoute(
             onBackPressed = onBackPressed,

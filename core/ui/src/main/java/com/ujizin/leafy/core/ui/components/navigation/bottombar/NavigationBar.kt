@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.ujizin.leafy.core.navigation.Destination
-import com.ujizin.leafy.core.navigation.navigate
 import com.ujizin.leafy.core.ui.components.animated.animation.Animate.Animated
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
 import com.ujizin.leafy.core.ui.components.button.CameraButton
@@ -77,12 +76,12 @@ private fun BottomNavigationBar(
 
 fun NavController.navigateToItem(item: NavItem) {
     val route = currentBackStackEntry?.destination?.route
-    if (route == item.destination.route) return
-
-    if (item.destination.route == graph.startDestinationRoute) {
-        popBackStack()
-        return
-    }
+//    if (route == item.destination.route) return
+//
+//    if (item.destination.route == graph.startDestinationRoute) {
+//        popBackStack()
+//        return
+//    }
 
     navigate(item.destination) {
         graph.startDestinationRoute?.let { route ->

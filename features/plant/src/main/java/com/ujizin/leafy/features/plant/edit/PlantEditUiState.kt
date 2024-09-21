@@ -3,7 +3,8 @@ package com.ujizin.leafy.features.plant.edit
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ujizin.leafy.core.navigation.Args
+import androidx.navigation.toRoute
+import com.ujizin.leafy.core.navigation.Destination
 import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.mapResult
 import com.ujizin.leafy.domain.usecase.plant.load.LoadPlantUseCase
@@ -21,7 +22,7 @@ class PlantEditViewModel @Inject constructor(
     private val loadPlant: LoadPlantUseCase,
 ) : ViewModel() {
 
-    private val plantId: Long = checkNotNull(savedStateHandle[Args.PlantId])
+    private val plantId: Long = savedStateHandle.toRoute<Destination.PlantEdit>().plantId
 
     private val _uiState = MutableStateFlow<PlantEditUiState>(PlantEditUiState.Initial)
     val uiState get() = _uiState.asStateFlow()

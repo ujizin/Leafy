@@ -12,7 +12,7 @@ internal enum class BottomNavItem(
     override val destination: Destination,
 ) : NavItem {
     Home(R.drawable.home, R.string.home, Destination.Home),
-    Search(R.drawable.magnifier, R.string.search, Destination.Search),
+    Search(R.drawable.magnifier, R.string.search, Destination.Search()),
     Camera(destination = Destination.Camera),
     Alarm(R.drawable.alarm, R.string.tasks, Destination.Tasks),
     Others(R.drawable.others, R.string.others, Destination.Preferences),
