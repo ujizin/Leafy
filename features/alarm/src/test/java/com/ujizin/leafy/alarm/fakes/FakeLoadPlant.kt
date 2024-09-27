@@ -4,7 +4,6 @@ import com.ujizin.leafy.domain.model.Plant
 import com.ujizin.leafy.domain.result.Result
 import com.ujizin.leafy.domain.usecase.plant.load.LoadPlantUseCase
 import kotlinx.coroutines.flow.flow
-import java.io.File
 
 class FakeLoadPlant(
     private val until: Int = 10,
@@ -24,9 +23,9 @@ class FakeLoadPlant(
             id: Long = 1,
             title: String = "",
             description: String = "",
-            file: File = File("test"),
+            filePath: String = "test",
             favorite: Boolean = false,
             albumId: Long? = null,
-        ) = Plant(id, title, description, file, favorite, albumId)
+        ) = Plant(id, title, description, filePath, favorite, albumId)
     }
 }

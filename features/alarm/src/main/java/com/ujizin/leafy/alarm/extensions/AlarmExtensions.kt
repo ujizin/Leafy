@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
+import com.ujizin.leafy.alarm.AlarmService
 
 /**
  * Get alarm manager instance from context
@@ -34,3 +35,12 @@ val AlarmManager.hasAlarmPermission
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> canScheduleExactAlarms()
         else -> true
     }
+
+/**
+ * Get alarm service intent
+ * */
+internal fun Context.getAlarmIntent(
+    action: String? = null,
+) = Intent(this, AlarmService::class.java).apply {
+    this.action = action
+}

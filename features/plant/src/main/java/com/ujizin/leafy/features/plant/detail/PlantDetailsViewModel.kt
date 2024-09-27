@@ -33,10 +33,10 @@ class DetailPlantViewModel @Inject constructor(
     private val updateAlarmUseCase: UpdateAlarmUseCase,
 ) : ViewModel() {
 
-    private val plantId: Long = savedStateHandle.toRoute<Destination.PlantDetails>().plantId
+    private val arguments = savedStateHandle.toRoute<Destination.PlantDetails>()
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val uiState = loadPlant(plantId)
+    val uiState = loadPlant(arguments.plantId)
         .mapResult()
         .flatMapConcat { plant ->
             loadAlarms(plant.id)
@@ -56,7 +56,7 @@ class DetailPlantViewModel @Inject constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun deletePlant(plant: Plant, onCompletion: () -> Unit) {
-        deleteAlarmUseCase(plantId)
+        deleteAlarmUseCase(arguments.plantId)
             .flatMapConcat { deletePlantUseCase(plant) }
             .onCompletion { onCompletion() }
             .launchIn(viewModelScope)
