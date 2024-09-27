@@ -2,9 +2,11 @@ package com.ujizin.leafy.features.plant
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import androidx.navigation.navDeepLink
 import com.ujizin.leafy.core.navigation.AnimatedEnterTransition
 import com.ujizin.leafy.core.navigation.AnimatedExitTransition
-import com.ujizin.leafy.core.navigation.Destination
+import com.ujizin.leafy.core.navigation.Destination.PlantDetails
+import com.ujizin.leafy.core.navigation.Destination.PlantEdit
 import com.ujizin.leafy.core.ui.extensions.OnClick
 import com.ujizin.leafy.core.ui.extensions.fullSlideInHorizontally
 import com.ujizin.leafy.core.ui.extensions.fullSlideOutHorizontally
@@ -16,15 +18,18 @@ fun NavGraphBuilder.plantGraph(
     enterTransition: AnimatedEnterTransition = { fullSlideInHorizontally() },
     exitTransition: AnimatedExitTransition = { fullSlideOutHorizontally() },
 ) {
-    composable<Destination.PlantDetails>(
+    composable<PlantDetails>(
         enterTransition = enterTransition,
         exitTransition = exitTransition,
+        deepLinks = listOf(
+            navDeepLink<PlantDetails>(basePath = PlantDetails.DEEPLINK_URL),
+        ),
     ) {
         PlantDetailsRoute(
             onBackPressed = onBackPressed,
         )
     }
-    composable<Destination.PlantEdit>(
+    composable<PlantEdit>(
         enterTransition = enterTransition,
         exitTransition = exitTransition,
     ) {

@@ -8,7 +8,6 @@ import com.ujizin.leafy.domain.usecase.ringtone.load.LoadRingtonesUseCaseImpl
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
-import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.test.runTest
@@ -18,7 +17,6 @@ import org.junit.Rule
 import org.junit.Test
 
 class RingtoneUseCaseTest {
-    // TODO add unit test - #11
 
     @get:Rule
     var mainDispatcherRule = TestDispatcherRule()
@@ -49,7 +47,7 @@ class RingtoneUseCaseTest {
 
     companion object {
         private val ringtones = List(10) {
-            Ringtone("$it", "title-$it", mockk())
+            Ringtone("$it", "title-$it", "uriContent-$it")
         }
     }
 }

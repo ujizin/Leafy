@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import com.ujizin.leafy.alarm.AlarmService
+import com.ujizin.leafy.alarm.extensions.getAlarmIntent
 import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
 import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarmUseCase
 import com.ujizin.leafy.core.components.R
@@ -64,7 +65,7 @@ class AlarmReceiver : BroadcastReceiver() {
     private fun Context.getAlarmServiceIntent(
         plant: Plant,
         ringtone: String?,
-    ) = Intent(this, AlarmService::class.java).apply {
+    ) = getAlarmIntent().apply {
         putExtra(AlarmService.PLANT_ID, plant.id)
         putExtra(AlarmService.TITLE_ARG, getString(R.string.app_name))
         putExtra(AlarmService.DESCRIPTION_ARG, plant.title)

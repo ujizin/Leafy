@@ -26,13 +26,20 @@
         android:theme="@style/Theme.Splash">
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.Splash"
             android:exported="true"
+            android:theme="@style/Theme.Splash"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="leafy"
+                    android:scheme="app" />
             </intent-filter>
         </activity>
         <service

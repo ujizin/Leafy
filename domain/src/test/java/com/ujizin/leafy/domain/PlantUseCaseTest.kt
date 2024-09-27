@@ -23,7 +23,6 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import java.io.File
 
 @ExperimentalCoroutinesApi
 class PlantUseCaseTest {
@@ -68,9 +67,9 @@ class PlantUseCaseTest {
     @Test
     fun `when load plant then expect return plants on repository`() = runTest {
         val expectedPlants = listOf(
-            Plant(id = 1, "", "", File(""), false),
-            Plant(id = 2, "", "", File(""), false),
-            Plant(id = 3, "", "", File(""), false),
+            Plant(id = 1, "", "", "", false),
+            Plant(id = 2, "", "", "", false),
+            Plant(id = 3, "", "", "", false),
         )
 
         every { plantRepository.getPlants() } returns flowOf(expectedPlants)

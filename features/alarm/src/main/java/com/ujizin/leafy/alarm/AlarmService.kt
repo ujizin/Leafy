@@ -12,8 +12,12 @@ import android.os.CountDownTimer
 import android.os.IBinder
 import android.os.PowerManager
 import androidx.core.app.NotificationCompat
+import androidx.core.app.TaskStackBuilder
+import com.ujizin.leafy.alarm.extensions.getAlarmIntent
 import com.ujizin.leafy.alarm.extensions.orDefaultRingtone
 import com.ujizin.leafy.alarm.notificator.AlarmNotificator
+import com.ujizin.leafy.alarm.receiver.StopPlantServiceActivity
+import com.ujizin.leafy.core.navigation.Destination
 import com.ujizin.leafy.core.ui.props.RequestCode
 import com.ujizin.leafy.features.alarm.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -81,8 +85,8 @@ class AlarmService : Service() {
     private fun Intent.getNotification(): Notification {
         val title = getStringExtra(TITLE_ARG) ?: getString(CR.string.app_name)
         val description = getStringExtra(DESCRIPTION_ARG) ?: getString(CR.string.alarm)
-        val contentIntent = getPendingIntent(plantId)
-        val stopIntent = alarmIntent(action = STOP_ACTION)
+        val contentIntent = getPlantPendingIntent(plantId)
+        val stopIntent = getAlarmPendingIntent(action = STOP_ACTION)
 
         return alarmNotificator.getNotification(
             title = title,
@@ -94,22 +98,10 @@ class AlarmService : Service() {
         )
     }
 
-    private fun alarmIntent(action: String) = PendingIntent.getService(
+    private fun getAlarmPendingIntent(action: String) = PendingIntent.getService(
         this,
         RequestCode.ALARM,
-        Intent(this, AlarmService::class.java).apply {
-            this.action = action
-        },
-        PendingIntent.FLAG_IMMUTABLE,
-    )
-
-    private fun getPendingIntent(plantId: Long) = PendingIntent.getActivity(
-        this,
-        RequestCode.ALARM,
-        packageManager.getLaunchIntentForPackage(packageName)?.apply {
-            action = STOP_ACTION
-            putExtra(PLANT_ID, plantId)
-        },
+        getAlarmIntent(action),
         PendingIntent.FLAG_IMMUTABLE,
     )
 
@@ -128,6 +120,22 @@ class AlarmService : Service() {
             }
         } catch (_: IOException) {
         }
+    }
+
+    private fun getPlantPendingIntent(
+        plantId: Long,
+    ) = TaskStackBuilder.create(this).run {
+        val deeplinkIntent = Intent(
+            Intent.ACTION_VIEW,
+            Destination.PlantDetails.createDeeplink(plantId),
+        ).apply {
+            putExtra(ALARM_SERVICE_ARG, true)
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val stopService = StopPlantServiceActivity.getIntent(this@AlarmService)
+        addNextIntentWithParentStack(deeplinkIntent)
+        addNextIntent(stopService)
+        getPendingIntent(0, PendingIntent.FLAG_IMMUTABLE)
     }
 
     override fun onDestroy() {
@@ -150,6 +158,7 @@ class AlarmService : Service() {
         internal const val TITLE_ARG = "alarm_title"
         internal const val DESCRIPTION_ARG = "alarm_description"
         internal const val RINGTONE_URI_STRINGIFY_ARG = "alarm_ringtone_uri_stringify"
+        const val ALARM_SERVICE_ARG = "alarm_service"
         const val PLANT_ID = "alarm_plant_id"
         const val STOP_ACTION = "alarm_service_stop"
     }
