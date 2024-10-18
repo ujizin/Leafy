@@ -19,3 +19,5 @@ dependencies {
     implementation(libs.hilt.plugin)
     implementation(libs.ksp.plugin)
 }
+
+apply(from = "../config-properties.gradle.kts")
