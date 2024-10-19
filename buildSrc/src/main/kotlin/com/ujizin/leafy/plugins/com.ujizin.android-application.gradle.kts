@@ -13,6 +13,8 @@ plugins {
 internal val Project.libs: VersionCatalog
     get() = project.extensions.getByType<VersionCatalogsExtension>().named("libs")
 
+apply(from = "$rootDir/config-properties.gradle.kts")
+
 android {
     configApplication(project)
     configAndroid()
@@ -48,5 +50,3 @@ dependencies {
 
     testImplementation(libs.findLibrary("mockk").get())
 }
-
-apply(from = "../config-properties.gradle.kts")
