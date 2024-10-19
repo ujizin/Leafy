@@ -48,3 +48,5 @@ dependencies {
 
     testImplementation(libs.findLibrary("mockk").get())
 }
+
+apply(from = "../config-properties.gradle.kts")
