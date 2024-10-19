@@ -15,10 +15,10 @@ fun BaseAppModuleExtension.configApplication(rootProject: Project) = with(rootPr
 
     signingConfigs {
         create("release") {
-            storeFile = file("${extra["RELEASE_STORE_FILE"]}")
-            storePassword = "${extra["RELEASE_STORE_PASSWORD"]}"
-            keyAlias = "${extra["RELEASE_KEY_ALIAS"]}"
-            keyPassword = "${extra["RELEASE_KEY_PASSWORD"]}"
+            storeFile = file("${rootProject.extra["RELEASE_STORE_FILE"]}")
+            storePassword = "${rootProject.extra["RELEASE_STORE_PASSWORD"]}"
+            keyAlias = "${rootProject.extra["RELEASE_KEY_ALIAS"]}"
+            keyPassword = "${rootProject.extra["RELEASE_KEY_PASSWORD"]}"
         }
     }
 
