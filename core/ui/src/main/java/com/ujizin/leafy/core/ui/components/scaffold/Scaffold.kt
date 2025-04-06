@@ -11,12 +11,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.ujizin.leafy.core.ui.extensions.Content
 
 @Composable
 fun Scaffold(
     modifier: Modifier = Modifier,
-    topBar: @Composable Content,
+    topBar: @Composable () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Column(modifier, content = content)
@@ -27,7 +26,7 @@ fun Scaffold(
 
 @Composable
 fun TopAppBar(
-    onNavigationContent: @Composable Content,
+    onNavigationContent: @Composable () -> Unit,
     onActionContent: @Composable RowScope.() -> Unit = {},
 ) {
     Row(

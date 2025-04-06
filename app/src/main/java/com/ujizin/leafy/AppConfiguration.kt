@@ -8,7 +8,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import com.ujizin.leafy.core.themes.LeafyTheme
 import com.ujizin.leafy.core.ui.components.AppPermission
-import com.ujizin.leafy.core.ui.extensions.Content
 import com.ujizin.leafy.core.ui.local.LocalUser
 import com.ujizin.leafy.user.isUserInDarkTheme
 import com.ujizin.leafy.user.rememberUserState
@@ -16,7 +15,7 @@ import com.ujizin.leafy.user.setLanguage
 
 @Composable
 fun AppCompatActivity.AppConfiguration(
-    content: @Composable Content,
+    content: @Composable () -> Unit,
 ) {
     val userState by rememberUserState()
     when (val state: MainUiState = userState) {

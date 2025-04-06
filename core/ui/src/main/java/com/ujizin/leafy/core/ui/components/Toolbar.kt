@@ -8,13 +8,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.ujizin.leafy.core.ui.components.animated.AnimatedButtonIcon
 import com.ujizin.leafy.core.ui.components.image.Icons
-import com.ujizin.leafy.core.ui.extensions.Content
 
 @Composable
 internal fun Toolbar(
     modifier: Modifier = Modifier,
-    leadingIcon: @Composable Content?,
-    trailingIcon: @Composable Content?,
+    leadingIcon: @Composable (() -> Unit)?,
+    trailingIcon: @Composable (() -> Unit)?,
 ) {
     Row(
         modifier.fillMaxWidth(),

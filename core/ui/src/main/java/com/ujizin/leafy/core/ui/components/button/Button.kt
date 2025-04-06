@@ -12,7 +12,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ujizin.leafy.core.themes.LeafyTheme
 import com.ujizin.leafy.core.ui.components.animated.AnimatedText
-import com.ujizin.leafy.core.ui.extensions.Content
 import com.ujizin.leafy.core.ui.extensions.OnClick
 import androidx.compose.material3.Button as Material3Button
 
@@ -25,7 +24,7 @@ fun Button(
     capitalize: Boolean = true,
     shape: Shape = RoundedCornerShape(4.dp),
     contentPadding: PaddingValues = PaddingValues(horizontal = 24.dp, vertical = 16.dp),
-    content: @Composable Content = {},
+    content: @Composable () -> Unit = {},
 ) {
     Material3Button(
         enabled = enabled,

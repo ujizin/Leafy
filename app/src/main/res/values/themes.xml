@@ -7,6 +7,8 @@
     </style>
 
     <style name="Theme.Splash" parent="Theme.SplashScreen">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
         <item name="android:statusBarColor">@color/launcher_foreground_color</item>
         <item name="windowSplashScreenBackground">@color/launcher_background_color</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>

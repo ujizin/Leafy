@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.ujizin.leafy.core.ui.extensions.Content
 import com.ujizin.leafy.core.ui.extensions.innerShadow
 import com.ujizin.leafy.core.ui.props.Shadow
 
@@ -22,7 +21,7 @@ fun BoxImage(
     contentDescription: String?,
     contentAlignment: Alignment = Alignment.TopStart,
     contentScale: ContentScale = ContentScale.Crop,
-    content: @Composable Content,
+    content: @Composable () -> Unit,
 ) {
     Box(modifier) {
         Image(

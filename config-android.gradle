@@ -3,10 +3,10 @@ apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'com.google.devtools.ksp'
 
 android {
-    compileSdk 34
+    compileSdk 35
     defaultConfig {
         minSdk 23
-        targetSdk 34
+        targetSdk 35
         vectorDrawables {
             useSupportLibrary true
         }

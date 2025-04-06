@@ -1,27 +1,26 @@
 [versions]
 
-kotlin = "1.9.23"
+kotlin = "2.1.20"
 gradle = "8.5.2"
-compose = "1.7.2"
-compose-bom = "2024.09.02"
-compose-compiler = "1.5.13"
-androidx-lifecyle = "2.8.6"
-material3 = "1.3.0"
+compose = "1.7.8"
+compose-bom = "2025.03.01"
+androidx-lifecyle = "2.8.7"
+material3 = "1.3.1"
 material = "1.12.0"
-coroutines = "1.8.1"
-androidx-core = "1.13.1"
+coroutines = "1.10.1"
+androidx-core = "1.15.0"
 splashscreen = "1.0.1"
 appcompat = "1.7.0"
 espresso = "3.6.1"
 junit = "4.13.2"
 android-junit = "1.2.1"
-hilt = "2.51.1"
+hilt = "2.56.1"
 hilt-compose = "1.2.0"
 room = "2.6.1"
-ksp = "1.9.23-1.0.20"
-navigation-compose = "2.8.1"
-datastore = "1.1.1"
-kotlinx-serialization = "1.5.1"
+ksp = "2.1.20-1.0.32"
+navigation-compose = "2.8.9"
+datastore = "1.1.4"
+kotlinx-serialization = "1.8.0"
 ktlint = "0.48.2"
 detekt = "1.22.0"
 coil = "2.7.0"
@@ -32,7 +31,7 @@ mockk = "1.13.5"
 camposer = "0.4.0"
 spotless = "6.25.0"
 google-services = "4.4.2"
-google-review = "2.0.1"
+google-review = "2.0.2"
 firebase-bom = "33.1.2"
 firebase-crashlytics = "2.9.9"
 
@@ -61,7 +60,6 @@ hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 hilt-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-compose" }
 
-room = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
@@ -149,6 +147,7 @@ android-application = { id = "com.android.application", version.ref = "gradle" }
 android-library = { id = "com.android.library", version.ref = "gradle" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

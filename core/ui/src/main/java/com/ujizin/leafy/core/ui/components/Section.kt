@@ -16,7 +16,6 @@ import com.ujizin.leafy.core.ui.components.animated.animation.Animate.Animated
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
 import com.ujizin.leafy.core.ui.components.header.HeaderTitle
 import com.ujizin.leafy.core.ui.components.image.Icons
-import com.ujizin.leafy.core.ui.extensions.Content
 
 @Composable
 fun Section(
@@ -28,8 +27,8 @@ fun Section(
     ),
     title: String,
     subTitle: String = "",
-    trailingIcon: @Composable Content? = null,
-    leadingIcon: @Composable Content? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
     headerAnimation: Animation = Animation.SlideToTop,
     animation: Animation = Animation.None,
     content: @Composable ColumnScope.() -> Unit = {},
@@ -52,8 +51,8 @@ fun Section(
 @Composable
 private fun HeaderSection(
     modifier: Modifier = Modifier,
-    trailingIcon: @Composable Content?,
-    leadingIcon: @Composable Content?,
+    trailingIcon: @Composable (() -> Unit)?,
+    leadingIcon: @Composable (() -> Unit)?,
     title: String,
     subTitle: String,
     headerAnimation: Animation,

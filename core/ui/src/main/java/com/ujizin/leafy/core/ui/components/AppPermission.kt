@@ -6,12 +6,11 @@ import androidx.compose.runtime.LaunchedEffect
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberPermissionState
-import com.ujizin.leafy.core.ui.extensions.Content
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun AppPermission(
-    content: @Composable Content,
+    content: @Composable () -> Unit,
 ) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         val permissionState = rememberPermissionState(

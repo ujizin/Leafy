@@ -22,7 +22,6 @@ import coil.size.Size
 import com.ujizin.leafy.core.ui.components.animated.animation.Animate.Animated
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
 import com.ujizin.leafy.core.ui.components.image.BoxImage
-import com.ujizin.leafy.core.ui.extensions.Content
 import com.ujizin.leafy.core.ui.extensions.OnClick
 
 @Composable
@@ -34,7 +33,7 @@ fun CardImage(
     animation: Animation = Animation.SlideToTop,
     shape: Shape = MaterialTheme.shapes.large,
     onClick: OnClick = {},
-    innerContent: @Composable Content = {},
+    innerContent: @Composable () -> Unit = {},
 ) {
     val context = LocalContext.current
     val model = remember(data) {

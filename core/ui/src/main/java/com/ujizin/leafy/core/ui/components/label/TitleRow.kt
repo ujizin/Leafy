@@ -12,7 +12,6 @@ import androidx.compose.ui.unit.dp
 import com.ujizin.leafy.core.ui.components.animated.animation.Animate.Animated
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
 import com.ujizin.leafy.core.ui.components.header.HeaderTitle
-import com.ujizin.leafy.core.ui.extensions.Content
 
 @Composable
 fun TitleRow(
@@ -25,7 +24,7 @@ fun TitleRow(
     subTitleStyle: TextStyle = MaterialTheme.typography.bodyMedium,
     animation: Animation = Animation.SlideToTop,
     iconSpacedBy: Dp = 8.dp,
-    icons: @Composable Content = {},
+    icons: @Composable () -> Unit = {},
 ) {
     Animated(animation = animation) {
         Row(

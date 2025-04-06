@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import com.ujizin.leafy.core.themes.LeafyTheme
 import com.ujizin.leafy.core.ui.components.animated.animation.Animate.Animated
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
-import com.ujizin.leafy.core.ui.extensions.Content
 import com.ujizin.leafy.core.ui.extensions.capitalize
 import androidx.compose.material3.TextField as MaterialTextField
 
@@ -31,7 +30,7 @@ fun TextField(
     singleLine: Boolean = true,
     shape: Shape = RoundedCornerShape(4.dp),
     animation: Animation = Animation.SlideToTop,
-    placeholder: @Composable Content? = null,
+    placeholder: @Composable (() -> Unit)? = null,
     onValueChange: (String) -> Unit,
 ) {
     Animated(animation = animation) {
@@ -55,7 +54,7 @@ fun TextField(
 @Composable
 fun Placeholder(
     modifier: Modifier = Modifier,
-    leadingIcon: @Composable Content = {},
+    leadingIcon: @Composable () -> Unit = {},
     text: String,
 ) {
     Row(
