@@ -1,46 +1,10 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.compose.compiler)
+    id("com.ujizin.android-application")
     id(libs.plugins.google.services.get().pluginId)
     id(libs.plugins.google.crashlytics.get().pluginId)
 }
 
-apply(from = "$rootDir/config-android.gradle")
-apply(from = "$rootDir/config-compose.gradle")
-
-android {
-    namespace = "com.ujizin.leafy"
-    defaultConfig {
-        applicationId = "com.ujizin.leafy"
-        versionCode = 1
-        versionName = "0.1.0"
-    }
-
-    signingConfigs {
-        create("release") {
-            storeFile = file("${rootProject.extra["RELEASE_STORE_FILE"]}")
-            storePassword = "${rootProject.extra["RELEASE_STORE_PASSWORD"]}"
-            keyAlias = "${rootProject.extra["RELEASE_KEY_ALIAS"]}"
-            keyPassword = "${rootProject.extra["RELEASE_KEY_PASSWORD"]}"
-        }
-    }
-
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-            resValue("string", "app_name", "Leafy")
-            signingConfig = signingConfigs.getByName("release")
-        }
-
-        getByName("debug") {
-            isMinifyEnabled = false
-            applicationIdSuffix = ".debug"
-            versionNameSuffix = "-debug"
-            resValue("string", "app_name", "Leafy Dev")
-        }
-    }
-}
+android { namespace = "com.ujizin.leafy" }
 
 dependencies {
     implementation(libs.androidx.core.splashscreen)

@@ -1,22 +1,22 @@
 [versions]
 
 kotlin = "2.1.20"
-gradle = "8.5.2"
+gradle = "8.9.1"
 compose = "1.7.8"
-compose-bom = "2025.03.01"
+compose-bom = "2025.04.00"
 androidx-lifecyle = "2.8.7"
-material3 = "1.3.1"
+material3 = "1.3.2"
 material = "1.12.0"
 coroutines = "1.10.1"
-androidx-core = "1.15.0"
+androidx-core = "1.16.0"
 splashscreen = "1.0.1"
 appcompat = "1.7.0"
 espresso = "3.6.1"
 junit = "4.13.2"
 android-junit = "1.2.1"
-hilt = "2.56.1"
+hilt = "2.56.2"
 hilt-compose = "1.2.0"
-room = "2.6.1"
+room = "2.7.0"
 ksp = "2.1.20-1.0.32"
 navigation-compose = "2.8.9"
 datastore = "1.1.4"
@@ -36,6 +36,15 @@ firebase-bom = "33.1.2"
 firebase-crashlytics = "2.9.9"
 
 [libraries]
+
+## Project
+gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
+gradle-api-plugin = { module = "com.android.tools.build:gradle-api", version.ref = "gradle" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+spotless-plugin-gradle = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
+compose-compiler-plugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+hilt-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
+ksp-plugin = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 
 # Implementations
 
