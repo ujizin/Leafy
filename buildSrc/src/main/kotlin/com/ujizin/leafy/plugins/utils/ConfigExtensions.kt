@@ -8,6 +8,7 @@ import org.gradle.kotlin.dsl.extra
 
 fun BaseAppModuleExtension.configApplication(rootProject: Project) = with(rootProject) {
     defaultConfig {
+        targetSdk = 35
         applicationId = "com.ujizin.leafy"
         versionCode = 1
         versionName = "0.1.0"
