@@ -3,7 +3,12 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
 }
 
-android { namespace = "com.ujizin.leafy.data.local" }
+android {
+    namespace = "com.ujizin.leafy.data.local"
+    defaultConfig {
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+}
 
 dependencies {
     implementation(libs.bundles.datastore)
