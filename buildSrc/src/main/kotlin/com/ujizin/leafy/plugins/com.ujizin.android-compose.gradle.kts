@@ -7,6 +7,9 @@ internal val Project.libs: VersionCatalog
     get() = project.extensions.getByType<VersionCatalogsExtension>().named("libs")
 
 android {
+    defaultConfig {
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
     buildFeatures {
         compose = true
     }
