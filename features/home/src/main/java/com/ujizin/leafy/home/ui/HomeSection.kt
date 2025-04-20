@@ -100,7 +100,6 @@ fun NavLazyColumn(
 }
 
 @Composable
-@OptIn(ExperimentalFoundationApi::class)
 private fun LazyItemScope.HomePlantCard(
     plant: Plant,
     onPlantClick: (Long) -> Unit,
@@ -108,7 +107,7 @@ private fun LazyItemScope.HomePlantCard(
 ) {
     CardPlant(
         modifier = Modifier
-            .animateItemPlacement()
+            .animateItem()
             .padding(horizontal = 20.dp)
             .fillMaxWidth()
             .aspectRatio(1F),
