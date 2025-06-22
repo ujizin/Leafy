@@ -9,6 +9,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph
+import androidx.navigation.NavOptionsBuilder
 import com.ujizin.leafy.core.navigation.Destination
 import com.ujizin.leafy.core.ui.components.animated.animation.Animate.Animated
 import com.ujizin.leafy.core.ui.components.animated.animation.Animation
@@ -75,13 +77,22 @@ private fun BottomNavigationBar(
 }
 
 fun NavController.navigateToItem(item: NavItem) {
-    navigate(item.destination) {
-        graph.startDestinationRoute?.let { route ->
-            popUpTo(route) {
-                saveState = true
-            }
+    navigate(item.destination) { navItemConfig(graph) }
+}
+
+fun NavController.navigateToItem(destination: Destination, restoreState: Boolean = true) {
+    navigate(destination) { navItemConfig(graph, restoreState) }
+}
+
+private fun NavOptionsBuilder.navItemConfig(
+    graph: NavGraph,
+    restoreState: Boolean = true,
+) {
+    graph.startDestinationRoute?.let { route ->
+        popUpTo(route) {
+            saveState = true
         }
-        launchSingleTop = true
-        restoreState = true
     }
+    launchSingleTop = true
+    this.restoreState = restoreState
 }

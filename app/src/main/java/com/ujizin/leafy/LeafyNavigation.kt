@@ -17,6 +17,7 @@ import com.ujizin.leafy.camera.cameraGraph
 import com.ujizin.leafy.core.navigation.Destination
 import com.ujizin.leafy.core.navigation.navigateUp
 import com.ujizin.leafy.core.ui.components.ScaffoldWithDrawer
+import com.ujizin.leafy.core.ui.components.navigation.bottombar.navigateToItem
 import com.ujizin.leafy.features.plant.plantGraph
 import com.ujizin.leafy.features.tasks.tasksGraph
 import com.ujizin.leafy.home.homeGraph
@@ -47,7 +48,10 @@ fun LeafyNavigation(
                 exitTransition = { ExitTransition.None },
                 onTakePictureClick = { navController.navigate(Destination.Camera) },
                 onSearchClick = {
-                    navController.navigate(Destination.Search(true))
+                    navController.navigateToItem(
+                        destination = Destination.Search(true),
+                        restoreState = false,
+                    )
                 },
                 onDrawerClick = { scope.launch { drawerState.open() } },
                 onPlantClick = { plantId ->
