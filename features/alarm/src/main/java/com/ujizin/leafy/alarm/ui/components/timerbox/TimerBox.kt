@@ -19,10 +19,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -33,6 +31,8 @@ import com.ujizin.leafy.alarm.ui.components.AutoSizeText
 import com.ujizin.leafy.core.themes.LeafyTheme
 import com.ujizin.leafy.core.ui.extensions.toDecimalFormat
 import kotlin.math.floor
+
+private const val SCALE_MULTIPLIER = 1.4F
 
 /**
  * Timer box with hour (00-23) and minute (00-59)
@@ -99,13 +99,35 @@ private fun TimerUnitBox(
     var hapticInitialized by remember { mutableStateOf(false) }
     val quantityMiddle = remember(quantity) { floor(quantity.toDouble() / 2).toInt() }
 
+    LaunchedEffect(Unit) {
+        val half = Int.MAX_VALUE / 2 // Set Infinite loop
+        val index = half % timeUnit.numbers.size
+        val zeroIndex = half - index - quantityMiddle
+        val scrollToIndex = zeroIndex + timeUnit.numbers.indexOf(
+            value.toDecimalFormat(),
+        ).coerceAtLeast(0)
+
+        state.scrollToItem(scrollToIndex)
+    }
+
+    // Set correct position when scroll is not in progress and trigger on time change
+    LaunchedEffect(state.isScrollInProgress) {
+        if (!state.isScrollInProgress) {
+            state.animateScrollToItem(state.firstVisibleItemIndex)
+            val index = (state.firstVisibleItemIndex + quantityMiddle) % timeUnit.numbers.size
+            val number = timeUnit.numbers[index]
+            onTimeChange(number)
+            hapticInitialized = true
+        }
+    }
+
     LazyColumn(
         modifier = modifier,
         state = state,
         horizontalAlignment = horizontalAlignment,
     ) {
         items(Int.MAX_VALUE) { listIndex ->
-            val index = listIndex % timeUnit.numbers.size
+            val index by remember { derivedStateOf { listIndex % timeUnit.numbers.size } }
             val number = timeUnit.numbers[index]
             val middle by remember {
                 derivedStateOf { state.firstVisibleItemIndex + quantityMiddle }
@@ -128,15 +150,12 @@ private fun TimerUnitBox(
                 }
             }
 
-            val scaleMultiplier = remember(Unit) { 1.4F }
-            val animatedScale by animateFloatAsState(targetValue = alpha * scaleMultiplier)
+            val animatedScale by animateFloatAsState(targetValue = alpha * SCALE_MULTIPLIER)
 
             AutoSizeText(
                 modifier = Modifier
-                    .alpha(alpha)
-                    .scale(
-                        animatedScale.coerceAtLeast(0.5F),
-                    ),
+                    .scale(animatedScale.coerceAtLeast(0.5F))
+                    .graphicsLayer { this.alpha = alpha },
                 text = number,
                 textStyle = TextStyle(
                     fontSize = 48.sp,
@@ -145,35 +164,6 @@ private fun TimerUnitBox(
                     fontWeight = FontWeight.Bold,
                 ),
             )
-
-            val haptic = LocalHapticFeedback.current
-            LaunchedEffect(remember { derivedStateOf { state.firstVisibleItemIndex } }) {
-                if (hapticInitialized) {
-                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                }
-            }
-        }
-    }
-
-    LaunchedEffect(Unit) {
-        val half = Int.MAX_VALUE / 2 // Set Infinite loop
-        val index = half % timeUnit.numbers.size
-        val zeroIndex = half - index - quantityMiddle
-        val scrollToIndex = zeroIndex + timeUnit.numbers.indexOf(
-            value.toDecimalFormat(),
-        ).coerceAtLeast(0)
-
-        state.scrollToItem(scrollToIndex)
-    }
-
-    // Set correct position when scroll is not in progress and trigger on time change
-    LaunchedEffect(state.isScrollInProgress) {
-        if (!state.isScrollInProgress) {
-            state.animateScrollToItem(state.firstVisibleItemIndex)
-            val index = (state.firstVisibleItemIndex + quantityMiddle) % timeUnit.numbers.size
-            val number = timeUnit.numbers[index]
-            onTimeChange(number)
-            hapticInitialized = true
         }
     }
 }

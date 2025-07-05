@@ -20,8 +20,8 @@ fun AutoSizeText(
     var readyToDraw by remember { mutableStateOf(false) }
 
     Text(
-        text,
-        modifier.drawWithContent {
+        text = text,
+        modifier = modifier.drawWithContent {
             if (readyToDraw) {
                 drawContent()
             }
