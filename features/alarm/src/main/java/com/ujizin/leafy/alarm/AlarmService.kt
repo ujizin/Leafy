@@ -86,7 +86,7 @@ class AlarmService : Service() {
         val title = getStringExtra(TITLE_ARG) ?: getString(CR.string.app_name)
         val description = getStringExtra(DESCRIPTION_ARG) ?: getString(CR.string.alarm)
         val contentIntent = getPlantPendingIntent(plantId)
-        val stopIntent = getAlarmPendingIntent(action = STOP_ACTION)
+        val stopIntent = getStopAlarmPendingIntent()
 
         return alarmNotificator.getNotification(
             title = title,
@@ -98,10 +98,10 @@ class AlarmService : Service() {
         )
     }
 
-    private fun getAlarmPendingIntent(action: String) = PendingIntent.getService(
+    private fun getStopAlarmPendingIntent() = PendingIntent.getService(
         this,
         RequestCode.ALARM,
-        getAlarmIntent(action),
+        getAlarmIntent(STOP_ACTION),
         PendingIntent.FLAG_IMMUTABLE,
     )
 

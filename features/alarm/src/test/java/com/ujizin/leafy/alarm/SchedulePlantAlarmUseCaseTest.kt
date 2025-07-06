@@ -37,8 +37,8 @@ class SchedulePlantAlarmUseCaseTest {
     private val loadAlarm = FakeLoadAlarmUseCase(until = COUNTER)
 
     val schedulePlantAlarm = SchedulePlantAlarmUseCase(
-        loadPlant = loadPlant,
-        loadAlarm = loadAlarm,
+        loadPlantUseCase = loadPlant,
+        loadAlarmUseCase = loadAlarm,
         alarmScheduler = alarmScheduler,
     )
 

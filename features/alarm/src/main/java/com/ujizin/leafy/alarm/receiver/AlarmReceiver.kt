@@ -4,76 +4,45 @@ import android.app.AlarmManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.ujizin.leafy.alarm.AlarmService
-import com.ujizin.leafy.alarm.extensions.getAlarmIntent
 import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
-import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarmUseCase
-import com.ujizin.leafy.core.components.R
-import com.ujizin.leafy.core.ui.extensions.currentDay
-import com.ujizin.leafy.core.ui.extensions.plus
-import com.ujizin.leafy.domain.model.Plant
-import com.ujizin.leafy.domain.result.mapResult
-import com.ujizin.leafy.domain.usecase.alarm.load.LoadAlarmsUseCase
+import com.ujizin.leafy.alarm.usecase.RescheduleAllAlarmsUseCase
+import com.ujizin.leafy.alarm.usecase.StartAlarmUseCase
+import com.ujizin.leafy.domain.dispatcher.IoDispatcher
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class AlarmReceiver : BroadcastReceiver() {
 
+    @IoDispatcher
     @Inject
-    lateinit var schedulePlantAlarm: SchedulePlantAlarmUseCase
+    lateinit var ioDispatcher: CoroutineDispatcher
 
     @Inject
-    lateinit var loadAlarms: LoadAlarmsUseCase
+    lateinit var startAlarmUseCase: StartAlarmUseCase
+
+    @Inject
+    lateinit var rescheduleAllAlarmsUseCase: RescheduleAllAlarmsUseCase
 
     @Inject
     lateinit var alarmScheduler: AlarmScheduler
 
-    private val Intent.alarmId get() = getLongExtra(ALARM_ID_EXTRA, -1)
+    private val coroutineScope = CoroutineScope(ioDispatcher)
 
-    private val Intent.ringtoneStringify get() = getStringExtra(RINGTONE_CONTENT_EXTRA)
-
-    @OptIn(DelicateCoroutinesApi::class)
     override fun onReceive(context: Context, intent: Intent) {
         when (intent.action) {
-            SCHEDULE_ALARM_ACTION -> schedulePlantAlarm(
-                alarmId = intent.alarmId,
-                actualDay = currentDay + 1,
-            ).onEach { plant ->
-                context.ringPlantAlarm(intent, plant)
-            }
+            SCHEDULE_ALARM_ACTION -> startAlarmUseCase(intent)
+            AlarmManager.ACTION_SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED,
             Intent.ACTION_TIME_CHANGED,
             Intent.ACTION_BOOT_COMPLETED,
-            AlarmManager.ACTION_SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED,
-            -> loadAlarms()
-                .mapResult()
-                .onEach { alarms -> alarms.forEach(alarmScheduler::scheduleAlarm) }
+            -> rescheduleAllAlarmsUseCase()
 
             else -> emptyFlow()
-        }.launchIn(GlobalScope)
-    }
-
-    private fun Context.ringPlantAlarm(intent: Intent, plant: Plant) = startAlarmService(
-        serviceIntent = getAlarmServiceIntent(plant, intent.ringtoneStringify),
-    )
-
-    private fun Context.getAlarmServiceIntent(
-        plant: Plant,
-        ringtone: String?,
-    ) = getAlarmIntent().apply {
-        putExtra(AlarmService.PLANT_ID, plant.id)
-        putExtra(AlarmService.TITLE_ARG, getString(R.string.app_name))
-        putExtra(AlarmService.DESCRIPTION_ARG, plant.title)
-        putExtra(AlarmService.RINGTONE_URI_STRINGIFY_ARG, ringtone)
-    }
-
-    private fun Context.startAlarmService(serviceIntent: Intent) {
-        startService(serviceIntent)
+        }.launchIn(coroutineScope)
     }
 
     internal companion object {
