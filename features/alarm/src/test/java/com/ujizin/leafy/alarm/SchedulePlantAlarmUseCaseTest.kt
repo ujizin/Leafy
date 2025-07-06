@@ -40,6 +40,7 @@ class SchedulePlantAlarmUseCaseTest {
         loadPlantUseCase = loadPlant,
         loadAlarmUseCase = loadAlarm,
         alarmScheduler = alarmScheduler,
+        dispatcher = mainDispatcherRule.testDispatcher,
     )
 
     @Test
