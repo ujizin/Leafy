@@ -51,7 +51,7 @@ class AlarmPlayer(
 
     companion object {
 
-        private const val TIME_OUT_IN_MILLISECONDS = 60000L
+        private const val TIME_OUT_IN_MILLISECONDS = 120000L
         private const val TICK_IN_MILLISECONDS = 1000L
     }
 }
