@@ -1,6 +1,7 @@
 package com.ujizin.leafy.domain.usecase.plant
 
 import com.ujizin.leafy.domain.repository.PlantRepository
+import com.ujizin.leafy.domain.usecase.alarm.load.LoadAlarmUseCase
 import com.ujizin.leafy.domain.usecase.plant.add.AddDraftPlantUseCase
 import com.ujizin.leafy.domain.usecase.plant.add.AddDraftPlantUseCaseImpl
 import com.ujizin.leafy.domain.usecase.plant.add.AddPlantUseCase
@@ -13,6 +14,8 @@ import com.ujizin.leafy.domain.usecase.plant.load.LoadAllPlantUseCase
 import com.ujizin.leafy.domain.usecase.plant.load.LoadAllPlantUseCaseImpl
 import com.ujizin.leafy.domain.usecase.plant.load.LoadDraftPlantUseCase
 import com.ujizin.leafy.domain.usecase.plant.load.LoadDraftPlantUseCaseImpl
+import com.ujizin.leafy.domain.usecase.plant.load.LoadPlantByAlarmIdUseCase
+import com.ujizin.leafy.domain.usecase.plant.load.LoadPlantByAlarmIdUseCaseImpl
 import com.ujizin.leafy.domain.usecase.plant.load.LoadPlantUseCase
 import com.ujizin.leafy.domain.usecase.plant.load.LoadPlantUseCaseImpl
 import com.ujizin.leafy.domain.usecase.plant.update.UpdatePlant
@@ -38,6 +41,15 @@ object PlantModule {
     fun provideLoadPlant(
         repository: PlantRepository,
     ): LoadPlantUseCase = LoadPlantUseCaseImpl(repository)
+
+    @Provides
+    fun provideLoadPlantByAlarmIdUseCase(
+        loadPlantUseCase: LoadPlantUseCase,
+        loadAlarmUseCase: LoadAlarmUseCase,
+    ): LoadPlantByAlarmIdUseCase = LoadPlantByAlarmIdUseCaseImpl(
+        loadAlarmUseCase = loadAlarmUseCase,
+        loadPlantUseCase = loadPlantUseCase,
+    )
 
     @Provides
     @Singleton

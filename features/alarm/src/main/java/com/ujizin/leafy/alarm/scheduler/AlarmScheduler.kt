@@ -3,7 +3,7 @@ package com.ujizin.leafy.alarm.scheduler
 import android.app.AlarmManager
 import android.os.Bundle
 import androidx.core.os.bundleOf
-import com.ujizin.leafy.alarm.receiver.AlarmReceiver
+import com.ujizin.leafy.alarm.AlarmService
 import com.ujizin.leafy.core.ui.extensions.currentDay
 import com.ujizin.leafy.core.ui.extensions.getNearestDay
 import com.ujizin.leafy.domain.model.Alarm
@@ -53,6 +53,6 @@ interface AlarmScheduler {
         minutes = alarm.minutes,
         ringtoneUri = alarm.ringtoneUriContent,
         requestCode = alarm.id.toInt(),
-        bundle = bundleOf(AlarmReceiver.ALARM_ID_EXTRA to alarm.id),
+        bundle = bundleOf(AlarmService.ALARM_ID_EXTRA to alarm.id),
     )
 }

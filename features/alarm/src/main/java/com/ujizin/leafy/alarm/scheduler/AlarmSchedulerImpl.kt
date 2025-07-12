@@ -4,11 +4,12 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import androidx.core.app.AlarmManagerCompat
 import androidx.core.net.toUri
+import com.ujizin.leafy.alarm.AlarmService
 import com.ujizin.leafy.alarm.extensions.alarmManager
-import com.ujizin.leafy.alarm.receiver.AlarmReceiver
 import com.ujizin.leafy.core.ui.extensions.isDayAlreadyPassed
 import com.ujizin.leafy.domain.model.WeekDay
 import java.util.Calendar
@@ -95,14 +96,19 @@ internal class AlarmSchedulerImpl(private val context: Context) : AlarmScheduler
         ringtoneUri: Uri = Uri.EMPTY,
         requestCode: Int = 0,
         bundle: Bundle = Bundle.EMPTY,
-    ): PendingIntent = PendingIntent.getBroadcast(
-        context,
-        requestCode,
-        Intent(context, AlarmReceiver::class.java).apply {
-            action = AlarmReceiver.SCHEDULE_ALARM_ACTION
-            putExtra(AlarmReceiver.RINGTONE_CONTENT_EXTRA, ringtoneUri.toString())
+    ): PendingIntent {
+        val intent = Intent(context, AlarmService::class.java).apply {
+            action = AlarmService.SCHEDULE_ALARM_ACTION
+            putExtra(AlarmService.RINGTONE_URI_STRINGIFY_EXTRA, ringtoneUri.toString())
             putExtras(bundle)
-        },
-        PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
-    )
+        }
+
+        val flags = PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            PendingIntent.getForegroundService(context, requestCode, intent, flags)
+        } else {
+            PendingIntent.getService(context, requestCode, intent, flags)
+        }
+    }
 }

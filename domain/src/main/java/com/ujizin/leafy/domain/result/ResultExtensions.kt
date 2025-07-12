@@ -3,6 +3,7 @@ package com.ujizin.leafy.domain.result
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.filterNot
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.onStart
@@ -21,7 +22,11 @@ fun <T : Any> Flow<Result<T?>>.mapResult(): Flow<T> = mapNotNull { result ->
             result.exception?.let(FirebaseCrashlytics.getInstance()::recordException)
             null
         }
+
         Result.Loading -> null
         is Result.Success -> result.data
     }
 }
+
+fun <T : Any> Result<T?>.getOrNull() = if (this is Result.Success) data else null
+fun <T : Any> Flow<Result<T?>>.filterNotLoading() = filterNot { it is Result.Loading }

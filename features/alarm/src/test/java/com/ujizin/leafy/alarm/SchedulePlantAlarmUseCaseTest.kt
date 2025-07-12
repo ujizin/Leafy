@@ -2,7 +2,6 @@ package com.ujizin.leafy.alarm
 
 import com.ujizin.leafy.alarm.fakes.FakeAlarmScheduler
 import com.ujizin.leafy.alarm.fakes.FakeLoadAlarmUseCase
-import com.ujizin.leafy.alarm.fakes.FakeLoadPlant
 import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarmUseCase
 import com.ujizin.leafy.core.test.TestDispatcherRule
 import com.ujizin.leafy.core.ui.extensions.currentDay
@@ -32,15 +31,11 @@ class SchedulePlantAlarmUseCaseTest {
 
     private val alarmScheduler = FakeAlarmScheduler()
 
-    private val loadPlant = FakeLoadPlant(until = COUNTER)
-
     private val loadAlarm = FakeLoadAlarmUseCase(until = COUNTER)
 
     val schedulePlantAlarm = SchedulePlantAlarmUseCase(
-        loadPlantUseCase = loadPlant,
         loadAlarmUseCase = loadAlarm,
         alarmScheduler = alarmScheduler,
-        dispatcher = mainDispatcherRule.testDispatcher,
     )
 
     @Test

@@ -1,17 +1,17 @@
 package com.ujizin.leafy.alarm
 
 import android.content.Context
+import android.media.MediaPlayer
 import com.ujizin.leafy.alarm.notificator.AlarmNotificator
 import com.ujizin.leafy.alarm.notificator.AlarmNotificatorImpl
+import com.ujizin.leafy.alarm.player.AlarmPlayer
 import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
 import com.ujizin.leafy.alarm.scheduler.AlarmSchedulerImpl
 import com.ujizin.leafy.alarm.usecase.RescheduleAllAlarmsUseCase
 import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarmUseCase
-import com.ujizin.leafy.alarm.usecase.StartAlarmUseCase
 import com.ujizin.leafy.domain.dispatcher.IoDispatcher
 import com.ujizin.leafy.domain.usecase.alarm.load.LoadAlarmUseCase
 import com.ujizin.leafy.domain.usecase.alarm.load.LoadAlarmsUseCase
-import com.ujizin.leafy.domain.usecase.plant.load.LoadPlantUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,15 +32,11 @@ object AlarmModule {
 
     @Provides
     fun provideShowAlarmUseCase(
-        loadPlant: LoadPlantUseCase,
         loadAlarm: LoadAlarmUseCase,
         alarmScheduler: AlarmScheduler,
-        @IoDispatcher ioDispatcher: CoroutineDispatcher,
     ) = SchedulePlantAlarmUseCase(
-        loadPlantUseCase = loadPlant,
         loadAlarmUseCase = loadAlarm,
         alarmScheduler = alarmScheduler,
-        dispatcher = ioDispatcher,
     )
 
     @Provides
@@ -55,19 +51,16 @@ object AlarmModule {
     )
 
     @Provides
-    fun provideStartAlarmUseCase(
-        @ApplicationContext context: Context,
-        schedulePlantAlarmUseCase: SchedulePlantAlarmUseCase,
-        @IoDispatcher ioDispatcher: CoroutineDispatcher,
-    ) = StartAlarmUseCase(
-        context = context,
-        schedulePlantAlarmUseCase = schedulePlantAlarmUseCase,
-        dispatcher = ioDispatcher,
-    )
-
-    @Provides
     @Singleton
     fun provideAlarmNotificator(
         @ApplicationContext context: Context,
     ): AlarmNotificator = AlarmNotificatorImpl(context)
+
+    @Provides
+    fun provideAlarmPlayer(
+        @ApplicationContext context: Context,
+    ) = AlarmPlayer(
+        context = context,
+        mediaPlayer = MediaPlayer(),
+    )
 }

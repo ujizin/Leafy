@@ -4,65 +4,91 @@ import android.app.Notification
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
-import android.media.AudioAttributes
-import android.media.MediaPlayer
-import android.net.Uri
 import android.os.Build
-import android.os.CountDownTimer
 import android.os.IBinder
-import android.os.PowerManager
 import androidx.core.app.NotificationCompat
 import androidx.core.app.TaskStackBuilder
+import com.ujizin.leafy.alarm.extensions.alarmId
 import com.ujizin.leafy.alarm.extensions.getAlarmIntent
-import com.ujizin.leafy.alarm.extensions.orDefaultRingtone
+import com.ujizin.leafy.alarm.extensions.plantId
+import com.ujizin.leafy.alarm.extensions.ringtoneUri
 import com.ujizin.leafy.alarm.notificator.AlarmNotificator
+import com.ujizin.leafy.alarm.player.AlarmPlayer
 import com.ujizin.leafy.alarm.receiver.StopPlantServiceActivity
+import com.ujizin.leafy.alarm.usecase.SchedulePlantAlarmUseCase
 import com.ujizin.leafy.core.navigation.Destination
+import com.ujizin.leafy.core.ui.extensions.currentDay
+import com.ujizin.leafy.core.ui.extensions.plus
 import com.ujizin.leafy.core.ui.props.RequestCode
+import com.ujizin.leafy.domain.dispatcher.IoDispatcher
+import com.ujizin.leafy.domain.result.filterNotLoading
+import com.ujizin.leafy.domain.result.getOrNull
+import com.ujizin.leafy.domain.usecase.plant.load.LoadPlantByAlarmIdUseCase
 import com.ujizin.leafy.features.alarm.R
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.IOException
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import kotlin.time.Duration.Companion.minutes
 import com.ujizin.leafy.core.components.R as CR
 
 @AndroidEntryPoint
 class AlarmService : Service() {
 
-    private var mediaPlayer: MediaPlayer? = null
+    @Inject
+    lateinit var alarmPlayer: AlarmPlayer
+
+    @Inject
+    @IoDispatcher
+    lateinit var ioDispatcher: CoroutineDispatcher
 
     @Inject
     lateinit var alarmNotificator: AlarmNotificator
 
-    private val Intent.plantId get() = getLongExtra(PLANT_ID, -1)
+    @Inject
+    lateinit var loadPlantUseCaseByAlarmId: LoadPlantByAlarmIdUseCase
 
-    private val Intent.ringtoneUri
-        get() = getStringExtra(RINGTONE_URI_STRINGIFY_ARG)?.let(Uri::parse).orDefaultRingtone()
+    @Inject
+    lateinit var schedulePlantAlarmUseCase: SchedulePlantAlarmUseCase
 
-    private val countDownTimer = object : CountDownTimer(
-        TIME_OUT_IN_MILLISECONDS,
-        TICK_IN_MILLISECONDS,
-    ) {
-        override fun onTick(millisUntilFinished: Long) = Unit /* no-op */
-        override fun onFinish() {
-            mediaPlayer?.pause()
-        }
-    }
+    private val ioScope by lazy { CoroutineScope(ioDispatcher) }
 
-    private val wakeLock: PowerManager.WakeLock by lazy {
-        (getSystemService(POWER_SERVICE) as PowerManager).run {
-            newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, ALARM_WAKE_LOCK_TAG)
-        }
-    }
+    private val stopAlarmPendingIntent: PendingIntent
+        get() = PendingIntent.getService(
+            this,
+            RequestCode.ALARM,
+            applicationContext.getAlarmIntent(STOP_ACTION),
+            PendingIntent.FLAG_IMMUTABLE,
+        )
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        when (intent?.action) {
+        if (intent == null) {
+            return super.onStartCommand(intent, flags, startId)
+        }
+
+        when (intent.action) {
             STOP_ACTION -> stopService()
-            else -> intent?.let(::startAlarm)
+            else -> startAlarm(intent)
         }
 
         return super.onStartCommand(intent, flags, startId)
     }
+
+    private fun startAlarm(intent: Intent) = combine(
+        schedulePlantAlarmUseCase(
+            alarmId = intent.alarmId,
+            actualDay = currentDay + 1,
+        ),
+        loadPlantUseCaseByAlarmId(intent.alarmId).filterNotLoading(),
+    ) { _, plantResult ->
+        val plant = plantResult.getOrNull()
+        withContext(Dispatchers.Main) {
+            startAlarmNotification(intent, plant?.title, plant?.description)
+        }
+    }.launchIn(ioScope)
 
     private fun stopService() {
         stopForeground()
@@ -75,51 +101,27 @@ class AlarmService : Service() {
         else -> stopForeground(true)
     }
 
-    private fun startAlarm(intent: Intent) {
-        wakeLock.acquire(1.minutes.inWholeMilliseconds)
-        intent.ringtoneUri.play()
-        countDownTimer.start()
-        startForeground(NOTIFICATION_ID, intent.getNotification())
+    private fun startAlarmNotification(intent: Intent, title: String?, description: String?) {
+        alarmPlayer.play(intent.ringtoneUri)
+        startForeground(NOTIFICATION_ID, intent.getNotification(title, description))
     }
 
-    private fun Intent.getNotification(): Notification {
-        val title = getStringExtra(TITLE_ARG) ?: getString(CR.string.app_name)
-        val description = getStringExtra(DESCRIPTION_ARG) ?: getString(CR.string.alarm)
+    private fun Intent.getNotification(
+        title: String?,
+        description: String?,
+    ): Notification {
+        val title = title ?: getString(CR.string.app_name)
+        val description = description ?: getString(CR.string.alarm)
         val contentIntent = getPlantPendingIntent(plantId)
-        val stopIntent = getStopAlarmPendingIntent()
 
         return alarmNotificator.getNotification(
             title = title,
             description = description,
             contentIntent = contentIntent,
             notificationActions = listOf(
-                NotificationCompat.Action(0, getString(R.string.stop), stopIntent),
+                NotificationCompat.Action(0, getString(R.string.stop), stopAlarmPendingIntent),
             ),
         )
-    }
-
-    private fun getStopAlarmPendingIntent() = PendingIntent.getService(
-        this,
-        RequestCode.ALARM,
-        getAlarmIntent(STOP_ACTION),
-        PendingIntent.FLAG_IMMUTABLE,
-    )
-
-    private fun Uri.play() {
-        try {
-            val audioAttributes = AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_ALARM)
-                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .build()
-
-            mediaPlayer = MediaPlayer().apply {
-                setDataSource(this@AlarmService, this@play)
-                setAudioAttributes(audioAttributes)
-                prepareAsync()
-                setOnPreparedListener { start() }
-            }
-        } catch (_: IOException) {
-        }
     }
 
     private fun getPlantPendingIntent(
@@ -129,7 +131,7 @@ class AlarmService : Service() {
             Intent.ACTION_VIEW,
             Destination.PlantDetails.createDeeplink(plantId),
         ).apply {
-            putExtra(ALARM_SERVICE_ARG, true)
+            putExtra(ALARM_SERVICE_EXTRA, true)
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         val stopService = StopPlantServiceActivity.getIntent(this@AlarmService)
@@ -139,27 +141,20 @@ class AlarmService : Service() {
     }
 
     override fun onDestroy() {
-        wakeLock.release()
-        countDownTimer.cancel()
         alarmNotificator.cancelNotification(NOTIFICATION_ID)
-        mediaPlayer?.stop()
-        mediaPlayer?.release()
-        mediaPlayer = null
+        alarmPlayer.release()
         super.onDestroy()
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
 
     companion object {
-        private const val TIME_OUT_IN_MILLISECONDS = 60000L
-        private const val TICK_IN_MILLISECONDS = 1000L
-        private const val ALARM_WAKE_LOCK_TAG = "leafy:alarm_wake_lock"
+        const val SCHEDULE_ALARM_ACTION = "com.ujizin.leafy.alarm.SCHEDULE_ALARM"
         private const val NOTIFICATION_ID = 1
-        internal const val TITLE_ARG = "alarm_title"
-        internal const val DESCRIPTION_ARG = "alarm_description"
-        internal const val RINGTONE_URI_STRINGIFY_ARG = "alarm_ringtone_uri_stringify"
-        const val ALARM_SERVICE_ARG = "alarm_service"
-        const val PLANT_ID = "alarm_plant_id"
         const val STOP_ACTION = "alarm_service_stop"
+        internal const val RINGTONE_URI_STRINGIFY_EXTRA = "alarm_ringtone_uri_stringify"
+        internal const val ALARM_ID_EXTRA = "alarm_id"
+        internal const val PLANT_ID_EXTRA = "alarm_plant_id"
+        private const val ALARM_SERVICE_EXTRA = "alarm_service"
     }
 }

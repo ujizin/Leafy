@@ -3,7 +3,7 @@ package com.ujizin.leafy.alarm.ui
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ujizin.leafy.alarm.receiver.AlarmReceiver
+import com.ujizin.leafy.alarm.AlarmService
 import com.ujizin.leafy.alarm.scheduler.AlarmScheduler
 import com.ujizin.leafy.core.ui.extensions.copyAndDelete
 import com.ujizin.leafy.core.ui.extensions.getNearestDay
@@ -84,7 +84,7 @@ class AlarmViewModel @Inject constructor(
                             minutes = minutes,
                             ringtoneUri = ringtoneContent,
                             requestCode = alarmId.toInt(),
-                            bundle = bundleOf(AlarmReceiver.ALARM_ID_EXTRA to alarmId),
+                            bundle = bundleOf(AlarmService.ALARM_ID_EXTRA to alarmId),
                         )
                     }
                 }

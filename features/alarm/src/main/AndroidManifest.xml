@@ -28,6 +28,6 @@
         </receiver>
         <service
             android:name="com.ujizin.leafy.alarm.AlarmService"
-            android:foregroundServiceType="systemExempted" />
+            android:foregroundServiceType="mediaPlayback" />
     </application>
 </manifest>
