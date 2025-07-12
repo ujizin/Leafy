@@ -32,6 +32,7 @@ class AlarmPlayer(
         with(mediaPlayer) {
             setDataSource(context, uri)
             setAudioAttributes(audioAttributes)
+            isLooping = true
             prepareAsync()
             setOnPreparedListener { start() }
         }
