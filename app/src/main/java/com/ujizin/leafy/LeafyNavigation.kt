@@ -1,6 +1,8 @@
 package com.ujizin.leafy
 
 import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.DrawerState
@@ -15,9 +17,6 @@ import com.ujizin.leafy.camera.cameraGraph
 import com.ujizin.leafy.core.navigation.Destination
 import com.ujizin.leafy.core.navigation.navigateUp
 import com.ujizin.leafy.core.ui.components.ScaffoldWithDrawer
-import com.ujizin.leafy.core.ui.components.navigation.navigationEnterTransition
-import com.ujizin.leafy.core.ui.components.navigation.navigationExitTransition
-import com.ujizin.leafy.core.ui.components.navigation.orNone
 import com.ujizin.leafy.features.plant.plantGraph
 import com.ujizin.leafy.features.tasks.tasksGraph
 import com.ujizin.leafy.home.homeGraph
@@ -44,10 +43,8 @@ fun LeafyNavigation(
             startDestination = Destination.Home,
         ) {
             homeGraph(
-                enterTransition = { navigationEnterTransition(navController) },
-                exitTransition = {
-                    navigationExitTransition(navController).orNone
-                },
+                enterTransition = { EnterTransition.None },
+                exitTransition = { ExitTransition.None },
                 onTakePictureClick = { navController.navigate(Destination.Camera) },
                 onSearchClick = {
                     navController.navigate(Destination.Search(true))
@@ -58,8 +55,8 @@ fun LeafyNavigation(
                 },
             )
             searchGraph(
-                enterTransition = { navigationEnterTransition(navController) },
-                exitTransition = { navigationExitTransition(navController) },
+                enterTransition = { EnterTransition.None },
+                exitTransition = { ExitTransition.None },
                 onDrawerClick = { scope.launch { drawerState.open() } },
                 onTakePictureClick = { navController.navigate(Destination.Camera) },
                 onPlantClick = { plantId ->
@@ -67,8 +64,8 @@ fun LeafyNavigation(
                 },
             )
             tasksGraph(
-                enterTransition = { navigationEnterTransition(navController) },
-                exitTransition = { navigationExitTransition(navController) },
+                enterTransition = { EnterTransition.None },
+                exitTransition = { ExitTransition.None },
                 onPlantClick = { plantId ->
                     navController.navigate(Destination.PlantDetails(plantId))
                 },
@@ -76,8 +73,8 @@ fun LeafyNavigation(
                 onDrawerClick = { scope.launch { drawerState.open() } },
             )
             preferencesGraph(
-                enterTransition = { navigationEnterTransition(navController) },
-                exitTransition = { navigationExitTransition(navController) },
+                enterTransition = { EnterTransition.None },
+                exitTransition = { ExitTransition.None },
             )
             alarmGraph(
                 onBackPressed = navController::navigateUp,

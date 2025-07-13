@@ -37,6 +37,7 @@ internal fun PlantDetailsContent(
     onSharedClick: (Plant) -> Unit,
 ) {
     Scaffold(
+        modifier = Modifier.background(MaterialTheme.colorScheme.background),
         topBar = {
             TopAppBar(
                 onNavigationContent = {
@@ -65,7 +66,7 @@ internal fun PlantDetailsContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(1F),
-                animation = Animation.SlideToTop,
+                animation = Animation.None,
                 data = plant.filePath,
                 elevation = 0.dp,
                 shape = RectangleShape,
